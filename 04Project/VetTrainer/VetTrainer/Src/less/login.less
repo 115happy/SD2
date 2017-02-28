@@ -1,0 +1,62 @@
+@import "common.less";
+
+header {
+    height: 100px;
+    position: relative;
+    background: @blue;
+    a {
+        height: 100px;
+        position: absolute;
+        line-height: 100px;
+        right: 0;
+        padding: 0 20px;
+        font-size: 24px;
+    }
+    a:hover {
+        background: #ddd;
+        color: white;
+    }
+}
+
+h1 {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 30px;
+    color: @blue;
+    margin-left: 30px;
+}
+.main {
+    height: 600px;
+    background: white;
+    .login-box {
+        height: 200px;
+        width: 300px;
+        background: white;
+        position: absolute;
+        right: 100px;
+        top: 100px;
+        padding: 80px 50px;
+        .input-row {
+            margin-bottom: 20px;
+            margin-top: 20px;
+            text-align: center;
+        }
+        span {
+            display: inline-block;
+            font-size: 20px;
+            width: 80px;
+        }
+        input {
+            height: 30px;
+            width: 200px;
+        }
+    }
+}
+
+footer {
+    height: 100px;
+    padding-top: 20px;
+    text-align: center;
+    color: gray;
+}
