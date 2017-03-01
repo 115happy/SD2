@@ -1,16 +1,17 @@
 @import "common.less";
 
 header {
-    height: 100px;
+    height: 60px;
     position: relative;
     background: @blue;
     a {
-        height: 100px;
+        height: 60px;
         position: absolute;
-        line-height: 100px;
-        right: 0;
+        line-height: 60px;
+        right: 100px;
         padding: 0 20px;
-        font-size: 24px;
+        font-size: 20px;
+        color: white;
     }
     a:hover {
         background: #ddd;
@@ -19,27 +20,33 @@ header {
 }
 
 h1 {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    font-size: 30px;
-    color: @blue;
+    display: inline-block;
+    width: 300px;
     margin-left: 30px;
+    color: white;
+    line-height: 60px;
+    font-size: 26px;
 }
 .main {
-    height: 600px;
+    height: 520px;
     background: white;
+    .wrapper {
+        padding-top: 40px;
+    }
     .login-box {
         height: 200px;
         width: 300px;
         background: white;
+        border: 1px solid @gray;
+        border-radius: 5px;
         position: absolute;
         right: 100px;
         top: 100px;
-        padding: 80px 50px;
+        padding: 60px 50px;
+        box-shadow: 0 0 8px @gray;
         .input-row {
             margin-bottom: 20px;
-            margin-top: 20px;
+            margin-top: 25px;
             text-align: center;
         }
         span {
@@ -52,11 +59,15 @@ h1 {
             width: 200px;
         }
     }
+    img {
+        margin-left: 30px;
+    }
 }
 
 footer {
-    height: 100px;
+    height: 60px;
     padding-top: 20px;
+    background: @gray;
     text-align: center;
     color: gray;
 }
