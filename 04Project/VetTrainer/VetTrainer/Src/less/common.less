@@ -1,5 +1,6 @@
 @blue: #4ab4c7;
 @gray: #d8d8d8;
+@gray-lighter: #e3e3e3;
 .wrapper {
     width: 1200px;
     margin: 0 auto;
@@ -21,4 +22,31 @@
 .btn-primary {
     background: @blue;
     color: white;
+}
+
+header {
+    height: 60px;
+    position: relative;
+    background: @blue;
+    a {
+        height: 60px;
+        position: absolute;
+        line-height: 60px;
+        right: 100px;
+        padding: 0 20px;
+        font-size: 20px;
+        color: white;
+    }
+    a:hover {
+        background: #ddd;
+        color: white;
+    }
+}
+
+footer {
+    height: 60px;
+    padding-top: 20px;
+    background: @gray-lighter;
+    text-align: center;
+    color: gray;
 }
