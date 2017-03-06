@@ -1,5 +1,7 @@
 ﻿using Microsoft.Owin;
+using MySql.Data.Entity;
 using Owin;
+using System.Data.Entity;
 
 [assembly: OwinStartupAttribute(typeof(VetTrainer.Startup))]
 namespace VetTrainer
@@ -9,6 +11,8 @@ namespace VetTrainer
         public void Configuration(IAppBuilder app)
         {
             ConfigureAuth(app);
+
+            DbConfiguration.SetConfiguration(new MySqlEFConfiguration());
         }
     }
 }
