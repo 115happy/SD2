@@ -9,19 +9,12 @@ namespace VetTrainer.Controllers
     [RoutePrefix("Home")]
     public class HomeController : Controller
     {
-        [Route("~/")]
+        [Route("~/Index")]
         public ActionResult Index()
         {
             return View();
         }
 
-        [Route("~/Login")]
-        public ActionResult Login()
-        {
-
-            return View();
-        }
-        
         public ActionResult About()
         {
             ViewBag.Message = "制作组：115happy.";

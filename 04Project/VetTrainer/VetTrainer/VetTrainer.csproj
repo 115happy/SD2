@@ -203,6 +203,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -223,6 +224,26 @@
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="Src\images\423523452345.jpg" />
+    <Content Include="Src\images\case_bg.jpg" />
+    <Content Include="Src\images\pets.png" />
+    <Content Include="Src\images\role_bg.jpg" />
+    <Content Include="Src\js\ai.0.22.9-build00167.js" />
+    <Content Include="Src\js\ai.0.22.9-build00167.min.js" />
+    <Content Include="Src\js\bootstrap.js" />
+    <Content Include="Src\js\bootstrap.min.js" />
+    <None Include="Src\js\jquery-1.10.2.intellisense.js" />
+    <Content Include="Src\js\jquery-1.10.2.js" />
+    <Content Include="Src\js\jquery-1.10.2.min.js" />
+    <None Include="Src\js\jquery.validate-vsdoc.js" />
+    <Content Include="Src\js\jquery.validate.js" />
+    <Content Include="Src\js\jquery.validate.min.js" />
+    <Content Include="Src\js\jquery.validate.unobtrusive.js" />
+    <Content Include="Src\js\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Src\js\modernizr-2.6.2.js" />
+    <Content Include="Src\js\respond.js" />
+    <Content Include="Src\js\respond.min.js" />
+    <None Include="Src\js\_references.js" />
     <Content Include="Views\Home\case_learning.html" />
     <Content Include="Views\Home\user_index.html" />
     <Content Include="Web.config" />
@@ -251,7 +272,13 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Home\Login.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
+    <Content Include="Src\js\jquery-1.10.2.min.map" />
+    <Content Include="Src\less\case_learning.less" />
+    <Content Include="Src\less\common.less" />
+    <Content Include="Src\less\login.less" />
+    <Content Include="Src\less\Normalize.less" />
+    <Content Include="Src\less\user_index.less" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Migrations\201703061310462_Initial.resx">

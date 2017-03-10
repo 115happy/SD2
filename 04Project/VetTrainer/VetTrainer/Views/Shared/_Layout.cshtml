@@ -1,25 +1,45 @@
 ﻿<!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Title - 兽医学习软件</title>
+    @Styles.Render("~/Dist/css/bootstrap.min.css")
     @Styles.Render("~/Dist/css/common.css")
-    @Scripts.Render("~/Dist/js/")
-
+    @Scripts.Render("~/Dist/js/") 
 </head>
+
 <body>
-    <header>
-        <div class="wrapper">
-            <h1>虚拟宠物医院教学系统</h1>
-            <a href="">关于我们</a>
+    <header class="navbar navbar-static-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand nav-head">虚拟宠物医院</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right" href="">
+                    <li>
+                        <a class="nav-about" href="#">关于我们</a>
+                    </li>
+                </ul>
+            </div>
         </div>
+
+
     </header>
+    
         @RenderBody()
-     
-    <footer>&copy; copyright</footer>
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @RenderSection("scripts", required: false)
+  
+
+
+    <footer class="container-fluid">
+        <div class="row text-center">
+            <p class="">&copy; copyright</p>
+ 
+        </div>
+    </footer>
+
 </body>
+
 </html>
