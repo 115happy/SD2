@@ -90,6 +90,8 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -208,12 +210,43 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703061310462_Initial.cs" />
-    <Compile Include="Migrations\201703061310462_Initial.Designer.cs">
-      <DependentUpon>201703061310462_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201703121343215_InitialModel.cs" />
+    <Compile Include="Migrations\201703121343215_InitialModel.Designer.cs">
+      <DependentUpon>201703121343215_InitialModel.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\tbref_clinics_instruments.cs" />
+    <Compile Include="Models\tbref_diseases_disecase.cs" />
+    <Compile Include="Models\tbref_disecasetab_analyses.cs" />
+    <Compile Include="Models\tbref_disecasetab_drugs.cs" />
+    <Compile Include="Models\tbref_disecasetab_pics.cs" />
+    <Compile Include="Models\tbref_disecasetab_texts.cs" />
+    <Compile Include="Models\tbref_disecasetab_videos.cs" />
+    <Compile Include="Models\tbref_disecase_charges.cs" />
+    <Compile Include="Models\tbref_disecase_disecasetab.cs" />
+    <Compile Include="Models\tbref_disetype_diseases.cs" />
+    <Compile Include="Models\tbref_instruments_pics.cs" />
+    <Compile Include="Models\tbref_instruments_texts.cs" />
+    <Compile Include="Models\tbref_instruments_videos.cs" />
+    <Compile Include="Models\tbref_roles_clinics_pics.cs" />
+    <Compile Include="Models\tbref_roles_clinics_texts.cs" />
+    <Compile Include="Models\tbref_roles_clinics_videos.cs" />
+    <Compile Include="Models\tb_analyses.cs" />
+    <Compile Include="Models\tb_charges.cs" />
+    <Compile Include="Models\tb_clinics.cs" />
+    <Compile Include="Models\tb_diseases.cs" />
+    <Compile Include="Models\tb_dise_case.cs" />
+    <Compile Include="Models\tb_dise_case_tab.cs" />
+    <Compile Include="Models\tb_dise_type.cs" />
+    <Compile Include="Models\tb_drugs.cs" />
+    <Compile Include="Models\tb_instruments.cs" />
+    <Compile Include="Models\tb_pics.cs" />
+    <Compile Include="Models\tb_roles.cs" />
+    <Compile Include="Models\tb_texts.cs" />
+    <Compile Include="Models\tb_users.cs" />
+    <Compile Include="Models\tb_videos.cs" />
+    <Compile Include="Models\VetAppModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -246,7 +279,9 @@
     <None Include="Src\js\_references.js" />
     <Content Include="Views\Home\case_learning.html" />
     <Content Include="Views\Home\user_index.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -281,8 +316,11 @@
     <Content Include="Src\less\user_index.less" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703061310462_Initial.resx">
-      <DependentUpon>201703061310462_Initial.cs</DependentUpon>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201703121343215_InitialModel.resx">
+      <DependentUpon>201703121343215_InitialModel.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
@@ -299,7 +337,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>12755</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

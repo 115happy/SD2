@@ -3,7 +3,12 @@
     <title>首页</title>
 </head>
 
-
+<ul>
+@foreach(var user in ViewBag.Users)
+{
+    <li>@string.Format($"Name: {user.username}")</li>
+}
+</ul>
     <div class="container">
         <div class="row">
             <div class="col-lg-6">
