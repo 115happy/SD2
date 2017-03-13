@@ -1,25 +1,53 @@
-﻿
+﻿@model VetTrainer.Models.User
+@{
+    ViewBag.Title = "登录";
+}
 <head>
     <link rel="stylesheet" href="../dist/css/login.css">
     <title>用户登录</title>
 </head>
 
 <body>
-   
+    @Html.ValidationSummary(true, "登陆失败")
     <div class="main">
         <div class="wrapper">
-           <img src="../Src/images/pets.png" alt="pets">
-            <div class="login-box">
-                <div class="input-row">
-                    <span>用户名：</span><input type="text" name="id">
-                </div>
-                <div class="input-row">
-                    <span>密码：</span><input type="text">
-                </div>
-                <div class="input-row">
-                    <a href="" class="btn btn-primary">登陆</a>
-                </div>
-            </div>
+            <img src="../Src/images/pets.png" alt="pets">
+
+            @using (Html.BeginForm())
+            {
+                <fieldset>
+                    <legend>@VetTrainer.Views.Strings.Login.FormLoginText</legend>
+                    <div class="login-box">
+                        <div class="input-row editor-label">
+                            <span>@VetTrainer.Views.Strings.Login.LblUsername</span>
+                            @*<input type="text" name="id">*@
+                            <div class="editor-field">
+                                @Html.TextBoxFor(u => u.Username)
+                                @Html.ValidationMessageFor(u => u.Username)
+                            </div>
+                        </div>
+                        <div class="input-row editor-label">
+                            <span>@VetTrainer.Views.Strings.Login.LblPassword</span>
+                            @* <input type="text">*@
+                            <div class="editor-field">
+                                @Html.PasswordFor(u => u.Password)
+                                @Html.ValidationMessageFor(u => u.Password)
+                            </div>
+                        </div>
+                        <div class="editor-label">
+                            @Html.CheckBoxFor(u => u.IsToRememberMe)
+                            @VetTrainer.Views.Strings.Login.LblIsToRememberMe;
+                        </div>
+                        @*<div class="input-row">
+                            <a href="" class="btn btn-primary">
+                                
+                            </a>
+                        </div>*@
+                        <input type="submit" value="@VetTrainer.Views.Strings.Login.BtnLoginText" />
+                    </div>
+
+                </fieldset>
+            }
         </div>
     </div>
 

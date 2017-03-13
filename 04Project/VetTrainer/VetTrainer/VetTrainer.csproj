@@ -210,9 +210,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703121343215_InitialModel.cs" />
-    <Compile Include="Migrations\201703121343215_InitialModel.Designer.cs">
-      <DependentUpon>201703121343215_InitialModel.cs</DependentUpon>
+    <Compile Include="Migrations\201703130520498_InitialModels.cs" />
+    <Compile Include="Migrations\201703130520498_InitialModels.Designer.cs">
+      <DependentUpon>201703130520498_InitialModels.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201703131159289_NewLoginFunctionsAdded.cs" />
+    <Compile Include="Migrations\201703131159289_NewLoginFunctionsAdded.Designer.cs">
+      <DependentUpon>201703131159289_NewLoginFunctionsAdded.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -246,9 +250,11 @@
     <Compile Include="Models\tb_texts.cs" />
     <Compile Include="Models\tb_users.cs" />
     <Compile Include="Models\tb_videos.cs" />
-    <Compile Include="Models\VetAppModel.cs" />
+    <Compile Include="Models\VetAppDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\SHA1.cs" />
+    <Compile Include="Views\Strings.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -319,8 +325,11 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703121343215_InitialModel.resx">
-      <DependentUpon>201703121343215_InitialModel.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703130520498_InitialModels.resx">
+      <DependentUpon>201703130520498_InitialModels.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703131159289_NewLoginFunctionsAdded.resx">
+      <DependentUpon>201703131159289_NewLoginFunctionsAdded.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

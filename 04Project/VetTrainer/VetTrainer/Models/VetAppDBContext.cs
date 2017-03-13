@@ -4,12 +4,15 @@ namespace VetTrainer.Models
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using MySql.Data.Entity;
 
-    public partial class VetAppModel : DbContext
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    public partial class VetAppDBContext : DbContext
     {
-        public VetAppModel()
+        public VetAppDBContext()
             : base("name=VetAppDBContext")
         {
+
         }
 
         public virtual DbSet<tb_analyses> tb_analyses { get; set; }
@@ -24,7 +27,7 @@ namespace VetTrainer.Models
         public virtual DbSet<tb_pics> tb_pics { get; set; }
         public virtual DbSet<tb_roles> tb_roles { get; set; }
         public virtual DbSet<tb_texts> tb_texts { get; set; }
-        public virtual DbSet<tb_users> tb_users { get; set; }
+        public virtual DbSet<User> Users { get; set; }
         public virtual DbSet<tb_videos> tb_videos { get; set; }
         public virtual DbSet<tbref_clinics_instruments> tbref_clinics_instruments { get; set; }
         public virtual DbSet<tbref_diseases_disecase> tbref_diseases_disecase { get; set; }
@@ -45,6 +48,10 @@ namespace VetTrainer.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
+            Database.SetInitializer<VetAppDBContext>(null);
+
+            //modelBuilder.HasDefaultSchema("vet_app");
+
             modelBuilder.Entity<tb_analyses>()
                 .Property(e => e.analysis_name)
                 .IsUnicode(false);
@@ -289,17 +296,40 @@ namespace VetTrainer.Models
                 .WithRequired(e => e.tb_texts)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_users>()
-                .Property(e => e.username)
+            modelBuilder.Entity<User>()
+                .ToTable("tb_users")
+                .HasKey(b => b.UserId);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.UserId)
+                .HasColumnName("user_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.Username)
+                .HasColumnName("username")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_users>()
-                .Property(e => e.password)
+            modelBuilder.Entity<User>()
+                .Property(e => e.Password)
+                .HasColumnName("password")
+                .HasMaxLength(60)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_users>()
-                .Property(e => e.authority)
+            modelBuilder.Entity<User>()
+                .Property(e => e.Authority)
+                .HasColumnName("authority")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
+
+            modelBuilder.Entity<User>()
+                .Property(e => e.IsToRememberMe)
+                .HasColumnName("is_to_remember")
+                .IsRequired();
 
             modelBuilder.Entity<tb_videos>()
                 .Property(e => e.video_name)

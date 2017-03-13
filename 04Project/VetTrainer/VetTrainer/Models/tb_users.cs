@@ -6,22 +6,20 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("vet_app.tb_users")]
-    public partial class tb_users
+    public partial class User
     {
-        [Key]
-        public int user_id { get; set; }
+        public int UserId { get; set; }
 
-        [Required]
-        [StringLength(45)]
-        public string username { get; set; }
+        [Display(Name = "User name")]
+        public string Username { get; set; }
 
-        [Required]
-        [StringLength(60)]
-        public string password { get; set; }
+        [DataType(DataType.Password)]
+        [Display(Name = "Password")]
+        public string Password { get; set; }
 
-        [Required]
-        [StringLength(45)]
-        public string authority { get; set; }
+        public string Authority { get; set; }
+
+        [Display(Name = "Remember on this computer")]
+        public bool IsToRememberMe { get; set; }
     }
 }
