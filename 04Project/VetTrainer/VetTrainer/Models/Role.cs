@@ -6,39 +6,22 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("vet_app.tb_roles")]
     public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Role()
         {
-            tbref_roles_clinics_pics = new HashSet<tbref_roles_clinics_pics>();
-            tbref_roles_clinics_texts = new HashSet<tbref_roles_clinics_texts>();
-            tbref_roles_clinics_videos = new HashSet<tbref_roles_clinics_videos>();
+            Clinics = new List<Clinic>();
         }
 
-        [Key]
-        public int role_id { get; set; }
+        public int RoleId { get; set; }
 
-        [Required]
-        [StringLength(45)]
-        public string role_name { get; set; }
+        public string RoleName { get; set; }
 
-        [Required]
-        [StringLength(3000)]
-        public string role_desp { get; set; }
+        public string RoleDescription { get; set; }
 
-        [Required]
-        [StringLength(300)]
-        public string role_pic_url { get; set; }
+        public string RolePicUrl { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_roles_clinics_pics> tbref_roles_clinics_pics { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_roles_clinics_texts> tbref_roles_clinics_texts { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_roles_clinics_videos> tbref_roles_clinics_videos { get; set; }
+        public virtual IList<Clinic> Clinics { get; set; }
     }
 }

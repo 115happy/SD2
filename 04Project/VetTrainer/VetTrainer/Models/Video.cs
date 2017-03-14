@@ -6,35 +6,23 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("vet_app.tb_videos")]
     public partial class Video
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Video()
         {
-            tbref_disecasetab_videos = new HashSet<tbref_disecasetab_videos>();
-            tbref_instruments_videos = new HashSet<tbref_instruments_videos>();
-            tbref_roles_clinics_videos = new HashSet<tbref_roles_clinics_videos>();
+            DiseaseCaseTabs = new List<DiseaseCaseTab>();
+            Instruments = new List<Instrument>();
         }
 
-        [Key]
-        public int video_id { get; set; }
+        public int VideoId { get; set; }
 
-        [Required]
-        [StringLength(45)]
-        public string video_name { get; set; }
+        public string VideoName { get; set; }
 
-        [Required]
-        [StringLength(3000)]
-        public string video_url { get; set; }
+        public string VideoUrl { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_disecasetab_videos> tbref_disecasetab_videos { get; set; }
+        public virtual IList<DiseaseCaseTab> DiseaseCaseTabs { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_instruments_videos> tbref_instruments_videos { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_roles_clinics_videos> tbref_roles_clinics_videos { get; set; }
+        public virtual IList<Instrument> Instruments { get; set; }
     }
 }

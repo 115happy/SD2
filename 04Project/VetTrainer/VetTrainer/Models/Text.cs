@@ -5,36 +5,25 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
-
-    [Table("vet_app.tb_texts")]
+    
     public partial class Text
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Text()
         {
-            tbref_disecasetab_texts = new HashSet<tbref_disecasetab_texts>();
-            tbref_instruments_texts = new HashSet<tbref_instruments_texts>();
-            tbref_roles_clinics_texts = new HashSet<tbref_roles_clinics_texts>();
+            DiseaseCaseTabs = new List<DiseaseCaseTab>();
+            Instruments = new List<Instrument>();
         }
 
-        [Key]
-        public int text_id { get; set; }
+        public int TextId { get; set; }
 
-        [Required]
-        [StringLength(45)]
-        public string text_name { get; set; }
+        public string TextName { get; set; }
 
-        [Required]
-        [StringLength(3000)]
-        public string text_content { get; set; }
+        public string TextContent { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_disecasetab_texts> tbref_disecasetab_texts { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_instruments_texts> tbref_instruments_texts { get; set; }
+        public virtual IList<DiseaseCaseTab> DiseaseCaseTabs { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_roles_clinics_texts> tbref_roles_clinics_texts { get; set; }
+        public virtual IList<Instrument> Instruments { get; set; }
     }
 }
