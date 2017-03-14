@@ -1,20 +1,37 @@
 @import "common.less";
 
-.main {
-    
-    background: white;
-    .wrapper {
-        padding-top: 40px;
+.tab-select {
+
+}
+.diease-tab {
+    height: 40px;
+    line-height: 40px;
+    color: @black;
+    font-size: 16px;
+    border-bottom: 2px @blue solid;
+    text-align: center;
+}
+.diease-tab.active {
+    background-color: @blue;
+    color: white;
+}
+.diease-tab:hover {
+    background-color: @blue-lighter;
+    color: white;
+    cursor: pointer;
+}
+
+.diease-list {
+    li {
         text-align: center;
+
     }
-    .select-box {
-        display: inline-block;
-        height: 600px;
-        width: 360px;
-        border: 1px solid @blue;
-        border-radius: 5px;
+    li:hover {
+        background-color: #f3f3f3;
+        cursor: pointer;
     }
-    .select-box:first-child {
-        margin-right: 60px;
-    }
+}
+
+.swiper-container {
+    height: 600px;
 }
