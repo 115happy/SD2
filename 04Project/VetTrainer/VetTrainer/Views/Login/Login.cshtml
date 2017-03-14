@@ -9,45 +9,50 @@
 
 <body>
     @Html.ValidationSummary(true, "登陆失败")
-    <div class="main">
-        <div class="wrapper">
+    <div class="container">
+        <div class="row">
+        <div class="col-lg-7">
             <img src="../Src/images/pets.png" alt="pets">
-
-            @using (Html.BeginForm())
+        </div>
+        <div class="col-lg-5">
+             @using (Html.BeginForm())
             {
-                <fieldset>
+                <fieldset class="">
                     <legend>@VetTrainer.Views.Strings.Login.FormLoginText</legend>
-                    <div class="login-box">
-                        <div class="input-row editor-label">
-                            <span>@VetTrainer.Views.Strings.Login.LblUsername</span>
-                            @*<input type="text" name="id">*@
-                            <div class="editor-field">
+                    <div class="login-box form-horizontal">
+                        <div class="editor-label form-group">
+                            <span class="col-md-3">@VetTrainer.Views.Strings.Login.LblUsername</span>
+                            <div class="editor-field col-md-9">
                                 @Html.TextBoxFor(u => u.UserName)
                                 @Html.ValidationMessageFor(u => u.UserName)
                             </div>
                         </div>
-                        <div class="input-row editor-label">
-                            <span>@VetTrainer.Views.Strings.Login.LblPassword</span>
-                            @* <input type="text">*@
-                            <div class="editor-field">
+                        <div class="editor-label form-group">
+                            <span class="col-md-3">@VetTrainer.Views.Strings.Login.LblPassword</span>
+                         
+                            <div class="editor-field col-md-9">
                                 @Html.PasswordFor(u => u.Password)
                                 @Html.ValidationMessageFor(u => u.Password)
                             </div>
                         </div>
-                        <div class="editor-label">
+                        <div class="editor-label form-group">
+                          <div class="col-md-12">
                             @Html.CheckBoxFor(u => u.IsToRememberMe)
                             @VetTrainer.Views.Strings.Login.LblIsToRememberMe;
+                          </div>
                         </div>
-                        @*<div class="input-row">
-                            <a href="" class="btn btn-primary">
-                                
-                            </a>
-                        </div>*@
-                        <input type="submit" value="@VetTrainer.Views.Strings.Login.BtnLoginText" />
+                        <div class="row">
+                        <div class="col-md-12 text-center">
+                          <input class="btn btn-default" type="submit" value="@VetTrainer.Views.Strings.Login.BtnLoginText" />
+                        </div>
+                          
+                        </div>
+                        
                     </div>
 
                 </fieldset>
             }
+        </div>
         </div>
     </div>
 
