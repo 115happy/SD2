@@ -218,38 +218,25 @@
     <Compile Include="Migrations\201703131159289_NewLoginFunctionsAdded.Designer.cs">
       <DependentUpon>201703131159289_NewLoginFunctionsAdded.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201703140622448_alterPicture1.cs" />
+    <Compile Include="Migrations\201703140622448_alterPicture1.Designer.cs">
+      <DependentUpon>201703140622448_alterPicture1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
-    <Compile Include="Models\tbref_clinics_instruments.cs" />
-    <Compile Include="Models\tbref_diseases_disecase.cs" />
-    <Compile Include="Models\tbref_disecasetab_analyses.cs" />
-    <Compile Include="Models\tbref_disecasetab_drugs.cs" />
-    <Compile Include="Models\tbref_disecasetab_pics.cs" />
-    <Compile Include="Models\tbref_disecasetab_texts.cs" />
-    <Compile Include="Models\tbref_disecasetab_videos.cs" />
-    <Compile Include="Models\tbref_disecase_charges.cs" />
-    <Compile Include="Models\tbref_disecase_disecasetab.cs" />
-    <Compile Include="Models\tbref_disetype_diseases.cs" />
-    <Compile Include="Models\tbref_instruments_pics.cs" />
-    <Compile Include="Models\tbref_instruments_texts.cs" />
-    <Compile Include="Models\tbref_instruments_videos.cs" />
-    <Compile Include="Models\tbref_roles_clinics_pics.cs" />
-    <Compile Include="Models\tbref_roles_clinics_texts.cs" />
-    <Compile Include="Models\tbref_roles_clinics_videos.cs" />
-    <Compile Include="Models\tb_analyses.cs" />
-    <Compile Include="Models\tb_charges.cs" />
-    <Compile Include="Models\tb_clinics.cs" />
-    <Compile Include="Models\tb_diseases.cs" />
-    <Compile Include="Models\tb_dise_case.cs" />
-    <Compile Include="Models\tb_dise_case_tab.cs" />
-    <Compile Include="Models\tb_dise_type.cs" />
-    <Compile Include="Models\tb_drugs.cs" />
-    <Compile Include="Models\tb_instruments.cs" />
-    <Compile Include="Models\tb_pics.cs" />
-    <Compile Include="Models\tb_roles.cs" />
-    <Compile Include="Models\tb_texts.cs" />
-    <Compile Include="Models\tb_users.cs" />
-    <Compile Include="Models\tb_videos.cs" />
+    <Compile Include="Models\Analysis.cs" />
+    <Compile Include="Models\Charge.cs" />
+    <Compile Include="Models\Clinic.cs" />
+    <Compile Include="Models\Disease.cs" />
+    <Compile Include="Models\DiseaseCase.cs" />
+    <Compile Include="Models\DiseaseCaseTab.cs" />
+    <Compile Include="Models\DiseaseType.cs" />
+    <Compile Include="Models\Drug.cs" />
+    <Compile Include="Models\Instrument.cs" />
+    <Compile Include="Models\Picture.cs" />
+    <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\Text.cs" />
+    <Compile Include="Models\User.cs" />
+    <Compile Include="Models\Video.cs" />
     <Compile Include="Models\VetAppDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
@@ -330,6 +317,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201703131159289_NewLoginFunctionsAdded.resx">
       <DependentUpon>201703131159289_NewLoginFunctionsAdded.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201703140622448_alterPicture1.resx">
+      <DependentUpon>201703140622448_alterPicture1.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

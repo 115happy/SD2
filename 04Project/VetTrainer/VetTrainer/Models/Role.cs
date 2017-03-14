@@ -6,35 +6,39 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    [Table("vet_app.tb_pics")]
-    public partial class tb_pics
+    [Table("vet_app.tb_roles")]
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_pics()
+        public Role()
         {
-            tbref_disecasetab_pics = new HashSet<tbref_disecasetab_pics>();
-            tbref_instruments_pics = new HashSet<tbref_instruments_pics>();
             tbref_roles_clinics_pics = new HashSet<tbref_roles_clinics_pics>();
+            tbref_roles_clinics_texts = new HashSet<tbref_roles_clinics_texts>();
+            tbref_roles_clinics_videos = new HashSet<tbref_roles_clinics_videos>();
         }
 
         [Key]
-        public int pic_id { get; set; }
+        public int role_id { get; set; }
 
         [Required]
         [StringLength(45)]
-        public string pic_name { get; set; }
+        public string role_name { get; set; }
 
         [Required]
         [StringLength(3000)]
-        public string pic_url { get; set; }
+        public string role_desp { get; set; }
 
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_disecasetab_pics> tbref_disecasetab_pics { get; set; }
-
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<tbref_instruments_pics> tbref_instruments_pics { get; set; }
+        [Required]
+        [StringLength(300)]
+        public string role_pic_url { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<tbref_roles_clinics_pics> tbref_roles_clinics_pics { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbref_roles_clinics_texts> tbref_roles_clinics_texts { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<tbref_roles_clinics_videos> tbref_roles_clinics_videos { get; set; }
     }
 }

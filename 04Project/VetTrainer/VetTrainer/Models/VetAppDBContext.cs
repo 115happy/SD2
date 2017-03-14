@@ -15,20 +15,20 @@ namespace VetTrainer.Models
 
         }
 
-        public virtual DbSet<tb_analyses> tb_analyses { get; set; }
-        public virtual DbSet<tb_charges> tb_charges { get; set; }
-        public virtual DbSet<tb_clinics> tb_clinics { get; set; }
-        public virtual DbSet<tb_dise_case> tb_dise_case { get; set; }
-        public virtual DbSet<tb_dise_case_tab> tb_dise_case_tab { get; set; }
-        public virtual DbSet<tb_dise_type> tb_dise_type { get; set; }
-        public virtual DbSet<tb_diseases> tb_diseases { get; set; }
-        public virtual DbSet<tb_drugs> tb_drugs { get; set; }
-        public virtual DbSet<tb_instruments> tb_instruments { get; set; }
-        public virtual DbSet<tb_pics> tb_pics { get; set; }
-        public virtual DbSet<tb_roles> tb_roles { get; set; }
-        public virtual DbSet<tb_texts> tb_texts { get; set; }
+        public virtual DbSet<Analysis> tb_analyses { get; set; }
+        public virtual DbSet<Charge> tb_charges { get; set; }
+        public virtual DbSet<Clinic> tb_clinics { get; set; }
+        public virtual DbSet<DiseaseCase> tb_dise_case { get; set; }
+        public virtual DbSet<DiseaseCaseTab> tb_dise_case_tab { get; set; }
+        public virtual DbSet<DiseaseType> tb_dise_type { get; set; }
+        public virtual DbSet<Disease> tb_diseases { get; set; }
+        public virtual DbSet<Drug> tb_drugs { get; set; }
+        public virtual DbSet<Instrument> tb_instruments { get; set; }
+        public virtual DbSet<Picture> tb_pics { get; set; }
+        public virtual DbSet<Role> tb_roles { get; set; }
+        public virtual DbSet<Text> tb_texts { get; set; }
         public virtual DbSet<User> Users { get; set; }
-        public virtual DbSet<tb_videos> tb_videos { get; set; }
+        public virtual DbSet<Video> tb_videos { get; set; }
         public virtual DbSet<tbref_clinics_instruments> tbref_clinics_instruments { get; set; }
         public virtual DbSet<tbref_diseases_disecase> tbref_diseases_disecase { get; set; }
         public virtual DbSet<tbref_disecase_charges> tbref_disecase_charges { get; set; }
@@ -51,250 +51,312 @@ namespace VetTrainer.Models
             Database.SetInitializer<VetAppDBContext>(null);
 
             //modelBuilder.HasDefaultSchema("vet_app");
+            #region Analyses
 
-            modelBuilder.Entity<tb_analyses>()
-                .Property(e => e.analysis_name)
+            modelBuilder.Entity<Analysis>()
+                .ToTable("tb_analyses")
+                .HasKey(e => e.AnalysisId);
+
+            modelBuilder.Entity<Analysis>()
+                .Property(e => e.AnalysisId)
+                .HasColumnName("analysis_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+
+            modelBuilder.Entity<Analysis>()
+                .Property(e => e.AnalysisName)
+                .HasColumnName("analysis_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_analyses>()
-                .HasMany(e => e.tbref_disecasetab_analyses)
-                .WithRequired(e => e.tb_analyses)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Analysis>()
+                .Property(e => e.AnalysisAmount)
+                .HasColumnName("analysis_amount")
+                .IsRequired();
 
-            modelBuilder.Entity<tb_charges>()
-                .Property(e => e.charge_name)
+            #endregion
+
+            #region Charge
+
+            modelBuilder.Entity<Charge>()
+                .ToTable("tb_charges")
+                .HasKey(e => e.ChargeId);
+
+            modelBuilder.Entity<Charge>()
+                .Property(e => e.ChargeId)
+                .HasColumnName("charge_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+                
+            modelBuilder.Entity<Charge>()
+                .Property(e => e.ChargeName)
+                .HasColumnName("charge_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_charges>()
-                .Property(e => e.charge_desp)
+            modelBuilder.Entity<Charge>()
+                .Property(e => e.ChargeDescription)
+                .HasColumnName("charge_desp")
+                .HasMaxLength(3000)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_charges>()
-                .HasMany(e => e.tbref_disecase_charges)
-                .WithRequired(e => e.tb_charges)
-                .WillCascadeOnDelete(false);
+            #endregion
 
-            modelBuilder.Entity<tb_clinics>()
-                .Property(e => e.clinic_name)
+            #region Clinic
+
+            modelBuilder.Entity<Clinic>()
+                .ToTable("tb_clinics")
+                .HasKey(e => e.ClinicId);
+
+            modelBuilder.Entity<Clinic>()
+                .Property(e => e.ClinicId)
+                .HasColumnName("clinic_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<Clinic>()
+                .Property(e => e.ClinicName)
+                .HasColumnName("clinic_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_clinics>()
-                .Property(e => e.clinic_desp)
+            modelBuilder.Entity<Clinic>()
+                .Property(e => e.ClinicDescription)
+                .HasColumnName("clinic_desp")
+                .HasMaxLength(3000)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_clinics>()
-                .HasMany(e => e.tbref_clinics_instruments)
-                .WithRequired(e => e.tb_clinics)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Clinic>()
+                .Property(e => e.ClinicPositionX)
+                .HasColumnName("clinic_pos_x");
 
-            modelBuilder.Entity<tb_clinics>()
-                .HasMany(e => e.tbref_roles_clinics_pics)
-                .WithRequired(e => e.tb_clinics)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Clinic>()
+                .Property(e => e.ClinicPositionY)
+                .HasColumnName("clinic_pos_y");
 
-            modelBuilder.Entity<tb_clinics>()
-                .HasMany(e => e.tbref_roles_clinics_texts)
-                .WithRequired(e => e.tb_clinics)
-                .WillCascadeOnDelete(false);
+            #endregion
 
-            modelBuilder.Entity<tb_clinics>()
-                .HasMany(e => e.tbref_roles_clinics_videos)
-                .WithRequired(e => e.tb_clinics)
-                .WillCascadeOnDelete(false);
+            #region diseases
 
-            modelBuilder.Entity<tb_dise_case>()
-                .Property(e => e.case_name)
+            modelBuilder.Entity<Disease>()
+                .ToTable("tb_diseases")
+                .HasKey(e => e.DiseaseId);
+
+            modelBuilder.Entity<Disease>()
+                .Property(e => e.DiseaseId)
+                .HasColumnName("disease_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<Disease>()
+                .Property(e => e.DiseaseName)
+                .HasColumnName("disease_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_dise_case>()
-                .Property(e => e.case_desp)
+            #endregion
+
+            #region DiseaseCase
+
+            modelBuilder.Entity<DiseaseCase>()
+                .ToTable("tb_dise_case")
+                .HasKey(e => e.CaseId);
+
+            modelBuilder.Entity<DiseaseCase>()
+                .Property(e => e.CaseId)
+                .HasColumnName("case_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<DiseaseCase>()
+                .Property(e => e.CaseName)
+                .HasColumnName("case_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_dise_case>()
-                .HasMany(e => e.tbref_diseases_disecase)
-                .WithRequired(e => e.tb_dise_case)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<tb_dise_case>()
-                .HasMany(e => e.tbref_disecase_disecasetab)
-                .WithRequired(e => e.tb_dise_case)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<tb_dise_case>()
-                .HasMany(e => e.tbref_disecase_charges)
-                .WithRequired(e => e.tb_dise_case)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<tb_dise_case_tab>()
-                .Property(e => e.tab_index)
+            modelBuilder.Entity<DiseaseCase>()
+                .Property(e => e.CaseDiscription)
+                .HasColumnName("case_desp")
+                .HasMaxLength(3000)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_dise_case_tab>()
-                .HasMany(e => e.tbref_disecase_disecasetab)
-                .WithRequired(e => e.tb_dise_case_tab)
-                .WillCascadeOnDelete(false);
+            #endregion
 
-            modelBuilder.Entity<tb_dise_case_tab>()
-                .HasMany(e => e.tbref_disecasetab_analyses)
-                .WithRequired(e => e.tb_dise_case_tab)
-                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_dise_case_tab>()
-                .HasMany(e => e.tbref_disecasetab_drugs)
-                .WithRequired(e => e.tb_dise_case_tab)
-                .WillCascadeOnDelete(false);
+            #region DiseaseCaseTab
 
-            modelBuilder.Entity<tb_dise_case_tab>()
-                .HasMany(e => e.tbref_disecasetab_pics)
-                .WithRequired(e => e.tb_dise_case_tab)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<DiseaseCaseTab>()
+                .ToTable("tb_dise_case_tab")
+                .HasKey(e => e.TabId);
 
-            modelBuilder.Entity<tb_dise_case_tab>()
-                .HasMany(e => e.tbref_disecasetab_texts)
-                .WithRequired(e => e.tb_dise_case_tab)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<DiseaseCaseTab>()
+                .Property(e => e.TabId)
+                .HasColumnName("tab_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
-            modelBuilder.Entity<tb_dise_case_tab>()
-                .HasMany(e => e.tbref_disecasetab_videos)
-                .WithRequired(e => e.tb_dise_case_tab)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<tb_dise_type>()
-                .Property(e => e.type_name)
+            modelBuilder.Entity<DiseaseCaseTab>()
+                .Property(e => e.TabIndex)
+                .HasColumnName("tab_index")
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_dise_type>()
-                .HasMany(e => e.tbref_disetype_diseases)
-                .WithRequired(e => e.tb_dise_type)
-                .WillCascadeOnDelete(false);
+            #endregion
 
-            modelBuilder.Entity<tb_diseases>()
-                .Property(e => e.disease_name)
+            #region DiseType
+
+            modelBuilder.Entity<DiseaseType>()
+                .ToTable("tb_dise_type")
+                .HasKey(e => e.TypeId);
+
+            modelBuilder.Entity<DiseaseType>()
+                .Property(e => e.TypeId)
+                .HasColumnName("type_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<DiseaseType>()
+                .Property(e => e.TypeName)
+                .HasColumnName("type_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_diseases>()
-                .HasMany(e => e.tbref_diseases_disecase)
-                .WithRequired(e => e.tb_diseases)
-                .WillCascadeOnDelete(false);
+            #endregion
 
-            modelBuilder.Entity<tb_diseases>()
-                .HasMany(e => e.tbref_disetype_diseases)
-                .WithRequired(e => e.tb_diseases)
-                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_drugs>()
-                .Property(e => e.drug_name)
+            #region Drug
+
+            modelBuilder.Entity<Drug>()
+                .ToTable("tb_drugs")
+                .HasKey(e => e.DrugId);
+
+            modelBuilder.Entity<Drug>()
+                .Property(e => e.DrugId)
+                .HasColumnName("drug_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<Drug>()
+                .Property(e => e.DrugName)
+                .HasColumnName("drug_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_drugs>()
-                .HasMany(e => e.tbref_disecasetab_drugs)
-                .WithRequired(e => e.tb_drugs)
-                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<Drug>()
+                .Property(e => e.DrugPrice)
+                .HasColumnName("drug_price")
+                .IsRequired();
 
-            modelBuilder.Entity<tb_instruments>()
+            #endregion
+
+            #region instrument
+
+            modelBuilder.Entity<Instrument>()
                 .Property(e => e.instument_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_instruments>()
+            modelBuilder.Entity<Instrument>()
                 .Property(e => e.instrument_desp)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_instruments>()
+            modelBuilder.Entity<Instrument>()
                 .Property(e => e.model_url)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_instruments>()
+            modelBuilder.Entity<Instrument>()
                 .HasMany(e => e.tbref_clinics_instruments)
                 .WithRequired(e => e.tb_instruments)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_instruments>()
+            modelBuilder.Entity<Instrument>()
                 .HasMany(e => e.tbref_instruments_pics)
                 .WithRequired(e => e.tb_instruments)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_instruments>()
+            modelBuilder.Entity<Instrument>()
                 .HasMany(e => e.tbref_instruments_texts)
                 .WithRequired(e => e.tb_instruments)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_instruments>()
+            modelBuilder.Entity<Instrument>()
                 .HasMany(e => e.tbref_instruments_videos)
                 .WithRequired(e => e.tb_instruments)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_pics>()
-                .Property(e => e.pic_name)
+            #endregion
+
+            #region picture
+            modelBuilder.Entity<Picture>()
+                .ToTable("tb_pics")
+                .HasKey(e => e.PicId);
+            
+            //×ÔÔö³¤
+            modelBuilder.Entity<Picture>()
+                .Property(e => e.PicId)
+                .HasColumnName("pic_id")
+                .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+
+            modelBuilder.Entity<Picture>()
+                .Property(e => e.PicName)
+                .HasColumnName("pic_name")
+                .HasMaxLength(45)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_pics>()
-                .Property(e => e.pic_url)
+            modelBuilder.Entity<Picture>()
+                .Property(e => e.PicUrl)
+                .HasColumnName("pic_url")
+                .HasMaxLength(3000)
+                .IsRequired()
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_pics>()
-                .HasMany(e => e.tbref_disecasetab_pics)
-                .WithRequired(e => e.tb_pics)
-                .WillCascadeOnDelete(false);
+            #endregion
 
-            modelBuilder.Entity<tb_pics>()
-                .HasMany(e => e.tbref_instruments_pics)
-                .WithRequired(e => e.tb_pics)
-                .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_pics>()
-                .HasMany(e => e.tbref_roles_clinics_pics)
-                .WithRequired(e => e.tb_pics)
-                .WillCascadeOnDelete(false);
+            #region roles
 
-            modelBuilder.Entity<tb_roles>()
+            modelBuilder.Entity<Role>()
                 .Property(e => e.role_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_roles>()
+            modelBuilder.Entity<Role>()
                 .Property(e => e.role_desp)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_roles>()
+            modelBuilder.Entity<Role>()
                 .Property(e => e.role_pic_url)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_roles>()
-                .HasMany(e => e.tbref_roles_clinics_pics)
-                .WithRequired(e => e.tb_roles)
-                .WillCascadeOnDelete(false);
+            #endregion
 
-            modelBuilder.Entity<tb_roles>()
-                .HasMany(e => e.tbref_roles_clinics_texts)
-                .WithRequired(e => e.tb_roles)
-                .WillCascadeOnDelete(false);
+            #region text
 
-            modelBuilder.Entity<tb_roles>()
-                .HasMany(e => e.tbref_roles_clinics_videos)
-                .WithRequired(e => e.tb_roles)
-                .WillCascadeOnDelete(false);
-
-            modelBuilder.Entity<tb_texts>()
+            modelBuilder.Entity<Text>()
                 .Property(e => e.text_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_texts>()
+            modelBuilder.Entity<Text>()
                 .Property(e => e.text_content)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_texts>()
+            modelBuilder.Entity<Text>()
                 .HasMany(e => e.tbref_disecasetab_texts)
                 .WithRequired(e => e.tb_texts)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_texts>()
+            modelBuilder.Entity<Text>()
                 .HasMany(e => e.tbref_instruments_texts)
                 .WithRequired(e => e.tb_texts)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_texts>()
+            modelBuilder.Entity<Text>()
                 .HasMany(e => e.tbref_roles_clinics_texts)
                 .WithRequired(e => e.tb_texts)
                 .WillCascadeOnDelete(false);
+
+            #endregion
+
+            #region user
 
             modelBuilder.Entity<User>()
                 .ToTable("tb_users")
@@ -306,8 +368,8 @@ namespace VetTrainer.Models
                 .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 
             modelBuilder.Entity<User>()
-                .Property(e => e.Username)
-                .HasColumnName("username")
+                .Property(e => e.UserName)
+                .HasColumnName("user_name")
                 .HasMaxLength(45)
                 .IsRequired()
                 .IsUnicode(false);
@@ -331,25 +393,27 @@ namespace VetTrainer.Models
                 .HasColumnName("is_to_remember")
                 .IsRequired();
 
-            modelBuilder.Entity<tb_videos>()
+            #endregion
+
+            modelBuilder.Entity<Video>()
                 .Property(e => e.video_name)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_videos>()
+            modelBuilder.Entity<Video>()
                 .Property(e => e.video_url)
                 .IsUnicode(false);
 
-            modelBuilder.Entity<tb_videos>()
+            modelBuilder.Entity<Video>()
                 .HasMany(e => e.tbref_disecasetab_videos)
                 .WithRequired(e => e.tb_videos)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_videos>()
+            modelBuilder.Entity<Video>()
                 .HasMany(e => e.tbref_instruments_videos)
                 .WithRequired(e => e.tb_videos)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<tb_videos>()
+            modelBuilder.Entity<Video>()
                 .HasMany(e => e.tbref_roles_clinics_videos)
                 .WithRequired(e => e.tb_videos)
                 .WillCascadeOnDelete(false);

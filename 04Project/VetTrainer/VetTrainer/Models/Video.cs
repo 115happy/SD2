@@ -7,10 +7,10 @@ namespace VetTrainer.Models
     using System.Data.Entity.Spatial;
 
     [Table("vet_app.tb_videos")]
-    public partial class tb_videos
+    public partial class Video
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public tb_videos()
+        public Video()
         {
             tbref_disecasetab_videos = new HashSet<tbref_disecasetab_videos>();
             tbref_instruments_videos = new HashSet<tbref_instruments_videos>();

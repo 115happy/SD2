@@ -36,9 +36,9 @@ namespace VetTrainer.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsValid(user.Username, user.Password))
+                if (IsValid(user.UserName, user.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(user.Username, user.IsToRememberMe);
+                    FormsAuthentication.SetAuthCookie(user.UserName, user.IsToRememberMe);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -65,13 +65,27 @@ namespace VetTrainer.Controllers
         {
             using (VetAppDBContext context = new VetAppDBContext())
             {
+
+                // var clinics = context.Clinics.Include(c=>c.Instruments).ToList();
                 var users = context.Users.ToList();
                 string encryptedPassword = Utilities.Encoder.Encode(password);
                 User foundUser = users.SingleOrDefault(u =>
-                    u.Username == username && u.Password == encryptedPassword);
+                    u.UserName == username && u.Password == encryptedPassword);
                 if (foundUser != null) return true;
                 return false;
             }
         }
+        // u => u*u
+        /*
+         int Multiply(int u)
+         {
+         return u * u;
+         }
+         SingleOrDefault(Func<T> (T, bool)) 
+
+        public delegate int multiply(int);
+        multiply +=u=>u*u;
+        multiply(6);
+         */
     }
 }
