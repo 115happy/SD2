@@ -11,48 +11,48 @@
     @Html.ValidationSummary(true, "登陆失败")
     <div class="container">
         <div class="row">
-        <div class="col-lg-7">
-            <img src="../Src/images/pets.png" alt="pets">
-        </div>
-        <div class="col-lg-5">
-             @using (Html.BeginForm())
-            {
-                <fieldset class="">
-                    <legend>@VetTrainer.Views.Strings.Login.FormLoginText</legend>
-                    <div class="login-box form-horizontal">
-                        <div class="editor-label form-group">
-                            <span class="col-md-3">@VetTrainer.Views.Strings.Login.LblUsername</span>
-                            <div class="editor-field col-md-9">
-                                @Html.TextBoxFor(u => u.Name)
-                                @Html.ValidationMessageFor(u => u.Name)
+            <div class="col-lg-7">
+                <img src="../Src/images/pets.png" alt="pets">
+            </div>
+            <div class="col-lg-5">
+                @using (Html.BeginForm("Login", "Login"))
+                {
+                    <fieldset class="">
+                        <legend>@VetTrainer.Views.Strings.Login.FormLoginText</legend>
+                        <div class="login-box form-horizontal">
+                            <div class="editor-label form-group">
+                                <span class="col-md-3">@Html.LabelFor(u=>u.Name)</span>
+                                <div class="editor-field col-md-9">
+                                    @Html.TextBoxFor(u => u.Name)
+                                    @Html.ValidationMessageFor(u => u.Name)
+                                </div>
                             </div>
-                        </div>
-                        <div class="editor-label form-group">
-                            <span class="col-md-3">@VetTrainer.Views.Strings.Login.LblPassword</span>
-                         
-                            <div class="editor-field col-md-9">
-                                @Html.PasswordFor(u => u.Password)
-                                @Html.ValidationMessageFor(u => u.Password)
-                            </div>
-                        </div>
-                        <div class="editor-label form-group">
-                          <div class="col-md-12">
-                            @Html.CheckBoxFor(u => u.IsToRememberMe)
-                            @VetTrainer.Views.Strings.Login.LblIsToRememberMe;
-                          </div>
-                        </div>
-                        <div class="row">
-                        <div class="col-md-12 text-center">
-                          <input class="btn btn-default" type="submit" value="@VetTrainer.Views.Strings.Login.BtnLoginText" />
-                        </div>
-                          
-                        </div>
-                        
-                    </div>
+                            <div class="editor-label form-group">
+                                <span class="col-md-3">@Html.LabelFor(u=>u.Password)</span>
 
-                </fieldset>
-            }
-        </div>
+                                <div class="editor-field col-md-9">
+                                    @Html.PasswordFor(u => u.Password)
+                                    @Html.ValidationMessageFor(u => u.Password)
+                                </div>
+                            </div>
+                            <div class="editor-label form-group">
+                                <div class="col-md-12">
+                                    @Html.CheckBoxFor(u => u.IsToRememberMe)
+                                    @Html.LabelFor(u=>u.IsToRememberMe)
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    <input class="btn btn-default" type="submit" value="@VetTrainer.Views.Strings.Login.BtnLoginText" />
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </fieldset>
+                }
+            </div>
         </div>
     </div>
 

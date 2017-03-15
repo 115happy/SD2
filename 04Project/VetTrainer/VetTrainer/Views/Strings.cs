@@ -7,6 +7,11 @@ namespace VetTrainer.Views
 {
     public static class Strings
     {
+        public static class Global
+        {
+            public const string AppName = "虚拟宠物医院学习软件";
+        }
+
         public static class Login
         {
             public const string FormLoginText = "登录";

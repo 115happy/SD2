@@ -12,11 +12,16 @@ namespace VetTrainer.Models
     public class User
     {
         public int Id { get; set; }
+
+        [Display(Name = Views.Strings.Login.LblUsername)]
         public string Name { get; set; }
 
+        [Display(Name = Views.Strings.Login.LblPassword)]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public UserAuthority Authority { get; set; }
+
+        [Display(Name = Views.Strings.Login.LblIsToRememberMe)]
         public bool IsToRememberMe { get; set; }
     }
 }
