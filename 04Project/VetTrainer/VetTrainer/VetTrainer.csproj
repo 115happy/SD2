@@ -304,13 +304,10 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Case\caseSelect.cshtml" />
     <Content Include="Views\Case\caseLearning.cshtml" />
-<<<<<<< HEAD
     <Content Include="Views\RolePlay\Index.cshtml" />
     <Content Include="Views\RolePlay\ClinicSelect.cshtml" />
     <Content Include="Views\RolePlay\Clinic.cshtml" />
-=======
     <Content Include="Views\Nav\ChooseClinic.cshtml" />
->>>>>>> origin/master
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
