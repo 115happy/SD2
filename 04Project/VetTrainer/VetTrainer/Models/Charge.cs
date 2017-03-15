@@ -1,21 +1,17 @@
 namespace VetTrainer.Models
 {
 
-    public partial class Charge
+    public class Charge
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Charge()
         {
-
         }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Amount { get; set; }
+        public string Description { get; set; }
 
-        public int ChargeId { get; set; }
-
-        public string ChargeName { get; set; }
-
-        public decimal ChargeAmount { get; set; }
-
-        public string ChargeDescription { get; set; }
+        //*********************************************************************
 
         public virtual DiseaseCase DiseaseCase { get; set; }
 

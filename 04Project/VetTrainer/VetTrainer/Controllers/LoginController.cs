@@ -36,9 +36,9 @@ namespace VetTrainer.Controllers
         {
             if (ModelState.IsValid)
             {
-                if (IsValid(user.UserName, user.Password))
+                if (IsValid(user.Name, user.Password))
                 {
-                    FormsAuthentication.SetAuthCookie(user.UserName, user.IsToRememberMe);
+                    FormsAuthentication.SetAuthCookie(user.Name, user.IsToRememberMe);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -70,7 +70,7 @@ namespace VetTrainer.Controllers
                 var users = context.Users.ToList();
                 string encryptedPassword = Utilities.Encoder.Encode(password);
                 User foundUser = users.SingleOrDefault(u =>
-                    u.UserName == username && u.Password == encryptedPassword);
+                    u.Name == username && u.Password == encryptedPassword);
                 if (foundUser != null) return true;
                 return false;
             }

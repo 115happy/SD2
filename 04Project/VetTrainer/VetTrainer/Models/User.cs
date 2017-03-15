@@ -2,17 +2,21 @@ namespace VetTrainer.Models
 {
     using System.ComponentModel.DataAnnotations;
 
-    public partial class User
+    public enum UserAuthority
     {
-        public int UserId { get; set; }
+        User = 0,
+        Admin = 1,
+        SuperAdmin = 2
+    }
 
-        public string UserName { get; set; }
+    public class User
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
 
         [DataType(DataType.Password)]
         public string Password { get; set; }
-
-        public string Authority { get; set; }
-
+        public UserAuthority Authority { get; set; }
         public bool IsToRememberMe { get; set; }
     }
 }

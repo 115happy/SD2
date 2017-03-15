@@ -4,19 +4,17 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
 
-    public partial class Analysis
+    public class Analysis
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Analysis()
         {
             DiseaseCaseTabs = new List<DiseaseCaseTab>();
         }
-        
-        public int AnalysisId { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public decimal Amount { get; set; }
 
-        public string AnalysisName { get; set; }
-
-        public decimal AnalysisAmount { get; set; }
+        //*********************************************************************
 
         public virtual IList<DiseaseCaseTab> DiseaseCaseTabs { get; set; }
     }

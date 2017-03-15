@@ -6,18 +6,14 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class DiseaseType
+    public class DiseaseType
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public DiseaseType()
         {
             Diseases = new List<Disease>();
         }
-
-        public int TypeId { get; set; }
-
-        public string TypeName { get; set; }
-
+        public int Id { get; set; }
+        public string Name { get; set; }
         public virtual IList<Disease> Diseases { get; set; }
     }
 }

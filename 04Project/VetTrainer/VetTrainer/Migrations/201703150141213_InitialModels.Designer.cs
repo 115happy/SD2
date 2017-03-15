@@ -7,13 +7,13 @@ namespace VetTrainer.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class alterPicture1 : IMigrationMetadata
+    public sealed partial class InitialModels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(alterPicture1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(InitialModels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201703140622448_alterPicture1"; }
+            get { return "201703150141213_InitialModels"; }
         }
         
         string IMigrationMetadata.Source

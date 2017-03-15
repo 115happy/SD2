@@ -6,23 +6,23 @@ namespace VetTrainer.Models
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
 
-    public partial class Video
+    public class Video
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Video()
         {
-            DiseaseCaseTabs = new List<DiseaseCaseTab>();
-            Instruments = new List<Instrument>();
+            RelatedDiseaseCaseTabs = new List<DiseaseCaseTab>();
+            RelatedInstruments = new List<Instrument>();
         }
+        public int Id { get; set; }
+        public string Name { get; set; }
+        public string Url { get; set; }
+        public string Description { get; set; }
 
-        public int VideoId { get; set; }
-
-        public string VideoName { get; set; }
-
-        public string VideoUrl { get; set; }
-
-        public virtual IList<DiseaseCaseTab> DiseaseCaseTabs { get; set; }
-
-        public virtual IList<Instrument> Instruments { get; set; }
+        //*********************************************************************
+        public int? RelatedClinicId { get; set; }
+        public virtual Clinic RelatedClinic { get; set; }
+        public virtual IList<DiseaseCaseTab> RelatedDiseaseCaseTabs { get; set; }
+        public virtual IList<Instrument> RelatedInstruments { get; set; }
+        public virtual IList<RPRecord> RelatedRPRecords { get; set; }
     }
 }

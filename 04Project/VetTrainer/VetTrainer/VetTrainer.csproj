@@ -211,17 +211,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201703130520498_InitialModels.cs" />
-    <Compile Include="Migrations\201703130520498_InitialModels.Designer.cs">
-      <DependentUpon>201703130520498_InitialModels.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703131159289_NewLoginFunctionsAdded.cs" />
-    <Compile Include="Migrations\201703131159289_NewLoginFunctionsAdded.Designer.cs">
-      <DependentUpon>201703131159289_NewLoginFunctionsAdded.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201703140622448_alterPicture1.cs" />
-    <Compile Include="Migrations\201703140622448_alterPicture1.Designer.cs">
-      <DependentUpon>201703140622448_alterPicture1.cs</DependentUpon>
+    <Compile Include="Migrations\201703150141213_InitialModels.cs" />
+    <Compile Include="Migrations\201703150141213_InitialModels.Designer.cs">
+      <DependentUpon>201703150141213_InitialModels.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Analysis.cs" />
@@ -235,6 +227,7 @@
     <Compile Include="Models\Instrument.cs" />
     <Compile Include="Models\Picture.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RPRecord.cs" />
     <Compile Include="Models\Text.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Video.cs" />
@@ -316,14 +309,8 @@
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201703130520498_InitialModels.resx">
-      <DependentUpon>201703130520498_InitialModels.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703131159289_NewLoginFunctionsAdded.resx">
-      <DependentUpon>201703131159289_NewLoginFunctionsAdded.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201703140622448_alterPicture1.resx">
-      <DependentUpon>201703140622448_alterPicture1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201703150141213_InitialModels.resx">
+      <DependentUpon>201703150141213_InitialModels.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
