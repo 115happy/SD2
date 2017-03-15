@@ -206,6 +206,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\CaseController.cs" />
+    <Compile Include="Controllers\DieaseCaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\RolePlayController.cs" />
@@ -308,6 +309,7 @@
     <Content Include="Views\RolePlay\ClinicSelect.cshtml" />
     <Content Include="Views\RolePlay\Clinic.cshtml" />
     <Content Include="Views\Nav\ChooseClinic.cshtml" />
+    <Content Include="Views\DieaseCase\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
