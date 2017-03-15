@@ -75,17 +75,5 @@ namespace VetTrainer.Controllers
                 return false;
             }
         }
-        // u => u*u
-        /*
-         int Multiply(int u)
-         {
-         return u * u;
-         }
-         SingleOrDefault(Func<T> (T, bool)) 
-
-        public delegate int multiply(int);
-        multiply +=u=>u*u;
-        multiply(6);
-         */
     }
 }

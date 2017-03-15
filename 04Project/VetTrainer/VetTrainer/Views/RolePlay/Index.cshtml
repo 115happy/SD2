@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "角色扮演";
+}
+
+<h2>Index</h2>
+@{
+    for (int i = 0; i < ViewBag.Roles.Count; i++)
+    {
+        string Name = ViewBag.Roles[i].Name;
+        <button>@Html.ActionLink(Name, "ClinicSelect", "RolePlay", new {roleId = ViewBag.Roles[i].Id}, null)</button>
+    }
+}

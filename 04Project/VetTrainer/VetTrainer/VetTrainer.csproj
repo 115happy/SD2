@@ -208,6 +208,7 @@
     <Compile Include="Controllers\CaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RolePlayController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -287,6 +288,9 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Case\caseSelect.cshtml" />
     <Content Include="Views\Case\caseLearning.cshtml" />
+    <Content Include="Views\RolePlay\Index.cshtml" />
+    <Content Include="Views\RolePlay\ClinicSelect.cshtml" />
+    <Content Include="Views\RolePlay\Clinic.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
