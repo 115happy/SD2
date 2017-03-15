@@ -1,0 +1,44 @@
+.navbar {
+  background: #309cd4;
+}
+h1 {
+  font-size: 26px;
+  color: white;
+}
+.nav-head {
+  color: white;
+}
+.nav-about {
+  font-size: 20px;
+  color: white;
+}
+footer {
+  background: #d8d8d8;
+}
+.select-box {
+  height: 600px;
+}
+.navi-select {
+  height: 640px;
+  background: #ffd800;
+}
+.role-select {
+  height: 320px;
+  background: #0094ff;
+}
+.case-select {
+  height: 320px;
+  background: #ff6a00;
+}
+.main-select img {
+  width: 100%;
+}
+.main-select:hover {
+  cursor: pointer;
+  opacity: .5;
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
+  -ms-transition: .4s;
+  -o-transition: .4s;
+  transition: .4s;
+}

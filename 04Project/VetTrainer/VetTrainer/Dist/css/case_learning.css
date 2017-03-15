@@ -1,0 +1,44 @@
+.navbar {
+  background: #309cd4;
+}
+h1 {
+  font-size: 26px;
+  color: white;
+}
+.nav-head {
+  color: white;
+}
+.nav-about {
+  font-size: 20px;
+  color: white;
+}
+footer {
+  background: #d8d8d8;
+}
+.diease-tab {
+  height: 40px;
+  line-height: 40px;
+  color: #333;
+  font-size: 16px;
+  border-bottom: 2px #309cd4 solid;
+  text-align: center;
+}
+.diease-tab.active {
+  background-color: #309cd4;
+  color: white;
+}
+.diease-tab:hover {
+  background-color: #84c4e6;
+  color: white;
+  cursor: pointer;
+}
+.diease-list li {
+  text-align: center;
+}
+.diease-list li:hover {
+  background-color: #f3f3f3;
+  cursor: pointer;
+}
+.swiper-container {
+  height: 600px;
+}
