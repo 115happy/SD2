@@ -1,0 +1,11 @@
+﻿@{
+    ViewBag.Title = "Index";
+    ViewBag.Count = 0;
+}
+
+<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.UserManage, "Manage","SystemManager",new {ManageId = ViewBag.Count++},null)</h2>
+<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BaseFunctionManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
+<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.RoleManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
+<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.CaseManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
+<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BackUpAndRecoverManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
+

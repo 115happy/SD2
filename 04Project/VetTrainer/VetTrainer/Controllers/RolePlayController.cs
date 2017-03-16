@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using VetTrainer.Models;
 using System.Data.Entity;
+using VetTrainer.Views.ViewModel;
 
 namespace VetTrainer.Controllers
 {
@@ -13,22 +14,25 @@ namespace VetTrainer.Controllers
         // GET: RolePlay
         public ActionResult Index()
         {
-            ViewBag.Roles = GetAllRoles();
-            return View();
+            //ViewBag.Roles = GetAllRoles();
+            RolesViewModel roles = new RolesViewModel();
+            roles.Roles = GetAllRoles();
+            return View(roles);
         }
         public ActionResult ClinicSelect()
         {
             int Id = int.Parse(Request.QueryString["roleId"]);
-            ViewBag.Role = GetRole(Id);
-            return View();
+            Role role = GetRole(Id);
+            //ViewBag.Role = GetRole(Id);
+            return View(role);
         }
         public ActionResult Clinic()
         {
             int roleId = int.Parse(Request.QueryString["roleId"]);
             int clinicId = int.Parse(Request.QueryString["clinicId"]);
-            ViewBag.rpRecord = GetRPRecord(roleId, clinicId);
-
-            return View();
+            //ViewBag.rpRecord = GetRPRecord(roleId, clinicId);
+            RPRecord rpRecord = GetRPRecord(roleId, clinicId);
+            return View(rpRecord);
         }
 
         public RPRecord GetRPRecord(int roleId,int clinicId)

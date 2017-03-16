@@ -205,12 +205,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Controllers\BackUpAndRecoveryController.cs" />
+    <Compile Include="Controllers\BaseFunctionManageController.cs" />
     <Compile Include="Controllers\CaseController.cs" />
+    <Compile Include="Controllers\CaseManageController.cs" />
     <Compile Include="Controllers\DieaseCaseController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoleManageController.cs" />
     <Compile Include="Controllers\RolePlayController.cs" />
     <Compile Include="Controllers\NavController.cs" />
+    <Compile Include="Controllers\SystemManagerController.cs" />
+    <Compile Include="Controllers\UserManageController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -254,6 +260,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\SHA1.cs" />
     <Compile Include="Views\Strings.cs" />
+    <Compile Include="Views\ViewModel\RolesViewModel.cs" />
+    <Compile Include="Views\ViewModel\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
@@ -310,6 +318,12 @@
     <Content Include="Views\RolePlay\Clinic.cshtml" />
     <Content Include="Views\Nav\ChooseClinic.cshtml" />
     <Content Include="Views\DieaseCase\Index.cshtml" />
+    <Content Include="Views\SystemManager\Index.cshtml" />
+    <Content Include="Views\CaseManage\Index.cshtml" />
+    <Content Include="Views\BackUpAndRecovery\Index.cshtml" />
+    <Content Include="Views\BaseFunctionManage\Index.cshtml" />
+    <Content Include="Views\RoleManage\Index.cshtml" />
+    <Content Include="Views\UserManage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
