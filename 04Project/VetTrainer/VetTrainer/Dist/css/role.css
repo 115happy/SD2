@@ -1,0 +1,43 @@
+.navbar {
+  background: #309cd4;
+}
+h1 {
+  font-size: 26px;
+  color: white;
+}
+h1:hover {
+  color: white;
+}
+.nav-head {
+  color: white;
+}
+.nav-about {
+  font-size: 20px;
+  color: white;
+}
+footer {
+  height: 60px;
+  line-height: 60px;
+  background: #d8d8d8;
+  color: gray;
+}
+.role-select-tab {
+  height: 600px;
+  position: relative;
+  overflow: hidden;
+}
+.role-desc {
+  display: none;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+  -moz-transform: translateY(-50%);
+  -ms-transform: translateY(-50%);
+  -o-transform: translateY(-50%);
+  transform: translateY(-50%);
+  text-align: center;
+}
+.role-desc h4 {
+  font-size: 20px;
+  margin-bottom: 18px;
+}

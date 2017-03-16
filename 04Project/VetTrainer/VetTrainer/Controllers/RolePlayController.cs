@@ -13,7 +13,7 @@ namespace VetTrainer.Controllers
         // GET: RolePlay
         public ActionResult Index()
         {
-            ViewBag.Roles = GetAllRoles();
+            //ViewBag.Roles = GetAllRoles();
             return View();
         }
         public ActionResult ClinicSelect()
