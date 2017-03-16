@@ -5,6 +5,9 @@ h1 {
   font-size: 26px;
   color: white;
 }
+h1:hover {
+  color: white;
+}
 .nav-head {
   color: white;
 }
@@ -13,7 +16,23 @@ h1 {
   color: white;
 }
 footer {
+  height: 60px;
+  line-height: 60px;
   background: #d8d8d8;
+  color: gray;
+}
+body {
+  background-color: #f5f5f5;
+}
+body .main {
+  background-color: white;
+}
+body .main h4 {
+  margin-left: 20px;
+  margin-top: 20px;
+}
+body .main hr {
+  margin: 10px 0;
 }
 .diease-tab {
   height: 40px;
@@ -22,6 +41,7 @@ footer {
   font-size: 16px;
   border-bottom: 2px #309cd4 solid;
   text-align: center;
+  margin-bottom: 10px;
 }
 .diease-tab.active {
   background-color: #309cd4;
