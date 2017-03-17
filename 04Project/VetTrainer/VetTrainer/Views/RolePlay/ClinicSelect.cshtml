@@ -1,14 +1,14 @@
-﻿
+﻿@model VetTrainer.Models.Role
 @{
     ViewBag.Title = "ClinicSelect";
 }
 
 <h2>ClinicSelect</h2>
 @{ 
-    for(int i=0;i<ViewBag.Role.Clinics.Count;i++)
+    for(int i=0;i< Model.Clinics.Count;i++)
     {
-        string name = ViewBag.Role.Clinics[i].Name;
-        <button>@Html.ActionLink(name, "Clinic", "RolePlay", new { roleId = ViewBag.Role.Id,clinicId=ViewBag.Role.Clinics[i].Id }, null)</button>
+        string name = Model.Clinics[i].Name;
+        <button>@Html.ActionLink(name, "Clinic", "RolePlay", new { roleId = Model.Id,clinicId= Model.Clinics[i].Id }, null)</button>
     }
 }
 

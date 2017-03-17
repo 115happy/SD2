@@ -1,13 +1,52 @@
-﻿
+﻿@model VetTrainer.Views.ViewModel.RolesViewModel
 @{
-    ViewBag.Title = "角色扮演";
+ViewBag.Title = "角色扮演";
 }
+@*@{
+for (int i = 0; i < ViewBag.Roles.Count; i++)
+{
+	string Name = ViewBag.Roles[i].Name;
+	<button>@Html.ActionLink(Name, "ClinicSelect", "RolePlay", new {roleId = ViewBag.Roles[i].Id}, null)</button>
+>>>>>>> origin/master
+}
+}*@
 
-<h2>Index</h2>
-@{
-    for (int i = 0; i < ViewBag.Roles.Count; i++)
-    {
-        string Name = ViewBag.Roles[i].Name;
-        <button>@Html.ActionLink(Name, "ClinicSelect", "RolePlay", new {roleId = ViewBag.Roles[i].Id}, null)</button>
-    }
-}
+<head>
+	<link rel="stylesheet" href="../../dist/css/role.css">
+</head>
+<div class="container">
+	<div class="row">
+		<div class="col-md-4 role-select-tab">
+			<div class="role-desc desc-hidden">
+				<h4>前台</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus, aliquid quidem voluptatem porro, est repellendus perspiciatis, eveniet numquam libero culpa fuga quod. Temporibus est, sed totam? Rem, similique, eaque.</p>
+			</div>
+		</div>
+		<div class="col-md-4 role-select-tab">
+			<div class="role-desc desc-hidden">
+				<h4>医师</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus, aliquid quidem voluptatem porro, est repellendus perspiciatis, eveniet numquam libero culpa fuga quod. Temporibus est, sed totam? Rem, similique, eaque.</p>
+			</div>
+		</div>
+		<div class="col-md-4 role-select-tab">
+			<div class="role-desc desc-hidden">
+				<h4>医助</h4>
+				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus, aliquid quidem voluptatem porro, est repellendus perspiciatis, eveniet numquam libero culpa fuga quod. Temporibus est, sed totam? Rem, similique, eaque.</p>
+			</div>
+			
+		</div>
+	</div>
+</div>
+<script>
+	(function () {
+		//显示角色描述
+		$('.role-select-tab').hover(
+			function () {
+				$(this).children('.role-desc').slideToggle('fast');
+			},
+			function () {
+				$(this).children('.role-desc').slideToggle('fast');
+			}
+		)
+	})();
+</script>
