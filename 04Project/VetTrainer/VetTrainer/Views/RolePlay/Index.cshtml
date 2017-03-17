@@ -1,6 +1,6 @@
 ﻿@model VetTrainer.Views.ViewModel.RolesViewModel
 @{
-ViewBag.Title = "角色扮演";
+    ViewBag.Title = "角色扮演";
 }
 @*@{
 for (int i = 0; i < ViewBag.Roles.Count; i++)
@@ -16,25 +16,17 @@ for (int i = 0; i < ViewBag.Roles.Count; i++)
 </head>
 <div class="container">
 	<div class="row">
-		<div class="col-md-4 role-select-tab">
-			<div class="role-desc desc-hidden">
-				<h4>前台</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus, aliquid quidem voluptatem porro, est repellendus perspiciatis, eveniet numquam libero culpa fuga quod. Temporibus est, sed totam? Rem, similique, eaque.</p>
-			</div>
-		</div>
-		<div class="col-md-4 role-select-tab">
-			<div class="role-desc desc-hidden">
-				<h4>医师</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus, aliquid quidem voluptatem porro, est repellendus perspiciatis, eveniet numquam libero culpa fuga quod. Temporibus est, sed totam? Rem, similique, eaque.</p>
-			</div>
-		</div>
-		<div class="col-md-4 role-select-tab">
-			<div class="role-desc desc-hidden">
-				<h4>医助</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque doloribus, aliquid quidem voluptatem porro, est repellendus perspiciatis, eveniet numquam libero culpa fuga quod. Temporibus est, sed totam? Rem, similique, eaque.</p>
-			</div>
-			
-		</div>
+        @{
+            for (int i = 0; i < Model.Roles.Count; i++)
+            {
+                <div class="col-md-4 role-select-tab">
+                    <div class="role-desc desc-hidden">
+                        <h4>@Model.Roles[i].Name</h4>
+                        <p>@Model.Roles[i].Description</p>
+                    </div>
+                </div>
+             }
+          }
 	</div>
 </div>
 <script>
