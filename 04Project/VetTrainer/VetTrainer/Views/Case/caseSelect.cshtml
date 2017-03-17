@@ -1,127 +1,58 @@
-﻿
+﻿@model VetTrainer.Views.ViewModel.SelDiseaseCaseViewModel
+
 <head>
-  <link rel="stylesheet" href="../../dist/css/case_learning.css">
-  <title>病例学习</title>
+    <link rel="stylesheet" href="../../dist/css/case_learning.css">
+    <title>病例学习</title>
 </head>
-<div class="container main tab-select">
-  <div class="row">
-    <h4>疾病选择</h4>
-  </div>
-  <hr>
-  <div class="row">
-    <div class="col-sm-2 diease-tab active">传染病</div>
-    <div class="col-sm-2 diease-tab">寄生虫病</div>
-    <div class="col-sm-2 diease-tab">内科病</div>
-    <div class="col-sm-2 diease-tab">外科病</div>
-    <div class="col-sm-2 diease-tab">常用手术</div>
-    <div class="col-sm-2 diease-tab">免疫</div>
-  </div>
-  <div class="row diease-content">
-    <ul class="diease-list list-group">
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-      <li class="col-sm-2 list-group-item">传染病</li>
-    </ul>
-    <ul class="diease-list list-group hidden">
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-      <li class="col-sm-2 list-group-item">寄生虫病</li>
-    </ul>
-    <ul class="diease-list list-group hidden">
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-      <li class="col-sm-2 list-group-item">内科病</li>
-    </ul>
-    <ul class="diease-list list-group hidden">
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-      <li class="col-sm-2 list-group-item">外科病</li>
-    </ul>
-    <ul class="diease-list list-group hidden">
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-      <li class="col-sm-2 list-group-item">常用手术</li>
-    </ul>
-    <ul class="diease-list list-group hidden">
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-      <li class="col-sm-2 list-group-item">免疫</li>
-    </ul>
-  </div>
-  <hr>
-  <div class="row">
-    <h4>病例选择</h4>
-  </div>
-  <div class="row case-container">
-    <ul class="case-list hidden">
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-    </ul>
-    <ul class="case-list hidden">
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-      <li class="case-list-item">测试病例</li>
-    </ul>
-  </div>
+<div class="container tab-select">
+    <div class="row">
+        @{
+            bool flag = true;
+            foreach (VetTrainer.Models.DiseaseType diseaseType in Model.DiseaseTypes)
+            {
+                if (flag)
+                {
+                    <div class="col-sm-2 diease-tab active">@diseaseType.Name</div>
+                    flag = false;
+                }
+                else
+                {
+                    <div class="col-sm-2 diease-tab">@diseaseType.Name</div>
+                }
+            }
+        }
+    </div>
+    <div class="row diease-content">
+        @{
+            bool flag2 = true;
+            foreach (VetTrainer.Models.DiseaseType diseaseType in Model.DiseaseTypes)
+            {
+                if (flag2)
+                {
+                    <ul class="diease-list list-group">
+                        @foreach (var disease in diseaseType.Diseases)
+                        {
+                            <li class="col-sm-2 list-group-item">@disease.Name</li>
+                        }
+                    </ul>
+                        flag2 = false;
+                }
+                else
+                {
+                    <ul class="diease-list list-group hidden">
+                        @foreach (var disease in diseaseType.Diseases)
+                        {
+                            <li class="col-sm-2 list-group-item">@disease.Name</li>
+                        }
+                    </ul>
+                }
+            }
+}
+    </div>
+    <hr>
+    <div class="row">
+        <h3>病例选择</h3>
+    </div>
 </div>
 
 <script src="../../Src/js/case_select.js"></script>

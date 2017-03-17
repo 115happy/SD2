@@ -270,6 +270,7 @@
     <Compile Include="Views\ViewModel\ClinicsViewModel.cs" />
     <Compile Include="Views\ViewModel\DrugsViewModel.cs" />
     <Compile Include="Views\ViewModel\InstrumentsViewModel.cs" />
+    <Compile Include="Views\ViewModel\SelDiseaseCaseViewModel.cs" />
     <Compile Include="Views\ViewModel\RolesViewModel.cs" />
     <Compile Include="Views\ViewModel\UsersViewModel.cs" />
   </ItemGroup>
