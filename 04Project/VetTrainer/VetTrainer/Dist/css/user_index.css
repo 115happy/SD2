@@ -5,6 +5,9 @@ h1 {
   font-size: 26px;
   color: white;
 }
+h1:hover {
+  color: white;
+}
 .nav-head {
   color: white;
 }
@@ -13,7 +16,10 @@ h1 {
   color: white;
 }
 footer {
+  height: 60px;
+  line-height: 60px;
   background: #d8d8d8;
+  color: gray;
 }
 .select-box {
   height: 600px;

@@ -20,5 +20,14 @@ namespace VetTrainer.Views
             public const string LblPassword = "密码：";
             public const string LblIsToRememberMe = "记住我";
         }
+        public static class SystemManager
+        {
+            public const string UserManage = "用户管理";
+            public const string BaseFunctionManage = "基本结构和功能管理";
+            public const string RoleManage = "角色管理";
+            public const string CaseManage = "病例管理";
+            public const string BackUpAndRecoverManage = "备份与恢复管理";
+            public static readonly string[] Manage = { "UserManage", "BaseFunctionManage", "RoleManage", "CaseManage", "BackUpAndRecoveryManage" };
+        }
     }
 }
