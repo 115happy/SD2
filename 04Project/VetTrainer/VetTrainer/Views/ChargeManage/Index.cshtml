@@ -1,0 +1,12 @@
+﻿@model VetTrainer.Views.ViewModel.ChargeViewModel
+@{
+    ViewBag.Title = "收费管理";
+}
+@{ 
+    foreach(var charge in Model.charges)
+    {
+        //收费名称，描述等等
+        <h2>@charge.Name + @charge.Amount</h2>
+    }
+}
+

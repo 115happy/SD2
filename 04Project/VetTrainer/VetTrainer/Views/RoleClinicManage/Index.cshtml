@@ -1,0 +1,14 @@
+﻿@model VetTrainer.Views.ViewModel.RolesViewModel
+@{
+    ViewBag.Title = "职能学习管理";
+}
+
+@{ 
+
+    for(int i=0;i<Model.Roles.Count;i++)
+    {
+        //角色-科室-图片
+        <h2>@Model.Roles[i].Clinics[0].Pictures[0].Name</h2>
+    }
+}
+

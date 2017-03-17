@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace VetTrainer.Controllers
 {
-    public class BackUpAndRecoveryController : Controller
+    public class BackUpAndRecoveryManageController : Controller
     {
         // GET: BackUpAndRecovery
         public ActionResult Index()

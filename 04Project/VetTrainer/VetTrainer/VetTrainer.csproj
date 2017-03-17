@@ -205,13 +205,18 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Controllers\BackUpAndRecoveryController.cs" />
+    <Compile Include="Controllers\AnalysisManageController.cs" />
+    <Compile Include="Controllers\BackUpAndRecoveryManageController.cs" />
     <Compile Include="Controllers\BaseFunctionManageController.cs" />
     <Compile Include="Controllers\CaseController.cs" />
     <Compile Include="Controllers\CaseManageController.cs" />
+    <Compile Include="Controllers\ChargeManageController.cs" />
     <Compile Include="Controllers\DieaseCaseController.cs" />
+    <Compile Include="Controllers\DrugManageController.cs" />
+    <Compile Include="Controllers\InstrumentManageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\RoleClinicManageController.cs" />
     <Compile Include="Controllers\RoleManageController.cs" />
     <Compile Include="Controllers\RolePlayController.cs" />
     <Compile Include="Controllers\NavController.cs" />
@@ -260,6 +265,11 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\SHA1.cs" />
     <Compile Include="Views\Strings.cs" />
+    <Compile Include="Views\ViewModel\AnalysesViewModel.cs" />
+    <Compile Include="Views\ViewModel\ChargeViewModel.cs" />
+    <Compile Include="Views\ViewModel\ClinicsViewModel.cs" />
+    <Compile Include="Views\ViewModel\DrugsViewModel.cs" />
+    <Compile Include="Views\ViewModel\InstrumentsViewModel.cs" />
     <Compile Include="Views\ViewModel\RolesViewModel.cs" />
     <Compile Include="Views\ViewModel\UsersViewModel.cs" />
   </ItemGroup>
@@ -310,7 +320,6 @@
     <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
-    <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\Case\caseSelect.cshtml" />
     <Content Include="Views\Case\caseLearning.cshtml" />
     <Content Include="Views\RolePlay\Index.cshtml" />
@@ -320,10 +329,15 @@
     <Content Include="Views\DieaseCase\Index.cshtml" />
     <Content Include="Views\SystemManager\Index.cshtml" />
     <Content Include="Views\CaseManage\Index.cshtml" />
-    <Content Include="Views\BackUpAndRecovery\Index.cshtml" />
+    <Content Include="Views\BackUpAndRecoveryManage\Index.cshtml" />
     <Content Include="Views\BaseFunctionManage\Index.cshtml" />
     <Content Include="Views\RoleManage\Index.cshtml" />
     <Content Include="Views\UserManage\Index.cshtml" />
+    <Content Include="Views\InstrumentManage\Index.cshtml" />
+    <Content Include="Views\RoleClinicManage\Index.cshtml" />
+    <Content Include="Views\DrugManage\Index.cshtml" />
+    <Content Include="Views\ChargeManage\Index.cshtml" />
+    <Content Include="Views\AnalysisManage\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

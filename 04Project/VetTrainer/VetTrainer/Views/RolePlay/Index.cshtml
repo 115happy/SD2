@@ -2,15 +2,6 @@
 @{
     ViewBag.Title = "角色扮演";
 }
-@*@{
-for (int i = 0; i < ViewBag.Roles.Count; i++)
-{
-	string Name = ViewBag.Roles[i].Name;
-	<button>@Html.ActionLink(Name, "ClinicSelect", "RolePlay", new {roleId = ViewBag.Roles[i].Id}, null)</button>
->>>>>>> origin/master
-}
-}*@
-
 <head>
 	<link rel="stylesheet" href="../../dist/css/role.css">
 </head>
@@ -21,7 +12,7 @@ for (int i = 0; i < ViewBag.Roles.Count; i++)
             {
                 <div class="col-md-4 role-select-tab">
                     <div class="role-desc desc-hidden">
-                        <h4>@Model.Roles[i].Name</h4>
+                        <h4>@Html.ActionLink(Model.Roles[i].Name, "ClinicSelect", "RolePlay", new { roleId = Model.Roles[i].Id }, null)</h4>
                         <p>@Model.Roles[i].Description</p>
                     </div>
                 </div>
@@ -32,13 +23,16 @@ for (int i = 0; i < ViewBag.Roles.Count; i++)
 <script>
 	(function () {
 		//显示角色描述
-		$('.role-select-tab').hover(
+	    $('.role-select-tab').hover(
 			function () {
-				$(this).children('.role-desc').slideToggle('fast');
+			    $(this).children('.role-desc').slideToggle('fast');
 			},
 			function () {
-				$(this).children('.role-desc').slideToggle('fast');
+			    $(this).children('.role-desc').slideToggle('fast');
 			}
-		)
+		);
+	    //$('.role-select-tab').on('click', function () {
+
+	    //})
 	})();
 </script>

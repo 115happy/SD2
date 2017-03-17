@@ -1,0 +1,12 @@
+﻿@model VetTrainer.Views.ViewModel.AnalysesViewModel
+@{
+    ViewBag.Title = "化验项目管理";
+}
+@{ 
+    foreach(var analysis in Model.Analyses)
+    {
+        //化验项目名字，费用等等
+        <h2>@analysis.Name + @analysis.Amount</h2>
+    }
+}
+
