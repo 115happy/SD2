@@ -260,6 +260,8 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\SHA1.cs" />
     <Compile Include="Views\Strings.cs" />
+
+    <Compile Include="Views\ViewModel\SelDiseaseCaseViewModel.cs" />
     <Compile Include="Views\ViewModel\RolesViewModel.cs" />
     <Compile Include="Views\ViewModel\UsersViewModel.cs" />
   </ItemGroup>
