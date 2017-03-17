@@ -254,6 +254,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="Utilities\SHA1.cs" />
     <Compile Include="Views\Strings.cs" />
+    <Compile Include="Views\ViewModel\SelDiseaseCaseViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
