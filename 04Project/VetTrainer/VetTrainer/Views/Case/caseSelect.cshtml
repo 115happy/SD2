@@ -1,4 +1,5 @@
-﻿@model VetTrainer.Views.ViewModel.SelDiseaseCaseViewModel
+﻿@*@model VetTrainer.Views.ViewModel.SelDiseaseCaseViewModel*@
+@model IEnumerable< VetTrainer.Models.DiseaseType>
 
 <head>
     <link rel="stylesheet" href="../../dist/css/case_learning.css">
@@ -8,7 +9,7 @@
     <div class="row">
         @{
             bool flag = true;
-            foreach (VetTrainer.Models.DiseaseType diseaseType in Model.DiseaseTypes)
+            foreach (VetTrainer.Models.DiseaseType diseaseType in Model)
             {
                 if (flag)
                 {
@@ -25,7 +26,7 @@
     <div class="row diease-content">
         @{
             bool flag2 = true;
-            foreach (VetTrainer.Models.DiseaseType diseaseType in Model.DiseaseTypes)
+            foreach (VetTrainer.Models.DiseaseType diseaseType in Model)
             {
                 if (flag2)
                 {
@@ -35,7 +36,7 @@
                             <li class="col-sm-2 list-group-item">@disease.Name</li>
                         }
                     </ul>
-                        flag2 = false;
+                    flag2 = false;
                 }
                 else
                 {
@@ -52,6 +53,20 @@
     <hr>
     <div class="row">
         <h3>病例选择</h3>
+        <ul>
+        @{ 
+            foreach(VetTrainer.Models.DiseaseType diseaseType in Model)
+            {
+                foreach (VetTrainer.Models.Disease disease in diseaseType.Diseases)
+                {
+                    foreach(VetTrainer.Models.DiseaseCase diseaseCase in disease.DiseaseCases)
+                    {
+                    <li>Disease Type: @diseaseType.Name; Disease: @disease.Name; Disease case: @diseaseCase.Name</li>
+                    }
+                }
+            }
+        }
+        </ul>
     </div>
 </div>
 

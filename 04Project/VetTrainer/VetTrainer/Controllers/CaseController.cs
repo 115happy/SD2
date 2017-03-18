@@ -23,12 +23,10 @@ namespace VetTrainer.Controllers
         [Route]
         public ActionResult CaseSelect()
         {
-            var diseases =_context.Diseases.Include(d=>d.DiseaseCases);
-            var diseaseTypes = _context.DiseaseTypes.Include(d => d.Diseases);
-            SelDiseaseCaseViewModel seldiseaseCase = new SelDiseaseCaseViewModel();
-            seldiseaseCase.DiseaseTypes = diseaseTypes;
-            seldiseaseCase.Diseases = diseases;
-            return View(seldiseaseCase);
+            var diseaseTypes = _context.DiseaseTypes.Include(dt => dt.Diseases.Select(d => d.DiseaseCases));
+            //var diseaseTypes = _context.DiseaseTypes.Include(dt => dt.Diseases);
+            //seldiseaseCase.Diseases = diseases;
+            return View(diseaseTypes);
         }
         [Route("CaseLearning")]
         public ActionResult CaseLearning()
