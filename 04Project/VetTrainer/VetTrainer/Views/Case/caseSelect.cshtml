@@ -61,12 +61,13 @@
                 {
                     foreach(VetTrainer.Models.DiseaseCase diseaseCase in disease.DiseaseCases)
                     {
-                    <li>Disease Type: @diseaseType.Name; Disease: @disease.Name; Disease case: @diseaseCase.Name</li>
+                    @*<li>Disease Type: @diseaseType.Name; Disease: @disease.Name; Disease case: @diseaseCase.Name</li>*@
+                    <li>@Html.ActionLink("Disease Type:" + diseaseType.Name + "Disease:" + disease.Name + " Disease case:" + diseaseCase.Name, "CaseLearning", "Case", diseaseCase.Name, null) </li>
                     }
                 }
             }
-        }
-        </ul>
+          }
+</ul>
     </div>
 </div>
 
