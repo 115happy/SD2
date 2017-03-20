@@ -7,6 +7,8 @@ using VetTrainer.Controllers;
 using VetTrainer.Models;
 using VetTrainer.Views.ViewModel;
 using System.Data.Entity;
+using System.Runtime.Serialization.Json;
+using System.IO;  
 
 namespace VetTrainer.Controllers
 {
@@ -23,10 +25,22 @@ namespace VetTrainer.Controllers
         [Route]
         public ActionResult CaseSelect()
         {
-            var diseaseTypes = _context.DiseaseTypes.Include(dt => dt.Diseases.Select(d => d.DiseaseCases));
+            IQueryable<DiseaseType> diseaseTypes = _context.DiseaseTypes.Include(dt => dt.Diseases.Select(d => d.DiseaseCases));
             //var diseaseTypes = _context.DiseaseTypes.Include(dt => dt.Diseases);
             //seldiseaseCase.Diseases = diseases;
-            return View(diseaseTypes);
+
+            //将对象序列化json  
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(IQueryable<DiseaseType>));
+            //创建存储区为内存流  
+            System.IO.MemoryStream ms = new MemoryStream();
+            //将json字符串写入内存流中  
+            serializer.WriteObject(ms, diseaseTypes);
+            System.IO.StreamReader reader = new StreamReader(ms);
+            ms.Position = 0;
+            string strRes = reader.ReadToEnd();
+            reader.Close();
+            ms.Close();
+            return View(strRes);
         }
         [Route("CaseLearning")]
         public ActionResult CaseLearning(String diseaseCaseName)
