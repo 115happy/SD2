@@ -3,14 +3,36 @@
 @gray: #d8d8d8;
 @gray-lighter: #e3e3e3;
 @gray-darker: #555;
-@black: #333;
+@black: #555;
 @a-hover: #555;
 
+.box-shadowed {
+    box-shadow: 0 0 8px @gray-lighter;
+}
+body {
+    font-family: '微软雅黑';
+}
+
+.container {
+    margin-bottom: 20px;
+    h2 {
+        color: @black;
+        font-size: 26px;
+        text-align: center;
+    }
+}
 .navbar {
     background: @blue;
     border: 0;
     height: 70px;
     margin-bottom: 0;
+    border-radius: 0;
+    .nav-head {
+        text-decoration: none;
+        h1 {
+            font-size: 28px;
+        }
+    }
     ul {
         margin-top: 20px;
     }

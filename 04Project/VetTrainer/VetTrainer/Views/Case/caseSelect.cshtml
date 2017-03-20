@@ -1,5 +1,6 @@
 ﻿@*@model VetTrainer.Views.ViewModel.SelDiseaseCaseViewModel*@
-@model IEnumerable< VetTrainer.Models.DiseaseType>
+
+@model List<VetTrainer.Models.DiseaseType>
 
 <head>
     <link rel="stylesheet" href="../../dist/css/case_learning.css">
@@ -7,9 +8,8 @@
 </head>
 
 <div class="container tab-select">
-    <div class="row">
-        <div class="col-md-12"><h2>病例学习</h2></div>
-    </div>
+   <h2>病例学习</h2>
+   <hr>
     <div class="row">
         <div class="col-md-2 disease-tab-list">
             <ul>
@@ -39,8 +39,8 @@
     <hr>
     <div class="row">
         <h3>病例选择</h3>
-        <ul>
-        @{ 
+        <ul class="case-list">
+      <%--   @{ 
             foreach(VetTrainer.Models.DiseaseType diseaseType in Model)
             {
                 foreach (VetTrainer.Models.Disease disease in diseaseType.Diseases)
@@ -52,9 +52,37 @@
                     }
                 }
             }
-          }
+          } --%>
 </ul>
     </div>
 </div>
 
 <script src="../../Src/js/case_select.js"></script>
+<script>
+    
+    var diseaseTabs = $('.disease-tab'),
+    diseaseLists = $('.disease-list'),
+    diseaseItem = $('.disease-list li');
+
+    //初始化
+    diseaseTabs.eq(0).addClass('active');
+    diseaseLists.eq(0).removeClass('hidden');
+    //tab切换
+    $('.disease-tab').hover(function() {
+        var index = $(this).index();
+        // console.log(index);
+        diseaseTabs.removeClass('active');
+        $(this).addClass('active');
+        diseaseLists.addClass('hidden');
+        diseaseLists.eq(index).removeClass('hidden');
+    });
+
+    //具体病例显示
+    diseaseItem.on('click', function() {
+        var diseaseName = $(this).text();
+        var index = $(this).index();
+        // console.log(diseaseName);
+        console.log(@Html.Raw(Json.Encode(Model[0])));
+
+    });
+</script>

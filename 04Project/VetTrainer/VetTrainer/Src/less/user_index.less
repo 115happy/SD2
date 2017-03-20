@@ -1,38 +1,61 @@
 @import "common.less";
 
-
-.select-box {
-    height: 600px;
-}
-
-.navi-select {
-    height: 640px;
-    background: #ffd800;
-}
-.role-select {
-  height: 320px;
-  background: #0094ff;
-}
-.case-select {
-    height: 320px;
-    background: #ff6a00;
-}
-
-.train-select {
-    
-}
-
 .main-select {
+  height: 500px;
+  border-radius: 10px;
+  position: relative;
+  text-align: center;
+  display: block;
+  opacity: .5;
+  h3 {
+    position: absolute;
+    font-size: 20px;
+    bottom: 120px;
+    left: 140px;
+  }
+  .select-icon {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    -webkit-transform: translate(-50%);
+       -moz-transform: translate(-50%);
+        -ms-transform: translate(-50%);
+         -o-transform: translate(-50%);
+            transform: translate(-50%);
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
+    border: 4px solid @gray;
     img {
-        width: 100%;
+      border-radius: 50%;
     }
+    .icon-tri {
+      position: absolute;
+      top: 193px;
+      left: 50%;
+      -webkit-transform: translateX(-50%);
+         -moz-transform: translateX(-50%);
+          -ms-transform: translateX(-50%);
+           -o-transform: translateX(-50%);
+              transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 30px solid @gray;
+    }
+  }
+  img {
+    width: 100%;
+  }
 }
 .main-select:hover {
-    cursor: pointer;
-    opacity: .5;
-     -webkit-transition: .4s;
-       -moz-transition: .4s;
-        -ms-transition: .4s;
-         -o-transition: .4s;
-            transition: .4s;
+  //border: 1px solid @gray;
+  opacity: 1;
+  cursor: pointer;
+  -webkit-transition: .4s;
+  -moz-transition: .4s;
+  -ms-transition: .4s;
+  -o-transition: .4s;
+  transition: .4s;
 }
