@@ -1,9 +1,35 @@
 .navbar {
-  background: #309cd4;
+  background: #2C90C4;
+  border: 0;
+  height: 70px;
+  margin-bottom: 0;
+}
+.navbar ul {
+  margin-top: 20px;
+}
+.navbar li a {
+  font-size: 16px;
+  padding: 8px 10px;
+  color: white;
+  transition: background-color 300ms;
+  border-radius: 4px;
+}
+.navbar li a:hover {
+  color: white;
+  background-color: #555;
 }
 h1 {
+  margin: 0;
+  height: 70px;
+  line-height: 70px;
+}
+h1 a {
   font-size: 26px;
   color: white;
+}
+h1 a:hover {
+  color: white;
+  text-decoration: none;
 }
 h1:hover {
   color: white;

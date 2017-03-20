@@ -8,22 +8,27 @@ ViewBag.Title = "登录";
     <title>用户登录</title>
 </head>
     @Html.ValidationSummary(true, "登陆失败")
-    <div class="container">
+    <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-7">
+            <div class="col-md-12 swiper-col">
                 <div class="swiper-container">
                     <div class="swiper-wrapper">
-                      <div class="swiper-slide"><img src="../Src/images/pets.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/pets.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/pets.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/pets.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/pets.png" alt="pets"></div>
+                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
                     </div>
                   <!-- 分页器 -->
                   <div class="swiper-pagination"></div>
               </div>
-          </div>
-          <div class="col-lg-5">
+            </div>
+        </div>
+    </div>
+   
+        
+      
+          <div class="login-container">
             @using (Html.BeginForm("Login", "Login"))
             {
             <fieldset class="">
@@ -62,15 +67,13 @@ ViewBag.Title = "登录";
             </fieldset>
         }
     </div>
-</div>
-</div>
+
 <script src="../../Src/js/swiper.jquery.min.js"></script>
 <script type="text/javascript">
     (function() {
         var mainSwiper = new Swiper('.swiper-container', {
             direction: 'horizontal',
             loop: true,
-            effect: 'fade',
         // 分页器
         pagination: '.swiper-pagination'
     });

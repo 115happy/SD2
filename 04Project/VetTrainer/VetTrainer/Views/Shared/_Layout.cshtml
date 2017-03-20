@@ -8,35 +8,36 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Title - @VetTrainer.Views.Strings.Global.AppName</title>
     @Styles.Render("~/Dist/css/bootstrap.min.css")
-    @Styles.Render("~/Dist/css/common.css")
     @Scripts.Render("~/Src/js/jquery-3.1.1.js")
     @*@Scripts.Render("~/Dist/js/")*@ 
 </head>
 
 <body>
-    <header class="navbar navbar-static-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a>@Html.ActionLink(VetTrainer.Views.Strings.Global.AppName,"Index","Home",new {@class="navbar-brand nav-head"})</a>
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right" href="">
-                    <li>
-                       <a class="nav-about" href="/Home/About">关于我们</a>
-                    </li>
-                </ul>
-            </div>
-            <div style="width: auto;">
+    <header>
+        <nav class="navbar" role="banner">
+            <div class="container">
+                <div class="navbar-header">
+                    <h1>
+                        @Html.ActionLink(VetTrainer.Views.Strings.Global.AppName,"Index","Home",new {@class="nav-head"})
+                    </h1>
+                </div>
+                
+                <div class="collapse navbar-collapse navbar-right">
+                    <ul class="nav navbar-nav">
+                        <li><a href="">关于我们</a></li>                        
+                    </ul>
+                </div>
+                <div style="width: auto;">
                 @if (Request.IsAuthenticated)
                 {
                     <strong>@Html.Encode(User.Identity.Name)</strong>
                     @Html.ActionLink("登出", "Logout", "Login")
                 }
             </div> 
-        </div>
-
-
-    </header>
+            </div><!--/.container-->
+        </nav><!--/nav-->
+        
+    </header><!--/header-->
     
         @RenderBody()
   

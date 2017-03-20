@@ -5,51 +5,37 @@
     <link rel="stylesheet" href="../../dist/css/case_learning.css">
     <title>病例学习</title>
 </head>
+
 <div class="container tab-select">
     <div class="row">
+        <div class="col-md-12"><h2>病例学习</h2></div>
+    </div>
+    <div class="row">
+        <div class="col-md-2 disease-tab-list">
+            <ul>
+                @{
+                    foreach (VetTrainer.Models.DiseaseType diseaseType in Model) {   
+                        <li class="disease-tab">@diseaseType.Name</li>
+                    }
+                }
+            </ul>
+        </div>
+
+        <div class="col-md-10 disease-content">
         @{
-            bool flag = true;
             foreach (VetTrainer.Models.DiseaseType diseaseType in Model)
             {
-                if (flag)
-                {
-                    <div class="col-sm-2 diease-tab active">@diseaseType.Name</div>
-                    flag = false;
-                }
-                else
-                {
-                    <div class="col-sm-2 diease-tab">@diseaseType.Name</div>
-                }
+                <ul class="disease-list hidden">
+                    @foreach (var disease in diseaseType.Diseases)
+                    {
+                        <li class="col-md-2">@disease.Name</li>
+                    }
+                </ul>
             }
         }
+        </div>
     </div>
-    <div class="row diease-content">
-        @{
-            bool flag2 = true;
-            foreach (VetTrainer.Models.DiseaseType diseaseType in Model)
-            {
-                if (flag2)
-                {
-                    <ul class="diease-list list-group">
-                        @foreach (var disease in diseaseType.Diseases)
-                        {
-                            <li class="col-sm-2 list-group-item">@disease.Name</li>
-                        }
-                    </ul>
-                    flag2 = false;
-                }
-                else
-                {
-                    <ul class="diease-list list-group hidden">
-                        @foreach (var disease in diseaseType.Diseases)
-                        {
-                            <li class="col-sm-2 list-group-item">@disease.Name</li>
-                        }
-                    </ul>
-                }
-            }
-}
-    </div>
+
     <hr>
     <div class="row">
         <h3>病例选择</h3>
