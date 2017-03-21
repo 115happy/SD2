@@ -16,5 +16,18 @@ namespace VetTrainer.Controllers
         {
             return View();
         }
+        // GET: Navigation
+        [Route("clinic")]
+        public ActionResult Clinic()
+        {
+            return View();
+        }
+
+        // GET: Navigation
+        [Route("tour")]
+        public ActionResult Tour()
+        {
+            return View();
+        }
     }
 }

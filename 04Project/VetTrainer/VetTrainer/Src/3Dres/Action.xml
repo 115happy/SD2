@@ -1,0 +1,47 @@
+﻿<krpano>
+  <!--JS click info icon to show the detail of a operator.//TODO -->
+  <action name="skin_infostyle_click" type="Javascript">
+    <!--click and show or hide the layer-->
+
+    <!--if(layer[InfoLayer].visible === true ,
+    set(layer[InfoLayer].visible,false),
+    set(layer[InfoLayer].visible,true));-->
+
+
+  </action>
+  <action name="add_iframe" type="Javascript">
+    var iframe = document.createElement("iframe");
+    iframe.style.position = "absolute";
+    iframe.style.left = 0;
+    iframe.style.top = 0;
+    iframe.style.width = "100%";
+    iframe.style.height = "100%";
+    iframe.style.border = 0;
+    iframe.src = args[1];
+    caller.registercontentsize(args[2], args[3]);
+    caller.sprite.appendChild(iframe);
+  </action>
+
+  <action name="btnOperation_click" >
+    <!--click btnOperation and show the HTML of Operation-->
+
+      if(layer[InfoLayer].visible == true ,
+      set(layer[InfoLayer].visible,false),
+      set(layer[InfoLayer].visible,true));
+      <!--layer[InfoLayer].add_iframe('https://www.baidu.com/', 640, 360);-->
+    </action>
+  <action name="btnExplaination_click" type="Javascript">
+    <!--click btnExplaination and show the HTML of Operation-->
+    document.write("Hello World!");
+  </action>
+  <action name="btnAnimation_click">
+    <!--click btnAnimation and show the HTML of Operation-->
+
+  </action>
+
+  <action name="btnClose_click">
+    <!--click btnClose to remove the iframe-->
+
+  </action>
+
+</krpano>
