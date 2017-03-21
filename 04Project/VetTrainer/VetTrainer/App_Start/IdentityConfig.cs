@@ -31,4 +31,19 @@ namespace VetTrainer
             return Task.FromResult(0);
         }
     }
+
+    //public class VetAppUserStore : UserStore<VetAppUser>
+    //{
+    //    public VetAppUserStore(VetAppDBContext context)
+    //        : base(context)
+    //    {
+    //    }
+    //}
+
+    //public class VetAppUserManager : UserManager<VetAppUser>
+    //{
+    //    public VetAppUserManager(IUserStore<VetAppUser> store) : base(store)
+    //    {
+    //    }
+    //}
 }

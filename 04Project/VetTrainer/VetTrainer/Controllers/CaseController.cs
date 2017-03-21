@@ -8,7 +8,7 @@ using VetTrainer.Models;
 using VetTrainer.Views.ViewModel;
 using System.Data.Entity;
 using System.Runtime.Serialization.Json;
-using System.IO;  
+using System.IO;
 
 namespace VetTrainer.Controllers
 {

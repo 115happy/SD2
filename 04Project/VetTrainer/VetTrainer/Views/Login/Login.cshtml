@@ -1,81 +1,82 @@
 ﻿@model VetTrainer.Models.User
 @{
-ViewBag.Title = "登录";
+    ViewBag.Title = "登录";
 }
 <head>
     <link rel="stylesheet" href="../../Src/css/swiper.min.css">
     <link rel="stylesheet" href="../dist/css/login.css">
     <title>用户登录</title>
 </head>
-    @Html.ValidationSummary(true, "登陆失败")
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-md-12 swiper-col">
-                <div class="swiper-container">
-                    <div class="swiper-wrapper">
-                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
-                      <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
-                    </div>
-                  <!-- 分页器 -->
-                  <div class="swiper-pagination"></div>
-              </div>
+@Html.ValidationSummary(true, "登陆失败")
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-12 swiper-col">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                    <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                    <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                    <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                    <div class="swiper-slide"><img src="../Src/images/login_bg.png" alt="pets"></div>
+                </div>
+                <!-- 分页器 -->
+                <div class="swiper-pagination"></div>
             </div>
         </div>
     </div>
-   
-        
-      
-          <div class="login-container">
-            @using (Html.BeginForm("Login", "Login"))
-            {
-            <fieldset class="">
-                <legend>@VetTrainer.Views.Strings.Login.FormLoginText</legend>
-                <div class="login-box form-horizontal">
-                    <div class="editor-label form-group">
-                        <span class="col-md-3">@Html.LabelFor(u=>u.Name)</span>
-                        <div class="editor-field col-md-9">
-                            @Html.TextBoxFor(u => u.Name, new {@class="form-control"})
-                            @Html.ValidationMessageFor(u => u.Name)
-                        </div>
-                    </div>
-                    <div class="editor-label form-group">
-                        <span class="col-md-3">@Html.LabelFor(u=>u.Password)</span>
+</div>
 
-                        <div class="editor-field col-md-9">
-                            @Html.PasswordFor(u => u.Password, new {@class="form-control"})
-                            @Html.ValidationMessageFor(u => u.Password)
-                        </div>
-                    </div>
-                    <div class="editor-label form-group">
-                        <div class="col-md-12 text-center">
-                            @Html.CheckBoxFor(u => u.IsToRememberMe)
-                            @Html.LabelFor(u=>u.IsToRememberMe)
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <input class="btn btn-default btn-primary btn-login" type="submit" value="@VetTrainer.Views.Strings.Login.BtnLoginText" />
-                        </div>
 
+
+<div class="login-container">
+    @using (Html.BeginForm("Login", "Login"))
+    {
+        @Html.ValidationSummary(true, VetTrainer.Views.Strings.Login.ErrValidationSummary)
+        <fieldset class="">
+            <legend>@VetTrainer.Views.Strings.Login.FormLoginText</legend>
+            <div class="login-box form-horizontal">
+                <div class="editor-label form-group">
+                    <span class="col-md-3">@Html.LabelFor(u => u.Name)</span>
+                    <div class="editor-field col-md-9">
+                        @Html.TextBoxFor(u => u.Name, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.Name)
+                    </div>
+                </div>
+                <div class="editor-label form-group">
+                    <span class="col-md-3">@Html.LabelFor(u => u.Password)</span>
+
+                    <div class="editor-field col-md-9">
+                        @Html.PasswordFor(u => u.Password, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(u => u.Password)
+                    </div>
+                </div>
+                <div class="editor-label form-group">
+                    <div class="col-md-12 text-center">
+                        @Html.CheckBoxFor(u => u.IsToRememberMe)
+                        @Html.LabelFor(u => u.IsToRememberMe)
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <input class="btn btn-default btn-primary btn-login" type="submit" value="@VetTrainer.Views.Strings.Login.BtnLoginText" />
                     </div>
 
                 </div>
 
-            </fieldset>
-        }
-    </div>
+            </div>
+            @Html.AntiForgeryToken()
+        </fieldset>
+    }
+</div>
 
 <script src="../../Src/js/swiper.jquery.min.js"></script>
 <script type="text/javascript">
-    (function() {
+    (function () {
         var mainSwiper = new Swiper('.swiper-container', {
             direction: 'horizontal',
             loop: true,
-        // 分页器
-        pagination: '.swiper-pagination'
-    });
+            // 分页器
+            pagination: '.swiper-pagination'
+        });
     })();
 </script>
