@@ -1,9 +1,56 @@
+.box-shadowed {
+  box-shadow: 0 0 8px #e3e3e3;
+}
+body {
+  font-family: '微软雅黑';
+}
+.container {
+  margin-bottom: 20px;
+}
+.container h2 {
+  color: #555;
+  font-size: 26px;
+  text-align: center;
+}
 .navbar {
-  background: #309cd4;
+  background: #2C90C4;
+  border: 0;
+  height: 70px;
+  margin-bottom: 0;
+  border-radius: 0;
+}
+.navbar .nav-head {
+  text-decoration: none;
+}
+.navbar .nav-head h1 {
+  font-size: 28px;
+}
+.navbar ul {
+  margin-top: 20px;
+}
+.navbar li a {
+  font-size: 16px;
+  padding: 8px 10px;
+  color: white;
+  transition: background-color 300ms;
+  border-radius: 4px;
+}
+.navbar li a:hover {
+  color: white;
+  background-color: #555;
 }
 h1 {
+  margin: 0;
+  height: 70px;
+  line-height: 70px;
+}
+h1 a {
   font-size: 26px;
   color: white;
+}
+h1 a:hover {
+  color: white;
+  text-decoration: none;
 }
 h1:hover {
   color: white;
@@ -21,41 +68,76 @@ footer {
   background: #d8d8d8;
   color: gray;
 }
-body {
-  background-color: #f5f5f5;
-}
-body .main {
-  background-color: white;
-}
 body .main h4 {
   margin-left: 20px;
   margin-top: 20px;
 }
 body .main hr {
-  margin: 10px 0;
+  margin: 0;
 }
-.diease-tab {
+.tab-select {
+  margin-top: 20px;
+  background-color: white;
+  padding: 0 30px;
+}
+.tab-select h2 {
+  margin-bottom: 20px;
+}
+.tab-select .label-select {
   height: 40px;
-  line-height: 40px;
-  color: #333;
   font-size: 16px;
-  border-bottom: 2px #309cd4 solid;
+  line-height: 40px;
   text-align: center;
-  margin-bottom: 10px;
 }
-.diease-tab.active {
-  background-color: #309cd4;
+.disease-tab-list ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border: 1px solid #d8d8d8;
+  box-shadow: 0 0 8px #e3e3e3;
+}
+.disease-tab-list ul li {
+  height: 40px;
+  border-bottom: 1px solid #d8d8d8;
+  line-height: 40px;
+  color: #555;
+  font-size: 14px;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+.disease-tab-list ul li:last-child {
+  border-bottom: 0;
+}
+.disease-tab-list ul li.active {
+  background-color: #2C90C4;
   color: white;
+  border: 0;
 }
-.diease-tab:hover {
-  background-color: #84c4e6;
+.disease-tab-list ul li:hover {
+  background-color: #2C90C4;
   color: white;
   cursor: pointer;
+  border: 0;
 }
-.diease-list li {
+.disease-content {
+  height: 242px;
+  border: 1px solid #d8d8d8;
+  padding: 0;
+  box-shadow: 0 0 8px #e3e3e3;
+}
+.disease-list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.disease-list li {
+  height: 40px;
+  line-height: 40px;
+  margin: 0;
   text-align: center;
+  border-radius: 4px;
 }
-.diease-list li:hover {
+.disease-list li:hover {
   background-color: #f3f3f3;
   cursor: pointer;
 }

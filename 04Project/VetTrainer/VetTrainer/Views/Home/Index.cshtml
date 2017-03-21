@@ -2,30 +2,32 @@
     <link rel="stylesheet" href="../../dist/css/user_index.css">
     <title>首页</title>
 </head>
+<div class="container-fluid index-bg">
+    <div class="container">
+    <h2>功能选择</h2>
+        <hr>
+        <div class="row">
+            <div class="col-md-4">
+                <a class="main-select" href="nav/chooseClinic">
+                    <div class="select-icon"><img src="../../Src/images/3d_icon.png" alt=""><div class="icon-tri"></div></div>
+                    <h3>&nbsp;3D 导览</h3>
+                </a>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-6">
-            <div class="main-select navi-select">
-                @*<a class="nav-about" href="#">3D导览</a>*@
-                <h2>@Html.ActionLink("3D导览", "ChooseClinic", "Nav", null, null)</h2>
+            </div>    
+            <div class="col-md-4">
+                <a class="main-select" href="roleplay/index">
+                    <div class="select-icon"><img src="../../Src/images/role_icon.png" alt=""><div class="icon-tri"></div></div>
+                    <h3>角色扮演</h3>
+                </a>
             </div>
-        </div>
-        <div class="col-lg-6 train-select">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-select role-select">
-                        <h2>@Html.ActionLink("角色扮演", "Index", "RolePlay", null, null) </h2>
-                    </div>
-                </div>
+
+            <div class="col-md-4">
+                <a class="main-select" href="case">
+                    <div class="select-icon"><img src="../../Src/images/case_icon.png" alt=""><div class="icon-tri"></div></div>
+                    <h3>病例学习</h3>
+                </a>
             </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="main-select case-select">
-                        <h2>@Html.ActionLink("病例学习", "CaseSelect", "Case", null, null) </h2>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </div>

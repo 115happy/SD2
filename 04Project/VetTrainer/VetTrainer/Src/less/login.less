@@ -1,9 +1,25 @@
 @import "common.less";
 
+.login-container {
+	width: 470px;
+	padding: 30px 40px;
+	position: absolute;
+	background-color: white;
+	top: 200px;
+	left: 50%;
+	-webkit-transform: translateX(-50%);
+	   -moz-transform: translateX(-50%);
+	    -ms-transform: translateX(-50%);
+	     -o-transform: translateX(-50%);
+	        transform: translateX(-50%);
+	z-index: 100;
+	border-radius: 10px;
+	border: 1px solid @gray;
+	box-shadow: 0 0 6px @gray;
+}
 .login-box {
-	padding-top: 60px;
+	padding-top: 30px;
 	.editor-label {
-
 		label {
 			height: 34px;
 			line-height: 34px;
@@ -15,4 +31,8 @@
 		padding: 6px 16px;
 		font-size: 16px;
 	}
+}
+
+.swiper-col {
+	padding: 0;
 }
