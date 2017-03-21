@@ -24,16 +24,21 @@
                 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="">关于我们</a></li>                        
+                        <li><a href="">关于我们</a></li> 
+                           <li style="width: auto;">
+                           @if (Session["UserID"] != null)
+                           {
+                               using(Html.BeginForm("Logout", "Login"))
+                               {
+                               <strong>@Html.Encode(User.Identity.Name)</strong>
+                               <input type="submit" value="登出" />
+                                           @*@Html.ActionLink("登出", "Logout", "Login")*@
+                               }
+                           }
+                           </li>
+                     
                     </ul>
                 </div>
-                <div style="width: auto;">
-                @if (Request.IsAuthenticated)
-                {
-                    <strong>@Html.Encode(User.Identity.Name)</strong>
-                    @Html.ActionLink("登出", "Logout", "Login")
-                }
-            </div> 
             </div><!--/.container-->
         </nav><!--/nav-->
         

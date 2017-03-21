@@ -288,6 +288,7 @@
     <Compile Include="Models\VetAppDBContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="Utilities\CheckAuthorization.cs" />
     <Compile Include="Utilities\MapperAdapter.cs" />
     <Compile Include="Utilities\SHA1.cs" />
     <Compile Include="Views\Strings.cs" />
