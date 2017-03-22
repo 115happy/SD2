@@ -1,11 +1,27 @@
 ﻿@{
-    ViewBag.Title = "Index";
-    ViewBag.Count = 0;
+ViewBag.Title = "Index";
+ViewBag.Count = 0;
 }
 
-<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.UserManage, "Manage","SystemManager",new {ManageId = ViewBag.Count++},null)</h2>
-<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BaseFunctionManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
-<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.RoleManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
-<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.CaseManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
-<h2>@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BackUpAndRecoverManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</h2>
+<head>
+	<link rel="stylesheet" href="../../dist/css/manage.css">
+	<title>管理</title>
+</head>
 
+<div class="container-fluid manage-container">
+	<div class="row">
+		<div class="col-md-2">
+			<ul class="list-group manage-list">
+				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.UserManage, "Manage","SystemManager",new {ManageId = ViewBag.Count++},null)</li>
+				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BaseFunctionManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
+				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.RoleManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
+				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.CaseManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
+				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BackUpAndRecoverManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
+			</ul>
+		</div>
+		<div class="col-md-10 manage-content">
+			<h2>欢迎使用宠物医院管理系统！</h2>
+		</div>
+	</div>
+	
+</div>

@@ -4,68 +4,51 @@
 @model List<VetTrainer.Models.DiseaseType>
 
 
-@*<head>
+<head>
     <link rel="stylesheet" href="../../dist/css/case_learning.css">
     <title>病例学习</title>
 </head>
 
 <div class="container tab-select">
-   <h2>病例学习</h2>
-   <hr>
-    <div class="row">
-        <div class="col-md-2 disease-tab-list">
-            <ul>
-                @{
-                    foreach (VetTrainer.Models.DiseaseType diseaseType in Model) {   
-                        <li class="disease-tab">@diseaseType.Name</li>
-                    }
-                }
-            </ul>
-        </div>
-
-        <div class="col-md-10 disease-content">
-        @{
-            foreach (VetTrainer.Models.DiseaseType diseaseType in Model)
-            {
-                <ul class="disease-list hidden">
-                    @foreach (var disease in diseaseType.Diseases)
-                    {
-                        <li class="col-md-2">@disease.Name</li>
-                    }
-                </ul>
-            }
+ <h2>病例学习</h2>
+ <hr>
+ <div class="row">
+    <div class="col-md-2 disease-tab-list">
+        <ul>
+            @{
+            foreach (VetTrainer.Models.DiseaseType diseaseType in Model) {   
+            <li class="disease-tab">@diseaseType.Name</li>
         }
-        </div>
-    </div>
-
-    <hr>
-    <div class="row">
-        <h3>病例选择</h3>
-        <ul class="case-list">
-      <%--   @{ 
-            foreach(VetTrainer.Models.DiseaseType diseaseType in Model)
-            {
-                foreach (VetTrainer.Models.Disease disease in diseaseType.Diseases)
-                {
-                    foreach(VetTrainer.Models.DiseaseCase diseaseCase in disease.DiseaseCases)
-                    {
-                    @*<li>Disease Type: @diseaseType.Name; Disease: @disease.Name; Disease case: @diseaseCase.Name</li>
-                    <li>@Html.ActionLink("Disease Type:" + diseaseType.Name + "Disease:" + disease.Name + " Disease case:" + diseaseCase.Name, "CaseLearning", "Case", diseaseCase.Name, null) </li>
-                    }
-                }
-            }
-          } --%>
+    }
 </ul>
-    </div>
-</div>*@
-<div>
-    @model
 </div>
 
+<div class="col-md-10 disease-content">
+    @{
+    foreach (VetTrainer.Models.DiseaseType diseaseType in Model)
+    {
+    <ul class="disease-list hidden" data-id="@diseaseType.Id">
+        @foreach (var disease in diseaseType.Diseases)
+        {
+        <li class="col-md-2">@disease.Name</li>
+    }
+</ul>
+}
+}
+</div>
+</div>
+
+<hr>
+<div class="row">
+    <ul class="case-list">
+
+    </ul>
+</div>
+</div>
 
 <script src="../../Src/js/case_select.js"></script>
 <script>
-    
+
     var diseaseTabs = $('.disease-tab'),
     diseaseLists = $('.disease-list'),
     diseaseItem = $('.disease-list li');
@@ -83,13 +66,24 @@
         diseaseLists.eq(index).removeClass('hidden');
     });
 
-    //具体病例显示
-    diseaseItem.on('click', function() {
-        var diseaseName = $(this).text();
-        var index = $(this).index();
-        // console.log(diseaseName);
-        console.log(@Html.Raw(Json.Encode(Model[0])));
+    //请求病例数据
+    var uri = 'api/case'
+    $.getJSON(uri)
+    .done(function(resData) {
+        // console.log(resData);
+        diseaseItem.on('click', function() {
+            var diseaseName = $(this).text(),
+            index = $(this).index(),
+            diseaseTypeId = $(this).parent().data('id') - 1,
+            cases = resData[diseaseTypeId].diseases[index].diseaseCases;
 
-    });
+            console.log(cases);
+            $('.case-list').empty();
+            $.each(cases, function(key, item) {
+                $('.case-list').append('<li class="col-md-2">' + item.name + '</li>');
+            });
+            // $.each(resData)
+        });
+    })
 </script>
 

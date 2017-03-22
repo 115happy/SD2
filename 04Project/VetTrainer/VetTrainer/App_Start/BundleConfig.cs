@@ -24,7 +24,8 @@ namespace VetTrainer
 
             bundles.Add(new StyleBundle("~/content/css").Include(
                       "~/dist/css/bootstrap.css",
-                      "~/dist/css/general.css"));
+                      "~/dist/css/common.css",
+                      "~/dist/css/validation.css"));
 
             // 启用bundle使得js css传的速度更快，并自动变成min的格式
             BundleTable.EnableOptimizations = true;
