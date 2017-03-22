@@ -35,6 +35,21 @@ namespace VetTrainer.Utilities
 
                 cfg.CreateMap<Charge, ChargeDto>();
                 cfg.CreateMap<ChargeDto, Charge>();
+
+                cfg.CreateMap<Clinic, ClinicDto>();
+                cfg.CreateMap<ClinicDto, Clinic>();
+
+                cfg.CreateMap<Instrument, InstrumentDto>();
+                cfg.CreateMap<InstrumentDto, Instrument>();
+
+                cfg.CreateMap<Text, TextDto>();
+                cfg.CreateMap<TextDto, Text>();
+
+                cfg.CreateMap<Picture, PictureDto>();
+                cfg.CreateMap<PictureDto, Picture>();
+
+                cfg.CreateMap<Video, VideoDto>();
+                cfg.CreateMap<VideoDto, Video>();
             });
         }
     }

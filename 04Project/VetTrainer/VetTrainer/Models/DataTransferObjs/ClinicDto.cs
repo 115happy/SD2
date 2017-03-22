@@ -9,19 +9,19 @@ namespace VetTrainer.Models.DataTransferObjs
     {
         public ClinicDto()
         {
-            Instruments = new List<Instrument>();
-            Texts = new List<Text>();
-            Pictures = new List<Picture>();
-            Videos = new List<Video>();
+            Instruments = new List<InstrumentDto>();
+            Texts = new List<TextDto>();
+            Pictures = new List<PictureDto>();
+            Videos = new List<VideoDto>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public decimal? PositionX { get; set; }
         public decimal? PositionY { get; set; }
-        public virtual IList<Text> Texts { get; set; }
-        public virtual IList<Picture> Pictures { get; set; }
-        public virtual IList<Video> Videos { get; set; }
-        public virtual IList<Instrument> Instruments { get; set; }
+        public virtual IList<TextDto> Texts { get; set; }
+        public virtual IList<PictureDto> Pictures { get; set; }
+        public virtual IList<VideoDto> Videos { get; set; }
+        public virtual IList<InstrumentDto> Instruments { get; set; }
     }
 }

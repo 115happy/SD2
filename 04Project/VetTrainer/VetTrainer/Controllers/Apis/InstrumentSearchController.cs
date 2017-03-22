@@ -12,7 +12,7 @@ using VetTrainer.Models.DataTransferObjs;
 
 namespace VetTrainer.Controllers.Apis
 {
-    public class ClinicInstrumentSearchController : ApiController
+    public class InstrumentSearchController : ApiController
     {
         VetAppDBContext _context = new VetAppDBContext();
         // GET: RoleSearch
@@ -23,17 +23,17 @@ namespace VetTrainer.Controllers.Apis
         public IHttpActionResult GetSearchResult()
         {
             string msg = "";
-            var userDtos = new List<UserDto>();
+            var instrumentDtos = new List<InstrumentDto>();
             try
             {
-                List<User> users = new List<User>();
-                users = _context.Users.ToList();
-                foreach (User user in users)
+                List<Instrument> instruments = new List<Instrument>();
+                instruments = _context.Instruments.ToList();
+                foreach (Instrument instrument in instruments)
                 {
-                    var userDto = Mapper.Map<User, UserDto>(user);
-                    userDtos.Add(userDto);
+                    var instrumentDto = Mapper.Map<Instrument, InstrumentDto>(instrument);
+                    instrumentDtos.Add(instrumentDto);
                 }
-                if (userDtos.Count > 0)
+                if (instrumentDtos.Count > 0)
                     msg = "查找成功";
                 else
                     msg = "没有结果";
@@ -44,31 +44,31 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(userDtos) + " }]";
+            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(instrumentDtos) + " }]";
             return Ok(str);
         }
         //获取查询用户信息结果api
         public IHttpActionResult GetSearchResult(string searchText)
         {
             string msg = "";
-            var userDtos = new List<UserDto>();
+            var instrumentDtos = new List<InstrumentDto>();
             try
             {
-                List<User> users = new List<User>();
+                List<Instrument> instruments = new List<Instrument>();
                 if (searchText == null || searchText.Trim() == "")
                 {
-                    users = _context.Users.ToList();
+                    instruments = _context.Instruments.ToList();
                 }
                 else
                 {
-                    users = _context.Users.Where(u => u.Name.Contains(searchText)).ToList();
+                    instruments = _context.Instruments.Where(u => u.Name.Contains(searchText)).ToList();
                 }
-                foreach (User user in users)
+                foreach (Instrument user in instruments)
                 {
-                    var userDto = Mapper.Map<User, UserDto>(user);
-                    userDtos.Add(userDto);
+                    var instrumentDto = Mapper.Map<Instrument, InstrumentDto>(user);
+                    instrumentDtos.Add(instrumentDto);
                 }
-                if (userDtos.Count > 0)
+                if (instrumentDtos.Count > 0)
                     msg = "查找成功";
                 else
                     msg = "没有结果";
@@ -79,7 +79,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(userDtos) + " }]";
+            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(instrumentDtos) + " }]";
             return Ok(str);
         }
     }

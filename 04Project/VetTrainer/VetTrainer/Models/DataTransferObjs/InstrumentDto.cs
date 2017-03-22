@@ -9,17 +9,17 @@ namespace VetTrainer.Models.DataTransferObjs
     {
         public InstrumentDto()
         {
-            Texts = new List<Text>();
-            Pictures = new List<Picture>();
-            Videos = new List<Video>();
+            Texts = new List<TextDto>();
+            Pictures = new List<PictureDto>();
+            Videos = new List<VideoDto>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Description { get; set; }
         public string ModelUrl { get; set; }
-        public virtual IList<Text> Texts { get; set; }
-        public virtual IList<Picture> Pictures { get; set; }
-        public virtual IList<Video> Videos { get; set; }
+        public virtual IList<TextDto> Texts { get; set; }
+        public virtual IList<PictureDto> Pictures { get; set; }
+        public virtual IList<VideoDto> Videos { get; set; }
 
     }
 }
