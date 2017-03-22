@@ -12,16 +12,248 @@ ViewBag.Count = 0;
 	<div class="row">
 		<div class="col-md-2">
 			<ul class="list-group manage-list">
-				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.UserManage, "Manage","SystemManager",new {ManageId = ViewBag.Count++},null)</li>
-				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BaseFunctionManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
-				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.RoleManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
-				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.CaseManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
-				<li class="list-group-item">@Html.ActionLink(@VetTrainer.Views.Strings.SystemManager.BackUpAndRecoverManage, "Manage", "SystemManager", new { ManageId = ViewBag.Count++ },null)</li>
+				<li class="list-group-item"><a class="manage-switch" href="javascript:;" data-target="user">用户管理</a></li>
+				<li class="list-group-item">
+					<a href="javascript:;">基本结构和功能管理</a>
+					<ul class="">
+						<li class=""><a class="manage-switch" href="javascript:;" data-target="instrument">操作器械管理</a></li>
+						<li class=""><a class="manage-switch" class="manage-switch" href="javascript:;" data-target="clinic">职能学习管理</a></li>
+						<li class=""><a class="manage-switch" href="javascript:;" data-target="drug">药品管理</a></li>
+						<li class=""><a class="manage-switch" href="javascript:;" data-target="analysis">化验项目管理</a></li>
+						<li class=""><a class="manage-switch" href="javascript:;" data-target="charge">收费管理</a></li>
+					</ul>
+				</li>
+				<li class="list-group-item"><a class="manage-switch" href="javascript:;" data-target="role">角色管理</a></li>
+				<li class="list-group-item"><a href="javascript:;">疾病管理</a>
+					<ul>
+						<li><a class="manage-switch" href="javascript:;" data-target="diseasetype">疾病类型管理</a></li>
+						<li><a class="manage-switch" href="javascript:;" data-target="disease">疾病管理</a></li>
+						<li><a class="manage-switch" href="javascript:;" data-target="case">病例管理</a></li>
+					</ul>
+				</li>
+				<li class="list-group-item"><a class="manage-switch" href="javascript:;" data-target="backup">备份与恢复</a></li>
 			</ul>
 		</div>
 		<div class="col-md-10 manage-content">
-			<h2>欢迎使用宠物医院管理系统！</h2>
+			<div class="container manage-welcome">
+				<h2>欢迎使用宠物医院管理系统！</h2>
+			</div>
+
+			<div class="container-fluid manage-user" style="display: none;">
+				<div class="row">
+					<div class="col-md-3">
+						<input class="form-control" type="text" placeholder="搜索用户">
+					</div>
+					<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+					<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addUserModal">添加</a></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped">
+							<thead>
+								<tr>
+									<th>用户名</th>
+									<th>密码</th>
+									<th>权限</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Tanmay</td>
+									<td>Bangalore</td>
+									<td>560001</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">删除</button></td>
+								</tr>
+								<tr>
+									<td>Sachin</td>
+									<td>Mumbai</td>
+									<td>400003</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+								</tr>
+								<tr>
+									<td>Uma</td>
+									<td>Pune</td>
+									<td>411027</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="addUserLabel">添加新用户</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="输入用户名">
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="密码">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary">确定</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
+
+				<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="deleteUserLabel">警告</h4>
+							</div>
+							<div class="modal-body">
+								确定删除此用户？
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger">确定</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
+			</div>
+			<div class="container-fluid manage-instrument" style="display: none;">
+				<div class="row">
+					<div class="col-md-2">
+						<ul class="list-group">
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+						</ul>
+					</div>
+					<div class="col-md-2">
+						<ul class="list-group">
+							<li class="list-group-item">手术台</li>
+							<li class="list-group-item">手术台</li>
+							<li class="list-group-item">手术台</li>
+							<li class="list-group-item">手术台</li>
+							<li class="list-group-item">手术台</li>
+							<li class="list-group-item">手术台</li>
+						</ul>
+					</div>
+					<div class="col-md-8">
+						<ul id="instrumentTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#function" data-toggle="tab">
+									功能说明
+								</a>
+							</li>
+							<li><a href="#opration" data-toggle="tab">操作流程</a></li>
+							<li class="dropdown">
+								<a href="#demo"	data-toggle="tab">演示动画</a>
+							</li>
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="function">
+								<div class="well">
+									<textarea class="form-control" rows="10"></textarea>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="opration">
+								<div class="well">
+									<textarea class="form-control" rows="10"></textarea>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="demo">
+								<div class="well">
+									演示动画
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid manage-clinic" style="display: none;">
+				<div class="row">
+					<div class="col-md-2">
+						<ul class="list-group">
+							<li class="list-group-item">医助</li>
+							<li class="list-group-item">前台</li>
+							<li class="list-group-item">医师</li>
+						</ul>
+					</div>
+					<div class="col-md-2">
+						<ul class="list-group">
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+							<li class="list-group-item">手术室</li>
+						</ul>
+					</div>
+					<div class="col-md-8">
+						<ul id="clinicTab" class="nav nav-tabs">
+							<li class="active">
+								<a href="#clinicDesc" data-toggle="tab">
+									科室描述
+								</a>
+							</li>
+							<li><a href="#clinicPic" data-toggle="tab">图片描述</a></li>
+							<li class="dropdown">
+								<a href="#clinicVideo"	data-toggle="tab">视频介绍</a>
+							</li>
+						</ul>
+						<div id="myTabContent" class="tab-content">
+							<div class="tab-pane fade in active" id="clinicDesc">
+								<div class="well">
+									<textarea class="form-control" rows="10"></textarea>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="clinicPic">
+								<div class="well">
+									<textarea class="form-control" rows="10"></textarea>
+								</div>
+							</div>
+							<div class="tab-pane fade" id="clinicVideo">
+								<div class="well">
+									
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="container-fluid manage-drug" style="display: none;">
+				药品管理
+			</div>
+			<div class="container-fluid manage-analysis" style="display: none;">
+				化验项目管理
+			</div>
+			<div class="container-fluid manage-charge" style="display: none;">
+				收费管理
+			</div>
+			<div class="container-fluid manage-role" style="display: none;">
+				角色管理
+			</div>
+			<div class="container-fluid manage-diseasetype" style="display: none;">
+				疾病类型管理
+			</div>
+			<div class="container-fluid manage-disease" style="display: none;">
+				疾病管理
+			</div>
+			<div class="container-fluid manage-case" style="display: none;">
+				病例管理
+			</div>
+			<div class="container-fluid manage-backup" style="display: none;">
+				备份管理
+			</div>
 		</div>
 	</div>
 	
 </div>
+<script src='../../Src/js/bootstrap.min.js'></script>
+<script src='../../Src/js/manage.js'></script>
