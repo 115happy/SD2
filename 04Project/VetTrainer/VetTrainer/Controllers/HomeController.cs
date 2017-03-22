@@ -16,6 +16,7 @@ namespace VetTrainer.Controllers
             return View();
         }
 
+        [AllowAnonymous]
         public ActionResult About()
         {
             ViewBag.Message = "制作组：115happy.";

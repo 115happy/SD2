@@ -31,7 +31,7 @@
 <div class="login-container">
     @using (Html.BeginForm("Login", "Login"))
     {
-        @Html.ValidationSummary(true, VetTrainer.Views.Strings.Login.ErrValidationSummary)
+        @Html.ValidationMessage(VetTrainer.Views.Strings.ModelErrorKeys.LoginErrValidation)
         <fieldset class="">
             <legend>@VetTrainer.Views.Strings.Login.FormLoginText</legend>
             <div class="login-box form-horizontal">

@@ -7,10 +7,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>@ViewBag.Title - @VetTrainer.Views.Strings.Global.AppName</title>
-    @Styles.Render("~/Dist/css/bootstrap.min.css")
+    @Styles.Render("~/content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @*@Styles.Render("~/Dist/css/bootstrap.min.css")
     @Styles.Render("~/Dist/css/common.css")
     @Scripts.Render("~/Src/js/jquery-3.1.1.js")
-    @*@Scripts.Render("~/Dist/js/")*@ 
+    @Scripts.Render("~/Dist/js/")*@ 
 </head>
 
 <body>
@@ -18,27 +20,32 @@
         <nav class="navbar" role="banner">
             <div class="container">
                 <div class="navbar-header">
-                <a href="index" class="nav-head">
+                <a href="@Url.Action("Index","Home")" class="nav-head">
                     <h1>虚拟宠物医院学习软件
                     </h1></a>
                 </div>
                 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="">关于我们</a></li> 
-                           <li style="width: auto;">
-                           @if (Session["UserID"] != null)
+                        <li><a href="@Url.Action("About","Home")">关于我们</a></li> 
+                           
+                           @if (Request.IsAuthenticated)
                            {
-                               using(Html.BeginForm("Logout", "Login"))
-                               {
-                               <strong>@Html.Encode(User.Identity.Name)</strong>
-                               <input type="submit" value="登出" />
-                                           @*@Html.ActionLink("登出", "Logout", "Login")*@
-                               }
+                            <li style="width: auto;">
+                                <strong>@Html.Encode(User.Identity.Name)</strong>
+                            </li>
+                            <li>@Html.ActionLink("登出", "Logout", "Login")</li>
+
                            }
-                           </li>
-                     
-                    </ul>
+                           else
+                           {
+                            <li style="width: auto;">
+                                @Html.ActionLink("登入", "Login", "Login")
+                            </li>
+                           }
+
+
+</ul>
                 </div>
             </div><!--/.container-->
         </nav><!--/nav-->

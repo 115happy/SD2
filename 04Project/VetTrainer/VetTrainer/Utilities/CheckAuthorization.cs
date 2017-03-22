@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Routing;
 
 namespace VetTrainer.Utilities
 {
     public class CheckAuthorization : AuthorizeAttribute
     {
-        public override void OnAuthorization(AuthorizationContext filterContext)
+        protected override void HandleUnauthorizedRequest(AuthorizationContext filterContext)
         {
             if (HttpContext.Current.Session["UserID"] == null || !HttpContext.Current.Request.IsAuthenticated)
             {
@@ -21,7 +22,12 @@ namespace VetTrainer.Utilities
                 {
                     //filterContext.Result = new RedirectResult(System.Web.Security.FormsAuthentication.LoginUrl + "?ReturnUrl=" +
                     //     filterContext.HttpContext.Server.UrlEncode(filterContext.HttpContext.Request.RawUrl));
-                    filterContext.Result = new RedirectResult("index");
+                    filterContext.Result = new RedirectToRouteResult(
+                        new RouteValueDictionary
+                        {
+                            { "action", "Login" },
+                            { "controller", "Login" }
+                        });
                 }
             }
             else

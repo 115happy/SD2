@@ -14,6 +14,7 @@ using System.Security.Principal;
 
 namespace VetTrainer.Controllers
 {
+    [AllowAnonymous]
     [RoutePrefix("Login")]
     public class LoginController : Controller
     {
@@ -36,7 +37,17 @@ namespace VetTrainer.Controllers
         [HttpGet]
         public ActionResult Login()
         {
-            EnsureLoggedOut();
+            if (Request.IsAuthenticated)
+            {
+                // First we clean the authentication ticket like always;
+                FormsAuthentication.SignOut();
+
+                // Second we clear the principal to ensure the user does not retain any authentication;
+                HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+
+                Session.Clear();
+                System.Web.HttpContext.Current.Session.RemoveAll();
+            }
             return View();
         }
 
@@ -46,25 +57,36 @@ namespace VetTrainer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user)
         {
+            try
+            {
+
+            }
+            catch (HttpAntiForgeryException ex)
+            {
+                Console.WriteLine($"AntiForgeryException: {ex.Message}.");
+                ModelState.AddModelError("", "AntiFogery Token不匹配，请检查！");
+                return View(user);
+            }
 
             if (!ModelState.IsValid)
                 return View(user);
 
             if (IsValid(user.Name, user.Password))
             {
-                //FormsAuthentication.SetAuthCookie(user.Name, user.IsToRememberMe);
                 // Successfully signed in
+                //FormsAuthentication.SetAuthCookie(user.Name, user.IsToRememberMe);
                 SetIsToRemember(user.Name, user.IsToRememberMe);
                 Session["UserID"] = $"{user.Id}_{Guid.NewGuid().ToString() }";
                 return RedirectToAction("Index", "Home");
             }
             else
             {
-                //ModelState.AddModelError("", "用户名和密码不匹配，请检查！");
                 // Fail to sign in
-                TempData["ErrorMsg"] = "Access Denied! Wrong Credential.";
+                ModelState.AddModelError(Views.Strings.ModelErrorKeys.LoginErrValidation, Views.Strings.Login.ErrValidationSummary);
+                //TempData["ErrorMsg"] = "Access Denied! Wrong Credential.";
                 return View(user);
             }
+
         }
 
         // GET: EnsureLoggedOut
@@ -75,9 +97,8 @@ namespace VetTrainer.Controllers
                 Logout();
         }
 
-        // POST: Logout
-        [HttpPost]
-        [ValidateAntiForgeryToken]
+        // GET: Logout
+        //[HttpPost]
         public ActionResult Logout()
         {
             try
