@@ -6,5 +6,40 @@
   min-height: 600px;
 }
 .manage-content {
+  position: relative;
   border-left: 1px solid #d8d8d8;
+}
+.manage-content table {
+  margin-top: 20px;
+}
+.manage-content table > tbody > tr > td {
+  vertical-align: middle;
+}
+.manage-content table button {
+  margin-right: 8px;
+}
+.manage-list ul {
+  list-style: none;
+  padding-left: 0;
+}
+.manage-list ul li a {
+  padding-left: 20px;
+}
+.manage-list li {
+  padding: 0;
+}
+.manage-list li a {
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+.manage-list li a:hover {
+  background-color: #e3e3e3;
+}
+.manage-list li a.active {
+  background-color: #2C90C4;
+  color: white;
+}
+.manage-list li:hover {
+  cursor: pointer;
 }

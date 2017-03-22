@@ -9,4 +9,16 @@
         <h2>@charge.Name + @charge.Amount</h2>
     }
 }
-
+<div>
+    <input type="text" id="searchText" />
+    <input type="submit" value="搜索" onclick="searchResult()" />
+</div>
+<script>
+    function searchResult()
+    {
+        $.get('/api/ChargeSearch', { searchText: $('#searchText').val() }, function (data,sucess)
+        {
+            console.log(data);
+        })
+    }
+</script>

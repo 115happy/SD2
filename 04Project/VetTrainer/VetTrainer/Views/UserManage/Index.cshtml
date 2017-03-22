@@ -22,5 +22,60 @@
         <h2>@Model.users[i].Name</h2>
     }
 }
-
+<div>
+    <input type="text" id="searchText" />
+    <input type="submit" value="搜索" onclick="deleteUser()" />
+</div>
+<script>
+    function searchResult()
+    {
+        $.get('/api/UserSearch', { searchText: $('#searchText').val() }, function (data,sucess)
+        {
+            console.log(data);
+        })
+    }
+    function modifyUser() {
+        var user = {
+            "Id": '3',
+            "Name": 'chaojiji',
+            "Password": '1234567',
+            "Authority": '0',
+            "IsToRememberMe":'0'
+        };
+        $.post('/api/UserModify', user,
+            function (data, sucess) {
+                console.log(data);
+                var t = JSON.parse(data);
+                console.log(t);
+            }
+        )
+    }
+    function addUser() {
+        var user = {
+            "Name": '哈哈2',
+            "Password": '1234567',
+            "Authority": '0',
+            "IsToRememberMe": '0'
+        };
+        $.post('/api/UserAdd', user,
+            function (data, sucess) {
+                console.log(data);
+                var t = JSON.parse(data);
+                console.log(t);
+            }
+        )
+    }
+    function deleteUser() {
+        var user = {
+            "Id": '6',
+        };
+        $.post('/api/UserDelete', user,
+            function (data, sucess) {
+                console.log(data);
+                var t = JSON.parse(data);
+                console.log(t);
+            }
+        )
+    }
+</script>
 

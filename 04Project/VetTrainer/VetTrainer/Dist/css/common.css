@@ -4,9 +4,6 @@
 body {
   font-family: '微软雅黑';
 }
-.container {
-  margin-bottom: 20px;
-}
 .container h2 {
   color: #555;
   font-size: 26px;
@@ -21,6 +18,7 @@ body {
 }
 .navbar .nav-head {
   text-decoration: none;
+  color: white;
 }
 .navbar .nav-head h1 {
   font-size: 28px;
@@ -39,23 +37,20 @@ body {
   color: white;
   background-color: #555;
 }
-h1 {
+.navbar h1 {
   margin: 0;
   height: 70px;
   line-height: 70px;
 }
-h1 a {
+.navbar h1 a {
   font-size: 26px;
   color: white;
 }
-h1 a:hover {
+.navbar h1 a:hover {
   color: white;
   text-decoration: none;
 }
-h1:hover {
-  color: white;
-}
-.nav-head {
+.navbar h1:hover {
   color: white;
 }
 .nav-about {

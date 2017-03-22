@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "ChooseClinic";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>以下是3D导览</h2>
+<script src="../../Src/3Dres/tour.js"></script>
+<div id="pano" style="width:100%;height:600px;">
+   <p>666</p>
+    
+</div>
+<script>
+        embedpano({ swf: "../../Src/3Dres/tour.swf", xml: "../../Src/3Dres/tour.xml", target: "pano", html5: "only", mobilescale: 1.0, passQueryParameters: true });
+</script>

@@ -228,8 +228,25 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Authentication\AuthPrincipal.cs" />
     <Compile Include="Authentication\UserManager.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\AnalysisManageController.cs" />
+    <Compile Include="Controllers\Apis\AnalysisAddController.cs" />
+    <Compile Include="Controllers\Apis\AnalysisDeleteController.cs" />
+    <Compile Include="Controllers\Apis\AnalysisModifyController.cs" />
+    <Compile Include="Controllers\Apis\AnalysisSearchController.cs" />
     <Compile Include="Controllers\Apis\CaseController.cs" />
+    <Compile Include="Controllers\Apis\ChargeSearchController.cs" />
+    <Compile Include="Controllers\Apis\ClinicInstrumentSearchController.cs" />
+    <Compile Include="Controllers\Apis\DrugAddController.cs" />
+    <Compile Include="Controllers\Apis\DrugDeleteController.cs" />
+    <Compile Include="Controllers\Apis\DrugModifyController.cs" />
+    <Compile Include="Controllers\Apis\DrugSearchController.cs" />
+    <Compile Include="Controllers\Apis\RoleModifyController.cs" />
+    <Compile Include="Controllers\Apis\RoleSearchController.cs" />
+    <Compile Include="Controllers\Apis\UserAddController.cs" />
+    <Compile Include="Controllers\Apis\UserDeleteController.cs" />
+    <Compile Include="Controllers\Apis\UserModifyController.cs" />
+    <Compile Include="Controllers\Apis\UserSearchController.cs" />
     <Compile Include="Controllers\BackUpAndRecoveryManageController.cs" />
     <Compile Include="Controllers\BaseFunctionManageController.cs" />
     <Compile Include="Controllers\CaseController.cs" />
@@ -257,10 +274,19 @@
     <Compile Include="Models\Analysis.cs" />
     <Compile Include="Models\Charge.cs" />
     <Compile Include="Models\Clinic.cs" />
+    <Compile Include="Models\DataTransferObjs\AnalysisDto.cs" />
+    <Compile Include="Models\DataTransferObjs\ChargeDto.cs" />
+    <Compile Include="Models\DataTransferObjs\ClinicDto.cs" />
     <Compile Include="Models\DataTransferObjs\DiseaseCaseDto.cs" />
     <Compile Include="Models\DataTransferObjs\DiseaseDto.cs" />
     <Compile Include="Models\DataTransferObjs\DiseaseTypeDto.cs" />
+    <Compile Include="Models\DataTransferObjs\DrugDto.cs" />
+    <Compile Include="Models\DataTransferObjs\InstrumentDto.cs" />
+    <Compile Include="Models\DataTransferObjs\PictureDto.cs" />
+    <Compile Include="Models\DataTransferObjs\RoleDto.cs" />
+    <Compile Include="Models\DataTransferObjs\TextDto.cs" />
     <Compile Include="Models\DataTransferObjs\UserDto.cs" />
+    <Compile Include="Models\DataTransferObjs\VideoDto.cs" />
     <Compile Include="Models\Disease.cs" />
     <Compile Include="Models\DiseaseCase.cs" />
     <Compile Include="Models\DiseaseCaseTab.cs" />
@@ -369,10 +395,12 @@
     <Content Include="Views\DrugManage\Index.cshtml" />
     <Content Include="Views\ChargeManage\Index.cshtml" />
     <Content Include="Views\AnalysisManage\Index.cshtml" />
+    <Content Include="Views\Account\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Navigation\" />
+    <Folder Include="Views\RoleSearch\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
