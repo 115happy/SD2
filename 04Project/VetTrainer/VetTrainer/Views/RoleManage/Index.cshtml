@@ -9,5 +9,38 @@
     {
         <h2>@Model.Roles[i].Name</h2>
     }
-}
+} 
+<div>
+    <input type="text" value="" name="searchText" id="searchText" />
+    <input type="submit" value="搜索"  onclick="searchResult()"/>
 
+</div>
+
+<script>
+    function searchResult()
+    {
+        var searchText = $('#searchText').val();
+        $.get('/api/RoleSearch', /*{ searchText : searchText },*/
+            function (data, sucess) {
+                alert(1);
+                console.log(data);
+            }
+            )
+    }
+    function modifyRole()
+    {
+        var role = {
+            "Id": '1',
+            "Name": 'chaojiji',
+            "Description": '1234567',
+            "RolePicUrl" :'88886666'
+        };
+        $.post('/api/RoleModify', role,
+            function (data, sucess) {
+                console.log(data);
+                var t = JSON.parse(data);
+                console.log(t);
+            }
+        )
+    }
+</script>

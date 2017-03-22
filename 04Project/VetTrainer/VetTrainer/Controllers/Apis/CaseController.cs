@@ -25,7 +25,7 @@ namespace VetTrainer.Controllers.Apis
         {
             var diseaseTypes = _context.DiseaseTypes.Include(dt => dt.Diseases.Select(d => d.DiseaseCases));
             //var diseaseTypes = _context.DiseaseTypes.ToList();
-            if (diseaseTypes == null) return NotFound();
+            //if (diseaseTypes == null) return NotFound();
 
             var diseaseTypeDtos = new List<DiseaseTypeDto>();
             foreach (DiseaseType dt in diseaseTypes)

@@ -228,6 +228,12 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AnalysisManageController.cs" />
     <Compile Include="Controllers\Apis\CaseController.cs" />
+    <Compile Include="Controllers\Apis\RoleModifyController.cs" />
+    <Compile Include="Controllers\Apis\RoleSearchController.cs" />
+    <Compile Include="Controllers\Apis\UserAddController.cs" />
+    <Compile Include="Controllers\Apis\UserDeleteController.cs" />
+    <Compile Include="Controllers\Apis\UserModifyController.cs" />
+    <Compile Include="Controllers\Apis\UserSearchController.cs" />
     <Compile Include="Controllers\BackUpAndRecoveryManageController.cs" />
     <Compile Include="Controllers\BaseFunctionManageController.cs" />
     <Compile Include="Controllers\CaseController.cs" />
@@ -255,9 +261,16 @@
     <Compile Include="Models\Analysis.cs" />
     <Compile Include="Models\Charge.cs" />
     <Compile Include="Models\Clinic.cs" />
+    <Compile Include="Models\DataTransferObjs\ClinicDto.cs" />
     <Compile Include="Models\DataTransferObjs\DiseaseCaseDto.cs" />
     <Compile Include="Models\DataTransferObjs\DiseaseDto.cs" />
     <Compile Include="Models\DataTransferObjs\DiseaseTypeDto.cs" />
+    <Compile Include="Models\DataTransferObjs\InstrumentDto.cs" />
+    <Compile Include="Models\DataTransferObjs\PictureDto.cs" />
+    <Compile Include="Models\DataTransferObjs\RoleDto.cs" />
+    <Compile Include="Models\DataTransferObjs\TextDto.cs" />
+    <Compile Include="Models\DataTransferObjs\UserDto.cs" />
+    <Compile Include="Models\DataTransferObjs\VideoDto.cs" />
     <Compile Include="Models\Disease.cs" />
     <Compile Include="Models\DiseaseCase.cs" />
     <Compile Include="Models\DiseaseCaseTab.cs" />
@@ -370,6 +383,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Navigation\" />
+    <Folder Include="Views\RoleSearch\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

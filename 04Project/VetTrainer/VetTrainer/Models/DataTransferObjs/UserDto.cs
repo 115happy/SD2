@@ -1,17 +1,12 @@
-namespace VetTrainer.Models
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Web;
+
+namespace VetTrainer.Models.DataTransferObjs
 {
-    using System.ComponentModel.DataAnnotations;
-    using Microsoft.AspNet.Identity;
-    using Microsoft.AspNet.Identity.EntityFramework;
-
-    public enum UserAuthority
-    {
-        User = 0,
-        Admin = 1,
-        SuperAdmin = 2
-    }
-
-    public class User
+    public class UserDto
     {
         public int Id { get; set; }
 

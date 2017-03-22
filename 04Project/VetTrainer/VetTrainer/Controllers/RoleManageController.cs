@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using VetTrainer.Models;
 using VetTrainer.Views.ViewModel;
+using System.Data.Entity;
+using System.Web.Script.Serialization;
 
 namespace VetTrainer.Controllers
 {
@@ -18,6 +20,16 @@ namespace VetTrainer.Controllers
             return View(model);
         }
 
+        public JsonResult Test()
+        {
+            var searchText = Request.QueryString["searchText"];
+            var SearchResults = SearchRoles(searchText);
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var str = jss.Serialize(SearchResults);
+            //var str = JsonConvert.SerializeObject(SearchResults[0]);
+            return Json(str, JsonRequestBehavior.AllowGet);
+        }
+
         private static IList<Role> GetAllRoles()
         {
             using (VetAppDBContext context = new VetAppDBContext())
@@ -26,5 +38,14 @@ namespace VetTrainer.Controllers
                 return roles;
             }
         }
+        private IList<Role> SearchRoles(string searchText)
+        {
+            using (VetAppDBContext context = new VetAppDBContext())
+            {
+                List<Role> roles = context.Roles.Where(u => u.Name.Contains(searchText)).ToList();
+                return roles;
+            }
+        }
+
     }
 }
