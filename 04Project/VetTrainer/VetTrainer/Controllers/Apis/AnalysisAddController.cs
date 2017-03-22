@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -9,11 +8,10 @@ using System.Net.Http;
 using System.Web.Http;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
-using VetTrainer.Utilities;
 
 namespace VetTrainer.Controllers.Apis
 {
-    public class UserModifyController : ApiController
+    public class AnalysisAddController : ApiController
     {
         VetAppDBContext _context = new VetAppDBContext();
 
@@ -22,24 +20,19 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostUserModify(UserDto user)
+        public IHttpActionResult PostAnalysisAdd(AnalysisDto analysis)
         {
             string msg = "";
-            if (user == null)
+            if (analysis == null)
             {
                 msg = "参数错误";
             }
-            var userToUpdate = _context.Users.Find(user.Id);
-            //userToUpdate = Mapper.Map<UserDto, User>(user);
-            userToUpdate.Name = user.Name;
-            userToUpdate.Password = Encoder.Encode(user.Password);
-            userToUpdate.Authority = user.Authority;
-            userToUpdate.IsToRememberMe = user.IsToRememberMe;
+            var AnalysisToAdd = Mapper.Map<AnalysisDto, Analysis>(analysis);
             try
             {
-                _context.Entry(userToUpdate).State = EntityState.Modified;
+                _context.Analyses.Add(AnalysisToAdd);
                 _context.SaveChanges();
-                msg = "修改成功";
+                msg = "添加成功";
             }
             catch (RetryLimitExceededException)
             {

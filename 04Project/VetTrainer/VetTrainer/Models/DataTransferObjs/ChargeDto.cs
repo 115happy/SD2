@@ -5,18 +5,15 @@ using System.Web;
 
 namespace VetTrainer.Models.DataTransferObjs
 {
-    public class VideoDto
+    public class ChargeDto
     {
-        public VideoDto()
+        public ChargeDto()
         {
 
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public string Url { get; set; }
+        public decimal Amount { get; set; }
         public string Description { get; set; }
-
-        //*********************************************************************
-        public int? RelatedClinicId { get; set; }
     }
 }

@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
@@ -9,11 +8,10 @@ using System.Net.Http;
 using System.Web.Http;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
-using VetTrainer.Utilities;
 
 namespace VetTrainer.Controllers.Apis
 {
-    public class UserModifyController : ApiController
+    public class AnalysisModifyController : ApiController
     {
         VetAppDBContext _context = new VetAppDBContext();
 
@@ -22,22 +20,20 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostUserModify(UserDto user)
+        public IHttpActionResult PostAnalysisModify(AnalysisDto analysis)
         {
             string msg = "";
-            if (user == null)
+            if (analysis == null)
             {
                 msg = "参数错误";
             }
-            var userToUpdate = _context.Users.Find(user.Id);
-            //userToUpdate = Mapper.Map<UserDto, User>(user);
-            userToUpdate.Name = user.Name;
-            userToUpdate.Password = Encoder.Encode(user.Password);
-            userToUpdate.Authority = user.Authority;
-            userToUpdate.IsToRememberMe = user.IsToRememberMe;
+            var analysisToUpdate = _context.Analyses.Find(analysis.Id);
+
+            analysisToUpdate.Name = analysis.Name;
+            analysisToUpdate.Amount = analysis.Amount;
             try
             {
-                _context.Entry(userToUpdate).State = EntityState.Modified;
+                _context.Entry(analysisToUpdate).State = EntityState.Modified;
                 _context.SaveChanges();
                 msg = "修改成功";
             }

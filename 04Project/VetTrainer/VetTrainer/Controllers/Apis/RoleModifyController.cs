@@ -17,7 +17,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostRoleChange(RoleDto role)
+        public IHttpActionResult PostRoleModify(RoleDto role)
         {
             string msg = "";
             if (role==null)
