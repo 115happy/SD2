@@ -12,6 +12,11 @@ namespace VetTrainer.Views
             public const string AppName = "虚拟宠物医院学习软件";
         }
 
+        public static class ModelErrorKeys
+        {
+            public const string LoginErrValidation = "LoginErrValidation";
+        }
+
         public static class Login
         {
             public const string FormLoginText = "登录";
