@@ -12,9 +12,10 @@ namespace VetTrainer.Views
             public const string AppName = "虚拟宠物医院学习软件";
         }
 
-        public static class ModelErrorKeys
+        public static class Keys
         {
             public const string LoginErrValidation = "LoginErrValidation";
+            public const string AuthUserTempData = "User";
         }
 
         public static class Login
@@ -24,7 +25,8 @@ namespace VetTrainer.Views
             public const string LblUsername = "用户名：";
             public const string LblPassword = "密码：";
             public const string LblIsToRememberMe = "记住我";
-            public const string ErrValidationSummary = "用户名和密码不匹配，请检查！";
+            public const string LoginErrValidationValue = "用户名和密码不匹配，请检查！";
+            public const string ValidationSummaryErrMsg = "登陆失败.";
         }
         public static class SystemManager
         {

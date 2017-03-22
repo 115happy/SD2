@@ -4,19 +4,6 @@ namespace VetTrainer.Models
     using Microsoft.AspNet.Identity;
     using Microsoft.AspNet.Identity.EntityFramework;
 
-    //public class VetAppUser : IdentityUser
-    //{
-
-    //}
-
-    //public class VetAppRole : IdentityRole
-    //{
-    //    public VetAppRole()
-    //    {
-
-    //    }
-    //}
-
     public enum UserAuthority
     {
         User = 0,

@@ -71,22 +71,40 @@ namespace VetTrainer.Controllers
             if (!ModelState.IsValid)
                 return View(user);
 
-            if (IsValid(user.Name, user.Password))
+            if (Authentication.UserManager.ValidateUser(user, Response))
             {
-                // Successfully signed in
-                //FormsAuthentication.SetAuthCookie(user.Name, user.IsToRememberMe);
-                SetIsToRemember(user.Name, user.IsToRememberMe);
-                Session["UserID"] = $"{user.Id}_{Guid.NewGuid().ToString() }";
+                // SetSession
+                //HttpContext.Session["_Role"] = user.Authority.ToString();
+
+                //Claim[] claims = LoadClaimsForUser(user);
+                //var id = new ClaimsIdentity(claims, "Forms");
+                //var cp = new ClaimsPrincipal(id);
+
+                //var token = new SessionSecurityToken(cp);
+                //var sam = FederatedAuthentication.SessionAuthenticationModule;
+                //sam.WriteSessionTokenToCookie(token);
+                //Session["UserID"] = $"{user.Id}_{Guid.NewGuid().ToString() }";
+
                 return RedirectToAction("Index", "Home");
             }
             else
             {
                 // Fail to sign in
-                ModelState.AddModelError(Views.Strings.ModelErrorKeys.LoginErrValidation, Views.Strings.Login.ErrValidationSummary);
-                //TempData["ErrorMsg"] = "Access Denied! Wrong Credential.";
+                ModelState.AddModelError(Views.Strings.Keys.LoginErrValidation, Views.Strings.Login.LoginErrValidationValue);
                 return View(user);
             }
 
+        }
+
+        private Claim[] LoadClaimsForUser(User user)
+        {
+            var claims = new Claim[]
+            {
+                new Claim(ClaimTypes.Name,user.Name),
+                new Claim(ClaimTypes.Role, user.Authority.ToString()),
+                new Claim("https://vetAppLearning.com/claims/UserAuthority",user.Authority.ToString()),
+            };
+            return claims;
         }
 
         // GET: EnsureLoggedOut
@@ -103,21 +121,28 @@ namespace VetTrainer.Controllers
         {
             try
             {
-                // First we clean the authentication ticket like always
-                //required NameSpace: using System.Web.Security;
-                FormsAuthentication.SignOut();
+                //// First we clean the authentication ticket like always
+                ////required NameSpace: using System.Web.Security;
 
-                // Second we clear the principal to ensure the user does not retain any authentication
-                //required NameSpace: using System.Security.Principal;
-                HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
+                //FormsAuthentication.SignOut();
 
-                Session.Clear();
-                System.Web.HttpContext.Current.Session.RemoveAll();
+                //// Second we clear the principal to ensure the user does not retain any authentication
+                ////required NameSpace: using System.Security.Principal;
+                //HttpContext.User = new GenericPrincipal(new GenericIdentity(string.Empty), null);
 
-                // Last we redirect to a controller/action that requires authentication to ensure a redirect takes place
+                //Session.Clear();
+                //System.Web.HttpContext.Current.Session.RemoveAll();
+
+                //// Third we clear authentication cookie.
+                //HttpCookie cookie = new HttpCookie(FormsAuthentication.FormsCookieName, "");
+                //cookie.Expires = DateTime.Now.AddYears(-1);
+                //Response.Cookies.Add(cookie);
+
+                Authentication.UserManager.Logout(Session, Response, HttpContext);
+
+                // After all these we redirect to a controller/action that requires authentication to ensure a redirect takes place
                 // this clears the Request.IsAuthenticated flag since this triggers a new request
                 return RedirectToAction("Login", "Login");
-                //return RedirectToLocal();
             }
             catch
             {
@@ -125,26 +150,7 @@ namespace VetTrainer.Controllers
             }
         }
 
-        /// <summary>
-        /// Checks if user with given password exists in the database.
-        /// </summary>
-        /// <param name="username">User name</param>
-        /// <param name="password">User password</param>
-        /// <returns></returns>
-        public static bool IsValid(string username, string password)
-        {
-            using (VetAppDBContext context = new VetAppDBContext())
-            {
 
-                // var clinics = context.Clinics.Include(c=>c.Instruments).ToList();
-                var users = context.Users.ToList();
-                string encryptedPassword = Utilities.Encoder.Encode(password);
-                User foundUser = users.SingleOrDefault(u =>
-                    u.Name == username && u.Password == encryptedPassword);
-                if (foundUser != null) return true;
-                return false;
-            }
-        }
 
         //GET: SignInAsync
         private void SetIsToRemember(string userName, bool isPersistent = false)

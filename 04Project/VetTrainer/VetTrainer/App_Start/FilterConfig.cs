@@ -1,6 +1,6 @@
 ﻿using System.Web;
 using System.Web.Mvc;
-using VetTrainer.Utilities;
+using VetTrainer.Authentication;
 
 namespace VetTrainer
 {

@@ -1,5 +1,4 @@
-﻿
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html>
 
 <head>
@@ -27,25 +26,33 @@
                 
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
-                        <li><a href="@Url.Action("About","Home")">关于我们</a></li> 
-                           
-                           @if (Request.IsAuthenticated)
-                           {
-                            <li style="width: auto;">
-                                <strong>@Html.Encode(User.Identity.Name)</strong>
-                            </li>
-                            <li>@Html.ActionLink("登出", "Logout", "Login")</li>
+                        @{
+                            bool authenticated = User.Identity.IsAuthenticated;
 
-                           }
-                           else
-                           {
-                            <li style="width: auto;">
-                                @Html.ActionLink("登入", "Login", "Login")
-                            </li>
-                           }
+                            if (authenticated)
+                            {
+                                if (UserManager.User.Authority == VetTrainer.Models.UserAuthority.Admin)
+                                {
+                                    <li><a href="@Url.Action("Index", "SystemManager")">系统管理</a></li>
+                                }
+                            }
+                                <li><a href="@Url.Action("About","Home")">关于我们</a></li>
+                            if (authenticated)
+                            { 
+                                <li style="width: auto;">
+                                    <strong>@Html.Encode(User.Identity.Name)</strong>
+                                </li>
+                                <li>@Html.ActionLink("登出", "Logout", "Login")</li>
 
-
-</ul>
+                            }
+                            else
+                            {
+                                <li style="width: auto;">
+                                    @Html.ActionLink("登入", "Login", "Login")
+                                </li>
+                            }
+                        }
+                    </ul>
                 </div>
             </div><!--/.container-->
         </nav><!--/nav-->

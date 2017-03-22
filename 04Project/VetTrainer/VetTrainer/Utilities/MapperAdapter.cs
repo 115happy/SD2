@@ -20,6 +20,8 @@ namespace VetTrainer.Utilities
                 cfg.CreateMap<DiseaseTypeDto, DiseaseType>();
                 cfg.CreateMap<DiseaseDto, Disease>();
                 cfg.CreateMap<DiseaseCaseDto, DiseaseCase>();
+                cfg.CreateMap<User, UserDto>();
+                cfg.CreateMap<UserDto, User>();
             });
         }
     }
