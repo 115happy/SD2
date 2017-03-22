@@ -49,7 +49,7 @@ ViewBag.Count = 0;
 				</div>
 				<div class="row">
 					<div class="col-md-12">
-						<table class="table table-striped">
+						<table class="table table-striped table-bordered">
 							<thead>
 								<tr>
 									<th>用户名</th>
@@ -228,16 +228,245 @@ ViewBag.Count = 0;
 				</div>
 			</div>
 			<div class="container-fluid manage-drug" style="display: none;">
-				药品管理
+				<div class="row">
+					<div class="col-md-3">
+						<input class="form-control" type="text" placeholder="搜索药品">
+					</div>
+					<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+					<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addDrugModal">添加</a></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>药品名</th>
+									<th>价格</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Tanmay</td>
+									<td>560001</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteDrugModal">删除</button></td>
+								</tr>
+								<tr>
+									<td>Sachin</td>
+									<td>400003</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+								</tr>
+								<tr>
+									<td>Uma</td>
+									<td>411027</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal fade" id="addDrugModal" tabindex="-1" role="dialog" aria-labelledby="addDrugLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="addDrugLabel">添加药品</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="输入药品名">
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="输入药品价格">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary">确定</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
+				<div class="modal fade" id="deleteDrugModal" tabindex="-1" role="dialog" aria-labelledby="deleteDrugLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="deleteDrugLabel">警告</h4>
+							</div>
+							<div class="modal-body">
+								确定删除此药品信息？
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger">确定</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
 			</div>
 			<div class="container-fluid manage-analysis" style="display: none;">
-				化验项目管理
+				<div class="row">
+					<div class="col-md-3">
+						<input class="form-control" type="text" placeholder="搜索化验项目">
+					</div>
+					<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+					<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addAnalysisModal">添加</a></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>化验项目名</th>
+									<th>价格</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Tanmay</td>
+									<td>560001</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteAnalysisModal">删除</button></td>
+								</tr>
+								<tr>
+									<td>Sachin</td>
+									<td>400003</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+								</tr>
+								<tr>
+									<td>Uma</td>
+									<td>411027</td>
+									<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal fade" id="addAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="addAnalysisLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="addAnalysisLabel">添加项目</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="输入化验项目名">
+								</div>
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="输入价格">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary">确定</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
+				<div class="modal fade" id="deleteAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="deleteAnalysisLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="deleteAnalysisLabel">警告</h4>
+							</div>
+							<div class="modal-body">
+								确定删除此药品信息？
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-danger">确定</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
 			</div>
 			<div class="container-fluid manage-charge" style="display: none;">
-				收费管理
+				<div class="row">
+					<div class="col-md-3">
+						<input class="form-control" type="text" placeholder="搜索收费项目">
+					</div>
+					<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>收费项目名</th>
+									<th>价格</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Tanmay</td>
+									<td>560001</td>
+								</tr>
+								<tr>
+									<td>Sachin</td>
+									<td>400003</td>
+								</tr>
+								<tr>
+									<td>Uma</td>
+									<td>411027</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
 			</div>
 			<div class="container-fluid manage-role" style="display: none;">
-				角色管理
+				<div class="row">
+					<div class="col-md-12">
+						<table class="table table-striped table-bordered">
+							<thead>
+								<tr>
+									<th>角色名称</th>
+									<th>描述</th>
+									<th>操作</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Tanmay</td>
+									<td>560001</td>
+									<td><button class="btn btn-primary" data-toggle="modal" data-target="#editRoleModal">修改</button></td>
+								</tr>
+								<tr>
+									<td>Sachin</td>
+									<td>400003</td>
+									<td><button class="btn btn-primary">修改</button></td>
+								</tr>
+								<tr>
+									<td>Uma</td>
+									<td>411027</td>
+									<td><button class="btn btn-primary">修改</button></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog" aria-labelledby="editRoleLabel" aria-hidden="true">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+								<h4 class="modal-title" id="editRoleLabel">添加项目</h4>
+							</div>
+							<div class="modal-body">
+								<div class="form-group">
+									<input class="form-control" type="text" placeholder="输入修改角色名">
+								</div>
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-primary">确定</button>
+								<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+							</div>
+						</div><!-- /.modal-content -->
+					</div><!-- /.modal -->
+				</div>
 			</div>
 			<div class="container-fluid manage-diseasetype" style="display: none;">
 				疾病类型管理
