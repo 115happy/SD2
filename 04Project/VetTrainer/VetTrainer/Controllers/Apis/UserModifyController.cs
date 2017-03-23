@@ -22,7 +22,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostUserChange(UserDto user)
+        public IHttpActionResult PostUserModify(UserIntactDto user)
         {
             string msg = "";
             if (user == null)
@@ -45,7 +45,7 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "网络故障";
             }
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
         }
     }

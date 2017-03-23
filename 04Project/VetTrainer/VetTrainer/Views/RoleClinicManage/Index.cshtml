@@ -8,7 +8,50 @@
     for(int i=0;i<Model.Roles.Count;i++)
     {
         //角色-科室-图片
-        <h2>@Model.Roles[i].Clinics[0].Pictures[0].Name</h2>
+        @*<h2>@Model.Roles[i].Clinics[0].Pictures[0].Name</h2>*@
     }
 }
 
+
+<div>
+    <input type="text" id="searchText" />
+    <input type="submit" value="搜索" onclick="addClinic()" />
+</div>
+<script>
+    function addClinic() {
+        var picture1 = {
+            "Name": "图片测试1",
+            "Url": "ssss",
+            "Description": "888"
+        }
+        var picture2 = {
+            "Name": "图片测试2",
+            "Url": "ggg",
+            "Description": "gggg"
+        }
+        var video = {
+            "Name": "视频测试1",
+            "Url": "bbb",
+            "Description": "999"
+        }
+        var videos = [];
+        videos.push(video);
+        var pictures = [];
+        pictures.push(picture1);
+        pictures.push(picture2);
+        var rpRecord = {
+            "RoleId": "1",
+            "ClinicId": "2",
+            "Description": "xxx",
+            "Pictures": pictures,
+            "Videos": videos
+        }
+        $.post('/api/RoleClinicAdd', rpRecord,
+            function (data, sucess) {
+                console.log(data);
+                var t = JSON.parse(data);
+                console.log(t);
+            }
+        )
+    }
+</script>

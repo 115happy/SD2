@@ -43,7 +43,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(roleDtos) + " }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(roleDtos) + " }";
             return Ok(str);
         }
         //获取查询角色信息结果api
@@ -76,7 +76,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(roleDtos) + " }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(roleDtos) + " }";
             return Ok(str);
         }
     }

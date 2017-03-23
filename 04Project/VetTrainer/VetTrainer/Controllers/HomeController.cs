@@ -7,6 +7,7 @@ using VetTrainer.Utilities;
 
 namespace VetTrainer.Controllers
 {
+    [Authorize]
     [RoutePrefix("Home")]
     public class HomeController : Controller
     {

@@ -17,7 +17,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostRoleChange(RoleDto role)
+        public IHttpActionResult PostRoleModify(RoleDto role)
         {
             string msg = "";
             if (role==null)
@@ -40,7 +40,7 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "网络故障";
             }
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
         }
     }

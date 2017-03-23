@@ -19,7 +19,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostUserDelete(UserDto user)
+        public IHttpActionResult PostUserDelete(UserIntactDto user)
         {
             string msg = "";
             if (user == null)
@@ -44,7 +44,7 @@ namespace VetTrainer.Controllers.Apis
                 }
             }
             
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
         }
     }

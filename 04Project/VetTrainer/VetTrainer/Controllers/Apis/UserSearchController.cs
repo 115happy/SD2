@@ -23,14 +23,14 @@ namespace VetTrainer.Controllers.Apis
         public IHttpActionResult GetSearchResult()
         {
             string msg = "";
-            var userDtos = new List<UserDto>();
+            var userDtos = new List<UserIntactDto>();
             try
             {
                 List<User> users = new List<User>();
                 users = _context.Users.ToList();
                 foreach (User user in users)
                 {
-                    var userDto = Mapper.Map<User, UserDto>(user);
+                    var userDto = Mapper.Map<User, UserIntactDto>(user);
                     userDtos.Add(userDto);
                 }
                 if (userDtos.Count > 0)
@@ -44,14 +44,14 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(userDtos) + " }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(userDtos) + " }";
             return Ok(str);
         }
         //获取查询用户信息结果api
         public IHttpActionResult GetSearchResult(string searchText)
         {
             string msg = "";
-            var userDtos = new List<UserDto>();
+            var userDtos = new List<UserIntactDto>();
             try
             {
                 List<User> users = new List<User>();
@@ -65,7 +65,7 @@ namespace VetTrainer.Controllers.Apis
                 }
                 foreach (User user in users)
                 {
-                    var userDto = Mapper.Map<User, UserDto>(user);
+                    var userDto = Mapper.Map<User, UserIntactDto>(user);
                     userDtos.Add(userDto);
                 }
                 if (userDtos.Count > 0)
@@ -79,7 +79,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(userDtos) + " }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(userDtos) + " }";
             return Ok(str);
         }
     }

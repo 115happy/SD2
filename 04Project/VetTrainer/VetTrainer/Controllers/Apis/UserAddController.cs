@@ -22,14 +22,14 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostUserAdd(UserDto user)
+        public IHttpActionResult PostUserAdd(UserIntactDto user)
         {
             string msg = "";
             if (user == null)
             {
                 msg = "参数错误";
             }
-            var userToAdd = Mapper.Map<UserDto, User>(user);
+            var userToAdd = Mapper.Map<UserIntactDto, User>(user);
             userToAdd.Password = Encoder.Encode(userToAdd.Password);
             try
             {
@@ -41,7 +41,7 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "网络故障";
             }
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
         }
     }

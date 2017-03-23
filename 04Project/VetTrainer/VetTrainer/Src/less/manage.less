@@ -6,5 +6,50 @@
 }
 
 .manage-content {
+	position: relative;
 	border-left: 1px solid @gray;
+	table {
+		margin-top: 20px;
+		>tbody>tr>td {
+			vertical-align: middle;
+		}
+		button {
+			margin-right: 8px;
+		}
+	}
+}
+
+.manage-list {
+	ul {
+		list-style: none;
+		padding-left: 0;
+		li a {
+			padding-left: 20px;
+		}
+	}
+	li {
+		padding: 0;
+		a {
+			display: block;
+			padding: 10px;
+			text-decoration: none;
+		}
+		a:hover {
+			background-color: @gray-lighter;
+		}
+		a.active {
+			background-color: @blue;
+			color: white;
+		}
+	}
+	li:hover {
+		cursor: pointer;
+	}
+}
+
+.fade-enter-active, .fade-leave-active {
+  transition: opacity .3s
+}
+.fade-enter, .fade-leave-active {
+  opacity: 0
 }
