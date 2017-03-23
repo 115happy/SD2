@@ -116,15 +116,15 @@
              atv="16.028"
              linkedscene="scene_1" />
     <!--pass a spot id as a para and get the result html of its info-->
-    <hotspot name="spotToHtml"
+    <hotspot name="spotInfo1"
+             spotName="手术刀"
              url="skin/vtourskin_info.png"
              ath="91.640"
              atv="23.065"
-             renderer="css3d"
              distorted="true"
-            
+             onclick="spotInfo_click(get(spotId))" 
       />
-    <!--onclick="add_iframe('http://www.baidu.com/', 640, 360);" -->
+    
     </scene>
 
   <!-- own textfield -->
@@ -133,9 +133,10 @@
   <style name="button" url="%SWFPATH%/plugins/textfield.swf" background="true" backgroundalpha="0.2" css="font-size:14px; color:#FFFFFF;" border="true" bordercolor="0xFFFFFF" padding="2 4" />
 
   <layer name="CtrlLayer"
+           spotId="默认id"
            keep="true"
            type="container"
-           width="400"
+           width="800"
            height.normal="600"
            height.mobile="180"
            align="rightbottom"
@@ -147,37 +148,80 @@
            bgcapture="true" x="0" y="0" style="dragable">
     <layer name="IL_title" style="textfield" html="详情" align="top" y="4" background="false" enabled="false" />
     <layer name="IL_scroller_container" type="container" align="top" y="30" width="-20" height="-40" bgborder="4 0xFFFFFF 0.8" bgcolor="0xFF1493">
+     
       <!--<layer name="IL_scroller" style="scrollarea" direction="v" width="100%" height="100" align="top" y="0" />-->
       <!--add 4 button-->
-      <layer name="btnOperation" style="button" onclick="btnOperation_click()" html="操作流程" align="top" height="20"  y="70"/>
-      <layer name="btnExplaination"  style="button" onclick="btnExplaination_click()" html="解释说明" align="top" height="20"  y="140"/>
-      <layer name="btnAnimation"  style="button" onclick="btnAnimation_click()" html="演示动画" align="top" height="20"  y="210"/>
-      <layer name="btnClose"  style="button" onclick="btnClose_click()" html="关闭说明" align="top" height="20"  y="280"/>
+      <layer name="btnOperation" style="button" onclick="btnOperation_click(get(layer[CtrlLayer].spotName))" html="操作流程" align="top" height="20"  x ="-150" y="30"/>
+      <layer name="btnExplaination"  style="button" onclick="btnSpecification_click(get(layer[CtrlLayer].spotName))" html="解释说明" align="top" height="20" x="-50" y="30"/>
+      <layer name="btnAnimation"  style="button" onclick="btnAnimation_click(get(layer[CtrlLayer].spotName))" html="演示动画" align="top" height="20" x="50" y="30"/>
+      <layer name="btnClose"  style="button" onclick="btnClose_click()" html="关闭说明" align="top" height="20" x="150" y="30"/>
+      
     </layer>
-  </layer>
 
-  <layer name="InfoLayer"
-         keep="true"
-         type="image"
-         url="black.png"
-         width="300"
-         height.normal="400"
-         height.mobile="180"
-         align="center"
-         bgcolor="get:skin_settings.design_bgcolor"
-         bgalpha="get:skin_settings.design_bgalpha"
-         bgborder="get:skin_settings.design_bgborder"
-         bgroundedge="get:skin_settings.design_bgroundedge"
-         bgshadow="get:skin_settings.design_bgshadow"
-         bgcapture="true"
-         x="0" y="0"
-         style="dragable"
-         visible="true"
-         renderer="css3d"
-         >
-         <!--onloaded="add_iframe('', 640, 360)"-->
-         
-    
+
+
+    <layer name="IL_Info_container" type="container" align="top" y="30" width="-20" height="-40" bgborder="4 0xFFFFFF 0.8" bgcolor="0xFF1493">
+      <layer name="OpLayer"
+       keep="true"
+       type="image"
+       url="transparentcy.png"
+       width="300"
+       height.normal="400"
+       height.mobile="180"
+       align="center"
+       bgcolor="get:skin_settings.design_bgcolor"
+       bgalpha="get:skin_settings.design_bgalpha"
+       bgborder="get:skin_settings.design_bgborder"
+       bgroundedge="get:skin_settings.design_bgroundedge"
+       bgshadow="get:skin_settings.design_bgshadow"
+       bgcapture="true"
+       x="0" y="0"
+       style="dragable"
+       visible="false"
+       renderer="css3d"
+       onloaded="add_iframe('/TriDInfo/Operation', 640, 360)"
+       />
+      <layer name="SpLayer"
+       keep="true"
+       type="image"
+       url="transparentcy.png"
+       width="300"
+       height.normal="400"
+       height.mobile="180"
+       align="center"
+       bgcolor="get:skin_settings.design_bgcolor"
+       bgalpha="get:skin_settings.design_bgalpha"
+       bgborder="get:skin_settings.design_bgborder"
+       bgroundedge="get:skin_settings.design_bgroundedge"
+       bgshadow="get:skin_settings.design_bgshadow"
+       bgcapture="true"
+       x="0" y="0"
+       style="dragable"
+       visible="false"
+       renderer="css3d"
+       onloaded="add_iframe('/TriDInfo/Specification', 640, 360)"
+       />
+      <layer name="AnLayer"
+       keep="true"
+       type="image"
+       url="transparentcy.png"
+       width="300"
+       height.normal="400"
+       height.mobile="180"
+       align="center"
+       bgcolor="get:skin_settings.design_bgcolor"
+       bgalpha="get:skin_settings.design_bgalpha"
+       bgborder="get:skin_settings.design_bgborder"
+       bgroundedge="get:skin_settings.design_bgroundedge"
+       bgshadow="get:skin_settings.design_bgshadow"
+       bgcapture="true"
+       x="0" y="0"
+       style="dragable"
+       visible="false"
+       renderer="css3d"
+       onloaded="add_iframe('/TriDInfo/Animation', 640, 360)"
+       />
+    </layer>
 
   </layer>
 
