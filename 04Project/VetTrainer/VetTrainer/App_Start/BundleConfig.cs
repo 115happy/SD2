@@ -11,6 +11,9 @@ namespace VetTrainer
             bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
                         "~/dist/js/jquery-{version}.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/vue").Include(
+                        "~/dist/js/vue.min.js",
+                        "~/dist/js/axios.min.js"));
             //bundles.Add(new ScriptBundle("~/bundles/jqueryval").Include(
             //            "~/dist/js/jquery.validate*"));
 
