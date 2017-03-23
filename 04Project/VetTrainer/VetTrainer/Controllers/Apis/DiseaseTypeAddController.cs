@@ -31,7 +31,7 @@ namespace VetTrainer.Controllers.Apis
 
             try
             {
-                _context.Disease.Add(diseaseTypeToAdd);
+                _context.DiseaseType.Add(diseaseTypeToAdd);
                 _context.SaveChanges();
                 msg = "添加成功";
             }

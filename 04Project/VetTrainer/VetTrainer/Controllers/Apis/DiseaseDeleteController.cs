@@ -20,7 +20,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostDiseaseTypeDelete(DiseaseDto disease)
+        public IHttpActionResult PostDiseaseDelete(DiseaseDto disease)
         {
             string msg = "";
             if (disease == null)

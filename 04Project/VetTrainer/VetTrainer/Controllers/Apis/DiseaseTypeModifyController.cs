@@ -27,7 +27,7 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "参数错误";
             }
-            var diseaseTypeToUpdate = _context.Disease.Find(diseaseType.Id);
+            var diseaseTypeToUpdate = _context.DiseaseType.Find(diseaseType.Id);
             diseaseTypeToUpdate.Name = diseaseType.Name;
 
             try

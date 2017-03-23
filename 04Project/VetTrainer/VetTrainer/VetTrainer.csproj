@@ -241,6 +241,7 @@
     <Compile Include="Controllers\Apis\ClinicInstrumentModifyController.cs" />
     <Compile Include="Controllers\Apis\ClinicSearchController.cs" />
     <Compile Include="Controllers\Apis\DiseaseAddController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseCaseAddController.cs" />
     <Compile Include="Controllers\Apis\DiseaseDeleteController.cs" />
     <Compile Include="Controllers\Apis\DiseaseModifyController.cs" />
     <Compile Include="Controllers\Apis\DiseaseSearchController.cs" />

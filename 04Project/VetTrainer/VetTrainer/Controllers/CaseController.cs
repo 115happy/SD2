@@ -28,7 +28,7 @@ namespace VetTrainer.Controllers
         [Route]
         public ActionResult CaseSelect()
         {
-            var diseaseTypes = _context.Disease.Include(dt => dt.Diseases.Select(d => d.DiseaseCases)).ToList();
+            var diseaseTypes = _context.DiseaseType.Include(dt => dt.Diseases.Select(d => d.DiseaseCases)).ToList();
             //var diseaseTypes = _context.DiseaseTypes.Include(dt => dt.Diseases);
             //seldiseaseCase.Diseases = diseases;
 

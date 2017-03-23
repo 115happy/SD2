@@ -27,7 +27,7 @@ namespace VetTrainer.Controllers.Apis
             var DiseaseTypeDtos = new List<DiseaseTypeDto>();
             try
             {
-                List<DiseaseType> diseaseTypes = _context.Disease.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                List<DiseaseType> diseaseTypes = _context.DiseaseType.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
                 foreach (DiseaseType dt in diseaseTypes)
                 {
                     foreach (Disease d in dt.Diseases)
@@ -74,11 +74,11 @@ namespace VetTrainer.Controllers.Apis
 
                 if (searchText == null || searchText.Trim() == "")
                 {
-                    diseaseTypes = _context.Disease.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                    diseaseTypes = _context.DiseaseType.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
                 }
                 else
                 {
-                    diseaseTypes = _context.Disease.Where(u => u.Name.Contains(searchText)).Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                    diseaseTypes = _context.DiseaseType.Where(u => u.Name.Contains(searchText)).Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
                 }
                 foreach (DiseaseType dt in diseaseTypes)
                 {

@@ -22,7 +22,7 @@ namespace VetTrainer.Models
         public virtual DbSet<Disease> Diseases { get; set; }
         public virtual DbSet<DiseaseCase> DiseaseCases { get; set; }
         public virtual DbSet<DiseaseCaseTab> DiseaseCaseTabs { get; set; }
-        public virtual DbSet<DiseaseType> Disease { get; set; }
+        public virtual DbSet<DiseaseType> DiseaseType { get; set; }
         public virtual DbSet<Drug> Drugs { get; set; }
         public virtual DbSet<Instrument> Instruments { get; set; }
         public virtual DbSet<Picture> Pictures { get; set; }

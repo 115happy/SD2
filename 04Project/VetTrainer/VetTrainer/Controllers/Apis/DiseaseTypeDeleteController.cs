@@ -27,7 +27,7 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "参数错误";
             }
-            var diseaseTypeToDelete = _context.Disease.Find(diseaseType.Id);
+            var diseaseTypeToDelete = _context.DiseaseType.Find(diseaseType.Id);
             if (diseaseTypeToDelete == null)
             {
                 msg = "删除失败，该用户不存在";
@@ -78,7 +78,7 @@ namespace VetTrainer.Controllers.Apis
                         _context.Diseases.Remove(disease);
                     }
                     diseaseTypeToDelete.Diseases.Clear();
-                    _context.Disease.Remove(diseaseTypeToDelete);
+                    _context.DiseaseType.Remove(diseaseTypeToDelete);
                     _context.SaveChanges();
                     msg = "删除成功";
                 }
