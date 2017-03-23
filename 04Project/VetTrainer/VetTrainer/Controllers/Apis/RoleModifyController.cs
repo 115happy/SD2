@@ -40,7 +40,7 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "网络故障";
             }
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
         }
     }

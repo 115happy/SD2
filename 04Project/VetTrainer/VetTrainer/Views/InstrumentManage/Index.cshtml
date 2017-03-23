@@ -29,7 +29,7 @@
         var instruments = [];
         instruments.push(instrument);
         var clinic = {
-            "Id": '1',
+            "Id": "1",
             "Instruments": instruments
         }
         $.post('/api/ClinicInstrumentDelete', clinic,
@@ -108,7 +108,7 @@
             ]
         }
         var clinic = {
-            "Id": '1',
+            "Id": "1",
             "Instruments": instruments
         }
         $.post('/api/ClinicInstrumentAdd', clinic,
@@ -121,7 +121,7 @@
     }
     function deleteUser() {
         var user = {
-            "Id": '1',
+            "Id": "1",
         };
         $.post('/api/InstrumentDelete', user,
             function (data, sucess) {

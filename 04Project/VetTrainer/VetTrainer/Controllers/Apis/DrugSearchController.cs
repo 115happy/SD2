@@ -79,7 +79,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(drugDtos) + " }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(drugDtos) + " }";
             return Ok(str);
         }
     }

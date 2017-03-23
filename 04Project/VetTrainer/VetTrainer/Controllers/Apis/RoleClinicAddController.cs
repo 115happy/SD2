@@ -1,17 +1,13 @@
 ﻿using AutoMapper;
-using System;
-using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
-using System.Linq;
-using System.Net;
-using System.Net.Http;
 using System.Web.Http;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
 
 namespace VetTrainer.Controllers.Apis
 {
-    public class DrugAddController : ApiController
+    public class RoleClinicAddController : ApiController
     {
         VetAppDBContext _context = new VetAppDBContext();
 
@@ -20,17 +16,19 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostDrugAdd(DrugDto drug)
+        public IHttpActionResult PostRoleClinicAdd(RPRecordDto rpRecord)
         {
             string msg = "";
-            if (drug == null)
+            var roleToAdd = _context.Roles.Find(rpRecord.RoleId);
+            var clinicToAdd = _context.Clinics.Find(rpRecord.ClinicId);
+            if (rpRecord == null || roleToAdd == null || clinicToAdd == null)
             {
                 msg = "参数错误";
             }
-            var drugToAdd = Mapper.Map<DrugDto, Drug>(drug);
+            var rpRecordToAdd = Mapper.Map<RPRecordDto, RPRecord>(rpRecord);
             try
             {
-                _context.Drugs.Add(drugToAdd);
+                _context.RPRecords.Add(rpRecordToAdd);
                 _context.SaveChanges();
                 msg = "添加成功";
             }

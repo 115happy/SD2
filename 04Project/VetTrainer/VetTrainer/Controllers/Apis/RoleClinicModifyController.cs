@@ -12,7 +12,7 @@ using VetTrainer.Models.DataTransferObjs;
 
 namespace VetTrainer.Controllers.Apis
 {
-    public class ClinicInstrumentModifyController : ApiController
+    public class RoleClinicModifyController : ApiController
     {
         VetAppDBContext _context = new VetAppDBContext();
 
@@ -21,52 +21,42 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostClinicInstrumentDelete(InstrumentDto instrument)
+        public IHttpActionResult PostRoleClinicModify(RPRecordDto rpRecord)
         {
             string msg = "";
-            if (instrument == null)
+            var roleToAdd = _context.Roles.Find(rpRecord.RoleId);
+            var clinicToAdd = _context.Clinics.Find(rpRecord.ClinicId);
+            if (rpRecord == null || roleToAdd == null || clinicToAdd == null)
             {
                 msg = "参数错误";
             }
-
+            var rpRecordToModify = _context.RPRecords.Find(rpRecord.RoleId, rpRecord.ClinicId);
+            var rpRecordToModifyDto = Mapper.Map<RPRecord, RPRecordDto>(rpRecordToModify);
             try
             {
-                var instrumentToModify = _context.Instruments.Find(instrument.Id);
-                var instrumentToModifyDto = Mapper.Map<Instrument, InstrumentDto>(instrumentToModify);
-                foreach (TextDto t in instrumentToModifyDto.Texts)
-                {
-                    var text = _context.Texts.Find(t.Id);
-                    _context.Texts.Remove(text);
-                }
-                foreach (PictureDto p in instrumentToModifyDto.Pictures)
+                foreach(PictureDto p in rpRecordToModifyDto.Pictures)
                 {
                     var picture = _context.Pictures.Find(p.Id);
                     _context.Pictures.Remove(picture);
                 }
-                foreach (VideoDto v in instrumentToModifyDto.Videos)
+                foreach(VideoDto v in rpRecordToModifyDto.Videos)
                 {
                     var video = _context.Videos.Find(v.Id);
                     _context.Videos.Remove(video);
                 }
-                instrumentToModify.Texts.Clear();
-                foreach(TextDto t in instrument.Texts)
-                {
-                    var text = Mapper.Map<TextDto, Text>(t);
-                    instrumentToModify.Texts.Add(text);
-                }
-                instrumentToModify.Pictures.Clear();
-                foreach (PictureDto p in instrument.Pictures)
+                rpRecordToModify.Pictures.Clear();
+                foreach(PictureDto p in rpRecord.Pictures)
                 {
                     var picture = Mapper.Map<PictureDto, Picture>(p);
-                    instrumentToModify.Pictures.Add(picture);
+                    rpRecordToModify.Pictures.Add(picture);
                 }
-                instrumentToModify.Videos.Clear();
-                foreach (VideoDto v in instrument.Videos)
+                rpRecordToModify.Videos.Clear();
+                foreach(VideoDto v in rpRecord.Videos)
                 {
                     var video = Mapper.Map<VideoDto, Video>(v);
-                    instrumentToModify.Videos.Add(video);
+                    rpRecordToModify.Videos.Add(video);
                 }
-                _context.Entry(instrumentToModify).State = EntityState.Modified;
+                _context.Entry(rpRecordToModify).State = EntityState.Modified;
                 _context.SaveChanges();
                 msg = "修改成功";
             }

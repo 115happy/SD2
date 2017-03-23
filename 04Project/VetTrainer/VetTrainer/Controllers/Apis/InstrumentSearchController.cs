@@ -44,7 +44,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(instrumentDtos) + " }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(instrumentDtos) + " }";
             return Ok(str);
         }
         //获取查询用户信息结果api
@@ -79,7 +79,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "[{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(instrumentDtos) + " }]";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(instrumentDtos) + " }";
             return Ok(str);
         }
     }

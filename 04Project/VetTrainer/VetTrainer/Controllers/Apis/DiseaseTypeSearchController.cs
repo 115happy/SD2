@@ -1,19 +1,19 @@
-﻿using AutoMapper;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
-using System.Web.Script.Serialization;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
 using System.Data.Entity;
+using AutoMapper;
+using System.Data.Entity.Infrastructure;
+using System.Web.Script.Serialization;
 
 namespace VetTrainer.Controllers.Apis
 {
-    public class ClinicSearchController : ApiController
+    public class DiseaseTypeSearchController : ApiController
     {
         VetAppDBContext _context = new VetAppDBContext();
         // GET: RoleSearch
@@ -24,27 +24,33 @@ namespace VetTrainer.Controllers.Apis
         public IHttpActionResult GetSearchResult()
         {
             string msg = "";
-            var clinicDtos = new List<ClinicDto>();
+            var DiseaseTypeDtos = new List<DiseaseTypeDto>();
             try
             {
-                List<Clinic> clinics = _context.Clinics.Include(u => u.Instruments)
-                    .Include(u => u.Texts).Include(u => u.Pictures)
-                    .Include(u => u.Videos).ToList();
-                foreach (Clinic c in clinics)
+                List<DiseaseType> diseaseTypes = _context.DiseaseTypes.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                foreach (DiseaseType dt in diseaseTypes)
                 {
-                    foreach (Instrument i in c.Instruments)
+                    foreach (Disease d in dt.Diseases)
                     {
-                        _context.Entry(i).Collection(u => u.Texts).Load();
-                        _context.Entry(i).Collection(u => u.Pictures).Load();
-                        _context.Entry(i).Collection(u => u.Videos).Load();
+                        foreach(DiseaseCase dc in d.DiseaseCases)
+                        {
+                            foreach(DiseaseCaseTab dct in dc.DiseaseCaseTabs)
+                            {
+                                _context.Entry(dct).Collection(u => u.Analyses);
+                                _context.Entry(dct).Collection(u => u.Drugs);
+                                _context.Entry(dct).Collection(u => u.Texts);
+                                _context.Entry(dct).Collection(u => u.Pictures);
+                                _context.Entry(dct).Collection(u => u.Videos);
+                            }
+                        }
                     }
                 }
-                foreach (Clinic clinic in clinics)
+                foreach (DiseaseType dt in diseaseTypes)
                 {
-                    var clinicDto = Mapper.Map<Clinic, ClinicDto>(clinic);
-                    clinicDtos.Add(clinicDto);
+                    var diseaseTypeDto = Mapper.Map<DiseaseType, DiseaseTypeDto>(dt);
+                    DiseaseTypeDtos.Add(diseaseTypeDto);
                 }
-                if (clinicDtos.Count > 0)
+                if (DiseaseTypeDtos.Count > 0)
                     msg = "查找成功";
                 else
                     msg = "没有结果";
@@ -55,7 +61,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "网络故障";
             }
             JavaScriptSerializer jss = new JavaScriptSerializer();
-            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(clinicDtos) + " }";
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(DiseaseTypeDtos) + " }";
             return Ok(str);
         }
         //获取查询用户信息结果api
@@ -65,8 +71,10 @@ namespace VetTrainer.Controllers.Apis
             var clinicDtos = new List<ClinicDto>();
             try
             {
-                List<Clinic> clinics = new List<Clinic>();
-                
+                List<Clinic> clinics = _context.Clinics.Include(u => u.Instruments)
+                    .Include(u => u.Texts).Include(u => u.Pictures)
+                    .Include(u => u.Videos).ToList();
+
                 if (searchText == null || searchText.Trim() == "")
                 {
                     clinics = _context.Clinics.Include(u => u.Instruments)
@@ -75,7 +83,7 @@ namespace VetTrainer.Controllers.Apis
                 }
                 else
                 {
-                    clinics = _context.Clinics.Where(u=>u.Name.Contains(searchText)).Include(u => u.Instruments)
+                    clinics = _context.Clinics.Where(u => u.Name.Contains(searchText)).Include(u => u.Instruments)
                     .Include(u => u.Texts).Include(u => u.Pictures)
                     .Include(u => u.Videos).ToList();
                 }

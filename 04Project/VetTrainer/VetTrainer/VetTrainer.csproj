@@ -240,6 +240,7 @@
     <Compile Include="Controllers\Apis\ClinicInstrumentDeleteController.cs" />
     <Compile Include="Controllers\Apis\ClinicInstrumentModifyController.cs" />
     <Compile Include="Controllers\Apis\ClinicSearchController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseTypeSearchController.cs" />
     <Compile Include="Controllers\Apis\DrugAddController.cs" />
     <Compile Include="Controllers\Apis\DrugDeleteController.cs" />
     <Compile Include="Controllers\Apis\DrugModifyController.cs" />
@@ -248,6 +249,9 @@
     <Compile Include="Controllers\Apis\InstrumentDeleteController.cs" />
     <Compile Include="Controllers\Apis\InstrumentModifyController.cs" />
     <Compile Include="Controllers\Apis\InstrumentSearchController.cs" />
+    <Compile Include="Controllers\Apis\RoleClinicAddController.cs" />
+    <Compile Include="Controllers\Apis\RoleClinicDeleteController.cs" />
+    <Compile Include="Controllers\Apis\RoleClinicModifyController.cs" />
     <Compile Include="Controllers\Apis\RoleModifyController.cs" />
     <Compile Include="Controllers\Apis\RoleSearchController.cs" />
     <Compile Include="Controllers\Apis\UserAddController.cs" />
@@ -291,8 +295,10 @@
     <Compile Include="Models\DataTransferObjs\InstrumentDto.cs" />
     <Compile Include="Models\DataTransferObjs\PictureDto.cs" />
     <Compile Include="Models\DataTransferObjs\RoleDto.cs" />
+    <Compile Include="Models\DataTransferObjs\RPRecordDto.cs" />
     <Compile Include="Models\DataTransferObjs\TextDto.cs" />
     <Compile Include="Models\DataTransferObjs\UserDto.cs" />
+    <Compile Include="Models\DataTransferObjs\UserIntactDto.cs" />
     <Compile Include="Models\DataTransferObjs\VideoDto.cs" />
     <Compile Include="Models\Disease.cs" />
     <Compile Include="Models\DiseaseCase.cs" />
