@@ -240,6 +240,13 @@
     <Compile Include="Controllers\Apis\ClinicInstrumentDeleteController.cs" />
     <Compile Include="Controllers\Apis\ClinicInstrumentModifyController.cs" />
     <Compile Include="Controllers\Apis\ClinicSearchController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseAddController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseDeleteController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseModifyController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseSearchController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseTypeAddController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseTypeDeleteController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseTypeModifyController.cs" />
     <Compile Include="Controllers\Apis\DiseaseTypeSearchController.cs" />
     <Compile Include="Controllers\Apis\DrugAddController.cs" />
     <Compile Include="Controllers\Apis\DrugDeleteController.cs" />

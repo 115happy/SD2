@@ -14,6 +14,7 @@ namespace VetTrainer.Models.DataTransferObjs
         }
         public int Id { get; set; }
         public string Name { get; set; }
+        public int DiseaseTypeId { get; set; }
         public virtual IList<DiseaseCaseDto> DiseaseCases { get; set; }
     }
 }

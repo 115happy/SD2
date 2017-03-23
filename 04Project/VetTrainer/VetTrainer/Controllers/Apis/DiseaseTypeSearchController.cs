@@ -27,7 +27,7 @@ namespace VetTrainer.Controllers.Apis
             var DiseaseTypeDtos = new List<DiseaseTypeDto>();
             try
             {
-                List<DiseaseType> diseaseTypes = _context.DiseaseTypes.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                List<DiseaseType> diseaseTypes = _context.Disease.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
                 foreach (DiseaseType dt in diseaseTypes)
                 {
                     foreach (Disease d in dt.Diseases)
@@ -64,53 +64,57 @@ namespace VetTrainer.Controllers.Apis
             var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(DiseaseTypeDtos) + " }";
             return Ok(str);
         }
-        //public IHttpActionResult GetSearchResult(string searchText)
-        //{
-        //    string msg = "";
-        //    var DiseaseTypeDtos = new List<DiseaseTypeDto>();
-        //    try
-        //    {
-        //        List<DiseaseType> diseaseTypes = new List<DiseaseType>();
+        public IHttpActionResult GetSearchResult(string searchText)
+        {
+            string msg = "";
+            var DiseaseTypeDtos = new List<DiseaseTypeDto>();
+            try
+            {
+                List<DiseaseType> diseaseTypes = new List<DiseaseType>();
 
-        //        if (searchText == null || searchText.Trim() == "")
-        //        {
-        //            clinics = _context.Clinics.Include(u => u.Instruments)
-        //            .Include(u => u.Texts).Include(u => u.Pictures)
-        //            .Include(u => u.Videos).ToList();
-        //        }
-        //        else
-        //        {
-        //            clinics = _context.Clinics.Where(u => u.Name.Contains(searchText)).Include(u => u.Instruments)
-        //            .Include(u => u.Texts).Include(u => u.Pictures)
-        //            .Include(u => u.Videos).ToList();
-        //        }
-        //        foreach (Clinic c in clinics)
-        //        {
-        //            foreach (Instrument i in c.Instruments)
-        //            {
-        //                _context.Entry(i).Collection(u => u.Texts).Load();
-        //                _context.Entry(i).Collection(u => u.Pictures).Load();
-        //                _context.Entry(i).Collection(u => u.Videos).Load();
-        //            }
-        //        }
-        //        foreach (Clinic clinic in clinics)
-        //        {
-        //            var clinicDto = Mapper.Map<Clinic, ClinicDto>(clinic);
-        //            clinicDtos.Add(clinicDto);
-        //        }
-        //        if (clinicDtos.Count > 0)
-        //            msg = "查找成功";
-        //        else
-        //            msg = "没有结果";
+                if (searchText == null || searchText.Trim() == "")
+                {
+                    diseaseTypes = _context.Disease.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                }
+                else
+                {
+                    diseaseTypes = _context.Disease.Where(u => u.Name.Contains(searchText)).Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                }
+                foreach (DiseaseType dt in diseaseTypes)
+                {
+                    foreach (Disease d in dt.Diseases)
+                    {
+                        foreach (DiseaseCase dc in d.DiseaseCases)
+                        {
+                            foreach (DiseaseCaseTab dct in dc.DiseaseCaseTabs)
+                            {
+                                _context.Entry(dct).Collection(u => u.Analyses);
+                                _context.Entry(dct).Collection(u => u.Drugs);
+                                _context.Entry(dct).Collection(u => u.Texts);
+                                _context.Entry(dct).Collection(u => u.Pictures);
+                                _context.Entry(dct).Collection(u => u.Videos);
+                            }
+                        }
+                    }
+                }
+                foreach (DiseaseType dt in diseaseTypes)
+                {
+                    var diseaseTypeDto = Mapper.Map<DiseaseType, DiseaseTypeDto>(dt);
+                    DiseaseTypeDtos.Add(diseaseTypeDto);
+                }
+                if (DiseaseTypeDtos.Count > 0)
+                    msg = "查找成功";
+                else
+                    msg = "没有结果";
 
-        //    }
-        //    catch (RetryLimitExceededException)
-        //    {
-        //        msg = "网络故障";
-        //    }
-        //    JavaScriptSerializer jss = new JavaScriptSerializer();
-        //    var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(clinicDtos) + " }";
-        //    return ok(str);
-        //}
+            }
+            catch (RetryLimitExceededException)
+            {
+                msg = "网络故障";
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(DiseaseTypeDtos) + " }";
+            return Ok(str);
+        }
     }
 }

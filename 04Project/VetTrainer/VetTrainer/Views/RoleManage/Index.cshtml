@@ -12,15 +12,27 @@
 } 
 <div>
     <input type="text" value="" name="searchText" id="searchText" />
-    <input type="submit" value="搜索"  onclick="searchResult()"/>
+    <input type="submit" value="搜索"  onclick="DeleteTest()"/>
 
 </div>
 
 <script>
+    function DeleteTest() {
+        var diseaseType = {
+            "Id": "9"
+        };
+        $.post('/api/DiseaseTypeDelete', diseaseType,
+            function (data, sucess) {
+                console.log(data);
+                var t = JSON.parse(data);
+                console.log(t);
+            }
+        )
+    }
     function searchResult()
     {
         var searchText = $('#searchText').val();
-        $.get('/api/RoleSearch', /*{ searchText : searchText },*/
+        $.get('/api/DiseaseTypeSearch', { searchText : searchText },
             function (data, sucess) {
                 alert(1);
                 console.log(data);

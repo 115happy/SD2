@@ -9,10 +9,13 @@ namespace VetTrainer.Models.DataTransferObjs
     {
         public DiseaseCaseDto()
         {
+            DiseaseCaseTabs = new List<DiseaseCaseTabDto>();
         }
         public int Id { get; set; }
         public string Name { get; set; }
         public string Discription { get; set; }
+
+        public virtual IList<DiseaseCaseTabDto> DiseaseCaseTabs { get; set; }
     }
 }
 
