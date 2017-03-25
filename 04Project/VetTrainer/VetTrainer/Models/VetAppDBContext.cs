@@ -7,12 +7,13 @@ namespace VetTrainer.Models
     using MySql.Data.Entity;
     using System.Data.Entity.ModelConfiguration;
     using VetTrainer.Models.EntityConfigurations;
+    using static VetTrainer.Views.Strings.Global;
 
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public partial class VetAppDBContext : DbContext
     {
         public VetAppDBContext()
-            : base("name=VetAppDBContext")
+            : base($"name={ConnectionStringName}")
         {
         }
 

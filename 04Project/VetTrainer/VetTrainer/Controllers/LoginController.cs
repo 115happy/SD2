@@ -57,17 +57,6 @@ namespace VetTrainer.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Login(User user)
         {
-            try
-            {
-
-            }
-            catch (HttpAntiForgeryException ex)
-            {
-                Console.WriteLine($"AntiForgeryException: {ex.Message}.");
-                ModelState.AddModelError("", "AntiFogery Token不匹配，请检查！");
-                return View(user);
-            }
-
             if (!ModelState.IsValid)
                 return View(user);
 
@@ -93,7 +82,15 @@ namespace VetTrainer.Controllers
                 ModelState.AddModelError(Views.Strings.Keys.LoginErrValidation, Views.Strings.Login.LoginErrValidationValue);
                 return View(user);
             }
-
+            //try
+            //{
+            //}
+            //catch (HttpAntiForgeryException ex)
+            //{
+            //    Console.WriteLine($"AntiForgeryException: {ex.Message}.");
+            //    ModelState.AddModelError("", "AntiFogery Token不匹配，请检查！");
+            //    return View(user);
+            //}
         }
 
         private Claim[] LoadClaimsForUser(User user)

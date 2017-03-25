@@ -49,6 +49,10 @@
       <HintPath>..\packages\AutoMapper.6.0.1\lib\net45\AutoMapper.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Ionic.Zip, Version=1.9.1.8, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Ionic.Zip.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
       <Private>True</Private>
@@ -89,6 +93,9 @@
     <Reference Include="MySql.Data.Entity.EF6, Version=6.9.9.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL">
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
       <Private>True</Private>
+    </Reference>
+    <Reference Include="MySqlBackup, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>bin\MySqlBackup.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -226,6 +233,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Authentication\AdminExclusive.cs" />
     <Compile Include="Authentication\AuthPrincipal.cs" />
     <Compile Include="Authentication\UserManager.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -276,6 +284,7 @@
     <Compile Include="Controllers\InstrumentManageController.cs" />
     <Compile Include="Controllers\LoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ErrorPagesController.cs" />
     <Compile Include="Controllers\RoleClinicManageController.cs" />
     <Compile Include="Controllers\RoleManageController.cs" />
     <Compile Include="Controllers\RolePlayController.cs" />
@@ -671,6 +680,7 @@
     <Content Include="Src\js\respond.js" />
     <Content Include="Src\js\respond.min.js" />
     <None Include="Src\js\_references.js" />
+    <Content Include="404.html" />
     <Content Include="Views\Home\case_learning.html" />
     <Content Include="Views\Home\user_index.html" />
     <Content Include="Web.config">
@@ -699,7 +709,6 @@
     <Content Include="Views\DieaseCase\Index.cshtml" />
     <Content Include="Views\SystemManager\Index.cshtml" />
     <Content Include="Views\CaseManage\Index.cshtml" />
-    <Content Include="Views\BackUpAndRecoveryManage\Index.cshtml" />
     <Content Include="Views\BaseFunctionManage\Index.cshtml" />
     <Content Include="Views\RoleManage\Index.cshtml" />
     <Content Include="Views\UserManage\Index.cshtml" />
@@ -713,10 +722,14 @@
     <Content Include="Views\TriDInfo\Specification.cshtml" />
     <Content Include="Views\TriDInfo\Operation.cshtml" />
     <Content Include="Views\TriDInfo\Animation.cshtml" />
+    <Content Include="Views\BackUpAndRecoveryManage\Index.cshtml" />
+    <Content Include="Views\ErrorPages\Error404.cshtml" />
+    <Content Include="Views\ErrorPages\ErrorAdminRequired.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\Navigation\" />
+    <Folder Include="Views\RequestErr\" />
     <Folder Include="Views\RoleSearch\" />
   </ItemGroup>
   <ItemGroup>

@@ -11,7 +11,7 @@ using VetTrainer.Models.DataTransferObjs;
 
 namespace VetTrainer.Authentication
 {
-    public class CheckAuthorization : AuthorizeAttribute
+    public class CheckAuthorizationAttribute : AuthorizeAttribute
     {
         public override void OnAuthorization(AuthorizationContext filterContext)
         {
@@ -32,6 +32,8 @@ namespace VetTrainer.Authentication
 
                 // Set the context user as the authPrincipal hence views can retrive user data.
                 filterContext.HttpContext.User = principal;
+
+                // Page level authentication
             }
             base.OnAuthorization(filterContext);
         }
@@ -84,4 +86,6 @@ namespace VetTrainer.Authentication
         //    }
         //}
     }
+
+
 }

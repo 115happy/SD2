@@ -3,7 +3,8 @@ ViewBag.Title = "Index";
 ViewBag.Count = 0;
 }
 
-@Scripts.Render("~/bundles/vue")
+@*@Scripts.Render("~/bundles/vue")*@
+@*<script src="https://unpkg.com/vue/dist/vue.js"></script>*@
 
 <head>
 	<link rel="stylesheet" href="../../dist/css/manage.css">
@@ -766,3 +767,7 @@ ViewBag.Count = 0;
 </div>
 
 <script src='../../Src/js/manage.js'></script>
+@section scripts
+{
+    @Scripts.Render("~/bundles/vue")
+}

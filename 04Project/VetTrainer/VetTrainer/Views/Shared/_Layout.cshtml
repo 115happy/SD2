@@ -9,6 +9,7 @@
     @Styles.Render("~/content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
     @*@Styles.Render("~/Dist/css/bootstrap.min.css")
     @Styles.Render("~/Dist/css/common.css")
     @Scripts.Render("~/Src/js/jquery-3.1.1.js")
@@ -32,7 +33,7 @@
 
                             if (authenticated)
                             {
-                                if (UserManager.User.Authority == VetTrainer.Models.UserAuthority.Admin)
+                                if (UserManager.User.Authority == UserAuthority.Admin)
                                 {
                                     <li><a href="@Url.Action("Index", "SystemManager")">系统管理</a></li>
                                 }
@@ -70,7 +71,6 @@
  
         </div>
     </footer>
-
 </body>
 
 </html>

@@ -10,6 +10,8 @@ namespace VetTrainer.Views
         public static class Global
         {
             public const string AppName = "虚拟宠物医院学习软件";
+            public const string ConnectionStringName = "VetAppDBContext";
+            public const string BackupFile = @"F:\Programming\Projects\WebSites\VetTrainer\04Project\BackupFiles\backup.sql";
         }
 
         public static class Keys
@@ -36,6 +38,17 @@ namespace VetTrainer.Views
             public const string CaseManage = "病例管理";
             public const string BackUpAndRecoverManage = "备份与恢复管理";
             public static readonly string[] Manage = { "UserManage", "BaseFunctionManage", "RoleManage", "CaseManage", "BackUpAndRecoveryManage" };
+        }
+
+        public static class BackupAndRecovery
+        {
+            public const string BackupSuccess = "备份成功！";
+            public const string RecoverySuccess = "数据恢复成功！";
+            public const string Processing = "正在备份或恢复中，请稍等。";
+            public const string DumpFileNotFound = "没有备份文件！";
+            public const string BackupError = "备份过程中出现问题，请联系开发者。";
+            public const string RecoveryError = "恢复过程中出现问题，请联系开发者。";
+            public const string ViewNameBound = "Index";
         }
     }
 }

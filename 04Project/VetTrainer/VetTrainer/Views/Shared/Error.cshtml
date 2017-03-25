@@ -1,9 +1,19 @@
 ﻿@model System.Web.Mvc.HandleErrorInfo
 
 @{
-    ViewBag.Title = "Error";
+    ViewBag.Title = "请求失败";
+
+    Exception e = Model.Exception;
+    string eMsg = string.Empty;
+    do
+    {
+        eMsg += e.Message + Environment.NewLine;
+        e = e.InnerException;
+    } while (e != null);
+    ViewBag.ExceptionMessage = eMsg;
 }
 
-<h1 class="text-danger">Error.</h1>
-<h2 class="text-danger">An error occurred while processing your request.</h2>
+<h1 class="text-danger">一个小问题发生了</h1>
+<h2 class="text-danger">不过并没有关系，请随便点点吧，并不是大问题。</h2>
+<p>开发者信息:@ViewBag.ExceptionMessage</p>
 
