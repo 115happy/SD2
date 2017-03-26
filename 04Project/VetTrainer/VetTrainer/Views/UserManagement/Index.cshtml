@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    var user = ViewBag.User;
+}
+
+<head>
+    <link rel="stylesheet" href="../../dist/css/case_learning.css">
+    <title>用户管理</title>
+</head>
+
+
+<div>
+    用户名：@user.Name <br>
+    新密码&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="password" /><br>
+    再次确认&nbsp;<input type="text" id="passwordConfirm" /><br>
+    <input type="submit" value="更改密码" onclick="modifyUser()" />
+</div>
+
+<script>
+    function modifyUser() {
+        if(password.textContent == passwordConfirm.textContent){
+            var user = {
+                "Id": @user.Id,
+                "Name": @user.Name,
+                "Password": password.textContent,
+                "Authority": @user.Authority,
+                "IsToRememberMe":@user.IsToRememberMe
+            };
+            $.post('/api/UserModify', user,
+                function (data, sucess) {
+                    //console.log(data);
+                    //var t = JSON.parse(data);
+                    //console.log(t);
+                    //想做点啥做点啥吧，大兄弟
+                }
+            )
+        }else{
+        //提示两次输入的密码不一致
+        }
+
+    }
+</script>
+

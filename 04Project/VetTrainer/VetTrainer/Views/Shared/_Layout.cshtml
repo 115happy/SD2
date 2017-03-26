@@ -30,9 +30,9 @@
                     <ul class="nav navbar-nav">
                         @{
                             bool authenticated = User.Identity.IsAuthenticated;
-
                             if (authenticated)
                             {
+                                <li>@Html.ActionLink("用户管理", "Index", "UserManagement", new { Name = User.Identity.Name } , null)</li>
                                 if (UserManager.User.Authority == UserAuthority.Admin)
                                 {
                                     <li><a href="@Url.Action("Index", "SystemManager")">系统管理</a></li>
