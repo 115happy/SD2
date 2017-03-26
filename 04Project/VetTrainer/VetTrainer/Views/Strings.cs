@@ -11,7 +11,8 @@ namespace VetTrainer.Views
         {
             public const string AppName = "虚拟宠物医院学习软件";
             public const string ConnectionStringName = "VetAppDBContext";
-            public const string BackupFile = @"F:\Programming\Projects\WebSites\VetTrainer\04Project\BackupFiles\backup.sql";
+            public const string BackupFileDirectory = @"~\bin\BackupFiles\";
+            public const string BackupFileName = @"backup.sql";
         }
 
         public static class Keys
