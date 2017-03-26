@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "备份与恢复";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>备份与恢复</h2>
+<div id="broperations">
+    <p id="msg-operating">{{lblOperating}}</p>
+    @using (Html.BeginForm("PostBackup", "BackUpAndRecoveryManage"))
+    {
+        <button v-on:click="reverseMessage" id="btn-backup" class="btn btn-primary" type="submit">{{lblBackup}}</button>
+        @Html.AntiForgeryToken()
+    }
+
+    @using (Html.BeginForm("PostRecover", "BackUpAndRecoveryManage"))
+    {
+        <button v-on:click="reverseMessage" id="btn-recover" class="btn btn-primary" type="submit">{{lblRecover}}</button>
+        @Html.AntiForgeryToken()
+    }
+</div>
+
+<script>
+    var vueBackup = new Vue({
+        el: '#broperations',
+        data: {
+            lblBackup: '备份',
+            lblRecover: '恢复',
+            lblOperating: '',
+    },
+        methods: {
+            reverseMessage: function () {
+                this.lblOperating = 'Please wait until the operation is done.';
+            }
+        }
+    })
+</script>
+
+@if (ViewBag.Message != null)
+{
+    <script>
+        @*$(document).ready(function(){
+        document.getElementById('msg-operating').innerHTML = '{{lblOperating}}';
+        alert('@ViewBag.Message');
+    });*@
+        // TODO： Vue这里要再调一下
+        var vueDisplayMessage = new Vue({
+            el: '#broperations',
+            data: {
+                lblOperating: '',
+            },
+        })
+        alert('@ViewBag.Message');
+    </script>
+}
+
+@section scripts
+{
+    @Scripts.Render("~/bundles/vue")
+}

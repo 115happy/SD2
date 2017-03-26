@@ -14,7 +14,7 @@ namespace VetTrainer.Controllers
     [AllowAnonymous]
     public class BackUpAndRecoveryManageController : Controller
     {
-        string dumpFileLocation = BackupFile;
+        string dumpFileLocation = BackupFileDirectory + BackupFileName;
 
         // GET: BackUpAndRecovery
         public ActionResult Index()
@@ -29,6 +29,8 @@ namespace VetTrainer.Controllers
             string returnViewName = ViewNameBound;
             try
             {
+                if (!System.IO.Directory.Exists(Server.MapPath(BackupFileDirectory)))
+                    System.IO.Directory.CreateDirectory(Server.MapPath(BackupFileDirectory));
                 BackupMySql();
                 ViewBag.Message = BackupSuccess;
                 return View(returnViewName);
@@ -53,7 +55,7 @@ namespace VetTrainer.Controllers
         {
             string returnViewName = ViewNameBound;
 
-            if (!System.IO.File.Exists(dumpFileLocation))
+            if (!System.IO.File.Exists(Server.MapPath(dumpFileLocation)))
             {
                 ViewBag.Message = DumpFileNotFound;
                 return View(returnViewName);
@@ -81,28 +83,72 @@ namespace VetTrainer.Controllers
         protected void BackupMySql()
         {
             string connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
+
+            // Important Additional Connection Options
             connectionString += ";charset=utf8;convertzerodatetime=true;";
-            MySqlBackup backuper = new MySqlBackup(connectionString);
-            try
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                backuper.ExportInfo.FileName = dumpFileLocation;
-                backuper.ExportInfo.AsynchronousMode = false;
-                backuper.Export();
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    using (MySqlBackup backuper = new MySqlBackup(cmd))
+                    {
+                        cmd.Connection = connection;
+                        connection.Open();
+                        backuper.ExportToFile(Server.MapPath(dumpFileLocation));
+                        connection.Close();
+                    }
+                }
             }
-            catch (Exception) { throw; }
         }
 
         protected void RecoverMySql()
         {
             string connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
-            MySqlBackup backuper = new MySqlBackup(connectionString);
-            try
+
+            // Important Additional Connection Options
+            connectionString += ";charset=utf8;convertzerodatetime=true;";
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
             {
-                backuper.ImportInfo.FileName = dumpFileLocation;
-                backuper.ImportInfo.AsynchronousMode = false;
-                backuper.Import();
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    using (MySqlBackup backuper = new MySqlBackup(cmd))
+                    {
+                        cmd.Connection = connection;
+                        connection.Open();
+                        backuper.ImportFromFile(Server.MapPath(dumpFileLocation));
+                        connection.Close();
+                    }
+                }
             }
-            catch (Exception) { throw; }
         }
+
+        //protected void BackupMySql_v1_5()
+        //{
+        //    string connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
+        //    connectionString += ";charset=utf8;convertzerodatetime=true;";
+        //    MySqlBackup backuper = new MySqlBackup(connectionString);
+        //    try
+        //    {
+        //        backuper.ExportInfo.FileName = dumpFileLocation;
+        //        backuper.ExportInfo.AsynchronousMode = false;
+        //        backuper.Export();
+        //    }
+        //    catch (Exception) { throw; }
+        //}
+
+        //protected void RecoverMySql_v1_5()
+        //{
+        //    string connectionString = ConfigurationManager.ConnectionStrings[ConnectionStringName].ConnectionString;
+        //    MySqlBackup backuper = new MySqlBackup(connectionString);
+        //    try
+        //    {
+        //        backuper.ImportInfo.FileName = dumpFileLocation;
+        //        backuper.ImportInfo.AsynchronousMode = false;
+        //        backuper.Import();
+        //    }
+        //    catch (Exception) { throw; }
+        //}
     }
 }
