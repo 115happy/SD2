@@ -15,30 +15,33 @@
     用户名：@user.Name <br>
     新密码&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="password" /><br>
     再次确认&nbsp;<input type="text" id="passwordConfirm" /><br>
-    <input type="submit" value="更改密码" onclick="modifyUser()" />
+    <input id="modifyUser"type="submit" value="更改密码" />
 </div>
 
 <script>
+    $('#modifyUser').on('click',  modifyUser);
     function modifyUser() {
-        if(password.textContent == passwordConfirm.textContent){
-            var user = {
-                "Id": @user.Id,
-                "Name": @user.Name,
-                "Password": password.textContent,
-                "Authority": @user.Authority,
-                "IsToRememberMe":@user.IsToRememberMe
+        //if((document.getElementById("password").innerHTML == document.getElementById("passwordConfirm").innerHTML) && 
+        //    document.getElementById("password").innerHTML != ""){
+            var juser = {
+                "Id": "@user.Id",
+                "Name": "@user.Name",
+                "Password": document.getElementById("password").value,
+                "Authority": "@user.Authority",
+                "IsToRememberMe":"@user.IsToRememberMe",
             };
-            $.post('/api/UserModify', user,
+            $.post('/api/UserModify', juser,
                 function (data, sucess) {
                     //console.log(data);
+                    alert(data);
                     //var t = JSON.parse(data);
                     //console.log(t);
                     //想做点啥做点啥吧，大兄弟
                 }
             )
-        }else{
-        //提示两次输入的密码不一致
-        }
+        //}else{
+        ////提示两次输入的密码不一致
+        //}
 
     }
 </script>

@@ -15,7 +15,7 @@ namespace VetTrainer.Controllers
         {
             User userToUpdate = _context.Users.Where(u => u.Name == Name).FirstOrDefault();
             ViewBag.User = userToUpdate;
-            return View();
+            return View(userToUpdate);
         }
     }
 }

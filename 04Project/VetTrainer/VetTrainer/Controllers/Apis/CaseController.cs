@@ -23,7 +23,7 @@ namespace VetTrainer.Controllers.Apis
         // GET /api/case
         public IHttpActionResult GetDiseaseTypes()
         {
-            var diseaseTypes = _context.DiseaseType.Include(dt => dt.Diseases.Select(d => d.DiseaseCases));
+            var diseaseTypes = _context.DiseaseType.Include(dt => dt.Diseases.Select(d => d.DiseaseCases)).ToList();
             //var diseaseTypes = _context.DiseaseTypes.ToList();
             //if (diseaseTypes == null) return NotFound();
 
