@@ -9,10 +9,27 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Operation</title>
+    @Styles.Render("~/content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
 </head>
-<body style="background-color: #fff;">
-    <div> 
-        <p>操作流程</p>
+<body style="background-color: #00ff90;">
+    <div class="container-fluid index-bg">
+        <div class="container">
+            <h2>操作流程</h2>
+            <hr>
+            <div class="login-box form-horizontal">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <img class="img-rounded" src="~/Src/images/case_bg.jpg" height="200" width="200">
+                    </div>
+                    <div  class="col-sm-4">
+                        <p>此处为操作流程文字</p>
+                    </div>
+                </div>              
+            </div>
+        </div>
     </div>
 </body>
 </html>

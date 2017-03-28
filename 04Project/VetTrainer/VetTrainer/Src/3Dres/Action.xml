@@ -5,9 +5,12 @@
     <!--if(layer[CtrlLayer].visible == true ,
     set(layer[CtrlLayer].visible,false),
     set(layer[CtrlLayer].visible,true));-->
-    
+
+    toggle(layer[CtrlLayer].visible);
     <!--set spot id into ctrllayer-->
     set(layer[CtrlLayer].spotId,%1);
+
+
   </action>
   <action name="add_iframe" type="Javascript">
     var iframe = document.createElement("iframe");
@@ -21,44 +24,32 @@
     caller.registercontentsize(args[2], args[3]);
     caller.sprite.appendChild(iframe);
   </action>
-
+  <!--click btnOperation and show the HTML of Operation-->
   <action name="btnOperation_click">
-    <!--click btnOperation and show the HTML of Operation-->
-    if(layer[OpLayer].visible == true ,
-    set(layer[OpLayer].visible,false),
-    set(layer[OpLayer].visible,true));
+    toggle(layer[OpLayer].visible);
+    set(layer[SpLayer].visible,false);
+    set(layer[AnLayer].visible,false);
 
-    set(layer[SpLayer].visible,false),
-    set(layer[AnLayer].visible,false),
-
-
-    <!--layer[InfoLayer].add_iframe('/TriDInfo/Index', 640, 360);-->
   </action>
   <action name="btnSpecification_click">
     <!--click btnExplaination and show the HTML of Operation-->
+    toggle(layer[SpLayer].visible);
 
-    if(layer[SpLayer].visible == true ,
-    set(layer[SpLayer].visible,false),
-    set(layer[SpLayer].visible,true));
-    
-    set(layer[OpLayer].visible,false),
-    set(layer[AnLayer].visible,false),
+    set(layer[OpLayer].visible,false);
+    set(layer[AnLayer].visible,false);
 
   </action>
   <action name="btnAnimation_click" >
     <!--click btnAnimation and show the HTML of Operation-->
-    if(layer[AnLayer].visible == true ,
-    set(layer[AnLayer].visible,false),
-    set(layer[AnLayer].visible,true));
+    toggle(layer[AnLayer].visible);
 
-    set(layer[OpLayer].visible,false),
-    set(layer[SpLayer].visible,false),
-
+    set(layer[OpLayer].visible,false);
+    set(layer[SpLayer].visible,false);
   </action>
 
-  <action name="btnClose_click">
-    <!--click btnClose to remove the iframe-->
-
+  <!--click btnClose to remove the iframe-->
+  <action name="btnClo_click">
+    set(layer[CtrlLayer].visible,false);
   </action>
 
   <action name="resetPanoSize">

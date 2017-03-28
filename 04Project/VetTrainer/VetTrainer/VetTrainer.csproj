@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=6.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>bin\AutoMapper.dll</HintPath>
+      <HintPath>..\packages\AutoMapper.6.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -367,6 +367,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Src\3Dres\Action.xml" />
+    <Content Include="Src\3Dres\imagemap.png" />
     <Content Include="Src\3Dres\Info\Info.html" />
     <Content Include="Src\3Dres\panos\1.tiles\b\l1\1\l1_b_1_1.jpg" />
     <Content Include="Src\3Dres\panos\1.tiles\b\l1\1\l1_b_1_2.jpg" />
@@ -707,7 +708,6 @@
     <Content Include="Views\ChargeManage\Index.cshtml" />
     <Content Include="Views\AnalysisManage\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\TriDInfo\Index.cshtml" />
     <Content Include="Views\TriDInfo\Specification.cshtml" />
     <Content Include="Views\TriDInfo\Operation.cshtml" />
     <Content Include="Views\TriDInfo\Animation.cshtml" />
@@ -715,6 +715,8 @@
     <Content Include="Views\ErrorPages\Error404.cshtml" />
     <Content Include="Views\ErrorPages\ErrorAdminRequired.cshtml" />
     <Content Include="Views\UserManagement\Index.cshtml" />
+    <Content Include="Views\Nav\Clinic.cshtml" />
+    <Content Include="Views\Nav\Tour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
