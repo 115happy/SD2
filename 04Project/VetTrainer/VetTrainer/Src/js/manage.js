@@ -9,10 +9,20 @@ var app = new Vue ({
 			users : [],
 			newUser : {},
 			userToDelete : '',
-			userToEdit : {},
+			userToEdit : {
+				'Name' : '',
+				'Password' : ''
+			},
 
 			//器械数据
 			instruments : [],
+			insKeyWord : [],
+			newIns : {},
+			insToDelete : '',
+			insToEdit : {},
+
+			//科室数据
+			clinics : [],
 
 			//药品数据
 			drugs : [],
@@ -46,9 +56,12 @@ var app = new Vue ({
 
 		this.getUser();
 		this.getInstrument();
+		// this.getClinic();
 		this.getDrug();
 		this.getAnalysis();
 		this.getRole();
+		this.getCharge();
+		this.getDiseaseType();
 	},
 	methods : {
 		getUser : function(key) {
@@ -82,7 +95,13 @@ var app = new Vue ({
 			});
 		},
 		editUser : function() {
-
+			axios.post('../api/UserModify', this.userToEdit)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getUser();
+			}).catch((error) => {
+				console.log('修改用户失败')
+			});
 		},
 
 		getInstrument : function() {
@@ -93,7 +112,27 @@ var app = new Vue ({
 				console.log('搜索器械失败')
 			});
 		},
-
+		addIns : function() {
+			axios.post('../api/InstrumentAdd', this.newIns)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.newIns = {};
+				this.getInstrument();
+			}).catch((error) => {
+				console.log('添加器械失败')
+			});
+		},
+		deleteIns : function() {
+			axios.post('../api/InstrumentDelete', {
+				'id' : this.insToDelete
+			})
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getInstrument();
+			}).catch((error) => {
+				console.log('删除器械失败')
+			});
+		},
 		getDrug : function(key) {
 			axios.get('../api/DrugSearch/' + key)
 			.then((res) => {
@@ -110,6 +149,14 @@ var app = new Vue ({
 				this.getDrug();
 			}).catch((error) => {
 				console.log('添加药品失败')
+			});
+		},
+		editDrug : function() {
+			axios.post('../api/DrugModify', this.drugToEdit)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+			}).catch((error) => {
+				console.log('修改药品失败')
 			});
 		},
 		deleteDrug : function() {
@@ -201,7 +248,15 @@ var app = new Vue ({
 				console.log('删除疾病类型失败')
 			});
 		},
-
+		getClinic : function() {
+			axios.get('../api/ClinicSearch')
+			.then((res) => {
+				this.clinics = JSON.parse(res.data).Data;
+			})
+			.catch((error) => {
+				console.log('搜索科室失败')
+			})
+		},
 
 
 
