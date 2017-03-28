@@ -27,24 +27,26 @@ namespace VetTrainer.Controllers.Apis
             var DiseaseTypeDtos = new List<DiseaseTypeDto>();
             try
             {
-                List<DiseaseType> diseaseTypes = _context.DiseaseType.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
-                foreach (DiseaseType dt in diseaseTypes)
-                {
-                    foreach (Disease d in dt.Diseases)
-                    {
-                        foreach(DiseaseCase dc in d.DiseaseCases)
-                        {
-                            foreach(DiseaseCaseTab dct in dc.DiseaseCaseTabs)
-                            {
-                                _context.Entry(dct).Collection(u => u.Analyses);
-                                _context.Entry(dct).Collection(u => u.Drugs);
-                                _context.Entry(dct).Collection(u => u.Texts);
-                                _context.Entry(dct).Collection(u => u.Pictures);
-                                _context.Entry(dct).Collection(u => u.Videos);
-                            }
-                        }
-                    }
-                }
+                //List<DiseaseType> diseaseTypes = _context.DiseaseType.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                //foreach (DiseaseType dt in diseaseTypes)
+                //{
+                //    foreach (Disease d in dt.Diseases)
+                //    {
+                //        foreach(DiseaseCase dc in d.DiseaseCases)
+                //        {
+                //            foreach(DiseaseCaseTab dct in dc.DiseaseCaseTabs)
+                //            {
+                //                _context.Entry(dct).Collection(u => u.Analyses);
+                //                _context.Entry(dct).Collection(u => u.Drugs);
+                //                _context.Entry(dct).Collection(u => u.Texts);
+                //                _context.Entry(dct).Collection(u => u.Pictures);
+                //                _context.Entry(dct).Collection(u => u.Videos);
+                //            }
+                //        }
+                //    }
+                //}
+                List<DiseaseType> diseaseTypes = _context.DiseaseType.ToList();
+
                 foreach (DiseaseType dt in diseaseTypes)
                 {
                     var diseaseTypeDto = Mapper.Map<DiseaseType, DiseaseTypeDto>(dt);
