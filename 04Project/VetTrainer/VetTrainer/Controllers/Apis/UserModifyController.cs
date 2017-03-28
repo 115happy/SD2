@@ -22,6 +22,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
+        [HttpPost]
         public IHttpActionResult PostUserModify(UserIntactDto user)
         {
             string msg = "";
@@ -45,6 +46,7 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "网络故障";
             }
+            //var str = string.Format("{\'Message\': \'{0}\', \'Data\':  \'null\'}", msg);
             var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
         }
