@@ -21,6 +21,7 @@ namespace VetTrainer.Controllers.Apis
         {
             _context.Dispose();
         }
+        // GET: api/ClinicSearch/
         public IHttpActionResult GetSearchResult()
         {
             string msg = "";
@@ -58,6 +59,8 @@ namespace VetTrainer.Controllers.Apis
             var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(clinicDtos) + " }";
             return Ok(str);
         }
+        
+        // GET: api/ClinicSearch/text
         //获取查询用户信息结果api
         public IHttpActionResult GetSearchResult(string searchText)
         {

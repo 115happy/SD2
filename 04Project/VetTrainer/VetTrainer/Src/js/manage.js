@@ -1,36 +1,206 @@
-// (function(){
-// 	$('.manage-switch').on('click', function() {
-// 		$('.manage-switch').removeClass('active');
-// 		$(this).addClass('active');
-
-// 		var target = $(this).data('target');
-// 		// console.log(target);
-// 		$('.manage-content>div').hide();
-// 		$('.manage-' + target).fadeIn();
-// 	});
-// })();
-
 var app = new Vue ({
 	el: '#app',
-	data : {
-		currentLayer : '',
-		users : [],
-		newUser : {}
+	data : function() {
+		return {
+			currentLayer : '',
+
+			//用户数据
+			userKeyWord : '',
+			users : [],
+			newUser : {},
+			userToDelete : '',
+			userToEdit : {},
+
+			//器械数据
+			instruments : [],
+
+			//药品数据
+			drugs : [],
+			drugKeyWord : '',
+			newDrug : {},
+			drugToDelete  : '',
+			drugToEdit : {},
+
+			//化验项目数据
+			analysises : [],
+			analysisKeyWord : '',
+			newAnalysis : {},
+			analysisToDelete  : '',
+			analysisToEdit : {},
+
+			charges : [],
+
+			roles : [],
+
+			//疾病类型数据
+			diseaseTypes : [],
+			typeKeyWord : '',
+			newType : {},
+			typeToDelete  : '',
+			typeToEdit : {},
+		}
+		
 	},
 	mounted : function() {
 		this.toggleWelcome();
+
+		this.getUser();
+		this.getInstrument();
+		this.getDrug();
+		this.getAnalysis();
+		this.getRole();
 	},
 	methods : {
-		getUser : function() {
-			axios.get('../api/UserSearch')
+		getUser : function(key) {
+			axios.get('../api/UserSearch/' + key)
 			.then((res) => {
 				this.users = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索用户失败')
 			});
 		},
 		addUser : function() {
 			console.log(this.newUser);
+			axios.post('../api/UserAdd', this.newUser)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.newUser = {};
+				this.getUser();
+			}).catch((error) => {
+				console.log('添加用户失败')
+			});
+		},
+		deleteUser : function() {
+			axios.post('../api/UserDelete', {
+				'id' : this.userToDelete
+			})
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getUser();
+			}).catch((error) => {
+				console.log('删除用户失败')
+			});
+		},
+		editUser : function() {
+
 		},
 
+		getInstrument : function() {
+			axios.get('../api/InstrumentSearch')
+			.then((res) => {
+				this.instruments = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索器械失败')
+			});
+		},
+
+		getDrug : function(key) {
+			axios.get('../api/DrugSearch/' + key)
+			.then((res) => {
+				this.drugs = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索药品失败')
+			});
+		},
+		addDrug : function() {
+			axios.post('../api/DrugAdd', this.newDrug)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.newDrug = {};
+				this.getDrug();
+			}).catch((error) => {
+				console.log('添加药品失败')
+			});
+		},
+		deleteDrug : function() {
+			axios.post('../api/DrugDelete', {
+				'id' : this.drugToDelete
+			})
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getDrug();
+			}).catch((error) => {
+				console.log('删除药品失败')
+			});
+		},
+		getAnalysis : function(key) {
+			axios.get('../api/AnalysisSearch/' + key)
+			.then((res) => {
+				this.analysises = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索化验信息失败')
+			});
+		},
+		addAnalysis : function() {
+			axios.post('../api/AnalysisAdd', this.newAnalysis)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.newAnalysis = {};
+				this.getAnalysis();
+			}).catch((error) => {
+				console.log('添加化验信息失败')
+			});
+		},
+		deleteAnalysis : function() {
+			axios.post('../api/AnalysisDelete', {
+				'id' : this.analysisToDelete
+			})
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getAnalysis();
+			}).catch((error) => {
+				console.log('删除化验信息失败')
+			});
+		},
+		getCharge : function(key) {
+			axios.get('../api/ChargeSearch/' + key)
+			.then((res) => {
+				this.charges = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索收费信息失败')
+			});
+		},
+		getRole : function() {
+			axios.get('../api/RoleSearch/')
+			.then((res) => {
+				this.roles = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索角色失败')
+			});
+		},
+		editRole : function() {
+
+		},
+
+		getDiseaseType : function(key) {
+			axios.get('../api/DiseaseTypeSearch/' + key)
+			.then((res) => {
+				this.diseaseTypes = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索疾病类型失败')
+			});
+		},
+		addDiseaseType : function() {
+			axios.post('../api/DiseaseTypeAdd', this.newType)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.newType = {};
+				this.getDiseaseType();
+			}).catch((error) => {
+				console.log('添加疾病类型失败')
+			});
+		},
+		deleteDiseaseType : function() {
+			axios.post('../api/DiseaseTypeDelete', {
+				'id' : this.typeToDelete
+			})
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getDiseaseType();
+			}).catch((error) => {
+				console.log('删除疾病类型失败')
+			});
+		},
 
 
 

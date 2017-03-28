@@ -44,12 +44,13 @@ ViewBag.Count = 0;
 						<h2>欢迎使用宠物医院管理系统！</h2>
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'user'" class="container-fluid" key="user">
 					<div class="row">
 						<div class="col-md-3">
-							<input class="form-control" type="text" placeholder="搜索用户">
+							<input v-model="userKeyWord" class="form-control" type="text" placeholder="搜索用户">
 						</div>
-						<div class="col-md-1"><a v-on:click="getUser" href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a v-on:click="getUser(userKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
 						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addUserModal">添加</a></div>
 					</div>
 					<div class="row">
@@ -67,12 +68,16 @@ ViewBag.Count = 0;
 										<td>{{user.Name}}</td>
 										<td v-if="user.Authority == 0">普通用户</td>
 										<td v-if="user.Authority == 1">管理员</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">删除</button></td>
+										<td>
+											<button data-toggle="modal" data-target="#editUserModal" class="btn btn-primary">修改</button>
+											<button v-on:click="userToDelete=user.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">删除</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
+					
 					<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
@@ -92,7 +97,7 @@ ViewBag.Count = 0;
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button v-on:click="addUser" type="button" class="btn btn-primary">确定</button>
+									<button v-on:click="addUser" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
@@ -132,16 +137,17 @@ ViewBag.Count = 0;
 									确定删除此用户？
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-danger">确定</button>
+									<button v-on:click="deleteUser" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'instrument'" class="container-fluid" key="instrument">
 					<div class="row">
-						<div class="col-md-2">
+						<!-- <div class="col-md-2">
 							<ul class="list-group">
 								<li class="list-group-item">手术室</li>
 								<li class="list-group-item">手术室</li>
@@ -150,15 +156,10 @@ ViewBag.Count = 0;
 								<li class="list-group-item">手术室</li>
 								<li class="list-group-item">手术室</li>
 							</ul>
-						</div>
+						</div> -->
 						<div class="col-md-2">
 							<ul class="list-group">
-								<li class="list-group-item">手术台</li>
-								<li class="list-group-item">手术台</li>
-								<li class="list-group-item">手术台</li>
-								<li class="list-group-item">手术台</li>
-								<li class="list-group-item">手术台</li>
-								<li class="list-group-item">手术台</li>
+								<li v-for="ins in instruments" class="list-group-item">{{ins.Name}}</li>
 							</ul>
 						</div>
 						<div class="col-md-8">
@@ -193,6 +194,7 @@ ViewBag.Count = 0;
 						</div>
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'clinic'" class="container-fluid" key="clinic">
 					<div class="row">
 						<div class="col-md-2">
@@ -244,12 +246,13 @@ ViewBag.Count = 0;
 						</div>
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'drug'" class="container-fluid" key="drug">
 					<div class="row">
 						<div class="col-md-3">
 							<input class="form-control" type="text" placeholder="搜索药品">
 						</div>
-						<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a v-on:click="getDrug(drugKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
 						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addDrugModal">添加</a></div>
 					</div>
 					<div class="row">
@@ -263,20 +266,13 @@ ViewBag.Count = 0;
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Tanmay</td>
-										<td>560001</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteDrugModal">删除</button></td>
-									</tr>
-									<tr>
-										<td>Sachin</td>
-										<td>400003</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
-									</tr>
-									<tr>
-										<td>Uma</td>
-										<td>411027</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+									<tr v-for="drug in drugs">
+										<td>{{drug.Name}}</td>
+										<td>{{drug.Price}}</td>
+										<td>
+											<button class="btn btn-primary">修改</button>
+											<button v-on:click="drugToDelete=drug.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteDrugModal">删除</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -291,14 +287,14 @@ ViewBag.Count = 0;
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="输入药品名">
+										<input v-model="newDrug.Name" class="form-control" type="text" placeholder="输入药品名">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="输入药品价格">
+										<input v-model="newDrug.Price" class="form-control" type="text" placeholder="输入药品价格">
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">确定</button>
+									<button v-on:click="addDrug" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
@@ -338,19 +334,20 @@ ViewBag.Count = 0;
 									确定删除此药品信息？
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-danger">确定</button>
+									<button v-on:click="deleteDrug" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'analysis'" class="container-fluid" key="analysis">
 					<div class="row">
 						<div class="col-md-3">
 							<input class="form-control" type="text" placeholder="搜索化验项目">
 						</div>
-						<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a v-on:click="getAnalysis(analysisKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
 						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addAnalysisModal">添加</a></div>
 					</div>
 					<div class="row">
@@ -364,20 +361,13 @@ ViewBag.Count = 0;
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Tanmay</td>
-										<td>560001</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteAnalysisModal">删除</button></td>
-									</tr>
-									<tr>
-										<td>Sachin</td>
-										<td>400003</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
-									</tr>
-									<tr>
-										<td>Uma</td>
-										<td>411027</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+									<tr v-for="ana in analysises">
+										<td>{{ana.Name}}</td>
+										<td>{{ana.Amount}}</td>
+										<td>
+											<button class="btn btn-primary">修改</button>
+											<button v-on:click="analysisToDelete=ana.id" class="btn btn-danger" data-toggle="modal" data-target="#deleteAnalysisModal">删除</button>
+											</td>
 									</tr>
 								</tbody>
 							</table>
@@ -392,14 +382,14 @@ ViewBag.Count = 0;
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="输入化验项目名">
+										<input v-model="newAnalysis.Name" class="form-control" type="text" placeholder="输入化验项目名">
 									</div>
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="输入价格">
+										<input v-model="newAnalysis.Amount" class="form-control" type="text" placeholder="输入价格">
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">确定</button>
+									<button v-on:click="addAnalysis" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
@@ -435,16 +425,17 @@ ViewBag.Count = 0;
 									<h4 class="modal-title" id="deleteAnalysisLabel">警告</h4>
 								</div>
 								<div class="modal-body">
-									确定删除此药品信息？
+									确定删除此化验项目信息？
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-danger">确定</button>
+									<button v-on:click="deleteAnalysis" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'charge'" class="container-fluid" key="charge">
 					<div class="row">
 						<div class="col-md-3">
@@ -462,23 +453,16 @@ ViewBag.Count = 0;
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Tanmay</td>
-										<td>560001</td>
-									</tr>
-									<tr>
-										<td>Sachin</td>
-										<td>400003</td>
-									</tr>
-									<tr>
-										<td>Uma</td>
-										<td>411027</td>
+									<tr v-for="charge in charges">
+										<td>{{charge.Name}}</td>
+										<td>{{charge.Amount}}</td>
 									</tr>
 								</tbody>
 							</table>
 						</div>
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'role'" class="container-fluid" key="role">
 					<div class="row">
 						<div class="col-md-12">
@@ -491,20 +475,10 @@ ViewBag.Count = 0;
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Tanmay</td>
-										<td>560001</td>
+									<tr v-for="role in roles">
+										<td>{{role.Name}}</td>
+										<td>{{role.Description}}</td>
 										<td><button class="btn btn-primary" data-toggle="modal" data-target="#editRoleModal">修改</button></td>
-									</tr>
-									<tr>
-										<td>Sachin</td>
-										<td>400003</td>
-										<td><button class="btn btn-primary">修改</button></td>
-									</tr>
-									<tr>
-										<td>Uma</td>
-										<td>411027</td>
-										<td><button class="btn btn-primary">修改</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -523,19 +497,20 @@ ViewBag.Count = 0;
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">确定</button>
+									<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'diseasetype'" class="container-fluid" key="diseasetype">
 					<div class="row">
 						<div class="col-md-3">
-							<input class="form-control" type="text" placeholder="搜索疾病类型">
+							<input v-model="typeKeyWord" class="form-control" type="text" placeholder="搜索疾病类型">
 						</div>
-						<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a v-on:click="getDiseaseType(typeKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
 						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addTypeModal">添加</a></div>
 					</div>
 					<div class="row">
@@ -548,17 +523,12 @@ ViewBag.Count = 0;
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>五月病</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteTypeModal">删除</button></td>
-									</tr>
-									<tr>
-										<td>Sachin</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
-									</tr>
-									<tr>
-										<td>Uma</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+									<tr v-for="type in diseaseTypes">
+										<td>{{type.Name}}</td>
+										<td>
+											<button class="btn btn-primary">修改</button>
+											<button v-on:click="typeToDelete=type.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteTypeModal">删除</button>
+										</td>
 									</tr>
 								</tbody>
 							</table>
@@ -573,11 +543,11 @@ ViewBag.Count = 0;
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="输入疾病类型">
+										<input v-model="newType.Name" class="form-control" type="text" placeholder="输入疾病类型">
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">确定</button>
+									<button v-on:click="addDiseaseType" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
@@ -615,13 +585,14 @@ ViewBag.Count = 0;
 									确定删除此疾病类型？
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-danger">确定</button>
+									<button v-on:click="deleteDiseaseType" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'disease'" class="container-fluid" key="disease">
 					<div class="row">
 						<div class="col-md-3">
@@ -723,6 +694,7 @@ ViewBag.Count = 0;
 						</div><!-- /.modal -->
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'case'" class="container-fluid" key="case">
 					<div class="row">
 						<div class="col-md-3">
@@ -758,6 +730,7 @@ ViewBag.Count = 0;
 						</div>
 					</div>
 				</div>
+
 				<div v-else-if="currentLayer == 'backup'" class="container-fluid" key="backup">
 				</div>
 			</transition>
@@ -766,8 +739,9 @@ ViewBag.Count = 0;
 	
 </div>
 
-<script src='../../Src/js/manage.js'></script>
+
 @section scripts
 {
     @Scripts.Render("~/bundles/vue")
 }
+<script src='../../Src/js/manage.js'></script>
