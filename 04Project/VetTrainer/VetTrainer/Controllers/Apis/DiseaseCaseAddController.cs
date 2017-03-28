@@ -9,5 +9,6 @@ namespace VetTrainer.Controllers.Apis
 {
     public class DiseaseCaseAddController : ApiController
     {
+
     }
 }
