@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetTrainer", "VetTrainer\Ve
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VetTrainer.Tests", "VetTrainer.Tests\VetTrainer.Tests.csproj", "{50173054-19E1-45B1-81ED-F98674B2E87C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTest", "ConsoleTest\ConsoleTest.csproj", "{C67AF778-6A82-4FEE-A8A6-C0571C7AB93E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{50173054-19E1-45B1-81ED-F98674B2E87C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{50173054-19E1-45B1-81ED-F98674B2E87C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{50173054-19E1-45B1-81ED-F98674B2E87C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C67AF778-6A82-4FEE-A8A6-C0571C7AB93E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C67AF778-6A82-4FEE-A8A6-C0571C7AB93E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C67AF778-6A82-4FEE-A8A6-C0571C7AB93E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C67AF778-6A82-4FEE-A8A6-C0571C7AB93E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

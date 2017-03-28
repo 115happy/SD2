@@ -664,15 +664,7 @@
     <Content Include="Src\js\ai.0.22.9-build00167.min.js" />
     <Content Include="Src\js\bootstrap.js" />
     <Content Include="Src\js\bootstrap.min.js" />
-    <None Include="Src\js\jquery-1.10.2.intellisense.js" />
-    <Content Include="Src\js\jquery-1.10.2.js" />
-    <Content Include="Src\js\jquery-1.10.2.min.js" />
-    <None Include="Src\js\jquery.validate-vsdoc.js" />
     <Content Include="Src\js\jquery-3.1.1.js" />
-    <Content Include="Src\js\jquery.validate.js" />
-    <Content Include="Src\js\jquery.validate.min.js" />
-    <Content Include="Src\js\jquery.validate.unobtrusive.js" />
-    <Content Include="Src\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Src\js\modernizr-2.6.2.js" />
     <Content Include="Src\js\respond.js" />
     <Content Include="Src\js\respond.min.js" />
@@ -737,7 +729,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Src\js\jquery-1.10.2.min.map" />
     <Content Include="Src\less\case_learning.less" />
     <Content Include="Src\less\common.less" />
     <Content Include="Src\less\login.less" />
