@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
@@ -73,6 +74,36 @@ namespace VetTrainer.Controllers.Apis
                 else
                     msg = "没有结果";
 
+            }
+            catch (RetryLimitExceededException)
+            {
+                msg = "网络故障";
+            }
+            JavaScriptSerializer jss = new JavaScriptSerializer();
+            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : " + jss.Serialize(instrumentDtos) + " }";
+            return Ok(str);
+        }
+
+        public IHttpActionResult GetInstrumentByClinicID(int id)
+        {
+            string msg = string.Empty;
+            var instrumentDtos = new List<InstrumentDto>();
+            try
+            {
+                Clinic theClinic = _context.Clinics.Include(c => c.Instruments).SingleOrDefault(c => c.Id == id);
+                if (theClinic != null)
+                {
+                    List<Instrument> instruments = new List<Instrument>(theClinic.Instruments);
+                    foreach (Instrument instrument in instruments)
+                    {
+                        var instrumentDto = Mapper.Map<Instrument, InstrumentDto>(instrument);
+                        instrumentDtos.Add(instrumentDto);
+                    }
+                    if (instrumentDtos.Count > 0)
+                        msg = "查找成功";
+                    else
+                        msg = "没有结果";
+                }
             }
             catch (RetryLimitExceededException)
             {
