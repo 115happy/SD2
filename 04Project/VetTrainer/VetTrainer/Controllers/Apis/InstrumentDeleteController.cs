@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AutoMapper;
+using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
 using System.Linq;
@@ -27,7 +28,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var instrumentToDelete = _context.Instruments.Find(instrument.Id);
-            
+            var instrumentToDeleteDto = Mapper.Map<Instrument, InstrumentDto>(instrumentToDelete);
             if (instrumentToDelete == null)
             {
                 msg = "删除失败，该用户不存在";
@@ -36,17 +37,20 @@ namespace VetTrainer.Controllers.Apis
             {
                 try
                 {
-                    foreach(Text t in instrumentToDelete.Texts)
+                    foreach(TextDto t in instrumentToDeleteDto.Texts)
                     {
-                        _context.Texts.Remove(t);
+                        Text text = _context.Texts.Find(t.Id);
+                        _context.Texts.Remove(text);
                     }
-                    foreach(Picture p in instrumentToDelete.Pictures)
+                    foreach(PictureDto p in instrumentToDeleteDto.Pictures)
                     {
-                        _context.Pictures.Remove(p);
+                        Picture picture = _context.Pictures.Find(p.Id);
+                        _context.Pictures.Remove(picture);
                     }
-                    foreach(Video v in instrumentToDelete.Videos)
+                    foreach(VideoDto v in instrumentToDeleteDto.Videos)
                     {
-                        _context.Videos.Remove(v);
+                        Video video = _context.Videos.Find(v.Id);
+                        _context.Videos.Remove(video);
                     }
 
                     _context.Instruments.Remove(instrumentToDelete);

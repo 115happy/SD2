@@ -24,7 +24,7 @@
 }
 <div>
     <input type="text" id="searchText" />
-    <input type="submit" value="搜索" onclick="deleteUser()" />
+    <input type="submit" value="搜索" onclick="searchResult()" />
 </div>
 <script>
     function searchResult()
@@ -52,9 +52,9 @@
     }
     function addUser() {
         var user = {
-            "Name": '哈哈2',
+            "Name": 'unhappy',
             "Password": '1234567',
-            "Authority": '0',
+            "Authority": '1',
             "IsToRememberMe": '0'
         };
         $.post('/api/UserAdd', user,
