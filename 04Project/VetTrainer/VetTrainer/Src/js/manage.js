@@ -30,7 +30,7 @@ var app = new Vue ({
 			newRp : {},
 			rpToDelete : {},
 			newClinicIns : {},
-			currentClinicIns : {},
+			currentClinicIns : [],
 
 
 			//药品数据
@@ -82,11 +82,11 @@ var app = new Vue ({
 		this.getRPRecord();
 	},
 	methods : {
-		cloneObject : function(origin) {
+		showClinicIns : function(id) {
 
 		},
 		getUser : function(key) {
-			axios.get('../api/UserSearch/' + key)
+			axios.get('../api/usersearch?searchText=' + key)
 			.then((res) => {
 				this.users = JSON.parse(res.data).Data;
 			}).catch((error) => {
@@ -118,8 +118,8 @@ var app = new Vue ({
 		editUser : function() {
 			axios.post('../api/UserModify', this.userToEdit)
 			.then((res) => {
-				console.log(JSON.parse(res.data).Message);
-				this.getUser();
+				console.log(JSON.parse(res.data).message);
+				this.getUser(this.userKeyWord);
 			}).catch((error) => {
 				console.log('修改用户失败')
 			});
@@ -155,7 +155,7 @@ var app = new Vue ({
 			});
 		},
 		getDrug : function(key) {
-			axios.get('../api/DrugSearch/' + key)
+			axios.get('../api/DrugSearch?searchText=' + key)
 			.then((res) => {
 				this.drugs = JSON.parse(res.data).Data;
 			}).catch((error) => {
@@ -192,7 +192,7 @@ var app = new Vue ({
 			});
 		},
 		getAnalysis : function(key) {
-			axios.get('../api/AnalysisSearch/' + key)
+			axios.get('../api/AnalysisSearch?searchText=' + key)
 			.then((res) => {
 				this.analysises = JSON.parse(res.data).Data;
 			}).catch((error) => {
@@ -241,7 +241,7 @@ var app = new Vue ({
 		},
 
 		getDiseaseType : function(key) {
-			axios.get('../api/DiseaseTypeSearch/' + key)
+			axios.get('../api/DiseaseTypeSearch?searchText=' + key)
 			.then((res) => {
 				this.diseaseTypes = JSON.parse(res.data).Data;
 			}).catch((error) => {
