@@ -27,14 +27,14 @@ namespace VetTrainer.Controllers.Apis
             var DiseaseTypeDtos = new List<DiseaseTypeDto>();
             try
             {
-                /*List<DiseaseType> diseaseTypes = _context.DiseaseType.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
+                List<DiseaseType> diseaseTypes = _context.DiseaseType.Include(u => u.Diseases.Select(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))).ToList();
                 foreach (DiseaseType dt in diseaseTypes)
                 {
                     foreach (Disease d in dt.Diseases)
                     {
-                        foreach(DiseaseCase dc in d.DiseaseCases)
+                        foreach (DiseaseCase dc in d.DiseaseCases)
                         {
-                            foreach(DiseaseCaseTab dct in dc.DiseaseCaseTabs)
+                            foreach (DiseaseCaseTab dct in dc.DiseaseCaseTabs)
                             {
                                 _context.Entry(dct).Collection(u => u.Analyses);
                                 _context.Entry(dct).Collection(u => u.Drugs);
@@ -44,8 +44,8 @@ namespace VetTrainer.Controllers.Apis
                             }
                         }
                     }
-                }*/
-                List<DiseaseType> diseaseTypes = _context.DiseaseType.ToList();
+                }
+                //List<DiseaseType> diseaseTypes = _context.DiseaseType.ToList();
 
                 foreach (DiseaseType dt in diseaseTypes)
                 {
