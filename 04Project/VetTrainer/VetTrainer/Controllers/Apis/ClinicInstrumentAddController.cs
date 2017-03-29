@@ -23,6 +23,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
+        // POST: api/clinicinstrumentaddcontroller
         public IHttpActionResult PostClinicInstrumentAdd(ClinicDto clinic)
         {
             string msg = "";
@@ -31,10 +32,10 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var clinicToAdd = _context.Clinics.Find(clinic.Id);
-            foreach(InstrumentDto ist in clinic.Instruments)
+            foreach (InstrumentDto ist in clinic.Instruments)
             {
                 var instrumentToAdd = _context.Instruments.Find(ist.Id);
-                foreach(TextDto t in ist.Texts)
+                foreach (TextDto t in ist.Texts)
                 {
                     var textToAdd = Mapper.Map<TextDto, Text>(t);
                     instrumentToAdd.Texts.Add(textToAdd);
@@ -43,8 +44,11 @@ namespace VetTrainer.Controllers.Apis
                 {
                     var picToAdd = Mapper.Map<PictureDto, Picture>(p);
                     instrumentToAdd.Pictures.Add(picToAdd);
+
+                    // GetPicture
+                    var httpRequest = HttpContext.Current.Request;
                 }
-                foreach(VideoDto v in ist.Videos)
+                foreach (VideoDto v in ist.Videos)
                 {
                     var videoToAdd = Mapper.Map<VideoDto, Video>(v);
                     instrumentToAdd.Videos.Add(videoToAdd);
