@@ -665,6 +665,7 @@
     <Content Include="Src\js\bootstrap.js" />
     <Content Include="Src\js\bootstrap.min.js" />
     <Content Include="Src\js\jquery-3.1.1.js" />
+    <Content Include="Src\js\manage.js" />
     <Content Include="Src\js\modernizr-2.6.2.js" />
     <Content Include="Src\js\respond.js" />
     <Content Include="Src\js\respond.min.js" />
