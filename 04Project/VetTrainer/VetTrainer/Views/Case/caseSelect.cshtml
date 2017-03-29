@@ -80,7 +80,7 @@
             console.log(cases);
             $('.case-list').empty();
             $.each(cases, function(key, item) {
-                $('.case-list').append('<li class="col-md-2">' + item.name + '</li>');
+                $('.case-list').append('<a href = "Case/CaseLearning?diseaseCaseName=' + item.name + '"><li class="col-md-2">' + item.name + '</li></a>');
             });
             // $.each(resData)
         });
