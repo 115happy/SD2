@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
+using System.IO;
 
 namespace VetTrainer.Controllers.Apis
 {
@@ -45,6 +46,7 @@ namespace VetTrainer.Controllers.Apis
                     foreach(PictureDto p in instrumentToDeleteDto.Pictures)
                     {
                         Picture picture = _context.Pictures.Find(p.Id);
+                        //string strpath
                         _context.Pictures.Remove(picture);
                     }
                     foreach(VideoDto v in instrumentToDeleteDto.Videos)
