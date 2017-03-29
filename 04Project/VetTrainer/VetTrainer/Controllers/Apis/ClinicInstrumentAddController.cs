@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -22,9 +23,41 @@ namespace VetTrainer.Controllers.Apis
         {
             _context.Dispose();
         }
-
+        public IHttpActionResult PostUpload()
+        {
+            var s = "";
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("C:\\Users\\lishu\\Desktop\\SD2\\test");
+                    postedFile.SaveAs(filePath);
+                    docfiles.Add(filePath);
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
+            return Ok();
+        }
         public IHttpActionResult PostClinicInstrumentAdd(ClinicDto clinic)
         {
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if(httpRequest.Files.Count>0)
+            {
+                var docfiles = new List<string>();
+                foreach(string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("C:\\Users\\lishu\\Desktop\\SD2\\test");
+                    postedFile.SaveAs(filePath);
+                    docfiles.Add(filePath);
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
             string msg = "";
             if (clinic == null)
             {
