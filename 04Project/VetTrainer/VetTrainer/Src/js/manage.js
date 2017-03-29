@@ -29,6 +29,9 @@ var app = new Vue ({
 			rpToEdit : {},
 			newRp : {},
 			rpToDelete : {},
+			newClinicIns : {},
+			currentClinicIns : {},
+
 
 			//药品数据
 			drugs : [],
@@ -68,7 +71,7 @@ var app = new Vue ({
 	},
 	mounted : function() {
 		// this.getUser();
-		// this.getInstrument();
+		this.getInstrument();
 		this.getClinic();
 		// this.getDrug();
 		// this.getAnalysis();
@@ -289,8 +292,8 @@ var app = new Vue ({
 			axios.post('../api/DiseaseAdd', this.newDisease)
 			.then((res) => {
 				console.log(JSON.parse(res.data).Message);
-				this.newType = {};
-				this.getDiseaseType();
+				this.newDisease = {};
+				this.getDisease();
 			}).catch((error) => {
 				console.log('添加疾病类型失败')
 			});
@@ -304,6 +307,18 @@ var app = new Vue ({
 				console.log('搜索科室失败')
 			})
 		},
+		addClinicIns : function() {
+			axios.post('../api/ClinicInstrumentAdd', {
+
+			})
+			.then((res) => {
+				this.clinics = JSON.parse(res.data).Data;
+			})
+			.catch((error) => {
+				console.log('搜索科室失败')
+			})
+		},
+
 		getRPRecord : function() {
 			axios.get('../api/getAllRPRecord')
 			.then((res) => {

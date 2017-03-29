@@ -1,23 +1,46 @@
 .box-shadowed {
   box-shadow: 0 0 8px #e3e3e3;
 }
+body {
+  background-color: white;
+}
+body > .container {
+  background-color: white;
+}
 .role-select-tab {
   height: 600px;
+  width: 300px;
   position: relative;
   overflow: hidden;
 }
+.role-select-tab img {
+  display: block;
+  margin: 0 auto;
+  width: 70%;
+  margin-top: 30%;
+}
+.swiper-slide {
+  width: 400px;
+}
 .role-desc {
-  display: none;
   position: absolute;
-  top: 50%;
-  -webkit-transform: translateY(-50%);
-  -moz-transform: translateY(-50%);
-  -ms-transform: translateY(-50%);
-  -o-transform: translateY(-50%);
-  transform: translateY(-50%);
+  top: 60%;
+  left: 50%;
+  -webkit-transform: translateX(-50%);
+  -moz-transform: translateX(-50%);
+  -ms-transform: translateX(-50%);
+  -o-transform: translateX(-50%);
+  transform: translateX(-50%);
   text-align: center;
 }
 .role-desc h4 {
+  text-align: center;
   font-size: 20px;
   margin-bottom: 18px;
+}
+.ass-tab img {
+  margin-top: 20%;
+}
+.doc-tab img {
+  margin-top: 25%;
 }

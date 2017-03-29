@@ -196,14 +196,14 @@ ViewBag.Count = 0;
 									</div>
 									<div class="form-group">
 										<textarea v-model="newIns.Texts[0]" class="form-control" type="text" placeholder="操作说明"  cols="30" rows="5"></textarea>
-									
+
 									</div>
 									<div class="form-group">
 										<label class="control-label">上传图片</label>
 										<input class="form-control" type="file">
 									</div>
 									<div class="form-group">
-									<label class="control-label">上传视频</label>
+										<label class="control-label">上传视频</label>
 										<input class="form-control" type="file">
 									</div>
 								</div>
@@ -254,62 +254,78 @@ ViewBag.Count = 0;
 							</div><!-- /.modal-content -->
 						</div><!-- /.modal -->
 					</div>
-				<!-- 	<div class="row">
-						<div class="col-md-3">
-							<ul class="list-group">
-								<li v-for="clinic in clinics" class="list-group-item">
-									<a href="javascript:;">{{clinic.Name}}</a>
-									<ul>
-										<li v-for="ins in clinic.Instruments"><a v-on:click="currentIns=ins" href="javascript:;">{{ins.Name}}</a></li>
-									</ul>
-								</li>
-							</ul>
-						</div> 
-
-						<div class="col-md-9">
-							<div class="ins-info">
-								<div class="row">
-									<div class="col-md-1">名称</div>
-									<div class="col-md-4"><input v-model="currentIns.Name" class="form-control" type="text"></div>
-									<div class="col-md-1">描述</div>
-									<div class="col-md-6"><input v-model="currentIns.Description" class="form-control" type="text"></div>
-								</div>
-								<hr>
-							</div>
-							<ul id="instrumentTab" class="nav nav-tabs">
-								<li class="active">
-									<a href="#function" data-toggle="tab">
-										功能说明
-									</a>
-								</li>
-								<li><a href="#opration" data-toggle="tab">操作流程</a></li>
-								<li class="dropdown">
-									<a href="#demo"	data-toggle="tab">演示动画</a>
-								</li>
-							</ul>
-							<div id="myTabContent" class="tab-content">
-								<div class="tab-pane fade in active" id="function">
-									<div class="well">
-										<textarea class="form-control" rows="10"></textarea>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="opration">
-									<div class="well">
-										<textarea class="form-control" rows="10"></textarea>
-									</div>
-								</div>
-								<div class="tab-pane fade" id="demo">
-									<div class="well">
-										演示动画
-									</div>
-								</div>
-							</div>
-						</div>
-					</div> -->
 				</div>
 
 				<div v-else-if="currentLayer == 'clinicIns'" class="containter-fluid" key="clinicIns">
+					<div class="row">
+						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addClinicInsModal">添加</a></div>
+					</div>
+					<div class="row">
+						<div class="col-md-2">
+							<ul class="list-group clinic-list">
+								<li v-on:click="currentClinicIns=clinic.Instruments" v-for="clinic in clinics" class="list-group-item">{{clinic.Name}}</li>
+							</ul>
+						</div>
+						<div class="col-md-10">
+
+								<table v-if="currentClinicIns" class="table table-striped table-bordered">
+									<thead>
+										<tr>
+											<th>器械名</th>
+											<th>操作</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr v-for="ins in currentClinicIns">
+											<td>{{ins.Name}}</td>
+											<td>
+												<button data-toggle="modal" data-target="#editUserModal" class="btn btn-primary">修改</button>
+												<button class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">删除</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
 					
+						</div>
+					</div>
+					<div class="modal fade" id="addClinicInsModal" tabindex="-1" role="dialog" aria-labelledby="addClinicInsLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="addClinicInsLabel">添加关联</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<select v-model="newClinicIns.clinicId" class="form-control">科室名
+											<option v-for="clinic in clinics" :value="clinic.Id">{{clinic.Name}}</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<select v-model="newClinicIns.Id" class="form-control">器械名
+											<option v-for="ins in instruments" :value="ins.Id">{{ins.Name}}</option>
+										</select>
+									</div>
+									<div class="form-group">
+										<textarea class="form-control" type="text" placeholder="操作说明"  cols="30" rows="5"></textarea>
+									</div>
+									<div class="form-group">
+										<label class="control-label">上传图片</label>
+										<input class="form-control" type="file">
+									</div>
+									<div class="form-group">
+										<label class="control-label">上传视频</label>
+										<input class="form-control" type="file">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="addClinicIns" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+
 				</div>
 
 				<div v-else-if="currentLayer == 'clinic'" class="container-fluid" key="clinic">
@@ -339,7 +355,7 @@ ViewBag.Count = 0;
 							</table>
 						</div>
 					</div>
-						<div class="modal fade" id="addRpModal" tabindex="-1" role="dialog" aria-labelledby="addRpLabel" aria-hidden="true">
+					<div class="modal fade" id="addRpModal" tabindex="-1" role="dialog" aria-labelledby="addRpLabel" aria-hidden="true">
 						<div class="modal-dialog">
 							<div class="modal-content">
 								<div class="modal-header">
@@ -365,7 +381,7 @@ ViewBag.Count = 0;
 										<input class="form-control" type="file">
 									</div>
 									<div class="form-group">
-									<label class="control-label">上传视频</label>
+										<label class="control-label">上传视频</label>
 										<input class="form-control" type="file">
 									</div>
 								</div>
@@ -381,7 +397,7 @@ ViewBag.Count = 0;
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="editRpLabel">修改器械</h4>
+									<h4 class="modal-title" id="editRpLabel">修改职能</h4>
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
@@ -407,7 +423,7 @@ ViewBag.Count = 0;
 									<h4 class="modal-title" id="deleteRpLabel">警告</h4>
 								</div>
 								<div class="modal-body">
-									确定删除此器械？
+									确定删除此职能？
 								</div>
 								<div class="modal-footer">
 									<button v-on:click="deleteRp" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
@@ -612,7 +628,7 @@ ViewBag.Count = 0;
 						<div class="col-md-3">
 							<input class="form-control" type="text" placeholder="搜索收费项目">
 						</div>
-						<div class="col-md-1"><a v-on:click="searchCharge" href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a v-on:click="getCharge()" href="javascript:;" class="btn btn-primary">搜索</a></div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -805,12 +821,12 @@ ViewBag.Count = 0;
 									</div>
 									<div class="form-group">
 										<select v-model="newDisease.DiseaseTypeId" name="" class="form-control">疾病类型
-											<option v-for="type in diseaseTypes" value="type.Id">{{type.Name}}</option>
+											<option v-for="type in diseaseTypes" :value="type.Id">{{type.Name}}</option>
 										</select>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button v-on:click="addDisease" type="button" class="btn btn-primary">确定</button>
+									<button v-on:click="addDisease" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
@@ -821,7 +837,7 @@ ViewBag.Count = 0;
 							<div class="modal-content">
 								<div class="modal-header">
 									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-									<h4 class="modal-title" id="editDiseaseLabel">添加疾病</h4>
+									<h4 class="modal-title" id="editDiseaseLabel">修改疾病</h4>
 								</div>
 								<div class="modal-body">
 									<div class="form-group">

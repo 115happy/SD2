@@ -1,6 +1,12 @@
 .box-shadowed {
   box-shadow: 0 0 8px #e3e3e3;
 }
+body {
+  background-color: white;
+}
+body > .container {
+  background-color: white;
+}
 .main-select {
   height: 500px;
   border-radius: 10px;
