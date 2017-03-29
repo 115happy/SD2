@@ -9,10 +9,15 @@ namespace VetTrainer.Views
     {
         public static class Global
         {
+            // public const string BackupFileDirectory = @"~\bin\BackupFiles\";
             public const string AppName = "虚拟宠物医院学习软件";
             public const string ConnectionStringName = "VetAppDBContext";
-            public const string BackupFileDirectory = @"~\bin\BackupFiles\";
+            public const string ServerDataLocation = @"\\VetAppServer\VetAppData\";
+
+            public const string BackupFileDirectory = ServerDataLocation + @"BackupSql\";
             public const string BackupFileName = @"backup.sql";
+            public const string InstrumentPicDirectory = ServerDataLocation + @"pics\instruments\";
+
         }
 
         public static class Keys
