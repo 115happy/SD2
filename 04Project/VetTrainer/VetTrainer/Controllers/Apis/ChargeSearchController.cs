@@ -9,6 +9,7 @@ using System.Web.Http;
 using System.Web.Script.Serialization;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
+using System.Web;
 
 namespace VetTrainer.Controllers.Apis
 {
@@ -23,6 +24,7 @@ namespace VetTrainer.Controllers.Apis
         {
             string msg = "";
             var chargeDtos = new List<ChargeDto>();
+            
             try
             {
                 List<Charge> charges = new List<Charge>();

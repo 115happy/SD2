@@ -29,8 +29,10 @@ namespace VetTrainer.Controllers
             string returnViewName = ViewNameBound;
             try
             {
-                if (!System.IO.Directory.Exists(Server.MapPath(BackupFileDirectory)))
-                    System.IO.Directory.CreateDirectory(Server.MapPath(BackupFileDirectory));
+                //if (!System.IO.Directory.Exists(Server.MapPath(BackupFileDirectory)))
+                //System.IO.Directory.CreateDirectory(Server.MapPath(BackupFileDirectory));
+                if (!System.IO.Directory.Exists(BackupFileDirectory))
+                    System.IO.Directory.CreateDirectory(BackupFileDirectory);
                 BackupMySql();
                 ViewBag.Message = BackupSuccess;
                 return View(returnViewName);
@@ -55,7 +57,8 @@ namespace VetTrainer.Controllers
         {
             string returnViewName = ViewNameBound;
 
-            if (!System.IO.File.Exists(Server.MapPath(dumpFileLocation)))
+            //if (!System.IO.File.Exists(Server.MapPath(dumpFileLocation)))
+            if (!System.IO.File.Exists(dumpFileLocation))
             {
                 ViewBag.Message = DumpFileNotFound;
                 return View(returnViewName);
@@ -95,7 +98,8 @@ namespace VetTrainer.Controllers
                     {
                         cmd.Connection = connection;
                         connection.Open();
-                        backuper.ExportToFile(Server.MapPath(dumpFileLocation));
+                        //backuper.ExportToFile(Server.MapPath(dumpFileLocation));
+                        backuper.ExportToFile(dumpFileLocation);
                         connection.Close();
                     }
                 }
@@ -117,7 +121,8 @@ namespace VetTrainer.Controllers
                     {
                         cmd.Connection = connection;
                         connection.Open();
-                        backuper.ImportFromFile(Server.MapPath(dumpFileLocation));
+                        //backuper.ImportFromFile(Server.MapPath(dumpFileLocation));
+                        backuper.ImportFromFile(dumpFileLocation);
                         connection.Close();
                     }
                 }

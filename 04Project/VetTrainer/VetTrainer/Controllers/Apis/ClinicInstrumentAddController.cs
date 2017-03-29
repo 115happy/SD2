@@ -6,6 +6,7 @@ using System.Data.Entity.Infrastructure;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Helpers;
 using System.Web.Http;
@@ -22,15 +23,50 @@ namespace VetTrainer.Controllers.Apis
         {
             _context.Dispose();
         }
+        public async Task<HttpResponseMessage> PostUpload()
+        {
+            var s = "";
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if (httpRequest.Files.Count > 0)
+            {
+                var docfiles = new List<string>();
+                foreach (string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("C:\\Users\\lishu\\Desktop\\SD2\\test");
+                    postedFile.SaveAs(filePath);
+                    docfiles.Add(filePath);
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
+            return result;
+        }
 
+        // POST: api/clinicinstrumentaddcontroller
         public IHttpActionResult PostClinicInstrumentAdd(ClinicDto clinic)
         {
+            HttpResponseMessage result = null;
+            var httpRequest = HttpContext.Current.Request;
+            if(httpRequest.Files.Count>0)
+            {
+                var docfiles = new List<string>();
+                foreach(string file in httpRequest.Files)
+                {
+                    var postedFile = httpRequest.Files[file];
+                    var filePath = HttpContext.Current.Server.MapPath("C:\\Users\\lishu\\Desktop\\SD2\\test");
+                    postedFile.SaveAs(filePath);
+                    docfiles.Add(filePath);
+                }
+                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
+            }
             string msg = "";
             if (clinic == null)
             {
                 msg = "参数错误";
             }
             var clinicToAdd = _context.Clinics.Find(clinic.Id);
+            foreach (InstrumentDto ist in clinic.Instruments)
             _context.Entry(clinicToAdd).Collection(u => u.Instruments);
             foreach(Instrument i in clinicToAdd.Instruments)
             {
@@ -41,7 +77,7 @@ namespace VetTrainer.Controllers.Apis
             foreach(InstrumentDto ist in clinic.Instruments)
             {
                 var instrumentToAdd = _context.Instruments.Find(ist.Id);
-                foreach(TextDto t in ist.Texts)
+                foreach (TextDto t in ist.Texts)
                 {
                     var textToAdd = Mapper.Map<TextDto, Text>(t);
                     instrumentToAdd.Texts.Add(textToAdd);
@@ -50,8 +86,11 @@ namespace VetTrainer.Controllers.Apis
                 {
                     var picToAdd = Mapper.Map<PictureDto, Picture>(p);
                     instrumentToAdd.Pictures.Add(picToAdd);
+
+                    //// GetPicture
+                    //var httpRequest = HttpContext.Current.Request;
                 }
-                foreach(VideoDto v in ist.Videos)
+                foreach (VideoDto v in ist.Videos)
                 {
                     var videoToAdd = Mapper.Map<VideoDto, Video>(v);
                     instrumentToAdd.Videos.Add(videoToAdd);

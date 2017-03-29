@@ -333,9 +333,7 @@ var app = new Vue ({
 			})
 		},
 		addClinicIns : function() {
-			axios.post('../api/ClinicInstrumentAdd', {
-
-			})
+			axios.post('../api/ClinicInstrumentAdd', this.newClinicIns)
 			.then((res) => {
 				this.clinics = JSON.parse(res.data).Data;
 			})
