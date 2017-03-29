@@ -32,6 +32,10 @@ namespace VetTrainer.Controllers.Apis
             try
             {
                 var instrumentToModify = _context.Instruments.Find(instrument.Id);
+                _context.Entry(instrumentToModify).Collection(u => u.Texts).Load();
+                _context.Entry(instrumentToModify).Collection(u => u.Pictures).Load();
+                _context.Entry(instrumentToModify).Collection(u => u.Videos).Load();
+
                 var instrumentToModifyDto = Mapper.Map<Instrument, InstrumentDto>(instrumentToModify);
                 foreach (TextDto t in instrumentToModifyDto.Texts)
                 {

@@ -31,6 +31,13 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var clinicToAdd = _context.Clinics.Find(clinic.Id);
+            _context.Entry(clinicToAdd).Collection(u => u.Instruments);
+            foreach(Instrument i in clinicToAdd.Instruments)
+            {
+                _context.Entry(i).Collection(u => u.Texts);
+                _context.Entry(i).Collection(u => u.Pictures);
+                _context.Entry(i).Collection(u => u.Videos);
+            }
             foreach(InstrumentDto ist in clinic.Instruments)
             {
                 var instrumentToAdd = _context.Instruments.Find(ist.Id);

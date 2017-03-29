@@ -15,6 +15,7 @@ namespace VetTrainer.Models
         public VetAppDBContext()
             : base($"name={ConnectionStringName}")
         {
+            this.Configuration.LazyLoadingEnabled = false;
         }
 
         public virtual DbSet<Analysis> Analyses { get; set; }

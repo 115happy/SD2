@@ -1,38 +1,86 @@
 ﻿@model VetTrainer.Views.ViewModel.RolesViewModel
 @{
-    ViewBag.Title = "角色扮演";
+ViewBag.Title = "角色扮演";
 }
 <head>
+<link rel="stylesheet" href="../../Src/css/swiper.min.css">
 	<link rel="stylesheet" href="../../dist/css/role.css">
 </head>
 <div class="container">
 	<div class="row">
-        @{
-            for (int i = 0; i < Model.Roles.Count; i++)
-            {
-                <div class="col-md-4 role-select-tab">
-                    <div class="role-desc desc-hidden">
-                        <h4>@Html.ActionLink(Model.Roles[i].Name, "ClinicSelect", "RolePlay", new { roleId = Model.Roles[i].Id }, null)</h4>
-                        <p>@Model.Roles[i].Description</p>
-                    </div>
-                </div>
-             }
-          }
+		<div class="col-md-12">
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+					<div class="swiper-slide">
+						<div class="role-select-tab front-tab">
+							<div class="front-tab"></div>
+							<img src="../../Src/images/front_icon.png" alt="">
+							<div class="role-desc desc-hidden">
+								<h4>@Html.ActionLink(Model.Roles[0].Name, "ClinicSelect", "RolePlay", new { roleId = Model.Roles[0].Id }, null)</h4>
+								<p>@Model.Roles[0].Description</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="role-select-tab ass-tab">
+							<img src="../../Src/images/ass_icon.png" alt="">
+							<div class="role-desc desc-hidden">
+								<h4>@Html.ActionLink(Model.Roles[1].Name, "ClinicSelect", "RolePlay", new { roleId = Model.Roles[1].Id }, null)</h4>
+								<p>@Model.Roles[1].Description</p>
+							</div>
+						</div>
+					</div>
+					<div class="swiper-slide">
+						<div class="role-select-tab doc-tab">
+							<img src="../../Src/images/doc_icon.png" alt="">
+							<div class="role-desc desc-hidden">
+								<h4>@Html.ActionLink(Model.Roles[2].Name, "ClinicSelect", "RolePlay", new { roleId = Model.Roles[2].Id }, null)</h4>
+								<p>@Model.Roles[2].Description</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="swiper-pagination"></div>
+			</div>
+
+		</div>
+		
+
+
+
+		
 	</div>
 </div>
+<script src="../../Src/js/swiper.jquery.min.js"></script>
 <script>
 	(function () {
-		//显示角色描述
-	    $('.role-select-tab').hover(
-			function () {
-			    $(this).children('.role-desc').slideToggle('fast');
-			},
-			function () {
-			    $(this).children('.role-desc').slideToggle('fast');
+		var roleSwiper = new Swiper('.swiper-container', {
+			initialSlide :1,
+			pagination: '.swiper-pagination',
+			effect: 'coverflow',
+			grabCursor: true,
+			centeredSlides: true,
+			slidesPerView: 'auto',
+			coverflow: {
+				rotate: 50,
+				stretch: 0,
+				depth: 10,
+				modifier: 1,
+				slideShadows : false
 			}
-		);
-	    //$('.role-select-tab').on('click', function () {
+		});
 
-	    //})
+		//显示角色描述
+		//    $('.role-select-tab').hover(
+		// 	function () {
+		// 	    $(this).children('.role-desc').slideToggle('fast');
+		// 	},
+		// 	function () {
+		// 	    $(this).children('.role-desc').slideToggle('fast');
+		// 	}
+		// );
+		//$('.role-select-tab').on('click', function () {
+
+		//})
 	})();
 </script>

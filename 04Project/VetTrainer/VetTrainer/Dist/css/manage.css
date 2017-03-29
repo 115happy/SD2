@@ -1,6 +1,12 @@
 .box-shadowed {
   box-shadow: 0 0 8px #e3e3e3;
 }
+body {
+  background-color: white;
+}
+body > .container {
+  background-color: white;
+}
 .manage-container {
   padding: 15px;
   min-height: 600px;
@@ -42,6 +48,15 @@
 }
 .manage-list li:hover {
   cursor: pointer;
+}
+.clinic-list {
+  margin-top: 20px;
+}
+.clinic-list li {
+  cursor: pointer;
+}
+.clinic-list li:hover {
+  background-color: #e3e3e3;
 }
 .fade-enter-active,
 .fade-leave-active {
