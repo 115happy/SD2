@@ -15,26 +15,27 @@ ViewBag.Count = 0;
 	<div class="row">
 		<div class="col-md-2">
 			<ul class="list-group manage-list">
-				<li class="list-group-item"><a v-on:click="toggleUser" href="javascript:;">用户管理</a></li>
+				<li class="list-group-item"><a v-on:click="currentLayer='user'" href="javascript:;">用户管理</a></li>
 				<li class="list-group-item">
 					<a href="javascript:;">基本结构和功能管理</a>
 					<ul class="">
-						<li class=""><a v-on:click="toggleInstrument" href="javascript:;">操作器械管理</a></li>
-						<li class=""><a v-on:click="toggleClinic" href="javascript:;">职能学习管理</a></li>
-						<li class=""><a v-on:click="toggleDrug" href="javascript:;">药品管理</a></li>
-						<li class=""><a v-on:click="toggleAnalysis" href="javascript:;">化验项目管理</a></li>
-						<li class=""><a v-on:click="toggleCharge" href="javascript:;">收费管理</a></li>
+						<li class=""><a v-on:click="currentLayer='instrument'" href="javascript:;">操作器械管理</a></li>
+						<li class=""><a v-on:click="currentLayer='clinicIns'" href="javascript:;">科室器械关系管理</a></li>
+						<li class=""><a v-on:click="currentLayer='clinic'" href="javascript:;">职能学习管理</a></li>
+						<li class=""><a v-on:click="currentLayer='drug'" href="javascript:;">药品管理</a></li>
+						<li class=""><a v-on:click="currentLayer='analysis'" href="javascript:;">化验项目管理</a></li>
+						<li class=""><a v-on:click="currentLayer='charge'" href="javascript:;">收费管理</a></li>
 					</ul>
 				</li>
-				<li class="list-group-item"><a v-on:click="toggleRole" href="javascript:;">角色管理</a></li>
+				<li class="list-group-item"><a v-on:click="currentLayer='role'" href="javascript:;">角色管理</a></li>
 				<li class="list-group-item"><a href="javascript:;">疾病管理</a>
 					<ul>
-						<li><a v-on:click="toggleDiseaseType" href="javascript:;">疾病类型管理</a></li>
-						<li><a v-on:click="toggleDisease" href="javascript:;">疾病管理</a></li>
-						<li><a v-on:click="toggleCase" href="javascript:;">病例管理</a></li>
+						<li><a v-on:click="currentLayer='diseasetype'" href="javascript:;">疾病类型管理</a></li>
+						<li><a v-on:click="currentLayer='disease'" href="javascript:;">疾病管理</a></li>
+						<li><a v-on:click="currentLayer='case'" href="javascript:;">病例管理</a></li>
 					</ul>
 				</li>
-				<li class="list-group-item"><a v-on:click="toggleBackup" href="javascript:;" data-target="backup">备份与恢复</a></li>
+				<li class="list-group-item"><a v-on:click="currentLayer='backup'" href="javascript:;" data-target="backup">备份与恢复</a></li>
 			</ul>
 		</div>
 		<div class="col-md-10 manage-content">
@@ -69,7 +70,7 @@ ViewBag.Count = 0;
 										<td v-if="user.Authority == 0">普通用户</td>
 										<td v-if="user.Authority == 1">管理员</td>
 										<td>
-											<button v-on:click="userToEdit=user" data-toggle="modal" data-target="#editUserModal" class="btn btn-primary">修改</button>
+											<button v-on:click="userToEdit=JSON.parse(JSON.stringify(user))" data-toggle="modal" data-target="#editUserModal" class="btn btn-primary">修改</button>
 											<button v-on:click="userToDelete=user.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">删除</button>
 										</td>
 									</tr>
@@ -112,7 +113,7 @@ ViewBag.Count = 0;
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<input v-model="userToEdit.Name" class="form-control" type="text" placeholder="输入用户名">
+										<input v-model="userToEdit.Name" class="form-control" type="text" placeholder="输入用户名" disabled>
 									</div>
 									<div class="form-group">
 										<input v-model="userToEdit.Password" class="form-control" type="text" placeholder="密码">
@@ -168,7 +169,7 @@ ViewBag.Count = 0;
 										<td>{{ins.Name}}</td>
 										<td>{{ins.Description}}</td>
 										<td>
-											<button data-toggle="modal" data-target="#editInsModal" class="btn btn-primary">修改</button>
+											<button v-on:click="insToEdit=JSON.parse(JSON.stringify(ins))" data-toggle="modal" data-target="#editInsModal" class="btn btn-primary">修改</button>
 											<button v-on:click="insToDelete=ins.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteInsModal">删除</button>
 										</td>
 									</tr>
@@ -192,6 +193,18 @@ ViewBag.Count = 0;
 									</div>
 									<div class="form-group">
 										<input v-model="newIns.ModelUrl" class="form-control" type="text" placeholder="模型">
+									</div>
+									<div class="form-group">
+										<textarea v-model="newIns.Texts[0]" class="form-control" type="text" placeholder="操作说明"  cols="30" rows="5"></textarea>
+									
+									</div>
+									<div class="form-group">
+										<label class="control-label">上传图片</label>
+										<input class="form-control" type="file">
+									</div>
+									<div class="form-group">
+									<label class="control-label">上传视频</label>
+										<input class="form-control" type="file">
 									</div>
 								</div>
 								<div class="modal-footer">
@@ -293,6 +306,10 @@ ViewBag.Count = 0;
 							</div>
 						</div>
 					</div> -->
+				</div>
+
+				<div v-else-if="currentLayer == 'clinicIns'" class="containter-fluid" key="clinicIns">
+					
 				</div>
 
 				<div v-else-if="currentLayer == 'clinic'" class="container-fluid" key="clinic">
@@ -539,7 +556,7 @@ ViewBag.Count = 0;
 						<div class="col-md-3">
 							<input class="form-control" type="text" placeholder="搜索收费项目">
 						</div>
-						<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a v-on:click="searchCharge" href="javascript:;" class="btn btn-primary">搜索</a></div>
 					</div>
 					<div class="row">
 						<div class="col-md-12">
@@ -694,9 +711,9 @@ ViewBag.Count = 0;
 				<div v-else-if="currentLayer == 'disease'" class="container-fluid" key="disease">
 					<div class="row">
 						<div class="col-md-3">
-							<input class="form-control" type="text" placeholder="搜索疾病">
+							<input v-model="diseaseKeyWord" class="form-control" type="text" placeholder="搜索疾病">
 						</div>
-						<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a v-on:click="getDisease(diseaseKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
 						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addDiseaseModal">添加</a></div>
 					</div>
 					<div class="row">
@@ -710,20 +727,10 @@ ViewBag.Count = 0;
 									</tr>
 								</thead>
 								<tbody>
-									<tr>
-										<td>Tanmay</td>
-										<td>Bangalore</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger" data-toggle="modal" data-target="#deleteDiseaseModal">删除</button></td>
-									</tr>
-									<tr>
-										<td>Sachin</td>
-										<td>400003</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
-									</tr>
-									<tr>
-										<td>Uma</td>
-										<td>411027</td>
-										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+									<tr v-for="disease in diseases">
+										<td>{{disease.Name}}</td>
+										<td>{{diseaseTypes[disease.DiseaseTypeId-1].Name}}</td>
+										<td><button class="btn btn-primary">修改</button><button v-on:click="diseaseToDelete=disease.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteDiseaseModal">删除</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -738,14 +745,16 @@ ViewBag.Count = 0;
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="输入疾病名称">
+										<input v-model="newDisease.Name" class="form-control" type="text" placeholder="输入疾病名称">
 									</div>
 									<div class="form-group">
-										<select name="" id="">疾病类型</select>
+										<select v-model="newDisease.DiseaseTypeId" name="" class="form-control">疾病类型
+											<option v-for="type in diseaseTypes" value="type.Id">{{type.Name}}</option>
+										</select>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary">确定</button>
+									<button v-on:click="addDisease" type="button" class="btn btn-primary">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
@@ -785,7 +794,7 @@ ViewBag.Count = 0;
 									确定删除此疾病？
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-danger">确定</button>
+									<button v-on:click="deleteDisease" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->

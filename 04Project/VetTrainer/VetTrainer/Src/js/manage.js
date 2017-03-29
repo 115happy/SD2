@@ -2,7 +2,7 @@ var app = new Vue ({
 	el: '#app',
 	data : function() {
 		return {
-			currentLayer : '',
+			currentLayer : 'welcome',
 
 			//用户数据
 			userKeyWord : '',
@@ -17,7 +17,9 @@ var app = new Vue ({
 			//器械数据
 			instruments : [],
 			insKeyWord : [],
-			newIns : {},
+			newIns : {
+				'Texts' : []
+			},
 			insToDelete : '',
 			insToEdit : {},
 
@@ -48,22 +50,33 @@ var app = new Vue ({
 			newType : {},
 			typeToDelete  : '',
 			typeToEdit : {},
+
+			//疾病数据
+			diseases : [],
+			diseaseKeyWord : '',
+			newDisease : {
+				'DiseaseCases' : []
+			},
+			diseaseToDelete  : '',
+			diseaseToEdit : {},
 		}
 		
 	},
 	mounted : function() {
-		this.toggleWelcome();
-
-		this.getUser();
-		this.getInstrument();
+		// this.getUser();
+		// this.getInstrument();
 		// this.getClinic();
-		this.getDrug();
-		this.getAnalysis();
-		this.getRole();
-		this.getCharge();
+		// this.getDrug();
+		// this.getAnalysis();
+		// this.getRole();
+		// this.getCharge();
 		this.getDiseaseType();
+		// this.getDisease();
 	},
 	methods : {
+		cloneObject : function(origin) {
+
+		},
 		getUser : function(key) {
 			axios.get('../api/UserSearch/' + key)
 			.then((res) => {
@@ -200,7 +213,7 @@ var app = new Vue ({
 			});
 		},
 		getCharge : function(key) {
-			axios.get('../api/ChargeSearch/' + key)
+			axios.get('../api/ChargeSearch?searchText=' + key)
 			.then((res) => {
 				this.charges = JSON.parse(res.data).Data;
 			}).catch((error) => {
@@ -248,6 +261,35 @@ var app = new Vue ({
 				console.log('删除疾病类型失败')
 			});
 		},
+		getDisease : function(key) {
+			axios.get('../api/DiseaseSearch?searchText=' + key)
+			.then((res) => {
+				this.diseases = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索疾病失败')
+			});
+		},
+		deleteDisease : function() {
+			axios.post('../api/DiseaseDelete', {
+				'id' : this.diseaseToDelete
+			})
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getDisease();
+			}).catch((error) => {
+				console.log('删除疾病失败')
+			});
+		},
+		addDisease : function() {
+			axios.post('../api/DiseaseAdd', this.newDisease)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.newType = {};
+				this.getDiseaseType();
+			}).catch((error) => {
+				console.log('添加疾病类型失败')
+			});
+		},
 		getClinic : function() {
 			axios.get('../api/ClinicSearch')
 			.then((res) => {
@@ -256,50 +298,6 @@ var app = new Vue ({
 			.catch((error) => {
 				console.log('搜索科室失败')
 			})
-		},
-
-
-
-
-
-
-
-
-		toggleWelcome : function() {
-			this.currentLayer = 'welcome';
-		},
-		toggleUser : function() {
-			this.currentLayer = 'user';
-		},
-		toggleInstrument : function() {
-			this.currentLayer = 'instrument';
-		},
-		toggleClinic : function() {
-			this.currentLayer = 'clinic';
-		},
-		toggleDrug : function() {
-			this.currentLayer = 'drug';
-		},
-		toggleAnalysis : function() {
-			this.currentLayer = 'analysis';
-		},
-		toggleCharge : function() {
-			this.currentLayer = 'charge';
-		},
-		toggleRole : function() {
-			this.currentLayer = 'role';
-		},
-		toggleDiseaseType : function() {
-			this.currentLayer = 'diseasetype';
-		},
-		toggleDisease : function() {
-			this.currentLayer = 'disease';
-		},
-		toggleCase : function() {
-			this.currentLayer = 'case';
-		},
-		toggleBackup : function() {
-			this.currentLayer = 'backup';
 		},
 	}
 })
