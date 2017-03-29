@@ -27,12 +27,12 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "参数错误";
             }
-            var diseaseToUpdate = _context.Diseases.Find(diseaseCase.Id);
-            diseaseToUpdate.Name = diseaseCase.Name;
+            var diseaseCaseToUpdate = _context.DiseaseCases.Find(diseaseCase.Id);
+            diseaseCaseToUpdate.Name = diseaseCase.Name;
 
             try
             {
-                _context.Entry(diseaseToUpdate).State = EntityState.Modified;
+                _context.Entry(diseaseCaseToUpdate).State = EntityState.Modified;
                 _context.SaveChanges();
                 msg = "修改成功";
             }

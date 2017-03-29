@@ -29,6 +29,10 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var instrumentToDelete = _context.Instruments.Find(instrument.Id);
+            _context.Entry(instrumentToDelete).Collection(u => u.Texts).Load();
+            _context.Entry(instrumentToDelete).Collection(u => u.Pictures).Load();
+            _context.Entry(instrumentToDelete).Collection(u => u.Videos).Load();
+
             var instrumentToDeleteDto = Mapper.Map<Instrument, InstrumentDto>(instrumentToDelete);
             if (instrumentToDelete == null)
             {
