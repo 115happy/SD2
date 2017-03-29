@@ -83,7 +83,6 @@
     function modifyUser() {
         //if((document.getElementById("password").innerHTML == document.getElementById("passwordConfirm").innerHTML) &&
         //document.getElementById("password").innerHTML != ""){
-        debugger;
         if ($('#password').val() != $('#passwordConfirm').val()) {
             setMsgModalContent("两次输入密码不一致，请检查！"); toggleMsgModal(); return;
         }
@@ -99,9 +98,11 @@
             "IsToRememberMe": "@Model.IsToRememberMe",
         };
         $.post('/api/UserModify', user,
-            function (data, sucess) {
-                //console.log(data);
-                setMsgModalContent(data.Message);
+            function (ds, success) {
+                //debugger;
+                var data = JSON.parse(ds);
+                console.log(ds);
+                setMsgModalContent(data.message);
                 toggleMsgModal();
                 //var t = JSON.parse(data);
                 //console.log(t);
