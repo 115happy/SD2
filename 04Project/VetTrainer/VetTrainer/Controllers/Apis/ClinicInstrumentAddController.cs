@@ -23,7 +23,7 @@ namespace VetTrainer.Controllers.Apis
         {
             _context.Dispose();
         }
-        public IHttpActionResult PostUpload()
+        public async Task<HttpResponseMessage> PostUpload()
         {
             var s = "";
             HttpResponseMessage result = null;
@@ -40,7 +40,7 @@ namespace VetTrainer.Controllers.Apis
                 }
                 result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
             }
-            return Ok();
+            return result;
         }
 
         // POST: api/clinicinstrumentaddcontroller
@@ -87,8 +87,8 @@ namespace VetTrainer.Controllers.Apis
                     var picToAdd = Mapper.Map<PictureDto, Picture>(p);
                     instrumentToAdd.Pictures.Add(picToAdd);
 
-                    // GetPicture
-                    var httpRequest = HttpContext.Current.Request;
+                    //// GetPicture
+                    //var httpRequest = HttpContext.Current.Request;
                 }
                 foreach (VideoDto v in ist.Videos)
                 {

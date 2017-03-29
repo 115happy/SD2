@@ -1,18 +1,17 @@
 ﻿@{
-    ViewBag.Title = "Index";
-    ViewBag.Count = 0;
+ViewBag.Title = "Index";
+ViewBag.Count = 0;
 }
 
 @*@Scripts.Render("~/bundles/vue")*@
 @*<script src="https://unpkg.com/vue/dist/vue.js"></script>*@
 
 <head>
-    <link rel="stylesheet" href="../../dist/css/manage.css">
-    <title>管理</title>
+	<link rel="stylesheet" href="../../dist/css/manage.css">
+	<title>管理</title>
 </head>
 
 <div class="container-fluid manage-container" id="app">
-
 	<div class="row">
 		<div class="col-md-2">
 			<ul class="list-group manage-list">
@@ -142,241 +141,26 @@
 						</div><!-- /.modal -->
 					</div>
 
-                    <div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="addUserLabel">添加新用户</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <input v-model="newUser.Name" class="form-control" type="text" placeholder="输入用户名">
-                                    </div>
-                                    <div class="form-group">
-                                        <input v-model="newUser.Password" class="form-control" type="text" placeholder="密码">
-                                    </div>
-                                    <div class="form-group">
+					<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="deleteUserLabel">警告</h4>
+								</div>
+								<div class="modal-body">
+									确定删除此用户？
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="deleteUser" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+				</div>
 
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button v-on:click="addUser" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal -->
-                    </div>
-                    <div class="modal fade" id="editUserModal" tabindex="-1" role="dialog" aria-labelledby="editUserLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="editUserLabel">修改用户</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <input v-model="userToEdit.Name" class="form-control" type="text" placeholder="输入用户名" disabled>
-                                    </div>
-                                    <div class="form-group">
-                                        <input v-model="userToEdit.Password" class="form-control" type="text" placeholder="密码">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button v-on:click="editUser" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal -->
-                    </div>
-
-                    <div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="deleteUserLabel">警告</h4>
-                                </div>
-                                <div class="modal-body">
-                                    确定删除此用户？
-                                </div>
-                                <div class="modal-footer">
-                                    <button v-on:click="deleteUser" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                </div>
-                            </div><!-- /.modal-content -->
-                        </div><!-- /.modal -->
-                    </div>
-                </div>
-
-                <div v-else-if="currentLayer == 'instrument'" class="container-fluid" key="instrument">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <input v-model="insKeyWord" class="form-control" type="text" placeholder="搜索器械">
-                        </div>
-                        <div class="col-md-1"><a v-on:click="getInstrument(insKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
-                        <div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addInsModal">添加</a></div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th>器械名</th>
-                                        <th>描述</th>
-                                        <th>操作</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr v-for="ins in instruments">
-                                        <td>{{ins.Name}}</td>
-                                        <td>{{ins.Description}}</td>
-                                        <td>
-                                            <button v-on:click="insToEdit=JSON.parse(JSON.stringify(ins))" data-toggle="modal" data-target="#editInsModal" class="btn btn-primary">修改</button>
-                                            <button v-on:click="insToDelete=ins.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteInsModal">删除</button>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                    <div class="modal fade" id="addInsModal" tabindex="-1" role="dialog" aria-labelledby="addInsLabel" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                    <h4 class="modal-title" id="addInsLabel">添加新器械</h4>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <input v-model="newIns.Name" class="form-control" type="text" placeholder="输入器械名">
-                                    </div>
-                                    <div class="form-group">
-                                        <input v-model="newIns.Description" class="form-control" type="text" placeholder="描述">
-                                    </div>
-                                    <div class="form-group">
-                                        <input v-model="newIns.ModelUrl" class="form-control" type="text" placeholder="模型">
-                                    </div>
-                                    <div class="form-group">
-                                        <textarea v-model="newIns.Texts[0]" class="form-control" type="text" placeholder="操作说明" cols="30" rows="5"></textarea>
-
-                                    </div>
-                                    @*<div class="form-group">
-                                        <label class="control-label">上传图片</label>
-                                        <input class="form-control" type="file">*@
-                                    @using (Html.BeginForm("Index", "SystemManager", FormMethod.Post, new { enctype = "multipart/form-data", @class = "form-group" }))
-                                    {
-                                        <label for="fileInstrument" class="control-label">上传图片</label>
-                                        <input id="fileInstrument" class="form-control" type="file" name="file" />
-                                        <input type="submit" value="OK" />
-                                    }
-                                </div>
-                                <div class="form-group">
-                                    <label class="control-label">上传视频</label>
-                                    <input class="form-control" type="file">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button v-on:click="addIns" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
-                </div>
-                <div class="modal fade" id="editInsModal" tabindex="-1" role="dialog" aria-labelledby="editInsLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="editInsLabel">修改器械</h4>
-                            </div>
-                            <div class="modal-body">
-                                <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                                <div class="form-group">
-                                    <input class="form-control" type="text" placeholder="">
-                                </div>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-primary">确定</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
-                </div>
-
-                <div class="modal fade" id="deleteInsModal" tabindex="-1" role="dialog" aria-labelledby="deleteInsLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                                <h4 class="modal-title" id="deleteInsLabel">警告</h4>
-                            </div>
-                            <div class="modal-body">
-                                确定删除此器械？
-                            </div>
-                            <div class="modal-footer">
-                                <button v-on:click="deleteIns" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
-                                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                            </div>
-                        </div><!-- /.modal-content -->
-                    </div><!-- /.modal -->
-                </div>
-                <!-- 	<div class="row">
-                        <div class="col-md-3">
-                            <ul class="list-group">
-                                <li v-for="clinic in clinics" class="list-group-item">
-                                    <a href="javascript:;">{{clinic.Name}}</a>
-                                    <ul>
-                                        <li v-for="ins in clinic.Instruments"><a v-on:click="currentIns=ins" href="javascript:;">{{ins.Name}}</a></li>
-                                    </ul>
-                                </li>
-                            </ul>
-                        </div>
-
-                        <div class="col-md-9">
-                            <div class="ins-info">
-                                <div class="row">
-                                    <div class="col-md-1">名称</div>
-                                    <div class="col-md-4"><input v-model="currentIns.Name" class="form-control" type="text"></div>
-                                    <div class="col-md-1">描述</div>
-                                    <div class="col-md-6"><input v-model="currentIns.Description" class="form-control" type="text"></div>
-                                </div>
-                                <hr>
-                            </div>
-                            <ul id="instrumentTab" class="nav nav-tabs">
-                                <li class="active">
-                                    <a href="#function" data-toggle="tab">
-                                        功能说明
-                                    </a>
-                                </li>
-                                <li><a href="#opration" data-toggle="tab">操作流程</a></li>
-                                <li class="dropdown">
-                                    <a href="#demo"	data-toggle="tab">演示动画</a>
-                                </li>
-                            </ul>
-                            <div id="myTabContent" class="tab-content">
-                                <div class="tab-pane fade in active" id="function">
-                                    <div class="well">
-                                        <textarea class="form-control" rows="10"></textarea>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="opration">
-                                    <div class="well">
-                                        <textarea class="form-control" rows="10"></textarea>
-                                    </div>
-                                </div>
-                                <div class="tab-pane fade" id="demo">
-                                    <div class="well">
-                                        演示动画
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
-        </div>
-			<div v-else-if="currentLayer == 'instrument'" class="container-fluid" key="instrument">
+				<div v-else-if="currentLayer == 'instrument'" class="container-fluid" key="instrument">
 					<div class="row">
 						<div class="col-md-3">
 							<input v-model="insKeyWord" class="form-control" type="text" placeholder="搜索器械">
@@ -528,7 +312,7 @@
 								<div class="modal-body">
 									<div class="form-group">
 										<select v-model="newClinicIns.clinicId" class="form-control">科室名
-											<option v-for="clinic in clinics" :value="clinic.Id">{{clinic.Name}}</option>
+											<option v-for="clinic in clinics" :value="clinic.Id">{{clinic.Id}}{{clinic.Name}}</option>
 										</select>
 									</div>
 									<div class="form-group">
@@ -539,20 +323,15 @@
 									<div class="form-group">
 										<textarea class="form-control" type="text" placeholder="操作说明"  cols="30" rows="5"></textarea>
 									</div>
-                                    <iframe name="ansynform" style="display:none;"></iframe>
-                                    <form name="form1" method="post" target="ansynform" action="~/api/ClinicInstrumentAdd" enctype="multipart/form-data">
-                                        <div class="form-group">
-                                            <label class="control-label">上传图片</label>
-                                            <input class="form-control" type="file">
-                                            <input type="submit" value="Upload" />
-                                        </div>
-                                    </form>
-                                        <div class="form-group">
-                                            <label class="control-label">上传视频</label>
-                                            <input class="form-control" type="file">
-                                        </div>
-                                      
-                                </div>
+									<div class="form-group">
+										<label class="control-label">上传图片</label>
+										<input class="form-control" type="file">
+									</div>
+									<div class="form-group">
+										<label class="control-label">上传视频</label>
+										<input class="form-control" type="file">
+									</div>
+								</div>
 								<div class="modal-footer">
 									<button v-on:click="addClinicIns" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -669,193 +448,195 @@
 					</div>
 				</div>
 
-        <div v-else-if="currentLayer == 'clinicIns'" class="containter-fluid" key="clinicIns">
+				<div v-else-if="currentLayer == 'drug'" class="container-fluid" key="drug">
+					<div class="row">
+						<div class="col-md-3">
+							<input class="form-control" type="text" placeholder="搜索药品">
+						</div>
+						<div class="col-md-1"><a v-on:click="getDrug(drugKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addDrugModal">添加</a></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>药品名</th>
+										<th>价格</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="drug in drugs">
+										<td>{{drug.Name}}</td>
+										<td>{{drug.Price}}</td>
+										<td>
+											<button v-on:click="drugToEdit=drug" class="btn btn-primary" data-toggle="modal" data-target="#editDrugModal">修改</button>
+											<button v-on:click="drugToDelete=drug.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteDrugModal">删除</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="modal fade" id="addDrugModal" tabindex="-1" role="dialog" aria-labelledby="addDrugLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="addDrugLabel">添加药品</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<input v-model="newDrug.Name" class="form-control" type="text" placeholder="输入药品名">
+									</div>
+									<div class="form-group">
+										<input v-model="newDrug.Price" class="form-control" type="text" placeholder="输入药品价格">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="addDrug" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+					<div class="modal fade" id="editDrugModal" tabindex="-1" role="dialog" aria-labelledby="editDrugLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="editDrugLabel">修改药品</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<input v-model="drugToEdit.Name" class="form-control" type="text" placeholder="输入药品名">
+									</div>
+									<div class="form-group">
+										<input v-model="drugToEdit.Price" class="form-control" type="text" placeholder="输入药品价格">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="editDrug" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
 
-        </div>
+					<div class="modal fade" id="deleteDrugModal" tabindex="-1" role="dialog" aria-labelledby="deleteDrugLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="deleteDrugLabel">警告</h4>
+								</div>
+								<div class="modal-body">
+									确定删除此药品信息？
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="deleteDrug" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+				</div>
 
-        <div v-else-if="currentLayer == 'clinic'" class="container-fluid" key="clinic">
-            <div class="row">
-                <div class="col-md-4"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addRpModal">添加职能信息</a></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>角色名称</th>
-                                <th>科室名称</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="rp in rps">
-                                <td>{{rp.Role.Name}}</td>
-                                <td>{{rp.Clinic.Name}}</td>
-                                <td>
-                                    <button v-on:click="rpToEdit=JSON.parse(JSON.stringify(rp))" data-toggle="modal" data-target="#editRpModal" class="btn btn-primary">修改</button>
-                                    <button v-on:click="rpToDelete=JSON.parse(JSON.stringify(rp))" class="btn btn-danger" data-toggle="modal" data-target="#deleteRpModal">删除</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal fade" id="addRpModal" tabindex="-1" role="dialog" aria-labelledby="addRpLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="addRpLabel">添加新职能</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <select v-model="newRp.RoleId" name="" class="form-control">
-                                    选择角色
-                                    <option v-for="role in roles" value="role.Id">{{role.Name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <select v-model="newRp.ClinicId" name="" class="form-control">
-                                    选择科室
-                                    <option v-for="clinic in clinics" value="clinic.Id">{{clinic.Name}}</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <textarea class="form-control" type="text" placeholder="操作说明" cols="30" rows="5"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">上传图片</label>
-                                <input class="form-control" type="file">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">上传视频</label>
-                                <input class="form-control" type="file">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="addRp" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-            <div class="modal fade" id="editRpModal" tabindex="-1" role="dialog" aria-labelledby="editInsLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="editRpLabel">修改器械</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
+				<div v-else-if="currentLayer == 'analysis'" class="container-fluid" key="analysis">
+					<div class="row">
+						<div class="col-md-3">
+							<input class="form-control" type="text" placeholder="搜索化验项目">
+						</div>
+						<div class="col-md-1"><a v-on:click="getAnalysis(analysisKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addAnalysisModal">添加</a></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>化验项目名</th>
+										<th>价格</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="ana in analysises">
+										<td>{{ana.Name}}</td>
+										<td>{{ana.Amount}}</td>
+										<td>
+											<button class="btn btn-primary">修改</button>
+											<button v-on:click="analysisToDelete=ana.id" class="btn btn-danger" data-toggle="modal" data-target="#deleteAnalysisModal">删除</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="modal fade" id="addAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="addAnalysisLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="addAnalysisLabel">添加项目</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<input v-model="newAnalysis.Name" class="form-control" type="text" placeholder="输入化验项目名">
+									</div>
+									<div class="form-group">
+										<input v-model="newAnalysis.Amount" class="form-control" type="text" placeholder="输入价格">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="addAnalysis" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+					<div class="modal fade" id="editAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="editAnalysisLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="editAnalysisLabel">修改项目</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<input class="form-control" type="text" placeholder="输入化验项目名">
+									</div>
+									<div class="form-group">
+										<input class="form-control" type="text" placeholder="输入价格">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+					<div class="modal fade" id="deleteAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="deleteAnalysisLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="deleteAnalysisLabel">警告</h4>
+								</div>
+								<div class="modal-body">
+									确定删除此化验项目信息？
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="deleteAnalysis" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+				</div>
 
-            <div class="modal fade" id="deleteRpModal" tabindex="-1" role="dialog" aria-labelledby="deleteRpLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="deleteRpLabel">警告</h4>
-                        </div>
-                        <div class="modal-body">
-                            确定删除此器械？
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="deleteRp" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-        </div>
-
-        <div v-else-if="currentLayer == 'drug'" class="container-fluid" key="drug">
-            <div class="row">
-                <div class="col-md-3">
-                    <input class="form-control" type="text" placeholder="搜索药品">
-                </div>
-                <div class="col-md-1"><a v-on:click="getDrug(drugKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
-                <div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addDrugModal">添加</a></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>药品名</th>
-                                <th>价格</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="drug in drugs">
-                                <td>{{drug.Name}}</td>
-                                <td>{{drug.Price}}</td>
-                                <td>
-                                    <button v-on:click="drugToEdit=drug" class="btn btn-primary" data-toggle="modal" data-target="#editDrugModal">修改</button>
-                                    <button v-on:click="drugToDelete=drug.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteDrugModal">删除</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal fade" id="addDrugModal" tabindex="-1" role="dialog" aria-labelledby="addDrugLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="addDrugLabel">添加药品</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input v-model="newDrug.Name" class="form-control" type="text" placeholder="输入药品名">
-                            </div>
-                            <div class="form-group">
-                                <input v-model="newDrug.Price" class="form-control" type="text" placeholder="输入药品价格">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="addDrug" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-            <div class="modal fade" id="editDrugModal" tabindex="-1" role="dialog" aria-labelledby="editDrugLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="editDrugLabel">修改药品</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input v-model="drugToEdit.Name" class="form-control" type="text" placeholder="输入药品名">
-                            </div>
-                            <div class="form-group">
-                                <input v-model="drugToEdit.Price" class="form-control" type="text" placeholder="输入药品价格">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="editDrug" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
 				<div v-else-if="currentLayer == 'charge'" class="container-fluid" key="charge">
 					<div class="row">
 						<div class="col-md-3">
@@ -925,187 +706,94 @@
 					</div>
 				</div>
 
-            <div class="modal fade" id="deleteDrugModal" tabindex="-1" role="dialog" aria-labelledby="deleteDrugLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="deleteDrugLabel">警告</h4>
-                        </div>
-                        <div class="modal-body">
-                            确定删除此药品信息？
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="deleteDrug" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-        </div>
+				<div v-else-if="currentLayer == 'diseasetype'" class="container-fluid" key="diseasetype">
+					<div class="row">
+						<div class="col-md-3">
+							<input v-model="typeKeyWord" class="form-control" type="text" placeholder="搜索疾病类型">
+						</div>
+						<div class="col-md-1"><a v-on:click="getDiseaseType(typeKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addTypeModal">添加</a></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>疾病类型</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr v-for="type in diseaseTypes">
+										<td>{{type.Name}}</td>
+										<td>
+											<button class="btn btn-primary">修改</button>
+											<button v-on:click="typeToDelete=type.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteTypeModal">删除</button>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+					<div class="modal fade" id="addTypeModal" tabindex="-1" role="dialog" aria-labelledby="addTypeLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="addTypeLabel">添加新疾病类型</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<input v-model="newType.Name" class="form-control" type="text" placeholder="输入疾病类型">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="addDiseaseType" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
 
-        <div v-else-if="currentLayer == 'analysis'" class="container-fluid" key="analysis">
-            <div class="row">
-                <div class="col-md-3">
-                    <input class="form-control" type="text" placeholder="搜索化验项目">
-                </div>
-                <div class="col-md-1"><a v-on:click="getAnalysis(analysisKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
-                <div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addAnalysisModal">添加</a></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>化验项目名</th>
-                                <th>价格</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="ana in analysises">
-                                <td>{{ana.Name}}</td>
-                                <td>{{ana.Amount}}</td>
-                                <td>
-                                    <button class="btn btn-primary">修改</button>
-                                    <button v-on:click="analysisToDelete=ana.id" class="btn btn-danger" data-toggle="modal" data-target="#deleteAnalysisModal">删除</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal fade" id="addAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="addAnalysisLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="addAnalysisLabel">添加项目</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input v-model="newAnalysis.Name" class="form-control" type="text" placeholder="输入化验项目名">
-                            </div>
-                            <div class="form-group">
-                                <input v-model="newAnalysis.Amount" class="form-control" type="text" placeholder="输入价格">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="addAnalysis" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-            <div class="modal fade" id="editAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="editAnalysisLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="editAnalysisLabel">修改项目</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="输入化验项目名">
-                            </div>
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="输入价格">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-            <div class="modal fade" id="deleteAnalysisModal" tabindex="-1" role="dialog" aria-labelledby="deleteAnalysisLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="deleteAnalysisLabel">警告</h4>
-                        </div>
-                        <div class="modal-body">
-                            确定删除此化验项目信息？
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="deleteAnalysis" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-        </div>
+					<div class="modal fade" id="editTypeModal" tabindex="-1" role="dialog" aria-labelledby="editTypeLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="editTypeLabel">修改疾病类型</h4>
+								</div>
+								<div class="modal-body">
+									<div class="form-group">
+										<input class="form-control" type="text" placeholder="输入疾病类型">
+									</div>
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-primary">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
 
-        <div v-else-if="currentLayer == 'charge'" class="container-fluid" key="charge">
-            <div class="row">
-                <div class="col-md-3">
-                    <input class="form-control" type="text" placeholder="搜索收费项目">
-                </div>
-                <div class="col-md-1"><a v-on:click="searchCharge" href="javascript:;" class="btn btn-primary">搜索</a></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>收费项目名</th>
-                                <th>价格</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="charge in charges">
-                                <td>{{charge.Name}}</td>
-                                <td>{{charge.Amount}}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
+					<div class="modal fade" id="deleteTypeModal" tabindex="-1" role="dialog" aria-labelledby="deleteTypeLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="deleteTypeLabel">警告</h4>
+								</div>
+								<div class="modal-body">
+									确定删除此疾病类型？
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="deleteDiseaseType" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+				</div>
 
-        <div v-else-if="currentLayer == 'role'" class="container-fluid" key="role">
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>角色名称</th>
-                                <th>描述</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="role in roles">
-                                <td>{{role.Name}}</td>
-                                <td>{{role.Description}}</td>
-                                <td><button class="btn btn-primary" data-toggle="modal" data-target="#editRoleModal">修改</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal fade" id="editRoleModal" tabindex="-1" role="dialog" aria-labelledby="editRoleLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="editRoleLabel">修改角色</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="输入修改角色名">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-        </div>
 				<div v-else-if="currentLayer == 'disease'" class="container-fluid" key="disease">
 					<div class="row">
 						<div class="col-md-3">
@@ -1181,236 +869,72 @@
 						</div><!-- /.modal -->
 					</div>
 
-        <div v-else-if="currentLayer == 'diseasetype'" class="container-fluid" key="diseasetype">
-            <div class="row">
-                <div class="col-md-3">
-                    <input v-model="typeKeyWord" class="form-control" type="text" placeholder="搜索疾病类型">
-                </div>
-                <div class="col-md-1"><a v-on:click="getDiseaseType(typeKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
-                <div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addTypeModal">添加</a></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>疾病类型</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="type in diseaseTypes">
-                                <td>{{type.Name}}</td>
-                                <td>
-                                    <button class="btn btn-primary">修改</button>
-                                    <button v-on:click="typeToDelete=type.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteTypeModal">删除</button>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal fade" id="addTypeModal" tabindex="-1" role="dialog" aria-labelledby="addTypeLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="addTypeLabel">添加新疾病类型</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input v-model="newType.Name" class="form-control" type="text" placeholder="输入疾病类型">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="addDiseaseType" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
+					<div class="modal fade" id="deleteDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="deleteDiseaseLabel" aria-hidden="true">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+									<h4 class="modal-title" id="deleteDiseaseLabel">警告</h4>
+								</div>
+								<div class="modal-body">
+									确定删除此疾病？
+								</div>
+								<div class="modal-footer">
+									<button v-on:click="deleteDisease" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
+									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+								</div>
+							</div><!-- /.modal-content -->
+						</div><!-- /.modal -->
+					</div>
+				</div>
 
-            <div class="modal fade" id="editTypeModal" tabindex="-1" role="dialog" aria-labelledby="editTypeLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="editTypeLabel">修改疾病类型</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="输入疾病类型">
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
+				<div v-else-if="currentLayer == 'case'" class="container-fluid" key="case">
+					<div class="row">
+						<div class="col-md-3">
+							<input class="form-control" type="text" placeholder="搜索病例">
+						</div>
+						<div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
+						<div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#">添加</a></div>
+					</div>
+					<div class="row">
+						<div class="col-md-12">
+							<table class="table table-striped table-bordered">
+								<thead>
+									<tr>
+										<th>病例</th>
+										<th>操作</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td>Tanmay</td>
+										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+									</tr>
+									<tr>
+										<td>Sachin</td>
+										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+									</tr>
+									<tr>
+										<td>Uma</td>
+										<td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
 
-            <div class="modal fade" id="deleteTypeModal" tabindex="-1" role="dialog" aria-labelledby="deleteTypeLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="deleteTypeLabel">警告</h4>
-                        </div>
-                        <div class="modal-body">
-                            确定删除此疾病类型？
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="deleteDiseaseType" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-        </div>
-
-        <div v-else-if="currentLayer == 'disease'" class="container-fluid" key="disease">
-            <div class="row">
-                <div class="col-md-3">
-                    <input v-model="diseaseKeyWord" class="form-control" type="text" placeholder="搜索疾病">
-                </div>
-                <div class="col-md-1"><a v-on:click="getDisease(diseaseKeyWord)" href="javascript:;" class="btn btn-primary">搜索</a></div>
-                <div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#addDiseaseModal">添加</a></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>疾病名</th>
-                                <th>疾病类型</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr v-for="disease in diseases">
-                                <td>{{disease.Name}}</td>
-                                <td>{{diseaseTypes[disease.DiseaseTypeId-1].Name}}</td>
-                                <td><button class="btn btn-primary">修改</button><button v-on:click="diseaseToDelete=disease.Id" class="btn btn-danger" data-toggle="modal" data-target="#deleteDiseaseModal">删除</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="modal fade" id="addDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="addDiseaseLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="addDiseaseLabel">添加疾病</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input v-model="newDisease.Name" class="form-control" type="text" placeholder="输入疾病名称">
-                            </div>
-                            <div class="form-group">
-                                <select v-model="newDisease.DiseaseTypeId" name="" class="form-control">
-                                    疾病类型
-                                    <option v-for="type in diseaseTypes" value="type.Id">{{type.Name}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="addDisease" type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-            <div class="modal fade" id="editDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="editDiseaseLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="editDiseaseLabel">添加疾病</h4>
-                        </div>
-                        <div class="modal-body">
-                            <div class="form-group">
-                                <input class="form-control" type="text" placeholder="输入疾病名称">
-                            </div>
-                            <div class="form-group">
-                                <select name="" id="">疾病类型</select>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-primary">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-
-            <div class="modal fade" id="deleteDiseaseModal" tabindex="-1" role="dialog" aria-labelledby="deleteDiseaseLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                            <h4 class="modal-title" id="deleteDiseaseLabel">警告</h4>
-                        </div>
-                        <div class="modal-body">
-                            确定删除此疾病？
-                        </div>
-                        <div class="modal-footer">
-                            <button v-on:click="deleteDisease" type="button" class="btn btn-danger" data-dismiss="modal">确定</button>
-                            <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                        </div>
-                    </div><!-- /.modal-content -->
-                </div><!-- /.modal -->
-            </div>
-        </div>
-
-        <div v-else-if="currentLayer == 'case'" class="container-fluid" key="case">
-            <div class="row">
-                <div class="col-md-3">
-                    <input class="form-control" type="text" placeholder="搜索病例">
-                </div>
-                <div class="col-md-1"><a href="javascript:;" class="btn btn-primary">搜索</a></div>
-                <div class="col-md-1"><a href="javascript:;" class="btn btn-info" data-toggle="modal" data-target="#">添加</a></div>
-            </div>
-            <div class="row">
-                <div class="col-md-12">
-                    <table class="table table-striped table-bordered">
-                        <thead>
-                            <tr>
-                                <th>病例</th>
-                                <th>操作</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Tanmay</td>
-                                <td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
-                            </tr>
-                            <tr>
-                                <td>Sachin</td>
-                                <td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
-                            </tr>
-                            <tr>
-                                <td>Uma</td>
-                                <td><button class="btn btn-primary">修改</button><button class="btn btn-danger">删除</button></td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </div>
-
-        <div v-else-if="currentLayer == 'backup'" class="container-fluid" key="backup">
-        </div>
-        </transition>
-    </div>
-</div>
-
+				<div v-else-if="currentLayer == 'backup'" class="container-fluid" key="backup">
+				</div>
+			</transition>
+		</div>
+	</div>
+	
 </div>
 
 
 @section scripts
 {
-    @Scripts.Render("~/bundles/vue")
+	@Scripts.Render("~/bundles/vue")
 }
 <script src='../../Src/js/manage.js'></script>
