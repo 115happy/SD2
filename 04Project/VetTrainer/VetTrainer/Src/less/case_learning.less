@@ -91,12 +91,19 @@ body {
 .case-list {
     list-style: none;
     margin: 0;
+    overflow: hidden;
+    min-height: 400px;
+    padding: 0;
     li {
         height: 40px;
         line-height: 40px;
         margin: 0;
         text-align: center;
-        border: 1px solid @gray;
-        box-shadow: 0 0 6px @gray;
+        a {
+            display: block;
+            border: 1px solid @gray;
+            box-shadow: 0 0 6px @gray;
+            border-radius: 4px;
+        }
     }
 }

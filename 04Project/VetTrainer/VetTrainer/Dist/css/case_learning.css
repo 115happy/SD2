@@ -88,12 +88,19 @@ body .main hr {
 .case-list {
   list-style: none;
   margin: 0;
+  overflow: hidden;
+  min-height: 400px;
+  padding: 0;
 }
 .case-list li {
   height: 40px;
   line-height: 40px;
   margin: 0;
   text-align: center;
+}
+.case-list li a {
+  display: block;
   border: 1px solid #d8d8d8;
   box-shadow: 0 0 6px #d8d8d8;
+  border-radius: 4px;
 }

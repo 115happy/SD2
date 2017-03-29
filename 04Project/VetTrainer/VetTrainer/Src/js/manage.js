@@ -50,6 +50,7 @@ var app = new Vue ({
 			charges : [],
 
 			roles : [],
+			roleToEdit : {},
 
 			//疾病类型数据
 			diseaseTypes : [],
@@ -70,15 +71,15 @@ var app = new Vue ({
 		
 	},
 	mounted : function() {
-		// this.getUser();
+		this.getUser('');
 		this.getInstrument();
 		this.getClinic();
-		// this.getDrug();
-		// this.getAnalysis();
+		this.getDrug('');
+		this.getAnalysis('');
 		this.getRole();
-		// this.getCharge();
+		this.getCharge('');
 		this.getDiseaseType();
-		// this.getDisease();
+		this.getDisease();
 		this.getRPRecord();
 	},
 	methods : {
@@ -237,7 +238,13 @@ var app = new Vue ({
 			});
 		},
 		editRole : function() {
-
+			axios.post('../api/RoleModify', this.roleToEdit)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getRole();
+			}).catch((error) => {
+				console.log('修改角色失败')
+			});
 		},
 
 		getDiseaseType : function(key) {

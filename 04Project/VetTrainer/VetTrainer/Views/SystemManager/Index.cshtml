@@ -44,6 +44,11 @@ ViewBag.Count = 0;
 					<div class="row">
 						<h2>欢迎使用宠物医院管理系统！</h2>
 					</div>
+					<div class="row">
+						<div class="col-md-12 text-center">
+							<img src="../../Src/images/pets.png" alt="">
+						</div>
+					</div>
 				</div>
 
 				<div v-else-if="currentLayer == 'user'" class="container-fluid" key="user">
@@ -674,7 +679,7 @@ ViewBag.Count = 0;
 									<tr v-for="role in roles">
 										<td>{{role.Name}}</td>
 										<td>{{role.Description}}</td>
-										<td><button class="btn btn-primary" data-toggle="modal" data-target="#editRoleModal">修改</button></td>
+										<td><button v-on:click="roleToEdit=JSON.parse(JSON.stringify(role))" class="btn btn-primary" data-toggle="modal" data-target="#editRoleModal">修改</button></td>
 									</tr>
 								</tbody>
 							</table>
@@ -689,11 +694,11 @@ ViewBag.Count = 0;
 								</div>
 								<div class="modal-body">
 									<div class="form-group">
-										<input class="form-control" type="text" placeholder="输入修改角色名">
+										<input v-model="roleToEdit.Name" class="form-control" type="text" placeholder="输入修改角色名">
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
+									<button v-on:click="editRole" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
 									<button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
 								</div>
 							</div><!-- /.modal-content -->
