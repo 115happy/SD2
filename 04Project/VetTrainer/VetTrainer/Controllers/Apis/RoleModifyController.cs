@@ -26,8 +26,6 @@ namespace VetTrainer.Controllers.Apis
             }
             var roleToUpdate = _context.Roles.Find(role.Id);
             roleToUpdate.Name = role.Name;
-            roleToUpdate.Description = role.Description;
-            roleToUpdate.RolePicUrl = role.RolePicUrl;
             try
             {
                 if(ModelState.IsValid)

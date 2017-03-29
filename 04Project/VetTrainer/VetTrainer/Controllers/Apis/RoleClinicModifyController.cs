@@ -31,6 +31,7 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var rpRecordToModify = _context.RPRecords.Find(rpRecord.RoleId, rpRecord.ClinicId);
+            rpRecordToModify.Description = rpRecord.Description;
             var rpRecordToModifyDto = Mapper.Map<RPRecord, RPRecordDto>(rpRecordToModify);
             try
             {
