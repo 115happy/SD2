@@ -25,6 +25,10 @@ var app = new Vue ({
 
 			//科室数据
 			clinics : [],
+			rps : [],
+			rpToEdit : {},
+			newRp : {},
+			rpToDelete : {},
 
 			//药品数据
 			drugs : [],
@@ -65,13 +69,14 @@ var app = new Vue ({
 	mounted : function() {
 		// this.getUser();
 		// this.getInstrument();
-		// this.getClinic();
+		this.getClinic();
 		// this.getDrug();
 		// this.getAnalysis();
-		// this.getRole();
+		this.getRole();
 		// this.getCharge();
 		this.getDiseaseType();
 		// this.getDisease();
+		this.getRPRecord();
 	},
 	methods : {
 		cloneObject : function(origin) {
@@ -298,6 +303,43 @@ var app = new Vue ({
 			.catch((error) => {
 				console.log('搜索科室失败')
 			})
+		},
+		getRPRecord : function() {
+			axios.get('../api/getAllRPRecord')
+			.then((res) => {
+				this.rps = JSON.parse(res.data).Data;
+			})
+			.catch((error) => {
+				console.log('搜索信息失败')
+			})
+		},
+		addRp : function() {
+			axios.post('../api/RoleClinicAdd', this.newRp)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.newRp = {};
+				this.getRPRecord();
+			}).catch((error) => {
+				console.log('添加职能信息失败')
+			});
+		},
+		editRp : function() {
+			axios.post('../api/RoleClinicModify', this.rpToEdit)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getRPRecord();
+			}).catch((error) => {
+				console.log('修改职能信息失败')
+			});
+		},
+		deleteRp : function() {
+			axios.post('../api/RoleClinicDelete', this.rpToDelete)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getRPRecord();
+			}).catch((error) => {
+				console.log('删除职能信息失败')
+			});
 		},
 	}
 })
