@@ -30,24 +30,47 @@ namespace VetTrainer.Controllers.Apis
             {
                 msg = "参数错误";
             }
+
             var userToUpdate = _context.Users.Find(user.Id);
-            //userToUpdate = Mapper.Map<UserDto, User>(user);
-            userToUpdate.Name = user.Name;
-            userToUpdate.Password = Encoder.Encode(user.Password);
-            userToUpdate.Authority = user.Authority;
-            userToUpdate.IsToRememberMe = user.IsToRememberMe;
-            try
+            if (userToUpdate.Password == Encoder.Encode(user.Password))
             {
-                _context.Entry(userToUpdate).State = EntityState.Modified;
-                _context.SaveChanges();
-                msg = "修改成功";
+                msg = "请输入不同的密码";
             }
-            catch (RetryLimitExceededException)
+            else
             {
-                msg = "网络故障";
+                try
+                {
+                    Mapper.Map(user, userToUpdate);
+                    userToUpdate.Password = Encoder.Encode(user.Password);
+                    _context.SaveChanges();
+                    msg = "修改成功";
+                }
+                catch (RetryLimitExceededException)
+                {
+                    msg = "网络故障";
+                }
             }
+
+            //var userToUpdate = _context.Users.Find(user.Id);
+            //userToUpdate = Mapper.Map<UserIntactDto, User>(user);
+            //userToUpdate.Password = Encoder.Encode(user.Password);
+            //userToUpdate.Name = user.Name;
+            //userToUpdate.Authority = user.Authority;
+            //userToUpdate.IsToRememberMe = user.IsToRememberMe;
+            //try
+            //{
+            //    _context.Entry(userToUpdate).State = EntityState.Modified;
+            //    _context.SaveChanges();
+            //    msg = "修改成功";
+            //}
+            //catch (RetryLimitExceededException)
+            //{
+            //    msg = "网络故障";
+            //}
             //var str = string.Format("{\'Message\': \'{0}\', \'Data\':  \'null\'}", msg);
-            var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
+            var str = $"{{'Message' : {msg}, 'Data' : 'null'}}";
+            str = str.Replace('\'', '"');
+            //var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
         }
     }

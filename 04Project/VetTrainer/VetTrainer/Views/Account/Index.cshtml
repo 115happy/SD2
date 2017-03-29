@@ -1,50 +1,73 @@
-﻿
+﻿@model VetTrainer.Models.DataTransferObjs.UserIntactDto
 @{
-    ViewBag.Title = "密码管理";
+    ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+
 <div class="container-fluid index-bg">
     <div class="container">
-        <hr>
+        <h2>@ViewBag.Title</h2>
+         <hr>
         <div class="login-box form-horizontal">
             <div class="editor-label form-group">
                 <span class="col-md-3">用户ID</span>
                 <div class="editor-field col-md-9">
-                    123145
+                    @Model.Id
                 </div>
             </div>
             <div class="editor-label form-group">
                 <span class="col-md-3">用户名</span>
                 <div class="editor-field col-md-9">
-                    XXX
-                </div>
-            </div>
-            <div class="editor-label form-group">
-                <span class="col-md-3">原密码</span>
-                <div class="editor-field col-md-2">
-                    <input type="text" class="form-control" />
+                    @Model.Name
                 </div>
             </div>
             <div class="editor-label form-group">
                 <span class="col-md-3">新密码</span>
                 <div class="editor-field col-md-2">
-                    <input type="text" class="form-control" />
+                    <input id="password" type="text" class="form-control" />
                 </div>
             </div>
             <div class="editor-label form-group">
                 <span class="col-md-3">确认密码</span>
                 <div class="editor-field col-md-2">
-                    <input type="text" class="form-control" />
+                    <input id="passwordConfirm" type="text" class="form-control" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2 text-center">
-                    <input class="btn btn-default btn-primary" type="submit" value="确认" />
-                </div>
-                <div class="col-md-2 text-center">
-                    <input class="btn btn-default" type="submit" value="取消" />
+                    <input id="modifyUser" class="btn btn-default btn-primary" type="submit" value="确认" />
                 </div>
             </div>
         </div>
-     </div>
+    </div>
 </div>
+
+<script>
+    $('#modifyUser').on('click', modifyUser);
+    function modifyUser() {
+        //if((document.getElementById("password").innerHTML == document.getElementById("passwordConfirm").innerHTML) &&
+        //document.getElementById("password").innerHTML != ""){
+        if ($('#password').val() != $('#passwordConfirm').val()) {
+            alert("两次输入密码不一致，请检查！"); return;
+        }
+        else if ($('#password').val() == "") {
+            alert("输入密码不能为空，请检查！"); return;
+        }
+
+        var user = {
+            "Id": "@Model.Id",
+            "Name": "@Model.Name",
+            "Password": document.getElementById("password").value,
+            "Authority": "@Model.Authority",
+            "IsToRememberMe": "@Model.IsToRememberMe",
+        };
+        $.post('/api/UserModify', user,
+            function (data, sucess) {
+                //console.log(data);
+                alert(data);
+                //var t = JSON.parse(data);
+                //console.log(t);
+            }
+        )
+    }
+</script>

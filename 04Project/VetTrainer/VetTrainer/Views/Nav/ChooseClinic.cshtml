@@ -4,18 +4,21 @@
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
-<h2>科室选择界面</h2>
+<h1>科室选择界面</h1>
 
 <script src="../../Src/3Dres/tour.js"></script>
 <div class="container" align="center">
     <div class="row">
         <div class="col-md-12">
-            <div id="pano" style="width:800px;height:600px;">
 
-            </div>
+            <img src="~/Src/3Dres/imagemap.png" alt="" usemap="#Map" />
+            <map name="Map" id="Map">
+                <area alt="error" title="前台" href="tour?param1=scene_1" shape="poly" coords="427,388,217,494,217,530,509,676,620,623,520,577,521,492,426,446" />
+                <area alt="error" title="手术室" href="tour?param1=scene_2" shape="poly" coords="785,451,873,494,694,587,685,581,684,502" />
+
+            </map>
+
         </div>
     </div>
 </div>
-    <script>
-        embedpano({ swf: "../../Src/3Dres/tour.swf", xml: "../../Src/3Dres/tour.xml", target: "pano", html5: "only", mobilescale: 1.0, passQueryParameters: true });
-    </script>
+

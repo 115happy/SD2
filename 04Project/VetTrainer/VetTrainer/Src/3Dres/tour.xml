@@ -63,9 +63,23 @@
     if(startscene === null OR !scene[get(startscene)], copy(startscene,scene[0].name); );
     loadscene(get(startscene), null, MERGE);
     if(startactions !== null, startactions() );
+
   </action>
+  <!--<action name="startup">
+    ifnot (startscene === null,
+    loadscene(get(scene[%startscene].name),null,MERGE);
+    ,
+    loadscene(get(scene[0].name),null,MERGE);
+    );
+  </action>-->
 
-
+  <!--<plugin name="map" url="map.png" keep="true"
+	        align="leftbottom" x="16"  y="16" alpha="0.85" handcursor="false"
+	        scalechildren="true"
+            width="320"
+            height="227"
+            onclick="action(closemap);"
+            />-->
 
   <scene name="scene_1" title="1" onstart="" havevrimage="true" thumburl="panos/1.tiles/thumb.jpg" lat="" lng="" heading="">
 
@@ -122,10 +136,10 @@
              ath="91.640"
              atv="23.065"
              distorted="true"
-             onclick="spotInfo_click(get(spotId))" 
+             onclick="spotInfo_click(get(spotName))"
       />
-    
-    </scene>
+
+  </scene>
 
   <!-- own textfield -->
   <style name="textfield" url="%SWFPATH%/plugins/textfield.swf" background="false" css="font-size:14px; color:#FF1493; font-style:italic;" />
@@ -133,6 +147,7 @@
   <style name="button" url="%SWFPATH%/plugins/textfield.swf" background="true" backgroundalpha="0.2" css="font-size:14px; color:#FFFFFF;" border="true" bordercolor="0xFFFFFF" padding="2 4" />
 
   <layer name="CtrlLayer"
+           visible="false"
            spotId="默认id"
            keep="true"
            type="container"
@@ -148,14 +163,14 @@
            bgcapture="true" x="0" y="0" style="dragable">
     <layer name="IL_title" style="textfield" html="详情" align="top" y="4" background="false" enabled="false" />
     <layer name="IL_scroller_container" type="container" align="top" y="30" width="-20" height="-40" bgborder="4 0xFFFFFF 0.8" bgcolor="0xFF1493">
-     
+
       <!--<layer name="IL_scroller" style="scrollarea" direction="v" width="100%" height="100" align="top" y="0" />-->
       <!--add 4 button-->
       <layer name="btnOperation" style="button" onclick="btnOperation_click(get(layer[CtrlLayer].spotName))" html="操作流程" align="top" height="20"  x ="-150" y="30"/>
-      <layer name="btnExplaination"  style="button" onclick="btnSpecification_click(get(layer[CtrlLayer].spotName))" html="解释说明" align="top" height="20" x="-50" y="30"/>
+      <layer name="btnExplaination"  style="button" onclick="btnSpecification_click(get(layer[CtrlLayer].spotName))" html="功能说明" align="top" height="20" x="-50" y="30"/>
       <layer name="btnAnimation"  style="button" onclick="btnAnimation_click(get(layer[CtrlLayer].spotName))" html="演示动画" align="top" height="20" x="50" y="30"/>
-      <layer name="btnClose"  style="button" onclick="btnClose_click()" html="关闭说明" align="top" height="20" x="150" y="30"/>
-      
+      <layer name="btnClo"  style="button" onclick="btnClo_click()" html="关闭说明" align="top" height="20" x="150" y="30"/>
+
     </layer>
 
 
@@ -165,7 +180,7 @@
        keep="true"
        type="image"
        url="transparentcy.png"
-       width="300"
+       width="600"
        height.normal="400"
        height.mobile="180"
        align="center"
@@ -185,7 +200,7 @@
        keep="true"
        type="image"
        url="transparentcy.png"
-       width="300"
+       width="600"
        height.normal="400"
        height.mobile="180"
        align="center"
@@ -205,7 +220,7 @@
        keep="true"
        type="image"
        url="transparentcy.png"
-       width="300"
+       width="600"
        height.normal="400"
        height.mobile="180"
        align="center"

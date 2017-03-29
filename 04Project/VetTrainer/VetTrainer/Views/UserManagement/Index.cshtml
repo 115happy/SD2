@@ -21,8 +21,8 @@
 <script>
     $('#modifyUser').on('click',  modifyUser);
     function modifyUser() {
-        //if((document.getElementById("password").innerHTML == document.getElementById("passwordConfirm").innerHTML) && 
-        //    document.getElementById("password").innerHTML != ""){
+        if((document.getElementById("password").innerHTML == document.getElementById("passwordConfirm").innerHTML) && 
+            document.getElementById("password").innerHTML != ""){
             var juser = {
                 "Id": "@user.Id",
                 "Name": "@user.Name",
@@ -36,12 +36,12 @@
                     alert(data);
                     //var t = JSON.parse(data);
                     //console.log(t);
-                    //想做点啥做点啥吧，大兄弟
                 }
             )
-        //}else{
-        ////提示两次输入的密码不一致
-        //}
+        }else{
+            //提示两次输入的密码不一致
+            alert("两次输入密码不一致，请检查！")
+        }
 
     }
 </script>

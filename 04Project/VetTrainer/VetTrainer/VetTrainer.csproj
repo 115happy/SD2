@@ -46,7 +46,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="AutoMapper, Version=6.0.1.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
-      <HintPath>bin\AutoMapper.dll</HintPath>
+      <HintPath>..\packages\AutoMapper.6.0.1\lib\net45\AutoMapper.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ApplicationInsights.Agent.Intercept.1.2.1\lib\net45\Microsoft.AI.Agent.Intercept.dll</HintPath>
@@ -367,6 +367,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Src\3Dres\Action.xml" />
+    <Content Include="Src\3Dres\imagemap.png" />
     <Content Include="Src\3Dres\Info\Info.html" />
     <Content Include="Src\3Dres\panos\1.tiles\b\l1\1\l1_b_1_1.jpg" />
     <Content Include="Src\3Dres\panos\1.tiles\b\l1\1\l1_b_1_2.jpg" />
@@ -664,15 +665,7 @@
     <Content Include="Src\js\ai.0.22.9-build00167.min.js" />
     <Content Include="Src\js\bootstrap.js" />
     <Content Include="Src\js\bootstrap.min.js" />
-    <None Include="Src\js\jquery-1.10.2.intellisense.js" />
-    <Content Include="Src\js\jquery-1.10.2.js" />
-    <Content Include="Src\js\jquery-1.10.2.min.js" />
-    <None Include="Src\js\jquery.validate-vsdoc.js" />
     <Content Include="Src\js\jquery-3.1.1.js" />
-    <Content Include="Src\js\jquery.validate.js" />
-    <Content Include="Src\js\jquery.validate.min.js" />
-    <Content Include="Src\js\jquery.validate.unobtrusive.js" />
-    <Content Include="Src\js\jquery.validate.unobtrusive.min.js" />
     <Content Include="Src\js\modernizr-2.6.2.js" />
     <Content Include="Src\js\respond.js" />
     <Content Include="Src\js\respond.min.js" />
@@ -715,7 +708,6 @@
     <Content Include="Views\ChargeManage\Index.cshtml" />
     <Content Include="Views\AnalysisManage\Index.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
-    <Content Include="Views\TriDInfo\Index.cshtml" />
     <Content Include="Views\TriDInfo\Specification.cshtml" />
     <Content Include="Views\TriDInfo\Operation.cshtml" />
     <Content Include="Views\TriDInfo\Animation.cshtml" />
@@ -723,6 +715,8 @@
     <Content Include="Views\ErrorPages\Error404.cshtml" />
     <Content Include="Views\ErrorPages\ErrorAdminRequired.cshtml" />
     <Content Include="Views\UserManagement\Index.cshtml" />
+    <Content Include="Views\Nav\Clinic.cshtml" />
+    <Content Include="Views\Nav\Tour.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -737,7 +731,6 @@
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
     <Content Include="Views\Login\Login.cshtml" />
-    <Content Include="Src\js\jquery-1.10.2.min.map" />
     <Content Include="Src\less\case_learning.less" />
     <Content Include="Src\less\common.less" />
     <Content Include="Src\less\login.less" />
