@@ -1,26 +1,52 @@
-
+@model List<VetTrainer.Models.DiseaseCaseTab>
 <head>
-  <link rel="stylesheet" href="../../dist/css/case_learning.css">
-  <link rel="stylesheet" href="../../Src/css/swiper.min.css">
-  <title>病例</title>
+    <link rel="stylesheet" href="../../dist/css/case_learning.css">
+    <link rel="stylesheet" href="../../Src/css/swiper.min.css">
+    <title>病例</title>
 </head>
 <div class="container main">
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">Slide 1</div>
-      <div class="swiper-slide">Slide 2</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 3</div>
-      <div class="swiper-slide">Slide 3</div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            @{
+                foreach (VetTrainer.Models.DiseaseCaseTab diseaseCaseTabObj in Model)
+                {
+                    <div class="swiper-slide">
+                        @{
+                            if (diseaseCaseTabObj.Analyses[0] != null)
+                            {
+
+                                <div class="swiper-slide">@diseaseCaseTabObj.Analyses[0]</div>
+                            }
+                            if (diseaseCaseTabObj.Drugs[0] != null)
+                            {
+                                <div class="swiper-slide">@diseaseCaseTabObj.Drugs[0]</div>
+                            }
+                            if (diseaseCaseTabObj.Texts[0] != null)
+                            {
+                                <div class="swiper-slide">@diseaseCaseTabObj.Texts[0]</div>
+                            }
+                            if (diseaseCaseTabObj.Pictures[0] != null)
+                            {
+                                <div class="swiper-slide">@diseaseCaseTabObj.Pictures[0]</div>
+                            }
+                            if (diseaseCaseTabObj.Videos[0] != null)
+                            {
+                                <div class="swiper-slide">@diseaseCaseTabObj.Videos[0]</div>
+                            }
+                        }
+                    </div>
+                            }
+            }
+        </div>
+
+        <!-- 分页器 -->
+        <div class="swiper-pagination"></div>
+        <!-- 导航按钮 -->
+        <div class="swiper-button-prev"></div>
+        <div class="swiper-button-next"></div>
+        <!-- 滚动条 -->
+        <div class="swiper-scrollbar"></div>
     </div>
-    <!-- 分页器 -->
-    <div class="swiper-pagination"></div>
-    <!-- 导航按钮 -->
-    <div class="swiper-button-prev"></div>
-    <div class="swiper-button-next"></div>
-    <!-- 滚动条 -->
-    <div class="swiper-scrollbar"></div>
-  </div>
 </div>
 
 <script src="../../Src/js/swiper.jquery.min.js"></script>
