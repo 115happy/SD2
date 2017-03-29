@@ -10,23 +10,38 @@
             @{
                 foreach (VetTrainer.Models.DiseaseCaseTab diseaseCaseTabObj in Model)
                 {
-                    <div class="swiper-slide">
+                    <div class="swiper-slide" align="center">
                         @{
                             if (diseaseCaseTabObj.Analyses.Count != 0)
                             {
+                                foreach (VetTrainer.Models.Analysis objA in diseaseCaseTabObj.Analyses)
+                                {
+                                    <p>@objA.Name</p>
+                                }
 
-                                <p >@diseaseCaseTabObj.Analyses[0]</p>
                             }
                             if (diseaseCaseTabObj.Drugs.Count != 0)
                             {
-                                <p >@diseaseCaseTabObj.Drugs[0]</p>
+                                foreach (VetTrainer.Models.Drug objD in diseaseCaseTabObj.Drugs)
+                                {
+                                    <p>@objD.Name</p>
+                                    <p>@objD.Price</p>
+                                }
                             }
                             if (diseaseCaseTabObj.Texts.Count != 0)
                             {
-                                <p >@diseaseCaseTabObj.Texts[0]</p>
+                                foreach (VetTrainer.Models.Text objT in diseaseCaseTabObj.Texts)
+                                {
+                                    <p>@objT.RelatedInstruments</p>
+                                }
                             }
                             if (diseaseCaseTabObj.Pictures.Count != 0)
                             {
+                                foreach (VetTrainer.Models.Picture objP in diseaseCaseTabObj.Pictures)
+                                {
+                                    <img alt="This should be a photo" height="200" width="200" src="@objP.Url">                                    
+                                }
+
                                 <p >@diseaseCaseTabObj.Pictures[0]</p>
                             }
                             if (diseaseCaseTabObj.Videos.Count != 0)
