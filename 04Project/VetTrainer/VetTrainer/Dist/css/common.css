@@ -2,6 +2,12 @@
   box-shadow: 0 0 8px #e3e3e3;
 }
 body {
+  background-color: #fafafa;
+}
+body > .container {
+  background-color: white;
+}
+body {
   font-family: '微软雅黑';
 }
 .container h2 {
@@ -36,6 +42,13 @@ body {
 .navbar li a:hover {
   color: white;
   background-color: #555;
+}
+.navbar li p {
+  font-size: 16px;
+  padding: 8px 10px;
+  color: white;
+  margin: 0;
+  line-height: 20px;
 }
 .navbar h1 {
   margin: 0;

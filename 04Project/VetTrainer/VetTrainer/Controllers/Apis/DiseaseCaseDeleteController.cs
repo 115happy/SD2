@@ -28,6 +28,15 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var diseaseCaseToDelete = _context.DiseaseCases.Find(diseaseCase.Id);
+            _context.Entry(diseaseCaseToDelete).Collection(u => u.DiseaseCaseTabs).Load();
+            foreach(DiseaseCaseTab dct in diseaseCaseToDelete.DiseaseCaseTabs)
+            {
+                _context.Entry(dct).Collection(u => u.Texts).Load();
+                _context.Entry(dct).Collection(u => u.Pictures).Load();
+                _context.Entry(dct).Collection(u => u.Videos).Load();
+                _context.Entry(dct).Collection(u => u.Analyses).Load();
+                _context.Entry(dct).Collection(u => u.Drugs).Load();
+            }
             if (diseaseCaseToDelete == null)
             {
                 msg = "删除失败，该病例不存在";

@@ -195,7 +195,9 @@
        visible="false"
        renderer="css3d"
        onloaded="add_iframe('/TriDInfo/Operation', 640, 360)"
-       />
+             />
+       
+       
       <layer name="SpLayer"
        keep="true"
        type="image"

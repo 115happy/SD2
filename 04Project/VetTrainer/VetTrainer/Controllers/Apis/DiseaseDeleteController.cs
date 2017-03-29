@@ -28,6 +28,19 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var diseaseToDelete = _context.Diseases.Find(disease.Id);
+            _context.Entry(diseaseToDelete).Collection(u => u.DiseaseCases).Load();
+            foreach(DiseaseCase dc in diseaseToDelete.DiseaseCases)
+            {
+                _context.Entry(dc).Collection(u => u.DiseaseCaseTabs).Load();
+                foreach(DiseaseCaseTab dct in dc.DiseaseCaseTabs)
+                {
+                    _context.Entry(dct).Collection(u => u.Analyses);
+                    _context.Entry(dct).Collection(u => u.Drugs);
+                    _context.Entry(dct).Collection(u => u.Texts);
+                    _context.Entry(dct).Collection(u => u.Pictures);
+                    _context.Entry(dct).Collection(u => u.Videos);
+                }
+            }
             if (diseaseToDelete == null)
             {
                 msg = "删除失败，该用户不存在";
@@ -40,11 +53,19 @@ namespace VetTrainer.Controllers.Apis
                     foreach (DiseaseCaseDto dc in diseaseToDeleteDto.DiseaseCases)
                     {
                         var diseaseCase = _context.DiseaseCases.Find(dc.Id);
+                        _context.Entry(diseaseCase).Collection(u => u.Diseases).Load();
+                        _context.Entry(diseaseCase).Collection(u => u.DiseaseCaseTabs).Load();
                         if (diseaseCase.Diseases.Count == 1)
                         {
                             foreach (DiseaseCaseTabDto dct in dc.DiseaseCaseTabs)
                             {
                                 var diseaseCaseTab = _context.DiseaseCaseTabs.Find(dct.Id);
+                                _context.Entry(diseaseCaseTab).Collection(u => u.Analyses).Load();
+                                _context.Entry(diseaseCaseTab).Collection(u => u.Drugs).Load();
+                                _context.Entry(diseaseCaseTab).Collection(u => u.Texts).Load();
+                                _context.Entry(diseaseCaseTab).Collection(u => u.Pictures).Load();
+                                _context.Entry(diseaseCaseTab).Collection(u => u.Videos).Load();
+
                                 diseaseCaseTab.Drugs.Clear();
                                 diseaseCaseTab.Analyses.Clear();
                                 foreach (TextDto t in dct.Texts)

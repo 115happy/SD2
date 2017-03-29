@@ -8,6 +8,7 @@ using System.Net.Http;
 using System.Web.Http;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
+using System.IO;
 
 namespace VetTrainer.Controllers.Apis
 {
@@ -28,6 +29,10 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var instrumentToDelete = _context.Instruments.Find(instrument.Id);
+            _context.Entry(instrumentToDelete).Collection(u => u.Texts).Load();
+            _context.Entry(instrumentToDelete).Collection(u => u.Pictures).Load();
+            _context.Entry(instrumentToDelete).Collection(u => u.Videos).Load();
+
             var instrumentToDeleteDto = Mapper.Map<Instrument, InstrumentDto>(instrumentToDelete);
             if (instrumentToDelete == null)
             {
@@ -45,6 +50,7 @@ namespace VetTrainer.Controllers.Apis
                     foreach(PictureDto p in instrumentToDeleteDto.Pictures)
                     {
                         Picture picture = _context.Pictures.Find(p.Id);
+                        //string strpath
                         _context.Pictures.Remove(picture);
                     }
                     foreach(VideoDto v in instrumentToDeleteDto.Videos)

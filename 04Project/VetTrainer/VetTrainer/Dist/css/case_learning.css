@@ -1,6 +1,12 @@
 .box-shadowed {
   box-shadow: 0 0 8px #e3e3e3;
 }
+body {
+  background-color: #fafafa;
+}
+body > .container {
+  background-color: white;
+}
 body .main h4 {
   margin-left: 20px;
   margin-top: 20px;
@@ -27,6 +33,7 @@ body .main hr {
   padding: 0;
   list-style: none;
   border: 1px solid #d8d8d8;
+  border-radius: 6px;
   box-shadow: 0 0 8px #e3e3e3;
 }
 .disease-tab-list ul li {
@@ -55,6 +62,7 @@ body .main hr {
 .disease-content {
   height: 242px;
   border: 1px solid #d8d8d8;
+  border-radius: 6px;
   padding: 0;
   box-shadow: 0 0 8px #e3e3e3;
 }
@@ -80,12 +88,19 @@ body .main hr {
 .case-list {
   list-style: none;
   margin: 0;
+  overflow: hidden;
+  min-height: 400px;
+  padding: 0;
 }
 .case-list li {
   height: 40px;
   line-height: 40px;
   margin: 0;
   text-align: center;
+}
+.case-list li a {
+  display: block;
   border: 1px solid #d8d8d8;
   box-shadow: 0 0 6px #d8d8d8;
+  border-radius: 4px;
 }

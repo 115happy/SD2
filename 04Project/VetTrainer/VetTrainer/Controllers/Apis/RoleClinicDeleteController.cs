@@ -30,6 +30,9 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var rpRecordToDelete = _context.RPRecords.Find(rpRecord.RoleId, rpRecord.ClinicId);
+            _context.Entry(rpRecordToDelete).Collection(u => u.Pictures).Load();
+            _context.Entry(rpRecordToDelete).Collection(u => u.Videos).Load();
+
             var rpRecordToDeleteDto = Mapper.Map<RPRecord, RPRecordDto>(rpRecordToDelete);
 
             try

@@ -14,6 +14,6 @@ namespace VetTrainer.Models
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual IList<Disease> Diseases { get; set; }
+        public  IList<Disease> Diseases { get; set; }
     }
 }

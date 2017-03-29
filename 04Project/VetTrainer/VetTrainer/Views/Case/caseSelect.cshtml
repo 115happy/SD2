@@ -10,7 +10,8 @@
 </head>
 
 <div class="container tab-select">
- <h2>病例学习</h2>
+
+<h2>病例选择</h2>
  <hr>
  <div class="row">
     <div class="col-md-2 disease-tab-list">
@@ -46,6 +47,8 @@
 </div>
 </div>
 
+<hr>
+
 <script src="../../Src/js/case_select.js"></script>
 <script>
 
@@ -80,7 +83,7 @@
             console.log(cases);
             $('.case-list').empty();
             $.each(cases, function(key, item) {
-                $('.case-list').append('<a href = "Case/CaseLearning?diseaseCaseName=' + item.name + '"><li class="col-md-2">' + item.name + '</li></a>');
+                $('.case-list').append('<li class="col-md-2"><a href = "Case/CaseLearning?diseaseCaseName=' + item.name + '">' + item.name + '</a></li>');
             });
             // $.each(resData)
         });

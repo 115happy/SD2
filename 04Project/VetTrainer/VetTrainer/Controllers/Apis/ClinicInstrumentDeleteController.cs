@@ -31,9 +31,14 @@ namespace VetTrainer.Controllers.Apis
             try
             {
                 var clinicToDelete = _context.Clinics.Find(clinic.Id);
+                _context.Entry(clinicToDelete).Collection(u => u.Instruments).Load();
                 foreach (InstrumentDto ist in clinic.Instruments)
                 {
                     var instrumentToDelete = _context.Instruments.Find(ist.Id);
+                    _context.Entry(instrumentToDelete).Collection(u => u.Texts).Load();
+                    _context.Entry(instrumentToDelete).Collection(u => u.Pictures).Load();
+                    _context.Entry(instrumentToDelete).Collection(u => u.Videos).Load();
+
                     var instrumentToDeleteDto = Mapper.Map<Instrument, InstrumentDto>(instrumentToDelete);
                     foreach (TextDto t in instrumentToDeleteDto.Texts)
                     {

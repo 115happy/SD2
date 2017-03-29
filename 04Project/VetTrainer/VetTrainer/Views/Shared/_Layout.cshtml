@@ -32,6 +32,22 @@
                     <ul class="nav navbar-nav">
                         @{
                             bool authenticated = User.Identity.IsAuthenticated;
+                            
+                            
+                            if (authenticated)
+                            {
+                                <li style="width: auto;">
+                                    <p>欢迎，@Html.Encode(User.Identity.Name)</p>
+                                </li>
+                                <li>@Html.ActionLink(VetTrainer.Views.Strings.Home.BtnLogOut, "Logout", "Login")</li>
+
+                            }
+                            else
+                            {
+                                <li style="width: auto;">
+                                    @Html.ActionLink(VetTrainer.Views.Strings.Home.BtnLogIn, "Login", "Login")
+                                </li>
+                            }
                             if (authenticated)
                             {
                                 <li>
@@ -46,20 +62,6 @@
                                 }
                             }
                             <li><a href="@Url.Action("About","Home")">@VetTrainer.Views.Strings.Home.About</a></li>
-                            if (authenticated)
-                            {
-                                <li style="width: auto;">
-                                    <strong>@Html.Encode(User.Identity.Name)</strong>
-                                </li>
-                                <li>@Html.ActionLink(VetTrainer.Views.Strings.Home.BtnLogOut, "Logout", "Login")</li>
-
-                            }
-                            else
-                            {
-                                <li style="width: auto;">
-                                    @Html.ActionLink(VetTrainer.Views.Strings.Home.BtnLogIn, "Login", "Login")
-                                </li>
-                            }
                         }
                     </ul>
                 </div>

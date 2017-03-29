@@ -28,6 +28,23 @@ namespace VetTrainer.Controllers.Apis
                 msg = "参数错误";
             }
             var diseaseTypeToDelete = _context.DiseaseType.Find(diseaseType.Id);
+            _context.Entry(diseaseTypeToDelete).Collection(u => u.Diseases).Load();
+            foreach(Disease d in diseaseTypeToDelete.Diseases)
+            {
+                _context.Entry(d).Collection(u => u.DiseaseCases).Load();
+                foreach(DiseaseCase dc in d.DiseaseCases)
+                {
+                    _context.Entry(dc).Collection(u => u.DiseaseCaseTabs).Load();
+                    foreach(DiseaseCaseTab dct in dc.DiseaseCaseTabs)
+                    {
+                        _context.Entry(dct).Collection(u => u.Analyses).Load();
+                        _context.Entry(dct).Collection(u => u.Drugs).Load();
+                        _context.Entry(dct).Collection(u => u.Texts).Load();
+                        _context.Entry(dct).Collection(u => u.Pictures).Load();
+                        _context.Entry(dct).Collection(u => u.Videos).Load();
+                    }
+                }
+            }
             if (diseaseTypeToDelete == null)
             {
                 msg = "删除失败，该用户不存在";
@@ -40,14 +57,25 @@ namespace VetTrainer.Controllers.Apis
                     foreach (DiseaseDto d in diseaseTypeToDeleteDto.Diseases)
                     {
                         var disease = _context.Diseases.Find(d.Id);
+                        _context.Entry(disease).Collection(u => u.DiseaseCases);
+
                         foreach(DiseaseCaseDto dc in d.DiseaseCases)
                         {
                             var diseaseCase = _context.DiseaseCases.Find(dc.Id);
+                            _context.Entry(diseaseCase).Collection(u => u.DiseaseCaseTabs).Load();
+                            _context.Entry(diseaseCase).Collection(u => u.Diseases).Load();
+
                             if(diseaseCase.Diseases.Count==1)
                             {
                                 foreach(DiseaseCaseTabDto dct in dc.DiseaseCaseTabs)
                                 {
                                     var diseaseCaseTab = _context.DiseaseCaseTabs.Find(dct.Id);
+                                    _context.Entry(diseaseCaseTab).Collection(u => u.Analyses).Load();
+                                    _context.Entry(diseaseCaseTab).Collection(u => u.Drugs).Load();
+                                    _context.Entry(diseaseCaseTab).Collection(u => u.Texts).Load();
+                                    _context.Entry(diseaseCaseTab).Collection(u => u.Pictures).Load();
+                                    _context.Entry(diseaseCaseTab).Collection(u => u.Videos).Load();
+
                                     diseaseCaseTab.Drugs.Clear();
                                     diseaseCaseTab.Analyses.Clear();
                                     foreach(TextDto t in dct.Texts)

@@ -4,25 +4,25 @@
 </head>
 <div class="container-fluid index-bg">
     <div class="container">
-    <h2>功能选择</h2>
+        <h2>功能选择</h2>
         <hr>
         <div class="row">
             <div class="col-md-4">
-                <a class="main-select" href="nav/chooseClinic">
+                <a class="main-select" data-target="nav" href="nav/chooseClinic">
                     <div class="select-icon"><img src="../../Src/images/3d_icon.png" alt=""><div class="icon-tri"></div></div>
                     <h3>&nbsp;3D 导览</h3>
                 </a>
 
             </div>    
             <div class="col-md-4">
-                <a class="main-select" href="roleplay/index">
+                <a class="main-select" data-target="role" href="roleplay/index">
                     <div class="select-icon"><img src="../../Src/images/role_icon.png" alt=""><div class="icon-tri"></div></div>
                     <h3>角色扮演</h3>
                 </a>
             </div>
 
             <div class="col-md-4">
-                <a class="main-select" href="case">
+                <a class="main-select" data-target="case" href="case">
                     <div class="select-icon"><img src="../../Src/images/case_icon.png" alt=""><div class="icon-tri"></div></div>
                     <h3>病例学习</h3>
                 </a>
@@ -31,3 +31,28 @@
         </div>
     </div>
 </div>
+<div class="container-fluid intro-container">
+    <div class="container">
+        <div class="row">
+            <h2>功能介绍</h2>
+            <p class="des-nav" style="display: none;">第一视角游览宠物医院全景，学习各个科室内的器械操作。</p>
+            <p class="des-role" style="display: none;">体验前台、医助、医师等不同角色的在不同科室内的工作。</p>
+            <p class="des-case" style="display: none;">以病例情景的形式系统地学习不同疾病的治疗处理过程。</p>
+        </div>
+    </div>
+    
+</div>
+
+<script type="text/javascript">
+    ;(function(){
+        //功能介绍切换
+        $('.main-select').hover(
+            function() {
+            target = $(this).data('target');
+            $('.intro-container p').hide();
+            $('.des-' + target).fadeIn();
+        }, function() {
+            $('.intro-container p').hide();
+        })
+    })();
+</script>
