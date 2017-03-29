@@ -20,7 +20,32 @@ namespace VetTrainer.Controllers.Apis
         {
             _context.Dispose();
         }
+        public IHttpActionResult DeleteClinicInstrumentDelete(int clinicId,int instrumrntId)
+        {
+            string msg = "";
+            var clinicToDelete = _context.Clinics.Find(clinicId);
+            if(clinicToDelete==null)
+            {
+                msg = "参数错误";
+            }
+            try
+            {
+                var clinicToDeleteDto = Mapper.Map<Clinic, ClinicDto>(clinicToDelete);
+                foreach(InstrumentDto ist in clinicToDeleteDto.Instruments)
+                {
+                    if(ist.Id==instrumrntId)
+                    {
+                        var instrument = _context.Instruments.Find(ist.Id);
+                        clinicToDelete.Instruments.Remove(instrument);
+                    }
+                }
+            }
+            catch
+            {
 
+            }
+            return Ok();
+        }
         public IHttpActionResult PostClinicInstrumentDelete(ClinicDto clinic)
         {
             string msg = "";
