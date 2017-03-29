@@ -10,6 +10,8 @@ using System.Web.Http;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
 using VetTrainer.Utilities;
+using static VetTrainer.Views.Strings.Account;
+using static VetTrainer.Views.Strings.JsonKeys;
 
 namespace VetTrainer.Controllers.Apis
 {
@@ -28,13 +30,13 @@ namespace VetTrainer.Controllers.Apis
             string msg = "";
             if (user == null)
             {
-                msg = "参数错误";
+                msg = MsgInputErr;
             }
 
             var userToUpdate = _context.Users.Find(user.Id);
             if (userToUpdate.Password == Encoder.Encode(user.Password))
             {
-                msg = "请输入不同的密码";
+                msg = MsgExsistingPasswordErr;
             }
             else
             {
@@ -43,11 +45,11 @@ namespace VetTrainer.Controllers.Apis
                     Mapper.Map(user, userToUpdate);
                     userToUpdate.Password = Encoder.Encode(user.Password);
                     _context.SaveChanges();
-                    msg = "修改成功";
+                    msg = MsgSuccess;
                 }
                 catch (RetryLimitExceededException)
                 {
-                    msg = "网络故障";
+                    msg = MsgException;
                 }
             }
 
@@ -68,7 +70,7 @@ namespace VetTrainer.Controllers.Apis
             //    msg = "网络故障";
             //}
             //var str = string.Format("{\'Message\': \'{0}\', \'Data\':  \'null\'}", msg);
-            var str = $"{{'message' : '{msg}', 'data' : 'null'}}";
+            var str = $"{{'{Message}' : '{msg}', '{Data}' : 'null'}}";
             str = str.Replace('\'', '"');
             //var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);

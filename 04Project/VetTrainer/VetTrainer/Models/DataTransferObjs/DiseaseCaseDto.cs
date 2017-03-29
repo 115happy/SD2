@@ -16,6 +16,8 @@ namespace VetTrainer.Models.DataTransferObjs
         public string Discription { get; set; }
 
         public virtual IList<DiseaseCaseTabDto> DiseaseCaseTabs { get; set; }
+
+        public virtual IList<DiseaseDto> Diseases { get; set; }
     }
 }
 

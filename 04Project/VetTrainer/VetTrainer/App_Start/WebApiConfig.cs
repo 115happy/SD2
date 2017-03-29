@@ -14,7 +14,7 @@ namespace VetTrainer
             var jsonPakSetting = config.Formatters.JsonFormatter.SerializerSettings;
             jsonPakSetting.ContractResolver = new CamelCasePropertyNamesContractResolver();
             jsonPakSetting.Formatting = Formatting.Indented;
-            jsonPakSetting.PreserveReferencesHandling = PreserveReferencesHandling.Objects; // 解决循环引用
+            //jsonPakSetting.PreserveReferencesHandling = PreserveReferencesHandling.Objects; // 解决循环引用
 
             config.MapHttpAttributeRoutes();
 

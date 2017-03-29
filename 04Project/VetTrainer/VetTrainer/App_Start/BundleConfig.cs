@@ -25,6 +25,9 @@ namespace VetTrainer
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/dist/js/bootstrap.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/msgboxfeedback").Include(
+                        "~/Src/js/feedback-message-box.js"));
+
             bundles.Add(new StyleBundle("~/content/css").Include(
                       "~/dist/css/bootstrap.css",
                       "~/dist/css/common.css",

@@ -20,7 +20,7 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostUserDelete(InstrumentDto instrument)
+        public IHttpActionResult PostInstrumentDelete(InstrumentDto instrument)
         {
             string msg = "";
             if (instrument == null)
