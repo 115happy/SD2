@@ -1,0 +1,45 @@
+﻿
+@{
+    ViewBag.Title = "Tour";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>3D导览界面</h1>
+
+<script src="../../Src/3Dres/tour.js"></script>
+<div class="container" align="center">
+    <div class="row">
+        <div class="col-md-12">
+            <div id="pano" style="width:800px;height:600px;">
+
+            </div>
+        </div>
+    </div>
+</div>
+<Script language="javascript">
+
+function GetParam1() {
+    var url = location.search; //获取url中"?"符后的字串
+   
+   var theParam1;
+   if (url.indexOf("?") != -1) {
+      var str = url.substr(1);   
+      theParam1 = unescape(str.split("=")[1]);      
+   }
+   return theParam1;
+}
+</Script>  
+<script>
+    var param1;
+    param1 = GetParam1();
+    console.log(param1);
+    embedpano({
+        swf: "../../Src/3Dres/tour.swf",
+        xml: "../../Src/3Dres/tour.xml",
+        target: "pano",
+        html5: "only",
+        mobilescale: 1.0,
+        passQueryParameters: true,
+        vars: { startscene: param1 }
+    });
+</script>

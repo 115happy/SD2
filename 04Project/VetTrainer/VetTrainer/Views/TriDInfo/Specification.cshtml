@@ -9,10 +9,29 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Specification</title>
+    @Styles.Render("~/content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
 </head>
-<body style="background-color: #fff;">
-    <div> 
-        <p>功能说明</p>
+<body style="background-color: #00ff90;">
+    <div class="container-fluid index-bg">
+        <div class="container">
+            <h2>功能说明</h2>
+            <hr>
+            <div class="login-box form-horizontal">
+                <div class="row">
+                    <div class="col-sm-4">
+                        <video src="" controls="controls" weight="200" height="150">
+                            your browser does not support the video tag
+                        </video>
+                    </div>
+                    <div class="col-sm-4">
+                        <p>此处为说明文字</p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
+
 </body>
 </html>
