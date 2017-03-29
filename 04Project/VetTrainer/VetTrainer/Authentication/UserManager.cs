@@ -20,19 +20,27 @@ namespace VetTrainer.Authentication
         {
             get
             {
-                if (HttpContext.Current.User.Identity.IsAuthenticated)
+                try
                 {
-                    // The user is authenticated. Return the user from the forms auth ticket.
-                    AuthPrincipal authPrincipal = HttpContext.Current.User as AuthPrincipal;
-                    return authPrincipal.User;
+                    if (HttpContext.Current.User.Identity.IsAuthenticated)
+                    {
+                        // The user is authenticated. Return the user from the forms auth ticket.
+                        AuthPrincipal authPrincipal = HttpContext.Current.User as AuthPrincipal;
+                        return authPrincipal.User;
+                    }
+                    else if (HttpContext.Current.Items.Contains(Views.Strings.Keys.AuthUserTempData))
+                    {
+                        // The user is not authenticated, but has successfully logged in.
+                        return (UserDto)HttpContext.Current.Items[Views.Strings.Keys.AuthUserTempData];
+                    }
+                    else
+                    {
+                        return null;
+                    }
                 }
-                else if (HttpContext.Current.Items.Contains(Views.Strings.Keys.AuthUserTempData))
+                catch (Exception ex)
                 {
-                    // The user is not authenticated, but has successfully logged in.
-                    return (UserDto)HttpContext.Current.Items[Views.Strings.Keys.AuthUserTempData];
-                }
-                else
-                {
+                    string s = ex.Message;
                     return null;
                 }
             }

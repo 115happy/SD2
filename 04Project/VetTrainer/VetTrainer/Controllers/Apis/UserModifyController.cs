@@ -68,7 +68,7 @@ namespace VetTrainer.Controllers.Apis
             //    msg = "网络故障";
             //}
             //var str = string.Format("{\'Message\': \'{0}\', \'Data\':  \'null\'}", msg);
-            var str = $"{{'Message' : {msg}, 'Data' : 'null'}}";
+            var str = $"{{'message' : '{msg}', 'data' : 'null'}}";
             str = str.Replace('\'', '"');
             //var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);

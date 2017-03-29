@@ -14,6 +14,8 @@ namespace VetTrainer.Models.DataTransferObjs
         }
         public int RoleId { get; set; }
         public int ClinicId { get; set; }
+        public RoleDto Role { get; set; }
+        public ClinicDto Clinic { get; set; }
         public string Description { get; set; }
         public IList<PictureDto> Pictures { get; set; }
         public IList<VideoDto> Videos { get; set; }

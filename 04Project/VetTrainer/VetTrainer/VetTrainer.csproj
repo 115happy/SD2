@@ -246,6 +246,9 @@
     <Compile Include="Controllers\Apis\ClinicSearchController.cs" />
     <Compile Include="Controllers\Apis\DiseaseAddController.cs" />
     <Compile Include="Controllers\Apis\DiseaseCaseAddController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseCaseDeleteController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseCaseModifyController.cs" />
+    <Compile Include="Controllers\Apis\DiseaseCaseSearchController.cs" />
     <Compile Include="Controllers\Apis\DiseaseDeleteController.cs" />
     <Compile Include="Controllers\Apis\DiseaseModifyController.cs" />
     <Compile Include="Controllers\Apis\DiseaseSearchController.cs" />
@@ -257,6 +260,7 @@
     <Compile Include="Controllers\Apis\DrugDeleteController.cs" />
     <Compile Include="Controllers\Apis\DrugModifyController.cs" />
     <Compile Include="Controllers\Apis\DrugSearchController.cs" />
+    <Compile Include="Controllers\Apis\GetAllRPRecordController.cs" />
     <Compile Include="Controllers\Apis\InstrumentAddController.cs" />
     <Compile Include="Controllers\Apis\InstrumentDeleteController.cs" />
     <Compile Include="Controllers\Apis\InstrumentModifyController.cs" />
@@ -666,6 +670,7 @@
     <Content Include="Src\js\bootstrap.js" />
     <Content Include="Src\js\bootstrap.min.js" />
     <Content Include="Src\js\jquery-3.1.1.js" />
+    <Content Include="Src\js\manage.js" />
     <Content Include="Src\js\modernizr-2.6.2.js" />
     <Content Include="Src\js\respond.js" />
     <Content Include="Src\js\respond.min.js" />

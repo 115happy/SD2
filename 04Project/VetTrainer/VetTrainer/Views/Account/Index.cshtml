@@ -3,6 +3,8 @@
     ViewBag.Title = "用户管理";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
+@*<script src="~/Src/js/jquery-3.1.1.js"></script>
+<script src="~/Src/js/bootstrap.min.js"></script>*@
 
 <div class="container-fluid index-bg">
     <div class="container">
@@ -42,16 +44,50 @@
     </div>
 </div>
 
+<!-- Message modal -->
+@*<a href="#myModal" class="btn btn-lg btn-primary" data-toggle="modal">Launch Demo Modal</a>*@
+<!-- Modal -->
+<div class="modal fade" id="msgModel" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">操作信息</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p id="msgModalContent"></p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">好的</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <script>
+    //$('#btntest').on('click', function () {
+    //    $('#myModal').modal('toggle')
+    //})
+
+    var setMsgModalContent = function (msg) {
+        $("#msgModalContent").html(msg);
+    }
+
+    var toggleMsgModal = function () {
+        $('#msgModel').modal('toggle');
+    }
+
     $('#modifyUser').on('click', modifyUser);
     function modifyUser() {
         //if((document.getElementById("password").innerHTML == document.getElementById("passwordConfirm").innerHTML) &&
         //document.getElementById("password").innerHTML != ""){
         if ($('#password').val() != $('#passwordConfirm').val()) {
-            alert("两次输入密码不一致，请检查！"); return;
+            setMsgModalContent("两次输入密码不一致，请检查！"); toggleMsgModal(); return;
         }
         else if ($('#password').val() == "") {
-            alert("输入密码不能为空，请检查！"); return;
+            setMsgModalContent("输入密码不能为空，请检查！"); toggleMsgModal(); return;
         }
 
         var user = {
@@ -62,9 +98,12 @@
             "IsToRememberMe": "@Model.IsToRememberMe",
         };
         $.post('/api/UserModify', user,
-            function (data, sucess) {
-                //console.log(data);
-                alert(data);
+            function (ds, success) {
+                //debugger;
+                var data = JSON.parse(ds);
+                console.log(ds);
+                setMsgModalContent(data.message);
+                toggleMsgModal();
                 //var t = JSON.parse(data);
                 //console.log(t);
             }
