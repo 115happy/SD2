@@ -27,22 +27,7 @@ namespace VetTrainer.Controllers.Apis
             var DiseaseDtos = new List<DiseaseDto>();
             try
             {
-                /*.Include(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs))*/
                 List<Disease> diseases = _context.Diseases.ToList();
-                //foreach (Disease d in diseases)
-                //{
-                //    foreach (DiseaseCase dc in d.DiseaseCases)
-                //    {
-                //        foreach (DiseaseCaseTab dct in dc.DiseaseCaseTabs)
-                //        {
-                //            _context.Entry(dct).Collection(u => u.Analyses);
-                //            _context.Entry(dct).Collection(u => u.Drugs);
-                //            _context.Entry(dct).Collection(u => u.Texts);
-                //            _context.Entry(dct).Collection(u => u.Pictures);
-                //            _context.Entry(dct).Collection(u => u.Videos);
-                //        }
-                //    }
-                //}
                 foreach (Disease d in diseases)
                 {
                     var diseaseDto = Mapper.Map<Disease, DiseaseDto>(d);
@@ -72,25 +57,11 @@ namespace VetTrainer.Controllers.Apis
 
                 if (searchText == null || searchText.Trim() == "")
                 {
-                    diseases = _context.Diseases.Include(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs)).ToList();
+                    diseases = _context.Diseases.ToList();
                 }
                 else
                 {
-                    diseases = _context.Diseases.Where(u => u.Name.Contains(searchText)).Include(v => v.DiseaseCases.Select(w => w.DiseaseCaseTabs)).ToList();
-                }
-                foreach (Disease d in diseases)
-                {
-                    foreach (DiseaseCase dc in d.DiseaseCases)
-                    {
-                        foreach (DiseaseCaseTab dct in dc.DiseaseCaseTabs)
-                        {
-                            _context.Entry(dct).Collection(u => u.Analyses);
-                            _context.Entry(dct).Collection(u => u.Drugs);
-                            _context.Entry(dct).Collection(u => u.Texts);
-                            _context.Entry(dct).Collection(u => u.Pictures);
-                            _context.Entry(dct).Collection(u => u.Videos);
-                        }
-                    }
+                    diseases = _context.Diseases.Where(u => u.Name.Contains(searchText)).ToList();
                 }
                 foreach (Disease d in diseases)
                 {

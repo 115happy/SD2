@@ -13,6 +13,6 @@ namespace VetTrainer.Models.DataTransferObjs
         }
         public int Id { get; set; }
         public string Name { get; set; }
-        public virtual IList<DiseaseDto> Diseases { get; set; }
+        public IList<DiseaseDto> Diseases { get; set; }
     }
 }
