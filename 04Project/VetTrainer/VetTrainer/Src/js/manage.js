@@ -29,7 +29,25 @@ var app = new Vue ({
 			rpToEdit : {},
 			newRp : {},
 			rpToDelete : {},
-			newClinicIns : {},
+			newClinicIns : {
+				'Id' : '',
+				'Instruments' : [{
+					'Id' : '',
+					'Texts' : [{
+						'Name' : 'insName',
+						'Content' : ''
+					}],
+					'Pictures' : [{
+						'Name' : '',
+						'Url' : ''
+					}],
+					'Videos' : [{
+						'Name' : '',
+						'Url' : ''
+					}]
+				}]
+
+			},
 			currentClinicIns : [],
 
 

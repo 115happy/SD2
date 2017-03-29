@@ -312,7 +312,7 @@ ViewBag.Count = 0;
 								<div class="modal-body">
 									<div class="form-group">
 										<select v-model="newClinicIns.clinicId" class="form-control">科室名
-											<option v-for="clinic in clinics" :value="clinic.Id">{{clinic.Name}}</option>
+											<option v-for="clinic in clinics" :value="clinic.Id">{{clinic.Id}}{{clinic.Name}}</option>
 										</select>
 									</div>
 									<div class="form-group">
