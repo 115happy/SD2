@@ -12,6 +12,12 @@
     @Styles.Render("~/content/css")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    <script type="text/javascript" charset="utf-8" src="http://cssass.com/blog/resource/threejs/three.min.js"></script>
+    <style>
+        body {
+            overflow: hidden;
+        }
+    </style>
 </head>
 <body style="background-color: #00ff90;">
     <div class="container-fluid index-bg">
@@ -20,13 +26,11 @@
             <hr>
             <div class="login-box form-horizontal">
                 <div class="row">
-                    <div class="col-sm-4">
-                        <video src="" controls="controls" weight="200" height="150">
-                            your browser does not support the video tag
-                        </video>
+                    <div id="ThreeJsModel" class="col-sm-4">
+                        @* 3D模型 *@
                     </div>
                     <div class="col-sm-4">
-                        <p>此处为说明文字</p>
+                        <p>医院里外科医生使用的手术刀分刀片和刀柄。刀片是一次性的，刀柄不是。其他的器械也不是一次性的，不过在每次使用时都是经过高压灭菌的。所谓灭菌就是杀灭一切微生物。所以只要严格消毒，就不用担心这个问题的。</p>
                     </div>
                 </div>
             </div>
@@ -35,3 +39,38 @@
 
 </body>
 </html>
+
+<script>
+	/* 场景 */
+	var WIDTH = 200,
+		HEIGHT = 200;
+	var scene = new THREE.Scene();
+	/* 摄像头 */
+	var VIEW_ANGLE = 75,
+		ASPECT = WIDTH / HEIGHT,
+		NEAR = 0.1,
+		FAR = 10000;
+	var	camera = new THREE.PerspectiveCamera(VIEW_ANGLE, ASPECT, NEAR, FAR); /* 摄像机视角，视口长宽比，近切面，远切面 */
+		camera.position.set(0, 0, 1000); //放置位置
+		scene.add(camera);
+	/* 显示对象 */
+	var geometry = new THREE.CubeGeometry( 200, 200, 200 ), //几何属性。代码位于"\src\extras\geometries"
+		material = new THREE.MeshLambertMaterial( { color: 0xcccccc} ); //材质属性 "\src\materials"
+	var cube = new THREE.Mesh(geometry, material);
+		cube.rotation.set(10,20,10); //放置角度
+		scene.add(cube);
+	/* 灯光 */
+	var light = new THREE.DirectionalLight(0xFFFFFF); //直线光,"\src\lights"
+		light.position.set(0, 0, 100).normalize();
+		scene.add(light);
+	/* 渲染器 */
+	var	renderer = new THREE.CanvasRenderer(); //有Canvas，WebGL，SVG三种模式
+		renderer.setSize(WIDTH , HEIGHT);
+		document.getElementById("ThreeJsModel").appendChild(renderer.domElement);
+	/* 动画 */
+	(function anime(){
+		cube.rotation.x += 0.01; //改变立方体角度
+		renderer.render(scene, camera); //开始渲染
+		return requestAnimationFrame(anime);
+	})()
+</script>

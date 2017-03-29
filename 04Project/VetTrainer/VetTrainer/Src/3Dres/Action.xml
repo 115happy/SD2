@@ -2,13 +2,12 @@
   <!--click info icon to show the detail of a operator.//TODO -->
   <action name="spotInfo_click">
     <!--click and show or hide the layer-->
-    <!--if(layer[CtrlLayer].visible == true ,
-    set(layer[CtrlLayer].visible,false),
-    set(layer[CtrlLayer].visible,true));-->
-
     toggle(layer[CtrlLayer].visible);
     <!--set spot id into ctrllayer-->
     set(layer[CtrlLayer].spotId,%1);
+    set(layer[SpLayer].onclick,"");
+    set(layer[OpLayer].onclick,"add_iframe('/TriDInfo/Operation', 640, 360)");
+    set(layer[AnLayer].onclick,"");
 
 
   </action>
@@ -26,6 +25,8 @@
   </action>
   <!--click btnOperation and show the HTML of Operation-->
   <action name="btnOperation_click">
+    callwith(layer[OpLayer], onclick);
+    
     toggle(layer[OpLayer].visible);
     set(layer[SpLayer].visible,false);
     set(layer[AnLayer].visible,false);

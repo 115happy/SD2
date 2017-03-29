@@ -20,18 +20,49 @@ namespace VetTrainer.Controllers.Apis
             _context.Dispose();
         }
 
-        public IHttpActionResult PostDiseaseCaseAdd(DiseaseCaseDto diseaseCase)
+        public IHttpActionResult PostDiseaseCaseAdd(DiseaseDto disease)
         {
             string msg = "";
-            if (diseaseCase == null)
+            if (disease == null)
             {
                 msg = "参数错误";
             }
-            var diseaseCaseToAdd = Mapper.Map<DiseaseCaseDto, DiseaseCase>(diseaseCase);
+            var diseaseToAdd = _context.Diseases.Find(disease.Id);
+            _context.Entry(diseaseToAdd).Collection(u => u.DiseaseCases).Load();
 
             try
             {
-                _context.DiseaseCases.Add(diseaseCaseToAdd);
+                Charge charge = new Charge();
+                charge.Amount = 0;
+                charge.Description = "";
+                charge.Name = diseaseToAdd.Name + "的费用";
+                foreach (DiseaseCaseDto dcd in disease.DiseaseCases)
+                {
+                    var diseaseCaseToAdd = Mapper.Map<DiseaseCaseDto, DiseaseCase>(dcd);
+                    foreach(DiseaseCaseTab dct in diseaseCaseToAdd.DiseaseCaseTabs)
+                    {
+                        switch(dct.Index)
+                        {
+                            case "2":
+                                charge.Description += "接诊费用:" + 10 + "\n";
+                                charge.Amount += 10;
+                                
+                                foreach(Analysis a in dct.Analyses)
+                                {
+                                    charge.Description += a.Name + ":" + a.Amount + "\n";
+                                    charge.Amount += a.Amount;
+                                }
+                                foreach(Drug d in dct.Drugs)
+                                {
+                                    charge.Description += d.Name + ":" + d.Price + "\n";
+                                    charge.Amount += d.Price;
+                                }
+                                break;
+                        }
+                    }
+                    diseaseToAdd.DiseaseCases.Add(diseaseCaseToAdd);
+                }
+                _context.Diseases.Add(diseaseToAdd);
                 _context.SaveChanges();
                 msg = "添加成功";
             }
