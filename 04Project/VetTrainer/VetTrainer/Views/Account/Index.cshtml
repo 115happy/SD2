@@ -1,6 +1,6 @@
 ﻿@model VetTrainer.Models.DataTransferObjs.UserIntactDto
 @{
-    ViewBag.Title = "用户管理";
+    ViewBag.Title = VetTrainer.Views.Strings.Home.Account;
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*<script src="~/Src/js/jquery-3.1.1.js"></script>
@@ -12,32 +12,32 @@
          <hr>
         <div class="login-box form-horizontal">
             <div class="editor-label form-group">
-                <span class="col-md-3">用户ID</span>
+                <span class="col-md-3">@VetTrainer.Views.Strings.Account.LblUserId</span>
                 <div class="editor-field col-md-9">
                     @Model.Id
                 </div>
             </div>
             <div class="editor-label form-group">
-                <span class="col-md-3">用户名</span>
+                <span class="col-md-3">@VetTrainer.Views.Strings.Account.LblUsername</span>
                 <div class="editor-field col-md-9">
                     @Model.Name
                 </div>
             </div>
             <div class="editor-label form-group">
-                <span class="col-md-3">新密码</span>
+                <span class="col-md-3">@VetTrainer.Views.Strings.Account.LblNewPassword</span>
                 <div class="editor-field col-md-2">
                     <input id="password" type="text" class="form-control" />
                 </div>
             </div>
             <div class="editor-label form-group">
-                <span class="col-md-3">确认密码</span>
+                <span class="col-md-3">@VetTrainer.Views.Strings.Account.LblConfirmPassword</span>
                 <div class="editor-field col-md-2">
                     <input id="passwordConfirm" type="text" class="form-control" />
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-2 text-center">
-                    <input id="modifyUser" class="btn btn-default btn-primary" type="submit" value="确认" />
+                    <input id="modifyUser" class="btn btn-default btn-primary" type="submit" value="@VetTrainer.Views.Strings.Account.BtnSubmit" />
                 </div>
             </div>
         </div>

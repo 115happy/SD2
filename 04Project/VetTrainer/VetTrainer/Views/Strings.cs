@@ -27,6 +27,18 @@ namespace VetTrainer.Views
             public const string Data = "data";
         }
 
+        public static class Home
+        {
+            public const string Account = "用户管理";
+            public const string About = "关于我们";
+            public const string SystemManager = "系统管理";
+            public const string RolePlay = "职能学习";
+            public const string CaseLearning = "病例学习";
+            public const string Navigation = "3D导览";
+            public const string BtnLogIn = "登录";
+            public const string BtnLogOut = "登出";
+        }
+
         public static class Login
         {
             public const string FormLoginText = "登录";
@@ -38,6 +50,13 @@ namespace VetTrainer.Views
             public const string ValidationSummaryErrMsg = "登陆失败.";
         }
 
+        public static class About
+        {
+            public const string MainMsg = "制作组：115happy.";
+            public const string AdditionalInfo = "加盟方式：QQ 764359824。期待与您的合作，我们竭诚为您服务！";
+
+        }
+
         public static class Account
         {
             public const string MsgInputErr = "参数错误，请联系管理员。";
@@ -46,6 +65,13 @@ namespace VetTrainer.Views
             public const string MsgEmptyPasswordErr = "输入密码不能为空，请检查！";
             public const string MsgSuccess = "修改成功！";
             public const string MsgException = "操作失败，请联系管理员。";
+            public const string LblUserId = "用户ID：";
+            public const string LblUsername = "用户名：";
+            public const string LblNewPassword = "新密码：";
+            public const string LblConfirmPassword = "确认密码：";
+            public const string BtnSubmit = "确认";
+
+
         }
 
         public static class SystemManager

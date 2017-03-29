@@ -38,8 +38,8 @@ namespace VetTrainer.Controllers
         [Route("CaseLearning")]
         public ActionResult CaseLearning(String diseaseCaseName)
         {
-            var diseaseCases = _context.DiseaseCases.Include(dc => dc.DiseaseCaseTabs).Where(dc => dc.Name == diseaseCaseName);
-            return View(diseaseCases);
+            var diseaseCaseTabs = _context.DiseaseCases.Include(dc => dc.DiseaseCaseTabs).Where(dc => dc.Name == diseaseCaseName).ToList()[0].DiseaseCaseTabs;
+            return View(diseaseCaseTabs);
         }
     }
 }
