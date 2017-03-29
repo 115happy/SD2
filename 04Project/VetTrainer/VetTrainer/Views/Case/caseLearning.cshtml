@@ -12,30 +12,30 @@
                 {
                     <div class="swiper-slide">
                         @{
-                            if (diseaseCaseTabObj.Analyses != null)
+                            if (diseaseCaseTabObj.Analyses.Count != 0)
                             {
 
-                                <div class="swiper-slide">@diseaseCaseTabObj.Analyses[0]</div>
+                                <p >@diseaseCaseTabObj.Analyses[0]</p>
                             }
-                            if (diseaseCaseTabObj.Drugs != null)
+                            if (diseaseCaseTabObj.Drugs.Count != 0)
                             {
-                                <div class="swiper-slide">@diseaseCaseTabObj.Drugs[0]</div>
+                                <p >@diseaseCaseTabObj.Drugs[0]</p>
                             }
-                            if (diseaseCaseTabObj.Texts != null)
+                            if (diseaseCaseTabObj.Texts.Count != 0)
                             {
-                                <div class="swiper-slide">@diseaseCaseTabObj.Texts[0]</div>
+                                <p >@diseaseCaseTabObj.Texts[0]</p>
                             }
-                            if (diseaseCaseTabObj.Pictures != null)
+                            if (diseaseCaseTabObj.Pictures.Count != 0)
                             {
-                                <div class="swiper-slide">@diseaseCaseTabObj.Pictures[0]</div>
+                                <p >@diseaseCaseTabObj.Pictures[0]</p>
                             }
-                            if (diseaseCaseTabObj.Videos != null)
+                            if (diseaseCaseTabObj.Videos.Count != 0)
                             {
-                                <div class="swiper-slide">@diseaseCaseTabObj.Videos[0]</div>
+                                <p >@diseaseCaseTabObj.Videos[0]</p>
                             }
-                        }
+                        }   
                     </div>
-                            }
+                }
             }
         </div>
 
