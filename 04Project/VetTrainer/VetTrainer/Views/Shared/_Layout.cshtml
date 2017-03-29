@@ -11,9 +11,9 @@
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
     @*@Styles.Render("~/Dist/css/bootstrap.min.css")
-    @Styles.Render("~/Dist/css/common.css")
-    @Scripts.Render("~/Src/js/jquery-3.1.1.js")
-    @Scripts.Render("~/Dist/js/")*@ 
+        @Styles.Render("~/Dist/css/common.css")
+        @Scripts.Render("~/Src/js/jquery-3.1.1.js")
+        @Scripts.Render("~/Dist/js/")*@
 </head>
 
 <body>
@@ -21,36 +21,43 @@
         <nav class="navbar" role="banner">
             <div class="container">
                 <div class="navbar-header">
-                <a href="@Url.Action("Index","Home")" class="nav-head">
-                    <h1>虚拟宠物医院学习软件
-                    </h1></a>
+                    <a href="@Url.Action("Index","Home")" class="nav-head">
+                        <h1>
+                            @VetTrainer.Views.Strings.Global.AppName
+                        </h1>
+                    </a>
                 </div>
-                
+
                 <div class="collapse navbar-collapse navbar-right">
                     <ul class="nav navbar-nav">
                         @{
                             bool authenticated = User.Identity.IsAuthenticated;
                             if (authenticated)
                             {
-                                <li>@Html.ActionLink("用户管理", "Index", "Account", new { Name = User.Identity.Name } , null)</li>
+                                <li>
+                                    @Html.ActionLink(
+                                   VetTrainer.Views.Strings.Home.Account,
+                                   "Index", "Account",
+                                   new { Name = User.Identity.Name }, null)
+                                </li>
                                 if (UserManager.User?.Authority == UserAuthority.Admin)
                                 {
-                                    <li><a href="@Url.Action("Index", "SystemManager")">系统管理</a></li>
+                                    <li><a href="@Url.Action("Index", "SystemManager")">@VetTrainer.Views.Strings.Home.SystemManager</a></li>
                                 }
                             }
-                                <li><a href="@Url.Action("About","Home")">关于我们</a></li>
+                            <li><a href="@Url.Action("About","Home")">@VetTrainer.Views.Strings.Home.About</a></li>
                             if (authenticated)
-                            { 
+                            {
                                 <li style="width: auto;">
                                     <strong>@Html.Encode(User.Identity.Name)</strong>
                                 </li>
-                                <li>@Html.ActionLink("登出", "Logout", "Login")</li>
+                                <li>@Html.ActionLink(VetTrainer.Views.Strings.Home.BtnLogOut, "Logout", "Login")</li>
 
                             }
                             else
                             {
                                 <li style="width: auto;">
-                                    @Html.ActionLink("登入", "Login", "Login")
+                                    @Html.ActionLink(VetTrainer.Views.Strings.Home.BtnLogIn, "Login", "Login")
                                 </li>
                             }
                         }
@@ -58,17 +65,17 @@
                 </div>
             </div><!--/.container-->
         </nav><!--/nav-->
-        
+
     </header><!--/header-->
-    
-        @RenderBody()
-  
+
+    @RenderBody()
+
 
 
     <footer class="container-fluid">
         <div class="row text-center">
-            <p class="">&copy; copyright 2017 @VetTrainer.Views.Strings.Global.AppName</p>
- 
+            <p class="">&copy; copyright @DateTime.Today.Year @VetTrainer.Views.Strings.Global.AppName</p>
+
         </div>
     </footer>
 </body>
