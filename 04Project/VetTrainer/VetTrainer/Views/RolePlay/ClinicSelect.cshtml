@@ -4,6 +4,24 @@
 }
 
 <h2>ClinicSelect</h2>
+<div class="container">
+    <h2>科室选择</h2>
+    <div class="row">
+
+        <div class="col-md-12">
+
+            <img src="~/Src/3Dres/imagemap.png" alt="" usemap="#Map" />
+            <map name="Map" id="Map">
+                <area alt="error" title="前台" href="/RolePlay/Clinic?roleId=@Model.Id&clinicId=@Model.Clinics[0].Id" shape="poly" coords="427,388,217,494,217,530,509,676,620,623,520,577,521,492,426,446" />
+                <area alt="error" title="手术室" href="/RolePlay/Clinic?roleId=@Model.Id&clinicId=@Model.Clinics[0].Id" shape="poly" coords="785,451,873,494,694,587,685,581,684,502" />
+
+            </map>
+
+        </div>
+    </div>
+</div>
+<hr>
+
 @{
     for (int i = 0; i < Model.Clinics.Count; i++)
     {
