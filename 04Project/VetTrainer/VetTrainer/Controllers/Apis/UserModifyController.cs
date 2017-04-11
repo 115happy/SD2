@@ -42,8 +42,12 @@ namespace VetTrainer.Controllers.Apis
             {
                 try
                 {
+                    var tmpPassword = userToUpdate.Password;
                     Mapper.Map(user, userToUpdate);
-                    userToUpdate.Password = Encoder.Encode(user.Password);
+                    if (user.Password.Trim() == "")
+                        userToUpdate.Password = tmpPassword;
+                    else
+                        userToUpdate.Password = Encoder.Encode(user.Password);
                     _context.SaveChanges();
                     msg = MsgSuccess;
                 }

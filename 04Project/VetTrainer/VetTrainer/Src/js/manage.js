@@ -65,7 +65,8 @@ var app = new Vue ({
 			analysisToDelete  : '',
 			analysisToEdit : {},
 
-			charges : [],
+            charges: [],
+            chargeKeyWord: '',
 
 			roles : [],
 			roleToEdit : {},
@@ -90,14 +91,14 @@ var app = new Vue ({
 	},
 	mounted : function() {
 		this.getUser('');
-		this.getInstrument();
+		this.getInstrument('');
 		this.getClinic();
 		this.getDrug('');
 		this.getAnalysis('');
 		this.getRole();
 		this.getCharge('');
-		this.getDiseaseType();
-		this.getDisease();
+		this.getDiseaseType('');
+		this.getDisease('');
 		this.getRPRecord();
 	},
 	methods : {
@@ -144,8 +145,8 @@ var app = new Vue ({
 			});
 		},
 
-		getInstrument : function() {
-			axios.get('../api/InstrumentSearch')
+		getInstrument : function(key) {
+			axios.get('../api/InstrumentSearch?searchText=' + key)
 			.then((res) => {
 				this.instruments = JSON.parse(res.data).Data;
 			}).catch((error) => {

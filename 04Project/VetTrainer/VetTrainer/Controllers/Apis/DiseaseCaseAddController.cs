@@ -44,22 +44,35 @@ namespace VetTrainer.Controllers.Apis
                         switch(dct.Index)
                         {
                             case "2":
-                                charge.Description += "接诊费用:" + 10 + "\n";
-                                charge.Amount += 10;
+                                charge.Description += "接诊费用:" + 2 + "\n";
+                                charge.Amount += 2;
+                                break;
                                 
-                                foreach(Analysis a in dct.Analyses)
-                                {
-                                    charge.Description += a.Name + ":" + a.Amount + "\n";
-                                    charge.Amount += a.Amount;
-                                }
-                                foreach(Drug d in dct.Drugs)
-                                {
-                                    charge.Description += d.Name + ":" + d.Price + "\n";
-                                    charge.Amount += d.Price;
-                                }
+                            case "3":
+                                charge.Description += "检查费用:" + 3 + "\n";
+                                charge.Amount += 3;
+                                break;
+                            case "4":
+                                charge.Description += "诊断费用:" + 4 + "\n";
+                                charge.Amount += 4;
+                                break;
+                            case "5":
+                                charge.Description += "治疗费用:" + 5 + "\n";
+                                charge.Amount += 5;
                                 break;
                         }
+                        foreach (Analysis a in dct.Analyses)
+                        {
+                            charge.Description += a.Name + ":" + a.Amount + "\n";
+                            charge.Amount += a.Amount;
+                        }
+                        foreach(Drug d in dct.Drugs)
+                        {
+                            charge.Description += d.Name + ":" + d.Price + "\n";
+                            charge.Amount += d.Price;
+                        }
                     }
+                    diseaseCaseToAdd.Charge = charge;
                     diseaseToAdd.DiseaseCases.Add(diseaseCaseToAdd);
                 }
                 _context.Diseases.Add(diseaseToAdd);
