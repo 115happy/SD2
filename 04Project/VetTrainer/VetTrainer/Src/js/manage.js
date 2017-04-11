@@ -16,7 +16,7 @@ var app = new Vue ({
 
 			//器械数据
 			instruments : [],
-			insKeyWord : [],
+			insKeyWord : '',
 			newIns : {
 				'Texts' : []
 			},
@@ -379,5 +379,21 @@ var app = new Vue ({
 				console.log('删除职能信息失败')
 			});
 		},
+		backup: function () {
+		    axios.post('../api/Backup')
+			.then((res) => {
+			    console.log(JSON.parse(res.data).Message);
+			}).catch((error) => {
+			    console.log('Backup failed.')
+			});
+		},
+	    recover: function () {
+	        axios.post('../api/Recover')
+			.then((res) => {
+			    console.log(JSON.parse(res.data).Message);
+			}).catch((error) => {
+			    console.log('Recovery failed.')
+			});
+	    }
 	}
 })

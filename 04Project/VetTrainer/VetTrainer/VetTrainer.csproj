@@ -238,6 +238,7 @@
     <Compile Include="Controllers\Apis\AnalysisDeleteController.cs" />
     <Compile Include="Controllers\Apis\AnalysisModifyController.cs" />
     <Compile Include="Controllers\Apis\AnalysisSearchController.cs" />
+    <Compile Include="Controllers\Apis\BackupAndRecoveryController.cs" />
     <Compile Include="Controllers\Apis\CaseController.cs" />
     <Compile Include="Controllers\Apis\ChargeSearchController.cs" />
     <Compile Include="Controllers\Apis\ClinicInstrumentAddController.cs" />
