@@ -19,7 +19,10 @@ namespace VetTrainer.Views
             public const string InstrumentPicDirectory = ServerDataLocation + @"pics\instruments\";
 
         }
-
+        public static class Path
+        {
+            public const string rootPath = @"\\VETAPPSERVER\VetAppData\";
+        }
         public static class Keys
         {
             public const string LoginErrValidation = "LoginErrValidation";

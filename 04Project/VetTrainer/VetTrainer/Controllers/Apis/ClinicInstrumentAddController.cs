@@ -14,6 +14,7 @@ using System.Web.Helpers;
 using System.Web.Http;
 using VetTrainer.Models;
 using VetTrainer.Models.DataTransferObjs;
+using VetTrainer.Utilities;
 
 namespace VetTrainer.Controllers.Apis
 {
@@ -67,8 +68,10 @@ namespace VetTrainer.Controllers.Apis
 
                 var instrumentToAdd = _context.Instruments.Find(instrumentId);
 
+                var PostFileName = clinicToAdd.Name + "_" + instrumentToAdd.Name;
+
                 TextDto t = new TextDto();
-                t.Name = clinicToAdd.Name + "-" + instrumentToAdd.Name;
+                t.Name = PostFileName;
                 t.Content = text;
                 var textToAdd = Mapper.Map<TextDto, Text>(t);
                 instrumentToAdd.Texts.Add(textToAdd);
@@ -79,10 +82,11 @@ namespace VetTrainer.Controllers.Apis
                         for (int i = 0; i < httpRequest.Files.Count; i++)
                         {
                             var postedFile = httpRequest.Files[i];
-                            var x = postedFile.ContentType;
-                            Image image = Bitmap.FromStream(postedFile.InputStream);
-                            var filePath = HttpContext.Current.Server.MapPath("~/" + postedFile.FileName);
-                            image.Save(filePath, ImageFormat.Jpeg);
+                            string filePath = @"\ClinicInstruments\";
+                            string fileName = FileUtil.SaveFile(postedFile, filePath, PostFileName);
+                            PictureDto p = new PictureDto();
+                            p.Name = fileName;
+                            
                         }
                     }
                     catch

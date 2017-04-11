@@ -22,6 +22,7 @@ namespace VetTrainer
                 defaults: new { controller = "Login", action = UrlParameter.Optional, id = UrlParameter.Optional }
             );
 
+            RouteTable.Routes.RouteExistingFiles = false;
             //routes.MapPageRoute("RedirectError404", "Error404", "Views/ErrorPages/404.html");
         }
     }
