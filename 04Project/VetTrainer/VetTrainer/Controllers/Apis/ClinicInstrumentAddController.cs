@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Data.Entity;
 using System.Data.Entity.Infrastructure;
+using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -23,89 +25,98 @@ namespace VetTrainer.Controllers.Apis
         {
             _context.Dispose();
         }
-        public async Task<HttpResponseMessage> PostUpload()
-        {
-            var s = "";
-            HttpResponseMessage result = null;
-            var httpRequest = HttpContext.Current.Request;
-            if (httpRequest.Files.Count > 0)
-            {
-                var docfiles = new List<string>();
-                foreach (string file in httpRequest.Files)
-                {
-                    var postedFile = httpRequest.Files[file];
-                    var filePath = HttpContext.Current.Server.MapPath("C:\\Users\\lishu\\Desktop\\SD2\\test");
-                    postedFile.SaveAs(filePath);
-                    docfiles.Add(filePath);
-                }
-                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-            }
-            return result;
-        }
 
         // POST: api/clinicinstrumentaddcontroller
-        public IHttpActionResult PostClinicInstrumentAdd(ClinicDto clinic)
+        public IHttpActionResult PostClinicInstrumentAdd()
         {
-            HttpResponseMessage result = null;
+            if (!Request.Content.IsMimeMultipartContent("form-data"))
+                throw new HttpResponseException(HttpStatusCode.UnsupportedMediaType);
             var httpRequest = HttpContext.Current.Request;
-            if(httpRequest.Files.Count>0)
-            {
-                var docfiles = new List<string>();
-                foreach(string file in httpRequest.Files)
-                {
-                    var postedFile = httpRequest.Files[file];
-                    var filePath = HttpContext.Current.Server.MapPath("C:\\Users\\lishu\\Desktop\\SD2\\test");
-                    postedFile.SaveAs(filePath);
-                    docfiles.Add(filePath);
-                }
-                result = Request.CreateResponse(HttpStatusCode.Created, docfiles);
-            }
+            var clinic_Id = httpRequest.Form["clinicId"];
+            var instrument_Id = httpRequest.Form["instrumentId"];
+            var text = httpRequest.Form["description"];
             string msg = "";
-            if (clinic == null)
+            if (clinic_Id == null && instrument_Id == null)
             {
-                msg = "参数错误";
+                msg = "请选择要添加的科室与操作器械关联";
             }
-            var clinicToAdd = _context.Clinics.Find(clinic.Id);
-            foreach (InstrumentDto ist in clinic.Instruments)
+
+            int clinicId = int.Parse(clinic_Id);
+            int instrumentId = int.Parse(instrument_Id);
+
+            var clinicToAdd = _context.Clinics.Find(clinicId);
             _context.Entry(clinicToAdd).Collection(u => u.Instruments);
+            bool flag = true;
             foreach(Instrument i in clinicToAdd.Instruments)
             {
-                _context.Entry(i).Collection(u => u.Texts);
-                _context.Entry(i).Collection(u => u.Pictures);
-                _context.Entry(i).Collection(u => u.Videos);
-            }
-            foreach(InstrumentDto ist in clinic.Instruments)
-            {
-                var instrumentToAdd = _context.Instruments.Find(ist.Id);
-                foreach (TextDto t in ist.Texts)
+                if (i.Id == instrumentId)
                 {
-                    var textToAdd = Mapper.Map<TextDto, Text>(t);
-                    instrumentToAdd.Texts.Add(textToAdd);
+                    msg = "此科室与操作器械关联已存在！";
+                    flag = false;
                 }
-                foreach (PictureDto p in ist.Pictures)
-                {
-                    var picToAdd = Mapper.Map<PictureDto, Picture>(p);
-                    instrumentToAdd.Pictures.Add(picToAdd);
+            }
+            if (flag)
+            {
 
-                    //// GetPicture
-                    //var httpRequest = HttpContext.Current.Request;
-                }
-                foreach (VideoDto v in ist.Videos)
+                foreach (Instrument i in clinicToAdd.Instruments)
                 {
-                    var videoToAdd = Mapper.Map<VideoDto, Video>(v);
-                    instrumentToAdd.Videos.Add(videoToAdd);
+                    _context.Entry(i).Collection(u => u.Texts);
+                    _context.Entry(i).Collection(u => u.Pictures);
+                    _context.Entry(i).Collection(u => u.Videos);
                 }
+
+                var instrumentToAdd = _context.Instruments.Find(instrumentId);
+
+                TextDto t = new TextDto();
+                t.Name = clinicToAdd.Name + "-" + instrumentToAdd.Name;
+                t.Content = text;
+                var textToAdd = Mapper.Map<TextDto, Text>(t);
+                instrumentToAdd.Texts.Add(textToAdd);
+                if (httpRequest.Files.Count > 0)
+                {
+                    try
+                    {
+                        for (int i = 0; i < httpRequest.Files.Count; i++)
+                        {
+                            var postedFile = httpRequest.Files[i];
+                            var x = postedFile.ContentType;
+                            Image image = Bitmap.FromStream(postedFile.InputStream);
+                            var filePath = HttpContext.Current.Server.MapPath("~/" + postedFile.FileName);
+                            image.Save(filePath, ImageFormat.Jpeg);
+                        }
+                    }
+                    catch
+                    {
+
+                    }
+                }else
+                {
+                    msg = "请上传图片和视频!";
+                }
+                //foreach (PictureDto p in ist.Pictures)
+                //{
+                //    var picToAdd = Mapper.Map<PictureDto, Picture>(p);
+                //    instrumentToAdd.Pictures.Add(picToAdd);
+
+                //    //// GetPicture
+                //    //var httpRequest = HttpContext.Current.Request;
+                //}
+                //foreach (VideoDto v in ist.Videos)
+                //{
+                //    var videoToAdd = Mapper.Map<VideoDto, Video>(v);
+                //    instrumentToAdd.Videos.Add(videoToAdd);
+                //}
                 clinicToAdd.Instruments.Add(instrumentToAdd);
-            }
-            try
-            {
-                _context.Entry(clinicToAdd).State = EntityState.Modified;
-                _context.SaveChanges();
-                msg = "添加成功";
-            }
-            catch (RetryLimitExceededException)
-            {
-                msg = "网络故障";
+                try
+                {
+                    _context.Entry(clinicToAdd).State = EntityState.Modified;
+                    _context.SaveChanges();
+                    msg = "添加成功";
+                }
+                catch (RetryLimitExceededException)
+                {
+                    msg = "网络故障";
+                }
             }
             var str = "{ \"Message\" : \"" + msg + "\" , \"" + "Data\" : \"" + "null" + "\" }";
             return Ok(str);
