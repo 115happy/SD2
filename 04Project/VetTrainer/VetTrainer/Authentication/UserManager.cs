@@ -57,7 +57,7 @@ namespace VetTrainer.Authentication
             using (VetAppDBContext context = new VetAppDBContext())
             {
 
-                // var clinics = context.Clinics.Include(c=>c.Instruments).ToList();
+                // var clinics = context.Clinics.Include(c=>c.Instrumentds).ToList();
                 var users = context.Users.ToList();
                 string encryptedPassword = Utilities.Encoder.Encode(password);
                 User foundUser = users.SingleOrDefault(u =>
