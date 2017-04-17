@@ -46,7 +46,6 @@ var app = new Vue ({
 						'Url' : ''
 					}]
 				}]
-
 			},
 			currentClinicIns : [],
 
@@ -86,6 +85,10 @@ var app = new Vue ({
 			},
 			diseaseToDelete  : '',
 			diseaseToEdit : {},
+
+			//病例数据
+			cases : [],
+			caseKeyWord : ''
 		}
 		
 	},
@@ -99,6 +102,7 @@ var app = new Vue ({
 		this.getCharge('');
 		this.getDiseaseType('');
 		this.getDisease('');
+		this.getCase('');
 		this.getRPRecord();
 	},
 	methods : {
@@ -279,9 +283,18 @@ var app = new Vue ({
 			.then((res) => {
 				console.log(JSON.parse(res.data).Message);
 				this.newType = {};
-				this.getDiseaseType();
+				this.getDiseaseType('');
 			}).catch((error) => {
 				console.log('添加疾病类型失败')
+			});
+		},
+		editDiseaseType : function() {
+			axios.post('../api/DiseaseTypeModify', this.typeToEdit)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getDiseaseType('');
+			}).catch((error) => {
+				console.log('修改疾病类型失败')
 			});
 		},
 		deleteDiseaseType : function() {
@@ -324,6 +337,15 @@ var app = new Vue ({
 				console.log('添加疾病类型失败')
 			});
 		},
+		editDisease : function() {
+			axios.post('../api/DiseaseModify', this.diseaseToEdit)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Message);
+				this.getDisease();
+			}).catch((error) => {
+				console.log('编辑疾病类型失败')
+			});
+		},
 		getClinic : function() {
 			axios.get('../api/ClinicSearch')
 			.then((res) => {
@@ -339,7 +361,7 @@ var app = new Vue ({
 				this.clinics = JSON.parse(res.data).Data;
 			})
 			.catch((error) => {
-				console.log('搜索科室失败')
+				console.log('添加器械失败')
 			})
 		},
 
@@ -369,6 +391,15 @@ var app = new Vue ({
 				this.getRPRecord();
 			}).catch((error) => {
 				console.log('修改职能信息失败')
+			});
+		},
+		getCase : function(key) {
+			axios.get('../api/DiseaseCaseSearch?searchText=' + key)
+			.then((res) => {
+				console.log(JSON.parse(res.data).Data);
+				this.cases = JSON.parse(res.data).Data;
+			}).catch((error) => {
+				console.log('搜索病例失败')
 			});
 		},
 		deleteRp : function() {
