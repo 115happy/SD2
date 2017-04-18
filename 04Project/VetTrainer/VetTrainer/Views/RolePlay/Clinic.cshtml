@@ -1,77 +1,86 @@
 ﻿@model VetTrainer.Models.RPRecord
 @{
-    ViewBag.Title = "Clinic";
+ViewBag.Title = "Clinic";
 }
 <head>
     <link rel="stylesheet" href="../../dist/css/case_learning.css">
     <link rel="stylesheet" href="../../Src/css/swiper.min.css">
     <style type="text/css">
         img.margin {
-            margin: 2cm 2cm 2cm 2cm;
+            margin: 20px;
+        }
+
+        .select-img {
+            margin-top: 20px;
+        }
+        .clinic-container {
+            padding: 20px 12px;
         }
     </style>
 </head>
 <h2 align="center">Clinic</h2>
-<div class="container">
-    <div class="col-sm-2">
-        <div align="center">
-            <select id="role-select">
-                <option value="rs1">前台</option>
-                <option value="rs2">医助</option>
-                <option value="rs3">医师</option>
-            </select>
+<div class="container clinic-container">
+<div class="row">
+        <div class="col-sm-2">
+            <div align="center">
+                <select class="form-control" id="role-select">
+                    <option value="rs1">前台</option>
+                    <option value="rs2">医助</option>
+                    <option value="rs3">医师</option>
+                </select>
+            </div>
+            <div align="center">
+                <img class="select-img" hidefocus="true" src="~/Src/images/ass_icon.png" width="100" height="100" border="1">
+            </div>      
+            <hr />
+            <div align="center">
+                <select class="form-control" id="clinic-select" value ="cs2">
+                    <option value="cs1">手术室</option>
+                    <option value="cs2">化验室</option>
+                    <option value="cs3">前台</option>
+                    <option value="cs4">员工休息室</option>
+                </select>
+            </div>
+            <div align="center">
+                <img class="select-img" hidefocus="true" src="~/Src/images/front_tai.jpg" width="100" height="100" border="1">
+            </div>
         </div>
-        <div align="center">
-            <img hidefocus="true" src="~/Src/images/ass_icon.png" width="100" height="100" border="1">
-        </div>      
-        <hr />
-        <div align="center">
-            <select id="clinic-select" value ="cs2">
-                <option value="cs1">手术室</option>
-                <option value="cs2">化验室</option>
-                <option value="cs3">前台</option>
-                <option value="cs4">员工休息室</option>
-            </select>
-        </div>
-        <div align="center">
-            <img hidefocus="true" src="~/Src/images/front_tai.jpg" width="100" height="100" border="1">
-        </div>
-    </div>
-    <div class="col-sm-10">
-        <div class="swiper-container">
-            <div class="swiper-wrapper">
-                @{
+        <div class="col-sm-10">
+            <div class="swiper-container">
+                <div class="swiper-wrapper">
+                    @{
                     if (Model.Pictures.Count != 0)
                     { 
-                        foreach (VetTrainer.Models.Picture picObj in Model.Pictures)
-                        {
-                            <div class="swiper-slide" align="center"  >
-                               <img class="margin" alt="This should be a photo" height="200" width="200" src="@picObj.Url">    
-                                <!--@picObj.Url-->                          
-                            </div>
-                        }
-                    }
-                    if (Model.Videos.Count != 0)
+                    foreach (VetTrainer.Models.Picture picObj in Model.Pictures)
                     {
-                        foreach (VetTrainer.Models.Video vidObj in Model.Videos)
-                        {
-                            <div class="swiper-slide" align="center">
-                                <embed src='@vidObj.Url' allowFullScreen='true' quality='high' width='480' height='400' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
-                                @*<video alt="This should be a video" autoplay="autoplay" height="200" width="200" src="@vidObj.Url"></video>*@
-                            </div>
-                        }
-                    }
-                }
-            
+                    <div class="swiper-slide" align="center"  >
+                     <img class="margin" alt="This should be a photo" height="200" width="200" src="@picObj.Url">    
+                     <!--@picObj.Url-->                          
+                 </div>
+             }
+         }
+         if (Model.Videos.Count != 0)
+         {
+         foreach (VetTrainer.Models.Video vidObj in Model.Videos)
+         {
+         <div class="swiper-slide" align="center">
+            <embed src='@vidObj.Url' allowFullScreen='true' quality='high' width='480' height='400' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>
+            @*<video alt="This should be a video" autoplay="autoplay" height="200" width="200" src="@vidObj.Url"></video>*@
         </div>
-            <!-- 分页器 -->
-            <div class="swiper-pagination"></div>
-            <!-- 导航按钮 -->
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-button-next"></div>
-            <!-- 滚动条 -->
-            <div class="swiper-scrollbar"></div>
-    </div>
+    }
+}
+}
+
+</div>
+<!-- 分页器 -->
+<div class="swiper-pagination"></div>
+<!-- 导航按钮 -->
+<div class="swiper-button-prev"></div>
+<div class="swiper-button-next"></div>
+<!-- 滚动条 -->
+<div class="swiper-scrollbar"></div>
+</div>
+</div>
 </div>
 </div>
 
@@ -83,7 +92,9 @@
             direction: 'horizontal',
             loop: true,
             // 分页器
-            pagination: '.swiper-pagination'
+            pagination: '.swiper-pagination',
+            prevButton: '.swiper-button-prev',
+            nextButton: '.swiper-button-next'
         });
     })();
 </script>
