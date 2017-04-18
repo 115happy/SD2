@@ -381,36 +381,39 @@
                                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
                                     <h4 class="modal-title" id="addRpLabel">添加新职能</h4>
                                 </div>
-                                <div class="modal-body">
-                                    <div class="form-group">
-                                        <select v-model="newRp.RoleId" name="" class="form-control">
-                                            选择角色
-                                            <option v-for="role in roles" value="role.Id">{{role.Name}}</option>
-                                        </select>
+                                <iframe name="Roleansynform" style="display:none"></iframe>
+                                <form name="Roleform" method="post" action="~/Api/RoleClincAdd" target="Roleansynform" enctype="multipart/form-data">
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <select v-model="newRp.RoleId" name="RoleId" class="form-control">
+                                                选择角色
+                                                <option v-for="role in roles" value="role.Id">{{role.Name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <select v-model="newRp.ClinicId" name="ClincId5" class="form-control">
+                                                选择科室
+                                                <option v-for="clinic in clinics" value="clinic.Id">{{clinic.Name}}</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <textarea class="form-control" type="text" name="RoleDescription" placeholder="操作说明" cols="30" rows="5"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">上传图片</label>
+                                            <input class="form-control" type="file" name="Roleupfile" multiple="multiple" accept="image/png,image/gif,image/bmp,image/jpeg,image/jpg">
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="control-label">上传视频</label>
+                                            <input class="form-control" type="file" name="Roleupvideo" multiple="multiple" accept="video/avi,video/rmvb,video/mp4">
+                                        </div>
                                     </div>
-                                    <div class="form-group">
-                                        <select v-model="newRp.ClinicId" name="" class="form-control">
-                                            选择科室
-                                            <option v-for="clinic in clinics" value="clinic.Id">{{clinic.Name}}</option>
-                                        </select>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-primary" value="确定">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
                                     </div>
-                                    <div class="form-group">
-                                        <textarea class="form-control" type="text" placeholder="操作说明" cols="30" rows="5"></textarea>
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">上传图片</label>
-                                        <input class="form-control" type="file">
-                                    </div>
-                                    <div class="form-group">
-                                        <label class="control-label">上传视频</label>
-                                        <input class="form-control" type="file">
-                                    </div>
-                                </div>
-                                <div class="modal-footer">
-                                    <button v-on:click="addRp" type="button" class="btn btn-primary" data-dismiss="modal">确定</button>
-                                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-                                </div>
-                            </div><!-- /.modal-content -->
+                                    </form>
+</div><!-- /.modal-content -->
                         </div><!-- /.modal -->
                     </div>
                     <div class="modal fade" id="editRpModal" tabindex="-1" role="dialog" aria-labelledby="editInsLabel" aria-hidden="true">

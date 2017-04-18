@@ -24,8 +24,7 @@ namespace VetTrainer.Utilities
             }
             return result;
         }
-
-        public static string SaveFile(HttpPostedFile postedFile,string filePath,string fileName)
+        public static string[] SaveFile(HttpPostedFile postedFile,string filePath,string fileName)
         {
             string contentType = postedFile.ContentType;
             int fileStyle = FileStyle(contentType);
@@ -33,8 +32,10 @@ namespace VetTrainer.Utilities
             string fileSuffix = tmp.Last();
             fileName += "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
             string fileLastPath = "";
+            string fileType = "";
             if (fileStyle == 1)
             {
+                fileType = "Picture";
                 fileName += ".jpeg";
                 Image image = Bitmap.FromStream(postedFile.InputStream);
                 fileLastPath = Strings.Path.RootPath() + "Pictures" + filePath;
@@ -44,11 +45,13 @@ namespace VetTrainer.Utilities
                 }
                 fileLastPath += fileName;
                 image.Save(fileLastPath, ImageFormat.Jpeg);
-            }else if(FileStyle(postedFile.ContentType) == 1)
+            }
+            else if (fileStyle == 2)
             {
+                fileType = "video";
                 fileName += "." + fileSuffix;
                 fileLastPath = Strings.Path.RootPath() + "Videos" + filePath;
-                if (Directory.Exists(fileLastPath))
+                if (!Directory.Exists(fileLastPath))
                 {
                     Directory.CreateDirectory(fileLastPath);
                 }
@@ -59,7 +62,9 @@ namespace VetTrainer.Utilities
             {
                 fileName = "";
             }
-            return fileName;
+
+            string[] result = { fileType, fileName };
+            return result;
         }
     }
 }
