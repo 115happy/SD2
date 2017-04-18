@@ -362,6 +362,27 @@
     <Compile Include="Views\ViewModel\UsersViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Dist\css\bootstrap-theme.css" />
+    <Content Include="Dist\css\bootstrap-theme.min.css" />
+    <Content Include="Dist\css\bootstrap.css" />
+    <Content Include="Dist\css\bootstrap.min.css" />
+    <Content Include="Dist\css\case_learning.css" />
+    <Content Include="Dist\css\common.css" />
+    <Content Include="Dist\css\login.css" />
+    <Content Include="Dist\css\manage.css" />
+    <Content Include="Dist\css\Normalize.css" />
+    <Content Include="Dist\css\public.css" />
+    <Content Include="Dist\css\role.css" />
+    <Content Include="Dist\css\user_index.css" />
+    <Content Include="Dist\css\validation.css" />
+    <Content Include="Dist\js\axios.min.js" />
+    <Content Include="Dist\js\bootstrap.js" />
+    <Content Include="Dist\js\bootstrap.min.js" />
+    <Content Include="Dist\js\jquery-3.1.1.js" />
+    <Content Include="Dist\js\modernizr-2.6.2.js" />
+    <Content Include="Dist\js\npm.js" />
+    <Content Include="Dist\js\vue.js" />
+    <Content Include="Dist\js\vue.min.js" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -369,6 +390,7 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Src\3Dres\Action.xml" />
+    <Content Include="Src\3Dres\black.png" />
     <Content Include="Src\3Dres\imagemap.png" />
     <Content Include="Src\3Dres\Info\Info.html" />
     <Content Include="Src\3Dres\panos\1.tiles\b\l1\1\l1_b_1_1.jpg" />
@@ -659,23 +681,39 @@
     </Content>
     <Content Include="Src\3Dres\tour_editor.html" />
     <Content Include="Src\3Dres\transparentcy.png" />
+    <Content Include="Src\css\swiper.min.css" />
+    <Content Include="Src\images\3d_icon.png" />
     <Content Include="Src\images\423523452345.jpg" />
+    <Content Include="Src\images\ass_icon.png" />
     <Content Include="Src\images\case_bg.jpg" />
+    <Content Include="Src\images\case_bg.png" />
+    <Content Include="Src\images\case_icon.png" />
+    <Content Include="Src\images\doc_icon.png" />
+    <Content Include="Src\images\front_icon.png" />
+    <Content Include="Src\images\login_bg.png" />
     <Content Include="Src\images\pets.png" />
     <Content Include="Src\images\role_bg.jpg" />
+    <Content Include="Src\images\role_icon.png" />
     <Content Include="Src\js\ai.0.22.9-build00167.js" />
     <Content Include="Src\js\ai.0.22.9-build00167.min.js" />
     <Content Include="Src\js\bootstrap.js" />
     <Content Include="Src\js\bootstrap.min.js" />
+    <Content Include="Src\js\case_select.js" />
     <Content Include="Src\js\feedback-message-box.js" />
     <Content Include="Src\js\jquery-3.1.1.js" />
     <Content Include="Src\js\manage.js" />
     <Content Include="Src\js\modernizr-2.6.2.js" />
     <Content Include="Src\js\respond.js" />
     <Content Include="Src\js\respond.min.js" />
+    <Content Include="Dist\css\bootstrap-theme.css.map" />
+    <Content Include="Dist\css\bootstrap-theme.min.css.map" />
+    <Content Include="Dist\css\bootstrap.css.map" />
+    <Content Include="Dist\css\bootstrap.min.css.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Src\js\_references.js" />
     <Content Include="404.html" />
-    <Content Include="Views\Home\case_learning.html" />
+    <Content Include="Src\js\swiper.jquery.min.js" />
+    <Content Include="Src\js\swiper.min.js" />
     <Content Include="Views\Home\user_index.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -716,6 +754,9 @@
     <Content Include="Views\Nav\Clinic.cshtml" />
     <Content Include="Views\Nav\Tour.cshtml" />
     <Content Include="Views\Shared\_FeedbackMessageBox.cshtml" />
+    <Content Include="Src\less\manage.less" />
+    <Content Include="Src\less\public.less" />
+    <Content Include="Src\less\role.less" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

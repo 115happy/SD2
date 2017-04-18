@@ -34,7 +34,7 @@ namespace VetTrainer
                       "~/dist/css/validation.css"));
 
             // 启用bundle使得js css传的速度更快，并自动变成min的格式
-            BundleTable.EnableOptimizations = true;
+            BundleTable.EnableOptimizations = false;
         }
     }
 }

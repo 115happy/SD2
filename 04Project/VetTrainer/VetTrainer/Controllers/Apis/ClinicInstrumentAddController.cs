@@ -83,9 +83,22 @@ namespace VetTrainer.Controllers.Apis
                         {
                             var postedFile = httpRequest.Files[i];
                             string filePath = @"\ClinicInstruments\";
-                            string fileName = FileUtil.SaveFile(postedFile, filePath, PostFileName);
-                            PictureDto p = new PictureDto();
-                            p.Name = fileName;
+                            var fileInfo = FileUtil.SaveFile(postedFile, filePath, PostFileName);
+                            if (fileInfo[0] == "Picture")
+                            {
+                                PictureDto p = new PictureDto();
+                                p.Name = fileInfo[1];
+                                p.Url = filePath + fileInfo[1];
+                                var picToAdd = Mapper.Map<PictureDto, Picture>(p);
+                                instrumentToAdd.Pictures.Add(picToAdd);
+                            }else if(fileInfo[0]=="Video")
+                            {
+                                VideoDto v = new VideoDto();
+                                v.Name = fileInfo[1];
+                                v.Url = filePath + fileInfo[1];
+                                var videoToAdd = Mapper.Map<VideoDto, Video>(v);
+                                instrumentToAdd.Videos.Add(videoToAdd);
+                            }
                             
                         }
                     }
@@ -97,19 +110,6 @@ namespace VetTrainer.Controllers.Apis
                 {
                     msg = "请上传图片和视频!";
                 }
-                //foreach (PictureDto p in ist.Pictures)
-                //{
-                //    var picToAdd = Mapper.Map<PictureDto, Picture>(p);
-                //    instrumentToAdd.Pictures.Add(picToAdd);
-
-                //    //// GetPicture
-                //    //var httpRequest = HttpContext.Current.Request;
-                //}
-                //foreach (VideoDto v in ist.Videos)
-                //{
-                //    var videoToAdd = Mapper.Map<VideoDto, Video>(v);
-                //    instrumentToAdd.Videos.Add(videoToAdd);
-                //}
                 clinicToAdd.Instruments.Add(instrumentToAdd);
                 try
                 {

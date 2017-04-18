@@ -24,16 +24,47 @@ namespace VetTrainer.Utilities
             }
             return result;
         }
-
-        public static string SaveFile(HttpPostedFile postedFile,string filePath,string fileName)
+        public static string[] SaveFile(HttpPostedFile postedFile,string filePath,string fileName)
         {
-            if (FileStyle(postedFile.ContentType) == 1)
+            string contentType = postedFile.ContentType;
+            int fileStyle = FileStyle(contentType);
+            string[] tmp = contentType.Split('/');
+            string fileSuffix = tmp.Last();
+            fileName += "_" + DateTime.Now.ToString("yyyyMMddHHmmss");
+            string fileLastPath = "";
+            string fileType = "";
+            if (fileStyle == 1)
             {
-                fileName += "_" + DateTime.Now.ToString("yyyyMMddHHmmss") + ".jpeg";
+                fileType = "Picture";
+                fileName += ".jpeg";
                 Image image = Bitmap.FromStream(postedFile.InputStream);
-                image.Save(Strings.Global.ServerDataLocation + "Pictures" + filePath + fileName, ImageFormat.Jpeg);
+                fileLastPath = Strings.Path.RootPath() + "Pictures" + filePath;
+                if (!Directory.Exists(fileLastPath))
+                {
+                    Directory.CreateDirectory(fileLastPath);
+                }
+                fileLastPath += fileName;
+                image.Save(fileLastPath, ImageFormat.Jpeg);
             }
-            return fileName;
+            else if (fileStyle == 2)
+            {
+                fileType = "video";
+                fileName += "." + fileSuffix;
+                fileLastPath = Strings.Path.RootPath() + "Videos" + filePath;
+                if (!Directory.Exists(fileLastPath))
+                {
+                    Directory.CreateDirectory(fileLastPath);
+                }
+                fileLastPath += fileName;
+                postedFile.SaveAs(fileLastPath);
+            }
+            if (fileLastPath == "" || !File.Exists(fileLastPath))
+            {
+                fileName = "";
+            }
+
+            string[] result = { fileType, fileName };
+            return result;
         }
     }
 }

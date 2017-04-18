@@ -21,7 +21,11 @@ namespace VetTrainer.Views
         }
         public static class Path
         {
-            public const string rootPath = @"\\VETAPPSERVER\VetAppData\";
+            //public const string RootPath = @"../";
+            public static string RootPath()
+            {
+                return HttpContext.Current.Server.MapPath("../")+ @"VetAppData\";
+            }
         }
         public static class Keys
         {
