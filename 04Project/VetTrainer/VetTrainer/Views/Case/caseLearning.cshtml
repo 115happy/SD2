@@ -39,14 +39,17 @@
                             {
                                 foreach (VetTrainer.Models.Picture objP in diseaseCaseTabObj.Pictures)
                                 {
-                                    <img alt="This should be a photo" height="200" width="200" src="@objP.Url">                                    
+                                    <img alt="This should be a photo" height="200" width="200" src="@objP.Url">
                                 }
 
-                                <p >@diseaseCaseTabObj.Pictures[0]</p>
+
                             }
                             if (diseaseCaseTabObj.Videos.Count != 0)
                             {
-                                <p >@diseaseCaseTabObj.Videos[0]</p>
+                                foreach (VetTrainer.Models.Video objV in diseaseCaseTabObj.Videos)
+                                {
+                                    <embed alt="This should be a video" src='@objV.Url' allowFullScreen='true' quality='high' width='480' height='400' align='middle' allowScriptAccess='always' type='application/x-shockwave-flash'></embed>                                    
+                                }
                             }
                         }   
                     </div>

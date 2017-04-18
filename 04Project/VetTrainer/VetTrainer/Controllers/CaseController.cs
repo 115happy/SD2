@@ -39,6 +39,13 @@ namespace VetTrainer.Controllers
         public ActionResult CaseLearning(String diseaseCaseName)
         {
             var diseaseCaseTabs = _context.DiseaseCases.Include(dc => dc.DiseaseCaseTabs).Where(dc => dc.Name == diseaseCaseName).ToList()[0].DiseaseCaseTabs;
+            foreach(DiseaseCaseTab dct in diseaseCaseTabs)
+            {
+                _context.Entry(dct).Collection(u => u.Pictures).Load();
+                _context.Entry(dct).Collection(u => u.Texts).Load();
+                _context.Entry(dct).Collection(u => u.Videos).Load();
+
+            }
             return View(diseaseCaseTabs);
         }
     }
